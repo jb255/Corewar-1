@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:57:55 by vlancien          #+#    #+#             */
-/*   Updated: 2016/10/20 17:17:28 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/15 19:12:53 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ void	other(char *str, t_env *e)
 	int		command;
 
 	nb_space = epur_str(str);
-	tab = ft_strsplit(str, ' ');
+	tab = ft_str_ext_split(str, "\t ,");
 	// printf("%s =>> ", str);
 	// printf("%d\n", nb_space);
 	if (nb_space == 0)
@@ -207,6 +207,120 @@ void	open_line(char *fichier, t_env *e)
 	printf("%s->%s\n", e->name, e->comment);
 }
 
+// Retire juste les deux points a la fin de chaque label de methode
+void	trim_args(t_env *file)
+{
+	t_func	*tmp_func;
+	t_line	*tmp_line;
+
+	tmp_func = file->head;
+	while (tmp_func)
+	{
+		tmp_func->label[ft_strlen(tmp_func->label) - 1] = 0;
+		tmp_func = tmp_func->next;
+	}
+}
+
+// Utilise dans labels_are_defined pour checker la validite d'un label !
+void	check_single_label(char *info, t_func *func)
+{
+	while (func != NULL && info && ft_strcmp(func->label,
+			info[0] == '%' ? info + 2 : info + 1))
+		func = func->next;
+	if (func == NULL)
+	{
+		asm_error("Label not defined");
+		exit (-1);
+	}
+}
 	// off_t	lenght_file;
 	// if ((lenght_file =  lseek(fd, 0, SEEK_END)) > CHAMP_MAX_SIZE) //a faire sur le binaire
 		// asm_error("fichier trop long");
+
+// Verifie si les labels appeles dans les methodes de l'asm sont bien definis quelque part
+// dans le meme fichier
+int		labels_are_defined(t_env *file)
+{
+	t_func	*tmpa_func;
+	t_func	*tmpb_func;
+	t_line	*tmp_line;
+
+	tmpa_func = file->head;
+	while (tmpa_func != NULL)
+	{
+		tmp_line = tmpa_func->line;
+		while (tmp_line != NULL)
+		{
+			if (tmp_line->info1 && ft_parse_match("*:[a-z0-9_]+", tmp_line->info1 + 1))
+				check_single_label(tmp_line->info1, tmpb_func = file->head);
+			if (tmp_line->info2 && ft_parse_match("*:[a-z0-9_]+", tmp_line->info2 + 1))
+				check_single_label(tmp_line->info2, tmpb_func = file->head);
+			if (tmp_line->info3 && ft_parse_match("*:[a-z0-9_]+", tmp_line->info3 + 1))
+				check_single_label(tmp_line->info3, tmpb_func = file->head);
+			tmp_line = tmp_line->next;
+		}
+		tmpa_func = tmpa_func->next;
+	}
+	return (1);
+}
+
+int		check_param(int nb_tab, t_op op_tab[], char *info, int nb_param)
+{
+	char	byte;
+	char	*reg;
+	
+	reg = ft_strnew(ft_strlen(LABEL_CHARS) + 3);
+	ft_strcpy(reg, "[");
+	reg[1] = LABEL_CHAR;
+	ft_strcpy(reg + 2, LABEL_CHARS);
+	ft_strcpy(reg + ft_strlen(LABEL_CHARS), "]+");
+	byte = op_tab[nb_tab].params_types[nb_param];
+	printf("BYTE = %d\n", byte);
+	printf("+++ Info vaut ==> %s\n+++\tinfo[0] vaut : %c\n", info, info[0]);
+	if (byte & T_REG)
+	{
+		if (ft_parse_match("r[0-9]+", info) && ft_atoi(info + 1) <= REG_NUMBER)
+			return (1);
+		else if (byte == T_REG)
+			return (0);
+	}
+	if (byte & T_DIR)
+	{
+		if (info[0] == DIRECT_CHAR &&
+				(ft_parse_match("[0-9]+", info + 1) || ft_parse_match(reg, info + 1)))
+			return (1);
+		else if (byte == T_DIR || byte == (T_DIR | T_REG))
+			return (0);
+	}
+	if (ft_parse_match("[0-9]+", info[0] == '-' ? info + 1 : info))
+	   return (1);
+	free(reg);
+	return (0);
+}
+
+int		params_correspond(t_env *file)
+{
+	t_func	*func;
+	t_line	*line;
+
+	func = file->head;
+	while (func)
+	{
+		line = func->line;
+		while (line)
+		{
+			if (!check_param(line->nb_tab, file->op_tab, line->info1, 0))
+				asm_error("Error type, 1");
+			if (line->info2 &&
+					!check_param(line->nb_tab, file->op_tab, line->info2, 1))
+				asm_error("Error type, 2");
+			if (line->info3 &&
+					!check_param(line->nb_tab, file->op_tab, line->info3, 2))
+				asm_error("Error type, 3");
+			line = line->next;
+			printf("\n");
+		}
+		func = func->next;
+	}
+	return (1);
+}

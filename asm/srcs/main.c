@@ -182,7 +182,9 @@ int		main(int argc, char **argv)
 	printf("%s\n", e.name_file);
 	fille_op_tab(&e);
 	open_line(argv[1], &e);
-
+	trim_args(&e);
+	labels_are_defined(&e);
+	params_correspond(&e);
 
 	create_file(&e);
 	print_all(e.head);
