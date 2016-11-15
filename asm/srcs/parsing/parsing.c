@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:57:55 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/15 19:12:53 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/15 21:22:16 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,11 +222,22 @@ void	trim_args(t_env *file)
 }
 
 // Utilise dans labels_are_defined pour checker la validite d'un label !
-void	check_single_label(char *info, t_func *func)
+void	check_single_label(t_line *line, t_func *func, int nb_info, t_env *env)
 {
-	while (func != NULL && info && ft_strcmp(func->label,
-			info[0] == '%' ? info + 2 : info + 1))
+	char	*info;
+
+	if (nb_info == 1 || nb_info == 2)
+		info = nb_info == 1 ? line->info1 : line->info2;
+	else
+		info = line->info3;
+	while (func != NULL && info && ft_strcmp(func->label, info + 2))
 		func = func->next;
+	if (nb_info == 1)
+		line->intfo1[1] = get_method_pos(info + 2, env);
+	if (nb_info == 2)
+		line->intfo2[1] = get_method_pos(info + 2, env);
+	if (nb_info == 3)
+		line->intfo3[1] = get_method_pos(info + 2, env);
 	if (func == NULL)
 	{
 		asm_error("Label not defined");
@@ -252,11 +263,11 @@ int		labels_are_defined(t_env *file)
 		while (tmp_line != NULL)
 		{
 			if (tmp_line->info1 && ft_parse_match("*:[a-z0-9_]+", tmp_line->info1 + 1))
-				check_single_label(tmp_line->info1, tmpb_func = file->head);
+				check_single_label(tmp_line, tmpb_func = file->head, 1, file);
 			if (tmp_line->info2 && ft_parse_match("*:[a-z0-9_]+", tmp_line->info2 + 1))
-				check_single_label(tmp_line->info2, tmpb_func = file->head);
+				check_single_label(tmp_line, tmpb_func = file->head, 2, file);
 			if (tmp_line->info3 && ft_parse_match("*:[a-z0-9_]+", tmp_line->info3 + 1))
-				check_single_label(tmp_line->info3, tmpb_func = file->head);
+				check_single_label(tmp_line, tmpb_func = file->head, 3, file);
 			tmp_line = tmp_line->next;
 		}
 		tmpa_func = tmpa_func->next;
@@ -323,4 +334,17 @@ int		params_correspond(t_env *file)
 		func = func->next;
 	}
 	return (1);
+}
+
+int		get_method_pos(char *label_name, t_env *file)
+{
+	t_func	*func;
+	t_line	*line;
+
+	func = file->head;
+	while (func && ft_strcmp(func->label, label_name))
+		func = func->next;
+	if (!func)
+		asm_error("An unknown error occured");
+	return (func->line->method_position);
 }
