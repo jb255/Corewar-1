@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:57:55 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/15 21:22:16 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/15 22:16:10 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -336,6 +336,7 @@ int		params_correspond(t_env *file)
 	return (1);
 }
 
+// Prend le nom du label en question, et l'env et renvoie la position du label en octet
 int		get_method_pos(char *label_name, t_env *file)
 {
 	t_func	*func;

@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/15 21:06:12 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/15 22:18:18 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int			check_param(int nb_tab, t_op op_tab[], char *info, int nb_param);
 int			params_correspond(t_env *file);
 int			labels_are_defined(t_env *env);
 int			get_method_pos(char *label_name, t_env *file);
-
+int			get_byte_len(int nb_tab, char *arg, int n_inf);
 
 
 
