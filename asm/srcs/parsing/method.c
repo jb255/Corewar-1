@@ -144,6 +144,7 @@ void		push_tail_method(t_line **begin_list, char **tab, int nb_arg, t_env *e)
 // Prend l'index de l'operation dans op_tab, l'argument ("r2", "%:khdfve"...) et le numero de
 // l'information (donc 1, 2 ou 3) et renvoie le nombre d'octet a utiliser pour le codage
 // de l'info en question
+
 int			get_byte_len(int nb_tab, char *arg, int n_inf)
 {
 	int		tmp;

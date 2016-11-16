@@ -20,7 +20,47 @@ unsigned int	little_to_big(unsigned int little)
 	((little >> 8) & 0xff00) | ((little << 24 )& 0xff000000);
 	return (big);
 }
+void	write_binary2(t_line *head, int fd)
+{
+	t_line *tmp;
+	unsigned int a;
 
+	a = 0;
+	tmp = head;
+	while (tmp)
+	{
+		write(fd, &tmp->method, 1);
+		if (tmp->opcode)
+			write(fd, &tmp->opcode, 1);
+		if (tmp->nb_tab > 0)
+		{
+			a = little_to_big(tmp->intfo1[1]);
+			write(fd, &a, tmp->intfo1[2]);
+		}
+		if (tmp->nb_tab > 1)
+		{
+			a = little_to_big(tmp->intfo2[1]);
+			write(fd, &a, tmp->intfo1[2]);
+		}
+		if (tmp->nb_tab > 2)
+		{
+			a = little_to_big(tmp->intfo3[1]);
+			write(fd, &a, tmp->intfo1[2]);
+		}
+		tmp = tmp->next;
+	}
+}
+void	write_binary(t_func	*head, int fd)
+{
+	t_func *tmp;
+
+	tmp = head;
+	while (tmp)
+	{
+		write_binary2(tmp->line, fd);
+		tmp = tmp->next;
+	}
+}
 void	create_file(t_env *e)
 {
 	int			fd;
@@ -37,7 +77,7 @@ void	create_file(t_env *e)
 	if ((fd = open(e->name_file, O_WRONLY | O_CREAT | O_TRUNC, 0644)) == -1)
 		ft_printf(" error open %s\n", e->name_file);
 	write(fd, &header, sizeof(header));
-
+	write_binary(e->head, fd);
 	if (close(fd) != 0)
 		asm_error("close_error_.cor");
 }
@@ -123,11 +163,29 @@ void	decoupage_nb(t_line *tmp)
 	unsigned char *cut;
 
 	cut = cut_nbr(tmp->intfo1[1]);
-	printf("%d %d %d %d ", cut[0], cut[1], cut[2], cut[3]);
+	//printf(">>%d<<", tmp->intfo1[2]);
+	if (tmp->intfo1[2] == 4)
+		printf("%d %d %d %d ", cut[0], cut[1], cut[2], cut[3]);
+	else if (tmp->intfo1[2] == 2)
+		printf("%d %d ", cut[2], cut[3]);
+	else if (tmp->intfo1[2] == 1)
+		printf("%d ", cut[3]);
 	cut = cut_nbr(tmp->intfo2[1]);
-	printf("%d %d %d %d ", cut[0], cut[1], cut[2], cut[3]);
+	//printf(">>%d<<", tmp->intfo2[2]);
+	if (tmp->intfo2[2] == 4)
+		printf("%d %d %d %d ", cut[0], cut[1], cut[2], cut[3]);
+	else if (tmp->intfo2[2] == 2)
+		printf("%d %d ", cut[2], cut[3]);
+	else if (tmp->intfo2[2] == 1)
+		printf("%d ", cut[3]);
 	cut = cut_nbr(tmp->intfo3[1]);
-	printf("%d %d %d %d ", cut[0], cut[1], cut[2], cut[3]);
+	//printf(">>%d<<", tmp->intfo3[2]);
+	if (tmp->intfo3[2] == 4)
+		printf("%d %d %d %d ", cut[0], cut[1], cut[2], cut[3]);
+	else if (tmp->intfo3[2] == 2)
+		printf("%d %d ", cut[2], cut[3]);
+	else if (tmp->intfo3[2] == 1)
+		printf("%d ", cut[3]);
 }
 
 void	print_all_info(t_line *head)
