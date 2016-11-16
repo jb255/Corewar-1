@@ -6,13 +6,13 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 12:59:13 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/16 21:05:33 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/16 21:56:41 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-unsigned int	little_to_big(unsigned int little)
+unsigned int		little_to_big(unsigned int little)
 {
 	unsigned int	big;
 
@@ -21,7 +21,7 @@ unsigned int	little_to_big(unsigned int little)
 	return (big);
 }
 
-void	create_file(t_env *e)
+void				create_file(t_env *e)
 {
 	int			fd;
 	header_t	header;
@@ -29,7 +29,7 @@ void	create_file(t_env *e)
 	ft_bzero(header.prog_name, PROG_NAME_LENGTH + 1);
 	ft_bzero(header.comment, COMMENT_LENGTH + 1);
 
-	header.prog_size = 0; // a calculer
+	header.prog_size = 0;
 
 	header.magic = little_to_big(COREWAR_EXEC_MAGIC);
 	ft_strncpy(header.prog_name ,e->name,PROG_NAME_LENGTH);
@@ -37,12 +37,11 @@ void	create_file(t_env *e)
 	if ((fd = open(e->name_file, O_WRONLY | O_CREAT | O_TRUNC, 0644)) == -1)
 		ft_printf(" error open %s\n", e->name_file);
 	write(fd, &header, sizeof(header));
-
 	if (close(fd) != 0)
 		asm_error("close_error_.cor");
 }
 
-void	init_env(t_env *e)
+void				init_env(t_env *e)
 {
 	e->name = NULL;
 	e->comment = NULL;
@@ -55,7 +54,7 @@ void	init_env(t_env *e)
 	e->method_position = 0;
 }
 
-char	*parsename(char *argv)
+char				*parsename(char *argv)
 {
 	int			a;
 	int			b;
@@ -94,7 +93,6 @@ unsigned char		calc_octet(unsigned int *nbr, unsigned int diviseur)
 	total = 0;
 	while (b > 0)
 	{
-		// printf("%u %u\n", *nbr, diviseur);
 		total += ((*nbr / diviseur) * a);
 		*nbr %= diviseur;
 		diviseur /= 2;
@@ -104,7 +102,7 @@ unsigned char		calc_octet(unsigned int *nbr, unsigned int diviseur)
 	return (total);
 }
 
-unsigned char		*cut_nbr(unsigned nbr) // cree un tab de 4 char   
+unsigned char		*cut_nbr(unsigned nbr)
 {
 	unsigned char *tab;
 
@@ -118,12 +116,11 @@ unsigned char		*cut_nbr(unsigned nbr) // cree un tab de 4 char
 	return (tab);
 }
 
-void	decoupage_nb(t_line *tmp)
+void				decoupage_nb(t_line *tmp)
 {
 	unsigned char *cut;
 
 	cut = cut_nbr(tmp->intfo1[1]);
-	//printf(">>%d<<", tmp->intfo1[2]);
 	if (tmp->intfo1[2] == 4)
 		printf("%-4d%-4d%-4d%-6d", cut[0], cut[1], cut[2], cut[3]);
 	else if (tmp->intfo1[2] == 2)
@@ -131,7 +128,6 @@ void	decoupage_nb(t_line *tmp)
 	else if (tmp->intfo1[2] == 1)
 		printf("%-18d", cut[3]);
 	cut = cut_nbr(tmp->intfo2[1]);
-	//printf(">>%d<<", tmp->intfo2[2]);
 	if (tmp->intfo2[2] == 4)
 		printf("%-4d%-4d%-4d%-6d", cut[0], cut[1], cut[2], cut[3]);
 	else if (tmp->intfo2[2] == 2)
@@ -139,7 +135,6 @@ void	decoupage_nb(t_line *tmp)
 	else if (tmp->intfo2[2] == 1)
 		printf("%-18d", cut[3]);
 	cut = cut_nbr(tmp->intfo3[1]);
-	//printf(">>%d<<", tmp->intfo3[2]);
 	if (tmp->intfo3[2] == 4)
 		printf("%-4d%-4d%-4d%d", cut[0], cut[1], cut[2], cut[3]);
 	else if (tmp->intfo3[2] == 2)
@@ -147,7 +142,8 @@ void	decoupage_nb(t_line *tmp)
 	else if (tmp->intfo3[2] == 1)
 		printf("%d", cut[3]);
 }
-void	print_all_info(t_line *head)
+
+void				print_all_info(t_line *head)
 {
 	t_line	*tmp;
 
@@ -156,17 +152,9 @@ void	print_all_info(t_line *head)
 	{
 		printf("%-5d(%-3d) :        ", tmp->method_position,
 				tmp->method_total);
-		if (tmp->nb_info == 1)
-			printf("%-10s%-18s\n", tmp->method,
-					tmp->info1);
-		else if (tmp->nb_info == 2)
-			printf("%-10s%-18s%-18s\n", tmp->method,
-					tmp->info1, tmp->info2);
-		else
-			printf("%-10s%-18s%-18s%s\n", tmp->method,
-					tmp->info1, tmp->info2, tmp->info3);
-		printf("                    ");
-		printf("%-10d", tmp->opcode);
+		printf("%-10s%-18s%-18s%s\n", tmp->method, tmp->info1, tmp->nb_info > 1
+				? tmp->info2 : "", tmp->nb_info > 2 ? tmp->info3 : "");
+		printf("                    %-10d", tmp->opcode);
 		decoupage_nb(tmp);
 		printf("\n                    %-3d",tmp->opcode);
 		if (tmp->encod)
@@ -174,17 +162,17 @@ void	print_all_info(t_line *head)
 		else
 			printf("%-8c", 0);
 		if (tmp->nb_info == 1)
-			printf("%-18d", tmp->intfo1[1]);
-		if (tmp->nb_info == 2)
-			printf("%-18d%-18d", tmp->intfo1[1], tmp->intfo2[1]);
-		if (tmp->nb_info == 3)
-			printf("%-18d%-18d%d", tmp->intfo1[1], tmp->intfo2[1], tmp->intfo3[1]);
-		printf("\n");
-		printf("\n");
+			printf("%-18d\n\n", tmp->intfo1[1]);
+		else if (tmp->nb_info == 2)
+			printf("%-18d%-18d\n\n", tmp->intfo1[1], tmp->intfo2[1]);
+		else	
+			printf("%-18d%-18d%d\n\n", tmp->intfo1[1], tmp->intfo2[1],
+					tmp->intfo3[1]);
 		tmp = tmp->next;
 	}
 }
-void	print_all(t_func *head)
+
+void				print_all(t_func *head)
 {
 	t_func	*tmp;
 
@@ -198,7 +186,7 @@ void	print_all(t_func *head)
 	}
 }
 
-int		main(int argc, char **argv)
+int					main(int argc, char **argv)
 {
 	t_env		e;
 
@@ -213,7 +201,6 @@ int		main(int argc, char **argv)
 	trim_args(&e);
 	labels_are_defined(&e);
 	params_correspond(&e);
-
 	create_file(&e);
 	print_all(e.head);
 	return (0);

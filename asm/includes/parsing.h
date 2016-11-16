@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/16 18:30:23 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/16 21:55:00 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int			params_correspond(t_env *file);
 int			labels_are_defined(t_env *env);
 int			get_method_pos(char *label_name, t_env *file);
 int			get_byte_len(int nb_tab, char *arg, int n_inf);
-
+unsigned char	*cut_nbr(unsigned nbr);
 
 
 
