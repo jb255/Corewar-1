@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   decimal_to_hexa.c                                  :+:      :+:    :+:   */
+/*   hexa_to_decimal.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 22:11:14 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/14 22:11:28 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/16 04:13:39 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-unsigned long	hex_to_dec(char *data, unsigned int size)
+unsigned int    hex_to_dec(const char *str)
 {
-    int				index;
-    unsigned long	value;
+    unsigned int total;
+    int i;
 
-	index = 0;
-	value = 0;
-	while (index < (int)size)
-	{
-		if (data[index] <= 57)
-			value += (data[index] - 48) * (1 << (4 * (size - 1 - index)));
-		else
-			value += (data[index] - 55) * (1 << (4 * (size - 1 - index)));
-		index++;
-	}
-    return (value);
+    total = 0;
+    i = 0;
+    while (0 < str[i] && str[i] < 33)
+        i++;
+    while ((str[i] >= '0' && str[i] <= '9') ||
+            (str[i] >= 'A' && str[i] <= 'F') ||
+            (str[i] >= 'a' && str[i] <= 'f'))
+    {
+        if (str[i] >= '0' && str[i] <= '9')
+            total = (total * 16) + (str[i++] - '0');
+        if (str[i] >= 'A' && str[i] <= 'F')
+            total = (total * 16) + (str[i++] - 'A' + 10);
+        if (str[i] >= 'a' && str[i] <= 'f')
+            total = (total * 16) + (str[i++] - 'a' + 10);
+    }
+    return (total);
 }

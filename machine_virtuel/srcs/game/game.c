@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 17:50:40 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/11 03:33:10 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/16 00:53:33 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int		jump(int code, char *status)
 	jump = 1;
 	if ((code == 90 && !ft_strcmp(status, "ld")) || (code == 68 && !ft_strcmp(status, "sti")))
 		return (14);
+	else if (!ft_strcmp(status, "ld"))
+		return (10);
 	else if (code == 64 && !ft_strcmp(status, "sti"))
 		return (12);
 	else if ((code == 70 && !ft_strcmp(status, "st")) || !ft_strcmp(status, "live"))

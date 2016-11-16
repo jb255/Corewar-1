@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/15 12:54:49 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/16 04:13:52 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char			*read_name(char *file_player);
 char			*print_hexa(unsigned char c, int byte);
 
 char			*hex_to_bin_quad(char *str_1);
-unsigned long	hex_to_dec(char *data, unsigned int size);
+unsigned int    hex_to_dec(const char *str);
 
 void			put_player(t_env *e);
 void			player_to_tab(t_env *e, int x);
@@ -86,11 +86,10 @@ char			*to_opcode(char c, char c1);
 void			init_process(t_env *e, int nb);
 void			set_process(t_env *e, int process_nb, int x, int creator);
 
-int				check_jump(t_env *e, char *op);
+
 // int		get_process_pos(t_process *list, int x);
 // int		get_process_start(t_process *list, int x);
 // int		get_process_jumptodo(t_process *list, int x);
 // int		set_process_pos(t_env *e, int process, int data);
 // int		set_process_jumptodo(t_env *e, int process, int data);
-
 #endif

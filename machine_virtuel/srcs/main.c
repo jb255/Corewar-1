@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 12:59:13 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/15 13:17:01 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/16 04:17:12 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int		main(int argc, char **argv)
 	x = NULL;
 	x = dec_to_hex(90, NULL, 0);
 	printf("main_>%s\n", x);
-	printf("main_>%ld\n", hex_to_dec("5C" , 4));
+	// printf("main_>%ld\n", hex_to_dec("01" , 2));
+	// printf("main_>%ld\n", hex_to_dec("e7" , 2));
 	return (0);
 }

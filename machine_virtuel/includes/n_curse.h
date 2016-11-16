@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 17:26:39 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/11 04:12:24 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/16 06:35:53 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "corewar.h"
 # include "game.h"
+# include "function.h"
 # include <ncurses.h>
 
 void	n_curse(t_env *e);
@@ -38,10 +39,8 @@ void	memory_set_init(t_env *e, int *addr, int *y, int *x);
 int		memory_run(t_env *e);
 
 char	*dec_to_hex(unsigned dec, char *hex, int len);
-
-
+char	*get_op_str(char c, char c1);
 void	apply_func(t_env *e, int xproc, int func);
-void	live_func(t_env *e, int xproc, int func);
-void	sub_func(t_env *e, int xproc, int func);
-void	add_func(t_env *e, int xproc, int func);
+char	*get_opfrom_x(t_env *e, int a, int x);
+t_type_func check_jump(t_env *e, char *op_size);
 #endif
