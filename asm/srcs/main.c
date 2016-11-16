@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 12:59:13 by vlancien          #+#    #+#             */
-/*   Updated: 2016/10/20 17:15:45 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/15 21:21:00 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,54 @@ char	*parsename(char *argv)
 	return (name_file);
 }
 
+unsigned char		calc_octet(unsigned int *nbr, unsigned int diviseur)
+{
+	int a;
+	int b;
+	unsigned char total;
+
+	a = 128;
+	b = 8;
+	total = 0;
+	while (b > 0)
+	{
+		// printf("%u %u\n", *nbr, diviseur);
+		total += ((*nbr / diviseur) * a);
+		*nbr %= diviseur;
+		diviseur /= 2;
+		a /= 2;
+		b --;
+	}
+	return (total);
+}
+
+unsigned char		*cut_nbr(unsigned nbr) // cree un tab de 4 char   
+{
+	unsigned char *tab;
+
+	tab = (unsigned char *)ft_memalloc(sizeof (unsigned char) * 5);
+	if (!tab)
+		printf("malloc error\n");
+	tab[0] = calc_octet(&nbr, 2147483648);
+	tab[1] = calc_octet(&nbr, 8388608);
+	tab[2] = calc_octet(&nbr, 32768);
+	tab[3] = calc_octet(&nbr, 128);
+	return (tab);
+}
+
+void	decoupage_nb(t_line *tmp)
+{
+	unsigned char *cut;
+
+	cut = cut_nbr(tmp->intfo1[1]);
+	printf("%d %d %d %d ", cut[0], cut[1], cut[2], cut[3]);
+	cut = cut_nbr(tmp->intfo2[1]);
+	printf("%d %d %d %d ", cut[0], cut[1], cut[2], cut[3]);
+	cut = cut_nbr(tmp->intfo3[1]);
+	printf("%d %d %d %d ", cut[0], cut[1], cut[2], cut[3]);
+
+}
+
 void	print_all_info(t_line *head)
 {
 	t_line	*tmp;
@@ -96,11 +144,12 @@ void	print_all_info(t_line *head)
 			tmp->info1, tmp->info2, tmp->info3);		
 		printf("                    %d  ",tmp->opcode);
 		if (tmp->encod)
-			printf("%d", tmp->encod);
+			printf("%d ", tmp->encod);
+		decoupage_nb(tmp);
 		printf("\n");
 		printf("                    %d  ",tmp->opcode);
 		if (tmp->encod)
-			printf("%d", tmp->encod);
+			printf("%d ", tmp->encod);
 		printf("     %d         %d       %d", tmp->intfo1[1], tmp->intfo2[1], tmp->intfo3[1]);
 		printf("\n");
 		printf("\n");
@@ -133,7 +182,9 @@ int		main(int argc, char **argv)
 	printf("%s\n", e.name_file);
 	fille_op_tab(&e);
 	open_line(argv[1], &e);
-
+	trim_args(&e);
+	labels_are_defined(&e);
+	params_correspond(&e);
 
 	create_file(&e);
 	print_all(e.head);

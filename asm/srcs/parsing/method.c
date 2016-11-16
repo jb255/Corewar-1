@@ -6,7 +6,7 @@
 /*   By: jaustry <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 23:53:21 by jaustry           #+#    #+#             */
-/*   Updated: 2016/11/04 23:53:22 by jaustry          ###   ########.fr       */
+/*   Updated: 2016/11/15 22:16:47 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int		coerence_str_optab(char *str, t_env *e) // verifie si le type
 		e->method_total += 1;
 		return (1);
 	}
-	else if ((str[0]) == '%' && ((str[1] == ':') || (ft_strlen(str) < 5)))
+	else if ((str[0]) == '%' && ((str[1] == ':') ||
+		((ft_strlen(str) < 5) && str[1] != '0')))
 	{
 		e->method_total += 2;
 		return (10);
@@ -134,3 +135,40 @@ void		push_tail_method(t_line **begin_list, char **tab, int nb_arg, t_env *e)
 	}
 }
 
+// Prend l'index de l'operation dans op_tab, l'argument ("r2", "%:khdfve"...) et le numero de
+// l'information (donc 1, 2 ou 3) et renvoie le nombre d'octet a utiliser pour le codage
+// de l'info en question
+int			get_byte_len(int nb_tab, char *arg, int n_inf)
+{
+	int		tmp;
+
+	tmp = ft_parse_match("r[0-9]+", arg);
+	if (tmp)
+		return (1);
+	if (n_inf == 1)
+	{
+		if (nb_tab == 0 || nb_tab == 1 ||
+			nb_tab == 5 || nb_tab == 6 ||
+			nb_tab == 7 || nb_tab == 12)
+			return (4);
+		if (nb_tab == 2 || nb_tab == 8 ||
+			nb_tab == 9 || nb_tab == 11 ||
+			nb_tab == 13 || nb_tab == 14)
+			return (2);
+	}
+	if (n_inf == 2)
+	{
+		if (nb_tab == 5 || nb_tab == 6 ||
+			nb_tab == 7)
+			return (4);
+		if (nb_tab == 2 || nb_tab == 9 ||
+			nb_tab == 10 || nb_tab == 13)
+			return (2);
+	}
+	if (n_inf == 3)
+	{
+		if (nb_tab == 10)
+			return (2);
+	}
+	return (0);
+}

@@ -58,19 +58,19 @@ int		main(void)
 
 	int b = 3401123;
 	unsigned char* a;
-	a = cut_nbr(-1);
-	// write (fd, &b, 4);
+	a = cut_nbr(3401123);
+	write (fd, &b, 4);
 	printf("%d %d %d %d %d\n", a[0], a[1], a[2], a[3], a[4]);
 	write (fd, &a[0], 1);
 	write (fd, &a[1], 1);
 	write (fd, &a[2], 1);
 	write (fd, &a[3], 1);
-	// write (fd, &a[4], 1);
+	write (fd, &a[4], 1);
 
 	unsigned int	toto;
 	toto = 3401123;
-	toto = little_to_big(-1);
-	write(fd, &toto, 2);
+	toto = little_to_big(3401123);
+	write(fd, &toto, 4);
 
 	if (close(fd) != 0)
 		printf("close_error_.cor");
