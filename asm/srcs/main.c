@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 12:59:13 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/15 21:21:00 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/16 18:42:07 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ void	decoupage_nb(t_line *tmp)
 	printf("%d %d %d %d ", cut[0], cut[1], cut[2], cut[3]);
 	cut = cut_nbr(tmp->intfo3[1]);
 	printf("%d %d %d %d ", cut[0], cut[1], cut[2], cut[3]);
-
 }
 
 void	print_all_info(t_line *head)

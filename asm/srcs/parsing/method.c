@@ -6,7 +6,7 @@
 /*   By: jaustry <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 23:53:21 by jaustry           #+#    #+#             */
-/*   Updated: 2016/11/15 22:16:47 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/16 18:38:31 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,20 +97,26 @@ t_line		*create_method(char **tab, int nb_arg, t_env *e)
 	e->method_total = 0;
 	list->encod = calculate_encod(tab, nb_arg, e);
 	list->method_total = ++e->method_total;
+	ft_bzero(list->intfo1, 12);
+	ft_bzero(list->intfo2, 12);
+	ft_bzero(list->intfo3, 12);
 	if (nb_arg >= 1)
 	{
 		list->info1 = tab[1];
 		argument_to_int(tab[1], list->intfo1);
+		list->intfo1[2] = get_byte_len(e->nb_tab, tab[1], 1);
 	}
 	if (nb_arg >= 2)
 	{
 		list->info2 = tab[2];
 		argument_to_int(tab[2], list->intfo2);
+		list->intfo2[2] = get_byte_len(e->nb_tab, tab[2], 2);
 	}
 	if (nb_arg >= 3)
 	{
 		list->info3 = tab[3];
 		argument_to_int(tab[3], list->intfo3);
+		list->intfo3[2] = get_byte_len(e->nb_tab, tab[3], 3);
 	}
 	list->nb_info = nb_arg;
 	list->opcode = e->op_tab[e->nb_tab].opcode;
@@ -142,6 +148,8 @@ int			get_byte_len(int nb_tab, char *arg, int n_inf)
 {
 	int		tmp;
 
+	if (!arg)
+		return (0);
 	tmp = ft_parse_match("r[0-9]+", arg);
 	if (tmp)
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/15 22:18:18 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/16 18:30:23 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ struct						s_line
 
 	int						nb_info; // nombre d'info
 	char					*info1;
-	int						intfo1[2]; // info transformer en int_fo
+	int						intfo1[3]; // info transformer en int_fo
 	char					*info2;
-	int						intfo2[2];
+	int						intfo2[3];
 	char					*info3;
-	int						intfo3[2];
+	int						intfo3[3];
 
 	int						encod; // code binaire des arguments
 	struct s_line			*next;
