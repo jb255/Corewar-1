@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 12:59:13 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/16 20:03:02 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/16 21:05:33 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void	decoupage_nb(t_line *tmp)
 	if (tmp->intfo1[2] == 4)
 		printf("%-4d%-4d%-4d%-6d", cut[0], cut[1], cut[2], cut[3]);
 	else if (tmp->intfo1[2] == 2)
-		printf("%4d%-14d", cut[2], cut[3]);
+		printf("%-4d%-14d", cut[2], cut[3]);
 	else if (tmp->intfo1[2] == 1)
 		printf("%-18d", cut[3]);
 	cut = cut_nbr(tmp->intfo2[1]);
@@ -141,11 +141,11 @@ void	decoupage_nb(t_line *tmp)
 	cut = cut_nbr(tmp->intfo3[1]);
 	//printf(">>%d<<", tmp->intfo3[2]);
 	if (tmp->intfo3[2] == 4)
-		printf("%-4d%-4d%-4d%-6d", cut[0], cut[1], cut[2], cut[3]);
+		printf("%-4d%-4d%-4d%d", cut[0], cut[1], cut[2], cut[3]);
 	else if (tmp->intfo3[2] == 2)
-		printf("%-4d%-14d", cut[2], cut[3]);
+		printf("%-4d%d", cut[2], cut[3]);
 	else if (tmp->intfo3[2] == 1)
-		printf("%-18d", cut[3]);
+		printf("%d", cut[3]);
 }
 void	print_all_info(t_line *head)
 {
