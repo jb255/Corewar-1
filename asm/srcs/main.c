@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 12:59:13 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/16 18:42:07 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/16 20:03:02 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,50 +17,10 @@ unsigned int	little_to_big(unsigned int little)
 	unsigned int	big;
 
 	big = ((little >> 24 ) & 0xff) | ((little << 8) & 0xff0000) |
-	((little >> 8) & 0xff00) | ((little << 24 )& 0xff000000);
+		((little >> 8) & 0xff00) | ((little << 24 )& 0xff000000);
 	return (big);
 }
-void	write_binary2(t_line *head, int fd)
-{
-	t_line *tmp;
-	unsigned int a;
 
-	a = 0;
-	tmp = head;
-	while (tmp)
-	{
-		write(fd, &tmp->method, 1);
-		if (tmp->opcode)
-			write(fd, &tmp->opcode, 1);
-		if (tmp->nb_tab > 0)
-		{
-			a = little_to_big(tmp->intfo1[1]);
-			write(fd, &a, tmp->intfo1[2]);
-		}
-		if (tmp->nb_tab > 1)
-		{
-			a = little_to_big(tmp->intfo2[1]);
-			write(fd, &a, tmp->intfo1[2]);
-		}
-		if (tmp->nb_tab > 2)
-		{
-			a = little_to_big(tmp->intfo3[1]);
-			write(fd, &a, tmp->intfo1[2]);
-		}
-		tmp = tmp->next;
-	}
-}
-void	write_binary(t_func	*head, int fd)
-{
-	t_func *tmp;
-
-	tmp = head;
-	while (tmp)
-	{
-		write_binary2(tmp->line, fd);
-		tmp = tmp->next;
-	}
-}
 void	create_file(t_env *e)
 {
 	int			fd;
@@ -77,7 +37,7 @@ void	create_file(t_env *e)
 	if ((fd = open(e->name_file, O_WRONLY | O_CREAT | O_TRUNC, 0644)) == -1)
 		ft_printf(" error open %s\n", e->name_file);
 	write(fd, &header, sizeof(header));
-	write_binary(e->head, fd);
+
 	if (close(fd) != 0)
 		asm_error("close_error_.cor");
 }
@@ -165,29 +125,28 @@ void	decoupage_nb(t_line *tmp)
 	cut = cut_nbr(tmp->intfo1[1]);
 	//printf(">>%d<<", tmp->intfo1[2]);
 	if (tmp->intfo1[2] == 4)
-		printf("%d %d %d %d ", cut[0], cut[1], cut[2], cut[3]);
+		printf("%-4d%-4d%-4d%-6d", cut[0], cut[1], cut[2], cut[3]);
 	else if (tmp->intfo1[2] == 2)
-		printf("%d %d ", cut[2], cut[3]);
+		printf("%4d%-14d", cut[2], cut[3]);
 	else if (tmp->intfo1[2] == 1)
-		printf("%d ", cut[3]);
+		printf("%-18d", cut[3]);
 	cut = cut_nbr(tmp->intfo2[1]);
 	//printf(">>%d<<", tmp->intfo2[2]);
 	if (tmp->intfo2[2] == 4)
-		printf("%d %d %d %d ", cut[0], cut[1], cut[2], cut[3]);
+		printf("%-4d%-4d%-4d%-6d", cut[0], cut[1], cut[2], cut[3]);
 	else if (tmp->intfo2[2] == 2)
-		printf("%d %d ", cut[2], cut[3]);
+		printf("%-4d%-14d", cut[2], cut[3]);
 	else if (tmp->intfo2[2] == 1)
-		printf("%d ", cut[3]);
+		printf("%-18d", cut[3]);
 	cut = cut_nbr(tmp->intfo3[1]);
 	//printf(">>%d<<", tmp->intfo3[2]);
 	if (tmp->intfo3[2] == 4)
-		printf("%d %d %d %d ", cut[0], cut[1], cut[2], cut[3]);
+		printf("%-4d%-4d%-4d%-6d", cut[0], cut[1], cut[2], cut[3]);
 	else if (tmp->intfo3[2] == 2)
-		printf("%d %d ", cut[2], cut[3]);
+		printf("%-4d%-14d", cut[2], cut[3]);
 	else if (tmp->intfo3[2] == 1)
-		printf("%d ", cut[3]);
+		printf("%-18d", cut[3]);
 }
-
 void	print_all_info(t_line *head)
 {
 	t_line	*tmp;
@@ -195,19 +154,31 @@ void	print_all_info(t_line *head)
 	tmp = head;
 	while (tmp != NULL)
 	{
-		printf("%d    (%d  ) :        ", tmp->method_position,
-			tmp->method_total);
-		printf("%s       %s     %s      %s\n", tmp->method,
-			tmp->info1, tmp->info2, tmp->info3);		
-		printf("                    %d  ",tmp->opcode);
-		if (tmp->encod)
-			printf("%d ", tmp->encod);
+		printf("%-5d(%-3d) :        ", tmp->method_position,
+				tmp->method_total);
+		if (tmp->nb_info == 1)
+			printf("%-10s%-18s\n", tmp->method,
+					tmp->info1);
+		else if (tmp->nb_info == 2)
+			printf("%-10s%-18s%-18s\n", tmp->method,
+					tmp->info1, tmp->info2);
+		else
+			printf("%-10s%-18s%-18s%s\n", tmp->method,
+					tmp->info1, tmp->info2, tmp->info3);
+		printf("                    ");
+		printf("%-10d", tmp->opcode);
 		decoupage_nb(tmp);
-		printf("\n");
-		printf("                    %d  ",tmp->opcode);
+		printf("\n                    %-3d",tmp->opcode);
 		if (tmp->encod)
-			printf("%d ", tmp->encod);
-		printf("     %d         %d       %d", tmp->intfo1[1], tmp->intfo2[1], tmp->intfo3[1]);
+			printf("%-7d", tmp->encod);
+		else
+			printf("%-8c", 0);
+		if (tmp->nb_info == 1)
+			printf("%-18d", tmp->intfo1[1]);
+		if (tmp->nb_info == 2)
+			printf("%-18d%-18d", tmp->intfo1[1], tmp->intfo2[1]);
+		if (tmp->nb_info == 3)
+			printf("%-18d%-18d%d", tmp->intfo1[1], tmp->intfo2[1], tmp->intfo3[1]);
 		printf("\n");
 		printf("\n");
 		tmp = tmp->next;
@@ -220,7 +191,7 @@ void	print_all(t_func *head)
 	tmp = head;
 	while (tmp != NULL)
 	{
-		printf("%d          :    ", tmp->line->method_position);
+		printf("%-11d:     ", tmp->line->method_position);
 		printf("%s\n", tmp->label);
 		print_all_info(tmp->line);
 		tmp = tmp->next;
