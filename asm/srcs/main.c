@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 12:59:13 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/16 21:56:41 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/17 19:28:32 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	cut_nbr_and_write(unsigned int nbr, int how_cut, int fd)
 	if (how_cut >= 1)
 		write(fd, &tab[3], 1);
 }
+
 void	write_binary2(t_line *head, int fd)
 {
 	t_line *tmp;
@@ -60,6 +61,7 @@ void	write_binary2(t_line *head, int fd)
 		tmp = tmp->next;
 	}
 }
+
 void	write_binary(t_func	*head, int fd)
 {
 	t_func *tmp;
@@ -204,15 +206,15 @@ void				print_all_info(t_line *head)
 				tmp->method_total);
 		printf("%-10s%-18s%-18s%s\n", tmp->method, tmp->info1, tmp->nb_info > 1
 				? tmp->info2 : "", tmp->nb_info > 2 ? tmp->info3 : "");
-		printf("                    %-3d", tmp->opcode);
+		printf("                    %-4d", tmp->opcode);
 		if (tmp->encod)
-			printf("%-7d", tmp->encod);
+			printf("%-6d", tmp->encod);
 		else
 			printf("%-8c", 0);
 		decoupage_nb(tmp);
-		printf("\n                    %-3d",tmp->opcode);
+		printf("\n                    %-4d",tmp->opcode);
 		if (tmp->encod)
-			printf("%-7d", tmp->encod);
+			printf("%-6d", tmp->encod);
 		else
 			printf("%-8c", 0);
 		if (tmp->nb_info == 1)
@@ -234,7 +236,7 @@ void				print_all(t_func *head)
 	while (tmp != NULL)
 	{
 		printf("%-11d:     ", tmp->line->method_position);
-		printf("%s\n", tmp->label);
+		printf("%s:\n", tmp->label);
 		print_all_info(tmp->line);
 		tmp = tmp->next;
 	}
