@@ -6,7 +6,7 @@
 /*   By: jaustry <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 23:53:21 by jaustry           #+#    #+#             */
-/*   Updated: 2016/11/17 21:39:19 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/17 22:18:59 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,19 +103,16 @@ t_line		*create_method(char **tab, int nb_arg, t_env *e)
 	{
 		list->info1 = tab[1];
 		argument_to_int(tab[1], list->intfo1);
-		list->intfo1[2] = get_byte_len(e->nb_tab, tab[1], 1);
 	}
 	if (nb_arg >= 2)
 	{
 		list->info2 = tab[2];
 		argument_to_int(tab[2], list->intfo2);
-		list->intfo2[2] = get_byte_len(e->nb_tab, tab[2], 2);
 	}
 	if (nb_arg >= 3)
 	{
 		list->info3 = tab[3];
 		argument_to_int(tab[3], list->intfo3);
-		list->intfo3[2] = get_byte_len(e->nb_tab, tab[3], 3);
 	}
 	list->nb_info = nb_arg;
 	list->opcode = e->op_tab[e->nb_tab].opcode;

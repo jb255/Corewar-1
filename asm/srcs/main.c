@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 12:59:13 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/17 21:37:20 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/17 22:21:46 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,13 +210,13 @@ void				print_all_info(t_line *head)
 		if (tmp->encod)
 			printf("%-6d", tmp->encod);
 		else
-			printf("%-8c", 0);
+			printf("%-7c", 0);
 		decoupage_nb(tmp);
 		printf("\n                    %-4d",tmp->opcode);
 		if (tmp->encod)
 			printf("%-6d", tmp->encod);
 		else
-			printf("%-8c", 0);
+			printf("%-7c", 0);
 		if (tmp->nb_info == 1)
 			printf("%-18d\n\n", tmp->intfo1[1]);
 		else if (tmp->nb_info == 2)
@@ -235,7 +235,7 @@ void				print_all(t_func *head)
 	tmp = head;
 	while (tmp != NULL)
 	{
-		printf("%-11d:     ", tmp->line->method_position);
+		printf("%-11d:    ", tmp->line->method_position);
 		printf("%s:\n", tmp->label);
 		print_all_info(tmp->line);
 		tmp = tmp->next;

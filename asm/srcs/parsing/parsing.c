@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:57:55 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/17 21:39:42 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/17 22:17:59 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,6 +264,14 @@ int		labels_are_defined(t_env *file)
 				check_single_label(tmp_line, tmpb_func = file->head, 2, file);
 			if (tmp_line->info3 && ft_parse_match("*:[a-z0-9_]+", tmp_line->info3 + 1))
 				check_single_label(tmp_line, tmpb_func = file->head, 3, file);
+	// La suite ira incessament sous peu dans une autre fonction pour normage,
+	// je le mets la temporairement
+			if (tmp_line->info1)
+				tmp_line->intfo1[2] = get_byte_len(tmp_line->nb_tab, tmp_line->info1, 1);
+			if (tmp_line->info2)
+				tmp_line->intfo2[2] = get_byte_len(tmp_line->nb_tab, tmp_line->info2, 2);
+			if (tmp_line->info3)
+				tmp_line->intfo3[2] = get_byte_len(tmp_line->nb_tab, tmp_line->info3, 3);
 			tmp_line = tmp_line->next;
 		}
 		tmpa_func = tmpa_func->next;
