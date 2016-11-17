@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/16 21:55:00 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/17 21:07:49 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ struct						s_line
 	int						intfo3[3];
 
 	int						encod; // code binaire des arguments
+	int						line_in_file;
 	struct s_line			*next;
 };
 
@@ -61,6 +62,7 @@ typedef struct s_func		t_func;
 struct						s_func
 {
 	char					*label; // nom du truc de merde
+	int						line_in_file;
 	t_line					*line; //pointeur sur struct
 	struct s_func			*next;
 };
@@ -87,7 +89,7 @@ struct						s_env
 void			open_line(char *fichier, t_env *e);
 void			fille_op_tab(t_env *env);
 void			recup_label(char *str, t_env *e);
-void			push_tail_label(t_func **begin_list, t_func **end_list, void *data);
+void			push_tail_label(t_func **begin_list, t_func **end_list, void *data, int line);
 void			push_tail_method(t_line **begin_list, char **tab, int nb_arg, t_env *e);
 int				ft_parse_match(char *reg, char *str);
 void			trim_args(t_env *env);

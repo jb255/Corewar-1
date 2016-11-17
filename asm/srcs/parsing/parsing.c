@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:57:55 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/16 21:56:58 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/17 21:39:42 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,8 +159,8 @@ void	other(char *str, t_env *e)
 	// printf("%d\n", nb_space);
 	if (nb_space == 0)
 	{
-		// printf("label\n");
-		push_tail_label(&e->head, &e->tail, tab[0]);
+		 printf("label\n");
+		push_tail_label(&e->head, &e->tail, tab[0], e->y_line);
 		return ;
 	}
 	command = is_command(tab[0], e);
@@ -171,7 +171,6 @@ void	other(char *str, t_env *e)
 	}
 	else
 		push_tail_method(&e->tail->line, tab, command, e);
-
 }
 
 void	stock_line(char *str, t_env *e)
@@ -232,17 +231,17 @@ void	check_single_label(t_line *line, t_func *func, int nb_info, t_env *env)
 		info = line->info3;
 	while (func != NULL && info && ft_strcmp(func->label, info + 2))
 		func = func->next;
+	if (func == NULL)
+	{
+		printf("Label not defined : line %d\n", line->line_in_file);
+		exit (-1);
+	}
 	if (nb_info == 1)
 		line->intfo1[1] = get_method_pos(info + 2, env) - line->method_position;
 	if (nb_info == 2)
 		line->intfo2[1] = get_method_pos(info + 2, env) - line->method_position;
 	if (nb_info == 3)
 		line->intfo3[1] = get_method_pos(info + 2, env) - line->method_position;
-	if (func == NULL)
-	{
-		asm_error("Label not defined");
-		exit (-1);
-	}
 }
 
 // Verifie si les labels appeles dans les methodes de l'asm sont bien definis quelque part
@@ -283,8 +282,6 @@ int		check_param(int nb_tab, t_op op_tab[], char *info, int nb_param)
 	ft_strcpy(reg + 2, LABEL_CHARS);
 	ft_strcpy(reg + ft_strlen(LABEL_CHARS), "]+");
 	byte = op_tab[nb_tab].params_types[nb_param];
-	printf("BYTE = %d\n", byte);
-	printf("+++ Info vaut ==> %s\n+++\tinfo[0] vaut : %c\n", info, info[0]);
 	if (byte & T_REG)
 	{
 		if (ft_parse_match("r[0-9]+", info) && ft_atoi(info + 1) <= REG_NUMBER)
@@ -310,7 +307,9 @@ int		params_correspond(t_env *file)
 {
 	t_func	*func;
 	t_line	*line;
+	int		flag;
 
+	flag = 0;
 	func = file->head;
 	while (func)
 	{
@@ -318,15 +317,19 @@ int		params_correspond(t_env *file)
 		while (line)
 		{
 			if (!check_param(line->nb_tab, file->op_tab, line->info1, 0))
-				asm_error("Error type, 1");
+				flag = 1;
 			if (line->info2 &&
 					!check_param(line->nb_tab, file->op_tab, line->info2, 1))
-				asm_error("Error type, 2");
+				flag = 2;
 			if (line->info3 &&
 					!check_param(line->nb_tab, file->op_tab, line->info3, 2))
-				asm_error("Error type, 3");
+				flag = 3;
+			if (flag != 0)
+			{
+				printf("Error line %d, param number %d is not valid\n", line->line_in_file, flag);
+				exit(-1);
+			}
 			line = line->next;
-			printf("\n");
 		}
 		func = func->next;
 	}

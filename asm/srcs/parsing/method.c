@@ -6,7 +6,7 @@
 /*   By: jaustry <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 23:53:21 by jaustry           #+#    #+#             */
-/*   Updated: 2016/11/16 18:38:31 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/17 21:39:19 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ t_line		*create_method(char **tab, int nb_arg, t_env *e)
 		return (NULL);
 	list->method = tab[0];
 	list->method_position = e->method_position + e->method_total;
+	list->line_in_file = e->y_line;
 	e->method_position += e->method_total;
 	e->method_total = 0;
 	list->encod = calculate_encod(tab, nb_arg, e);
