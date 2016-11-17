@@ -84,19 +84,21 @@ struct						s_env
 };
 
 
-void		open_line(char *fichier, t_env *e);
-void		fille_op_tab(t_env *env);
-void		recup_label(char *str, t_env *e);
-void		push_tail_label(t_func **begin_list, t_func **end_list, void *data);
-void		push_tail_method(t_line **begin_list, char **tab, int nb_arg, t_env *e);
-int			ft_parse_match(char *reg, char *str);
-void		trim_args(t_env *env);
-int			check_param(int nb_tab, t_op op_tab[], char *info, int nb_param);
-int			params_correspond(t_env *file);
-int			labels_are_defined(t_env *env);
-int			get_method_pos(char *label_name, t_env *file);
-int			get_byte_len(int nb_tab, char *arg, int n_inf);
+void			open_line(char *fichier, t_env *e);
+void			fille_op_tab(t_env *env);
+void			recup_label(char *str, t_env *e);
+void			push_tail_label(t_func **begin_list, t_func **end_list, void *data);
+void			push_tail_method(t_line **begin_list, char **tab, int nb_arg, t_env *e);
+int				ft_parse_match(char *reg, char *str);
+void			trim_args(t_env *env);
+int				check_param(int nb_tab, t_op op_tab[], char *info, int nb_param);
+int				params_correspond(t_env *file);
+int				labels_are_defined(t_env *env);
+int				get_method_pos(char *label_name, t_env *file);
+int				get_byte_len(int nb_tab, char *arg, int n_inf);
 unsigned char	*cut_nbr(unsigned nbr);
+unsigned char	calc_octet(unsigned int *nbr, unsigned int diviseur);
+
 
 
 

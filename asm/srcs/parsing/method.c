@@ -58,7 +58,7 @@ int			calculate_encod(char **tab, int nb_arg, t_env *e)
 		(e->nb_tab) == 16 || (e->nb_tab) == 17)
 		return (0);
 	e->method_total++;
-	return (encod);
+	return (encod - 1);
 }
 
 void		argument_to_int(char *str, int *intfo)
