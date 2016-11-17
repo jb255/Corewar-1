@@ -46,6 +46,7 @@ int			calculate_encod(char **tab, int nb_arg, t_env *e)
 
 	a = 1;
 	multiplicateur = 128;
+	encod = 0;
 	while (a <= nb_arg)
 	{
 		binary_code = coerence_str_optab(tab[a], e);
@@ -58,7 +59,7 @@ int			calculate_encod(char **tab, int nb_arg, t_env *e)
 		(e->nb_tab) == 16 || (e->nb_tab) == 17)
 		return (0);
 	e->method_total++;
-	return (encod - 1);
+	return (encod);
 }
 
 void		argument_to_int(char *str, int *intfo)
@@ -97,9 +98,6 @@ t_line		*create_method(char **tab, int nb_arg, t_env *e)
 	e->method_total = 0;
 	list->encod = calculate_encod(tab, nb_arg, e);
 	list->method_total = ++e->method_total;
-	ft_bzero(list->intfo1, 12);
-	ft_bzero(list->intfo2, 12);
-	ft_bzero(list->intfo3, 12);
 	if (nb_arg >= 1)
 	{
 		list->info1 = tab[1];

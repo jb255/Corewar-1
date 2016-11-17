@@ -233,20 +233,17 @@ void	check_single_label(t_line *line, t_func *func, int nb_info, t_env *env)
 	while (func != NULL && info && ft_strcmp(func->label, info + 2))
 		func = func->next;
 	if (nb_info == 1)
-		line->intfo1[1] = get_method_pos(info + 2, env);
+		line->intfo1[1] = get_method_pos(info + 2, env) - line->method_position;
 	if (nb_info == 2)
-		line->intfo2[1] = get_method_pos(info + 2, env);
+		line->intfo2[1] = get_method_pos(info + 2, env) - line->method_position;
 	if (nb_info == 3)
-		line->intfo3[1] = get_method_pos(info + 2, env);
+		line->intfo3[1] = get_method_pos(info + 2, env) - line->method_position;
 	if (func == NULL)
 	{
 		asm_error("Label not defined");
 		exit (-1);
 	}
 }
-	// off_t	lenght_file;
-	// if ((lenght_file =  lseek(fd, 0, SEEK_END)) > CHAMP_MAX_SIZE) //a faire sur le binaire
-		// asm_error("fichier trop long");
 
 // Verifie si les labels appeles dans les methodes de l'asm sont bien definis quelque part
 // dans le meme fichier
