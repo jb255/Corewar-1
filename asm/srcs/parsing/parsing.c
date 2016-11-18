@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:57:55 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/18 23:25:32 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/19 00:19:20 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,14 +157,14 @@ void	other(char *str, t_env *e)
 	tab = ft_str_ext_split(str, "\t ,");
 	printf("%s =>> \n", str);
 	printf("%d\n", nb_space);
-	if (nb_space == 0)
+	if (nb_space == 0 && ft_strchr(tab[0], ':'))
 	{
 		printf("label\n");
 		push_tail_label(&e->head, &e->tail, tab[0], e->y_line);
 		return ;
 	}
 	command = is_command(tab[0], e);
-	if (nb_space != command)
+	if (nb_space != command || tab[1] == NULL)
 	{
 		printf("Syntax error in line %d\n", e->y_line);
 		exit(1);

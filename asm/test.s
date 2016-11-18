@@ -4,14 +4,14 @@
 .name		"helltrain"
 .comment	"choo-choo, motherf*****s !"
 
-
+		  #lol
 entry:
 	sti		r1, %:beegees_gen, %1
 	sti		r1, %:beegees, %1
 	sti		r1, %:cc_spawn, %1
 	sti		r1, %:wall, %1
 	sti		r1, %:cc4, %1
-	sti		r1, %:cc4, %9
+	sti		r1, %:cc4l, %1
 	sti		r1, %:cc4, %17
 	sti		r1, %:cc4l, %1
 	sti		r1, %:cc4ld, %2
@@ -136,7 +136,7 @@ cc3:
 	zjmp	%:choochoo
 
 cc1:
-	ld		%57672192, r2
+	ld		%318992451, r2
 	ld		%318992387, r3
 	ld		%0, r16
 	zjmp	%:choochoo

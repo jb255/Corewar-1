@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 12:59:13 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/18 23:40:20 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/19 00:20:24 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void				create_file(t_env *e)
 	header_t	header;
 
 	
-	printf("%s\n", "On est grave bons");
 	ft_bzero(header.prog_name, PROG_NAME_LENGTH + 2);
 	ft_bzero(header.comment, COMMENT_LENGTH + 1);
 	header.prog_size = little_to_big(e->method_position + e->method_total);
@@ -91,7 +90,6 @@ void				create_file(t_env *e)
 		ft_printf(" error open %s\n", e->name_file);
 	write(fd, &header, sizeof(header));
 	write_binary(e->head, fd);
-	printf("Alors?\n");
 	if (close(fd) != 0)
 		asm_error("close_error_.cor");
 }
@@ -236,7 +234,6 @@ void				print_all(t_func *head)
 	t_func	*tmp;
 
 	tmp = head;
-	printf("Blup blup blup\n");
 	if (tmp->line)
 		while (tmp != NULL)
 		{
@@ -245,7 +242,6 @@ void				print_all(t_func *head)
 			print_all_info(tmp->line);
 			tmp = tmp->next;
 		}
-	printf("LOL\n");
 }
 
 int					main(int argc, char **argv)
@@ -259,17 +255,11 @@ int					main(int argc, char **argv)
 		asm_error("asm: wrong file extension!");
 	printf("%s\n", e.name_file);
 	fille_op_tab(&e);
-	printf("%s\n", "On est bons");
 	open_line(argv[1], &e);
-	printf("%s\n", "On est bons");
 	trim_args(&e);
-	printf("%s\n", "On est bons");
 	labels_are_defined(&e);
-	printf("%s\n", "On est bons");
 	params_correspond(&e);
-	printf("%s\n", "On est bons");
 	create_file(&e);
-	printf("%s\n", "On est bons");
 	print_all(e.head);
 	return (0);
 }
