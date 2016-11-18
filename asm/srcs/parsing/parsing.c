@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:57:55 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/19 00:19:20 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/19 00:48:09 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,16 @@ void	other(char *str, t_env *e)
 
 void	stock_line(char *str, t_env *e)
 {
-	if ((str[0] == 0) || (str[0] == COMMENT_CHAR) || (str[0] == COMMENT_CHAR2))
+	char	*tmp;
+	char	*tmp2;
+
+	tmp = ft_strnew(7);
+	ft_strcpy(tmp, "[\t ]+");
+	tmp[5] = COMMENT_CHAR;
+	tmp[6] = '*';
+	tmp2 = ft_strdup(tmp);
+	tmp2[5] = COMMENT_CHAR2;
+	if (ft_parse_match(tmp, str) || ft_parse_match(tmp2, str) || (str[0] == 0) || (str[0] == COMMENT_CHAR) || (str[0] == COMMENT_CHAR2))
 	{
 		printf("ligne vide ou # ou ;\n");
 		free(str);
@@ -190,6 +199,8 @@ void	stock_line(char *str, t_env *e)
 		name_comment(str, e);
 	else
 		other(str, e);
+	free(tmp);
+	free(tmp2);
 }
 
 void	open_line(char *fichier, t_env *e)
