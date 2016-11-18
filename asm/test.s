@@ -4,6 +4,7 @@
 .name		"helltrain"
 .comment	"choo-choo, motherf*****s !"
 
+
 entry:
 	sti		r1, %:beegees_gen, %1
 	sti		r1, %:beegees, %1
@@ -101,7 +102,7 @@ cc4:
 	live	%4329034
 	fork	%:cc3
 	live	%3401123
-	fork	%:cc2
+	fork	%:cc1
 	live	%4590543
 	fork	%:cc1
 cc4ld:

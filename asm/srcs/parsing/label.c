@@ -6,7 +6,7 @@
 /*   By: jaustry <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 21:41:37 by jaustry           #+#    #+#             */
-/*   Updated: 2016/11/17 21:29:02 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/18 23:22:53 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_func		*create_label(void *data, int line)
 		list->label = data;
 		list->next = NULL;
 		list->line = NULL;
-		//list->line_in_file = line;
+		list->line_in_file = line;
 	}
 	return (list);
 }

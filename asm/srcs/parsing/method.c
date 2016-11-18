@@ -6,7 +6,7 @@
 /*   By: jaustry <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 23:53:21 by jaustry           #+#    #+#             */
-/*   Updated: 2016/11/17 22:18:59 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/18 23:19:32 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ void		push_tail_method(t_line **begin_list, char **tab, int nb_arg, t_env *e)
 	t_line		*list;
 
 	list = *begin_list;
+	printf("Blop\n");
 	if (list)
 	{
 		while (list->next != NULL)
@@ -135,6 +136,7 @@ void		push_tail_method(t_line **begin_list, char **tab, int nb_arg, t_env *e)
 	{
 		*begin_list = create_method(tab, nb_arg, e);
 	}
+	printf("Bloom\n");
 }
 
 // Prend l'index de l'operation dans op_tab, l'argument ("r2", "%:khdfve"...) et le numero de

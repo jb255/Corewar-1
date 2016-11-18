@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:57:55 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/17 22:17:59 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/18 23:25:32 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,11 +155,11 @@ void	other(char *str, t_env *e)
 
 	nb_space = epur_str(str);
 	tab = ft_str_ext_split(str, "\t ,");
-	// printf("%s =>> ", str);
-	// printf("%d\n", nb_space);
+	printf("%s =>> \n", str);
+	printf("%d\n", nb_space);
 	if (nb_space == 0)
 	{
-		 printf("label\n");
+		printf("label\n");
 		push_tail_label(&e->head, &e->tail, tab[0], e->y_line);
 		return ;
 	}
@@ -170,7 +170,11 @@ void	other(char *str, t_env *e)
 		exit(1);
 	}
 	else
+	{
+		if (e->tail == NULL)
+			push_tail_label(&e->head, &e->tail, ft_strnew(0), e->y_line);
 		push_tail_method(&e->tail->line, tab, command, e);
+	}
 }
 
 void	stock_line(char *str, t_env *e)
