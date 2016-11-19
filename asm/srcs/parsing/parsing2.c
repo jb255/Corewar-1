@@ -6,13 +6,13 @@
 /*   By: mlevieux <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/19 02:42:43 by mlevieux          #+#    #+#             */
-/*   Updated: 2016/11/19 02:54:59 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/19 04:43:30 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-void	free_2d_tab(char **tab, int size)
+void			free_2d_tab(char **tab, int size)
 {
 	int a;
 
@@ -43,7 +43,7 @@ void			print_2d_tab(char **tab, int size)
 	ft_putendl(tab[a]);
 }
 
-void	double_cote(char *str, char *error)
+void			double_cote(char *str, char *error)
 {
 	int	a;
 
@@ -58,7 +58,7 @@ void	double_cote(char *str, char *error)
 		asm_error(error);
 }
 
-void	name_comment(char *str, t_env *e)
+void			name_comment(char *str, t_env *e)
 {
 	char	**tab;
 
@@ -89,7 +89,7 @@ void	name_comment(char *str, t_env *e)
 	free_2d_tab(tab, 2);
 }
 
-int		epur_str(char *str)
+int				epur_str(char *str)
 {
 	int		nb_c;
 	int		old;
@@ -119,10 +119,10 @@ int		epur_str(char *str)
 		{
 			find = 0;
 			str[new] = ' ';
-			new ++;
+			new++;
 			nb_c++;
 		}
 	}
 	str[new] = '\0';
-	return nb_c;
+	return (nb_c);
 }

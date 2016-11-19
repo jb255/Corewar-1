@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 12:59:13 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/19 00:20:24 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/19 04:41:25 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void				print_all_info(t_line *head)
 		else
 			printf("%-7c", 0);
 		decoupage_nb(tmp);
-		printf("\n                    %-4d",tmp->opcode);
+		printf("\n                    %-4d", tmp->opcode);
 		if (tmp->encod)
 			printf("%-6d", tmp->encod);
 		else
@@ -38,7 +38,7 @@ void				print_all_info(t_line *head)
 			printf("%-18d\n\n", tmp->intfo1[1]);
 		else if (tmp->nb_info == 2)
 			printf("%-18d%-18d\n\n", tmp->intfo1[1], tmp->intfo2[1]);
-		else	
+		else
 			printf("%-18d%-18d%d\n\n", tmp->intfo1[1], tmp->intfo2[1],
 					tmp->intfo3[1]);
 		tmp = tmp->next;

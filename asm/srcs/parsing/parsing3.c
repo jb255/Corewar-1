@@ -6,7 +6,7 @@
 /*   By: mlevieux <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/19 02:43:13 by mlevieux          #+#    #+#             */
-/*   Updated: 2016/11/19 03:01:41 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/19 04:00:07 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int		is_command(char *str, t_env *e)
 	int i;
 
 	i = 0;
-
 	while (i < 17)
 	{
 		if (ft_strcmp(str, e->op_tab[i].name) == 0)
@@ -45,9 +44,9 @@ int		ft_match_command(int command, char **tab)
 	{
 		if (i < command)
 			return (0);
-		else
-			if (tab[command + 1][0] != COMMENT_CHAR && tab[command + 1][0] != COMMENT_CHAR2)
-				return (0);
+		else if (tab[command + 1][0] != COMMENT_CHAR &&
+				tab[command + 1][0] != COMMENT_CHAR2)
+			return (0);
 	}
 	return (1);
 }
@@ -91,7 +90,9 @@ void	stock_line(char *str, t_env *e)
 	tmp[6] = '*';
 	tmp2 = ft_strdup(tmp);
 	tmp2[5] = COMMENT_CHAR2;
-	if (ft_parse_match(tmp, str) || ft_parse_match(tmp2, str) || (str[0] == 0) || (str[0] == COMMENT_CHAR) || (str[0] == COMMENT_CHAR2))
+	if (ft_parse_match(tmp, str) || ft_parse_match(tmp2, str) ||
+			(str[0] == 0) || (str[0] == COMMENT_CHAR) ||
+			(str[0] == COMMENT_CHAR2))
 	{
 		printf("ligne vide ou # ou ;\n");
 		free(str);
@@ -121,17 +122,4 @@ void	open_line(char *fichier, t_env *e)
 	}
 	if (close(fd) != 0)
 		asm_error("close_error");
-}
-
-void	trim_args(t_env *file)
-{
-	t_func	*tmp_func;
-	t_line	*tmp_line;
-
-	tmp_func = file->head;
-	while (tmp_func)
-	{
-		tmp_func->label[ft_strlen(tmp_func->label) - 1] = 0;
-		tmp_func = tmp_func->next;
-	}
 }

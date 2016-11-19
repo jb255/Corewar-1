@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tools2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlevieux <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/19 03:10:02 by mlevieux          #+#    #+#             */
+/*   Updated: 2016/11/19 03:12:08 by mlevieux         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
 void				init_env(t_env *e)
@@ -43,9 +55,9 @@ char				*parsename(char *argv)
 
 unsigned char		calc_octet(unsigned int *nbr, unsigned int diviseur)
 {
-	int a;
-	int b;
-	unsigned char total;
+	int				a;
+	int				b;
+	unsigned char	total;
 
 	a = 128;
 	b = 8;
@@ -56,7 +68,7 @@ unsigned char		calc_octet(unsigned int *nbr, unsigned int diviseur)
 		*nbr %= diviseur;
 		diviseur /= 2;
 		a /= 2;
-		b --;
+		b--;
 	}
 	return (total);
 }
@@ -65,7 +77,7 @@ unsigned char		*cut_nbr(unsigned int nbr)
 {
 	unsigned char *tab;
 
-	tab = (unsigned char *)ft_memalloc(sizeof (unsigned char) * 5);
+	tab = (unsigned char *)ft_memalloc(sizeof(unsigned char) * 5);
 	if (!tab)
 		printf("malloc error\n");
 	tab[0] = calc_octet(&nbr, 2147483648);
