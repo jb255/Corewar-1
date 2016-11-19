@@ -61,19 +61,8 @@ void		argument_to_int(char *str, int *intfo)
 	}
 }
 
-t_line		*create_method(char **tab, int nb_arg, t_env *e)
+void		set_infos(int nb_arg, t_line *list, char **tab)
 {
-	t_line		*list;
-
-	if (!(list = (t_line *)ft_memalloc(sizeof(t_line))))
-		return (NULL);
-	list->method = tab[0];
-	list->method_position = e->method_position + e->method_total;
-	list->line_in_file = e->y_line;
-	e->method_position += e->method_total;
-	e->method_total = 0;
-	list->encod = calculate_encod(tab, nb_arg, e);
-	list->method_total = ++e->method_total;
 	if (nb_arg >= 1)
 	{
 		list->info1 = tab[1];
@@ -89,37 +78,34 @@ t_line		*create_method(char **tab, int nb_arg, t_env *e)
 		list->info3 = tab[3];
 		argument_to_int(tab[3], list->intfo3);
 	}
+}
+
+t_line		*create_method(char **tab, int nb_arg, t_env *e)
+{
+	t_line		*list;
+
+	if (!(list = (t_line *)ft_memalloc(sizeof(t_line))))
+		return (NULL);
+	list->method = tab[0];
+	list->method_position = e->method_position + e->method_total;
+	list->line_in_file = e->y_line;
+	e->method_position += e->method_total;
+	e->method_total = 0;
+	list->encod = calculate_encod(tab, nb_arg, e);
+	list->method_total = ++e->method_total;
+	set_infos(nb_arg, list, tab);
 	list->nb_info = nb_arg;
 	list->opcode = e->op_tab[e->nb_tab].opcode;
 	list->nb_tab = e->nb_tab;
 	return (list);
 }
 
-void		push_tail_method(t_line **begin, char **tab, int nb_arg, t_env *e)
-{
-	t_line		*list;
-
-	list = *begin;
-	if (list)
-	{
-		while (list->next != NULL)
-			list = list->next;
-		list->next = create_method(tab, nb_arg, e);
-	}
-	else
-		*begin = create_method(tab, nb_arg, e);
-}
-
 int			get_byte_len(int nb_tab, char *arg, int n_inf)
 {
 	int		tmp;
 
-	if (!arg)
-		return (0);
-	tmp = ft_parse_match("r[0-9]+", arg);
-	if (tmp)
-		return (1);
-	if (n_inf == 1)
+	tmp = ft_parse_match("r[0-9]+", arg ? arg : "");
+	if (n_inf == 1 && arg)
 	{
 		if (nb_tab == 0 || nb_tab == 1 || nb_tab == 5 ||
 				nb_tab == 6 || nb_tab == 7 || nb_tab == 12)
@@ -128,7 +114,7 @@ int			get_byte_len(int nb_tab, char *arg, int n_inf)
 				nb_tab == 11 || nb_tab == 13 || nb_tab == 14)
 			return (2);
 	}
-	if (n_inf == 2)
+	if (n_inf == 2 && arg)
 	{
 		if (nb_tab == 5 || nb_tab == 6 || nb_tab == 7)
 			return (4);
@@ -136,10 +122,8 @@ int			get_byte_len(int nb_tab, char *arg, int n_inf)
 			nb_tab == 10 || nb_tab == 13)
 			return (2);
 	}
-	if (n_inf == 3)
-	{
+	if (n_inf == 3 && arg)
 		if (nb_tab == 10)
 			return (2);
-	}
-	return (0);
+	return (tmp ? 1 : 0);
 }

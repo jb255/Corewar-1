@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-int		coerence_str_optab(char *str, t_env *e)
+int			coerence_str_optab(char *str, t_env *e)
 {
 	if ((str[0]) == 'r')
 	{
@@ -35,4 +35,19 @@ int		coerence_str_optab(char *str, t_env *e)
 		e->method_total += 2;
 		return (11);
 	}
+}
+
+void		push_tail_method(t_line **begin, char **tab, int nb_arg, t_env *e)
+{
+	t_line		*list;
+
+	list = *begin;
+	if (list)
+	{
+		while (list->next != NULL)
+			list = list->next;
+		list->next = create_method(tab, nb_arg, e);
+	}
+	else
+		*begin = create_method(tab, nb_arg, e);
 }

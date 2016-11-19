@@ -58,14 +58,26 @@ void			double_cote(char *str, char *error)
 		asm_error(error);
 }
 
-void			name_comment(char *str, t_env *e)
+void			handle_comment(char *str, t_env *e, char **tab)
+{
+	double_cote(str, "error in .comment");
+	e->comment = ft_strdup(tab[1]);
+	if (ft_strlen(e->comment) > COMMENT_LENGTH)
+	{
+		printf("Champion comment to long (Max lenght %d)\n", COMMENT_LENGTH);
+		free_2d_tab(tab, 2);
+		exit(-1);
+	}
+}
+
+void			name_comment(char *s, t_env *e)
 {
 	char	**tab;
 
-	tab = ft_strsplit(str, '\"');
-	if ((str[1] == 'n') && (str[2] == 'a') && (str[3] == 'm') && (str[4] == 'e'))
+	tab = ft_strsplit(s, '\"');
+	if ((s[1] == 'n') && (s[2] == 'a') && (s[3] == 'm') && (s[4] == 'e'))
 	{
-		double_cote(str, "error in .name");
+		double_cote(s, "error in .name");
 		e->name = ft_strdup(tab[1]);
 		if (ft_strlen(e->name) > PROG_NAME_LENGTH)
 		{
@@ -74,55 +86,9 @@ void			name_comment(char *str, t_env *e)
 			exit(-1);
 		}
 	}
-	else if ((str[1] == 'c') && (str[2] == 'o') && (str[3] == 'm')
-		&& (str[4] == 'm') && (str[5] == 'e') && (str[6] == 'n') && (str[7] == 't'))
-	{
-		double_cote(str, "error in .comment");
-		e->comment = ft_strdup(tab[1]);
-		if (ft_strlen(e->comment) > COMMENT_LENGTH)
-		{
-			printf("Champion comment to long (Max lenght %d)\n", COMMENT_LENGTH);
-			free_2d_tab(tab, 2);
-			exit(-1);
-		}
-	}
+	else if ((s[1] == 'c') && (s[2] == 'o') && (s[3] == 'm')
+		&& (s[4] == 'm') && (s[5] == 'e') && (s[6] == 'n') &&
+		(s[7] == 't'))
+		handle_comment(s, e, tab);
 	free_2d_tab(tab, 2);
-}
-
-int				epur_str(char *str)
-{
-	int		nb_c;
-	int		old;
-	int		new;
-	int		find;
-
-	nb_c = 0;
-	old = 0;
-	new = 0;
-	find = 0;
-	while (str[old] && (str[old] == ' ' || str[old] == '\t'))
-		old++;
-	while (str[old])
-	{
-		if (str[old] != ' ' && str[old] != '\t')
-		{
-			str[new] = str[old];
-			new++;
-			old++;
-		}
-		while (str[old] && (str[old] == ' ' || str[old] == '\t'))
-		{
-			find = 1;
-			old++;
-		}
-		if ((find == 1) && str[old])
-		{
-			find = 0;
-			str[new] = ' ';
-			new++;
-			nb_c++;
-		}
-	}
-	str[new] = '\0';
-	return (nb_c);
 }

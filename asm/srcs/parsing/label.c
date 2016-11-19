@@ -6,7 +6,7 @@
 /*   By: jaustry <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 21:41:37 by jaustry           #+#    #+#             */
-/*   Updated: 2016/11/18 23:22:53 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/20 00:00:24 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ t_func		*create_label(void *data, int line)
 	return (list);
 }
 
-void		push_tail_label(t_func **begin_list, t_func **end_list, void *data, int line)
+void		push_tail_label(t_func **begin_list, t_func **end_list, void *data,
+		int line)
 {
 	t_func		*list;
 

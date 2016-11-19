@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:57:55 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/19 04:46:33 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/20 00:08:13 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,24 @@ int		labels_are_defined(t_env *file)
 	return (1);
 }
 
-int		check_param(int nb_tab, t_op op_tab[], char *info, int nb_param)
+char	*ft_prepare_reg(void)
 {
-	char	byte;
-	char	*reg;
+	char *reg;
 
 	reg = ft_strnew(ft_strlen(LABEL_CHARS) + 3);
 	ft_strcpy(reg, "[");
 	reg[1] = LABEL_CHAR;
 	ft_strcpy(reg + 2, LABEL_CHARS);
 	ft_strcpy(reg + ft_strlen(LABEL_CHARS), "]+");
+	return (reg);
+}
+
+int		check_param(int nb_tab, t_op op_tab[], char *info, int nb_param)
+{
+	char	byte;
+	char	*reg;
+
+	reg = ft_prepare_reg();
 	byte = op_tab[nb_tab].params_types[nb_param];
 	if (byte & T_REG)
 	{
@@ -70,6 +78,18 @@ int		check_param(int nb_tab, t_op op_tab[], char *info, int nb_param)
 	return (0);
 }
 
+void	set_flag(t_line *line, int *flag, t_env *file)
+{
+	if (!check_param(line->nb_tab, file->op_tab, line->info1, 0))
+		*flag = 1;
+	if (line->info2 &&
+			!check_param(line->nb_tab, file->op_tab, line->info2, 1))
+		*flag = 2;
+	if (line->info3 &&
+			!check_param(line->nb_tab, file->op_tab, line->info3, 2))
+		*flag = 3;
+}
+
 int		params_correspond(t_env *file)
 {
 	t_func	*func;
@@ -83,18 +103,11 @@ int		params_correspond(t_env *file)
 		line = func->line;
 		while (line)
 		{
-			if (!check_param(line->nb_tab, file->op_tab, line->info1, 0))
-				flag = 1;
-			if (line->info2 &&
-					!check_param(line->nb_tab, file->op_tab, line->info2, 1))
-				flag = 2;
-			if (line->info3 &&
-					!check_param(line->nb_tab, file->op_tab, line->info3, 2))
-				flag = 3;
+			set_flag(line, &flag, file);
 			if (flag != 0)
 			{
-				printf("Error line %d, param %d not valid\n", line->line_in_file,
-						flag);
+				printf("Error line %d, param %d not valid\n",
+						line->line_in_file, flag);
 				exit(-1);
 			}
 			line = line->next;
@@ -102,17 +115,4 @@ int		params_correspond(t_env *file)
 		func = func->next;
 	}
 	return (1);
-}
-
-int		get_method_pos(char *label_name, t_env *file)
-{
-	t_func	*func;
-	t_line	*line;
-
-	func = file->head;
-	while (func && ft_strcmp(func->label, label_name))
-		func = func->next;
-	if (!func)
-		asm_error("An unknown error occured");
-	return (func->line->method_position);
 }

@@ -67,15 +67,39 @@ void	fill_intfo(t_line *tmp_line)
 				tmp_line->info3, 3);
 }
 
-void	trim_args(t_env *file)
+void	inside_loop_epur(int cpt[], char *str)
 {
-	t_func	*tmp_func;
-	t_line	*tmp_line;
-
-	tmp_func = file->head;
-	while (tmp_func)
+	while (str[cpt[1]] && (str[cpt[1]] == ' ' || str[cpt[1]] == '\t'))
 	{
-		tmp_func->label[ft_strlen(tmp_func->label) - 1] = 0;
-		tmp_func = tmp_func->next;
+		cpt[3] = 1;
+		cpt[1]++;
 	}
+}
+
+int		epur_str(char *str)
+{
+	int		cpt[4];
+
+	ft_bzero(cpt, 16);
+	while (str[cpt[1]] && (str[cpt[1]] == ' ' || str[cpt[1]] == '\t'))
+		cpt[1]++;
+	while (str[cpt[1]])
+	{
+		if (str[cpt[1]] != ' ' && str[cpt[1]] != '\t')
+		{
+			str[cpt[2]] = str[cpt[1]];
+			cpt[2]++;
+			cpt[1]++;
+		}
+		inside_loop_epur(cpt, str);
+		if ((cpt[3] == 1) && str[cpt[1]])
+		{
+			cpt[3] = 0;
+			str[cpt[2]] = ' ';
+			cpt[2]++;
+			cpt[0]++;
+		}
+	}
+	str[cpt[2]] = '\0';
+	return (cpt[0]);
 }

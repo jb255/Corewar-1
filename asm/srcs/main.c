@@ -12,6 +12,21 @@
 
 #include "corewar.h"
 
+void				print_all_info2(t_line *tmp)
+{
+	if (tmp->encod)
+		printf("%-6d", tmp->encod);
+	else
+		printf("%-7c", 0);
+	if (tmp->nb_info == 1)
+		printf("%-18d\n\n", tmp->intfo1[1]);
+	else if (tmp->nb_info == 2)
+		printf("%-18d%-18d\n\n", tmp->intfo1[1], tmp->intfo2[1]);
+	else
+		printf("%-18d%-18d%d\n\n", tmp->intfo1[1], tmp->intfo2[1],
+				tmp->intfo3[1]);
+}
+
 void				print_all_info(t_line *head)
 {
 	t_line	*tmp;
@@ -30,17 +45,7 @@ void				print_all_info(t_line *head)
 			printf("%-7c", 0);
 		decoupage_nb(tmp);
 		printf("\n                    %-4d", tmp->opcode);
-		if (tmp->encod)
-			printf("%-6d", tmp->encod);
-		else
-			printf("%-7c", 0);
-		if (tmp->nb_info == 1)
-			printf("%-18d\n\n", tmp->intfo1[1]);
-		else if (tmp->nb_info == 2)
-			printf("%-18d%-18d\n\n", tmp->intfo1[1], tmp->intfo2[1]);
-		else
-			printf("%-18d%-18d%d\n\n", tmp->intfo1[1], tmp->intfo2[1],
-					tmp->intfo3[1]);
+		print_all_info2(tmp);
 		tmp = tmp->next;
 	}
 }

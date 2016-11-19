@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/19 03:32:12 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/20 00:15:30 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ char        	*parsename(char *arg);
 void        	init_env(t_env *e);
 int				verify_comma_continuity(char *str, int line);
 void			fill_intfo(t_line *line);
-
+t_line			*create_method(char **tab, int nb_arg, t_env *e);
 
 
 
