@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:57:55 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/19 00:58:46 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/19 01:37:14 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,27 @@ int		is_command(char *str, t_env *e)
 	exit(1);
 	return (0);
 }
+
+int		ft_match_command(int command, char **tab)
+{
+	int		i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	i -= 1;
+	if (i != command)
+	{
+		printf("I = %d, command = %d\n", i, command);
+		if (i < command)
+			return (0);
+		else
+			if (tab[command + 1][0] != COMMENT_CHAR && tab[command + 1][0] != COMMENT_CHAR2)
+				return (0);
+	}
+	return (1);
+}
+
 void	other(char *str, t_env *e)
 {
 	char	**tab;
@@ -157,6 +178,8 @@ void	other(char *str, t_env *e)
 	tab = ft_str_ext_split(str, "\t ,");
 	printf("%s =>> \n", str);
 	printf("%d\n", nb_space);
+	for (int i = 0; tab[i]; i++)
+		printf("Plop : %s\n", tab[i]);
 	if (nb_space == 0 && ft_strchr(tab[0], ':'))
 	{
 		printf("label\n");
@@ -164,7 +187,7 @@ void	other(char *str, t_env *e)
 		return ;
 	}
 	command = is_command(tab[0], e);
-	if ((nb_space != command || tab[1] == NULL) && tab[command + 1][0] != COMMENT_CHAR && tab[command + 1][0] != COMMENT_CHAR2)
+	if (!ft_match_command(command, tab))
 	{
 		printf("Syntax error in line %d\n", e->y_line);
 		exit(1);
