@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 12:53:56 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/11 03:27:54 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/19 04:55:52 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	find_next_pc(t_env *e, int x)
 
 	while (func == -1)
 	{
-		label = to_opcode(tab[position % ((MEM_SIZE) * 2)], tab[(position + 1) % ((MEM_SIZE) * 2)]);
+		label = to_opcode(tab[position % ((MEM_SIZE))], tab[(position + 1) % ((MEM_SIZE))]);
 		func = instruct_tab_value(label);
 		size = to_opcode(tab[position + 2], tab[position + 3]);
 		jump_size = jump(ft_atoi(size), g_status_code[func]);
@@ -46,5 +46,5 @@ void	set_process(t_env *e, int process_nb, int x, int creator)
 	ft_memset(e->process[process_nb]->reg, 0, 17);
 	e->process[process_nb]->reg[1] = x;
 	e->process[process_nb]->id_player = creator;
-	find_next_pc(e, process_nb);
+	// find_next_pc(e, process_nb);
 }

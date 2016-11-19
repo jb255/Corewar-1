@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 01:16:37 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/16 03:38:08 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/19 04:59:10 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,11 @@ extern char	g_status_code[17][8];
 
 void	process_cursor(t_env *e, int y, int addr, int x)
 {
-	int		process;
-
-	process = 0;
-	if (addr == e->process[e->memory_data[2]]->position)
+	if (addr == e->process[e->memory_data[3]]->position)
 	{
 		wattron(e->window.memory, COLOR_PAIR(6));
-		mvwprintw(e->window.memory, y, x, "%c%c", tab[addr % ((MEM_SIZE) * 2)],
-		tab[addr + 1 % ((MEM_SIZE) * 2)]);
+		mvwprintw(e->window.memory, y, x, "%02X", tab[addr % MEM_SIZE]);
 		wattroff(e->window.memory, COLOR_PAIR(6));
-		wrefresh(e->window.memory);
 	}
 }
 
@@ -36,11 +31,11 @@ void	exec_process(t_env *e, int xproc)
 	int		jumpx;
 	int		func;
 
-	label = to_opcode(tab[e->process[xproc]->position % (MEM_SIZE * 2)],
-		tab[(e->process[xproc]->position + 1) % (MEM_SIZE * 2)]);
+	label = to_opcode(tab[e->process[xproc]->position % (MEM_SIZE)],
+		tab[(e->process[xproc]->position + 1) % (MEM_SIZE)]);
 	func = instruct_tab_value(label);
-	size = to_opcode(tab[(e->process[xproc]->position + 2) % (MEM_SIZE * 2)],
-		tab[(e->process[xproc]->position + 3) % (MEM_SIZE * 2)]);
+	size = to_opcode(tab[(e->process[xproc]->position + 2) % (MEM_SIZE)],
+		tab[(e->process[xproc]->position + 3) % (MEM_SIZE)]);
 	jumpx = jump(ft_atoi(size), g_status_code[func]);
 	if (func != 1)
 		apply_func(e, xproc, func);
@@ -50,7 +45,7 @@ void	memory_exec(t_env *e, int *nb)
 {
 	int		memory_size;
 
-	memory_size = (MEM_SIZE * 2);
+	memory_size = (MEM_SIZE);
 	display_menu(&e->window.menu, e);
 	while (e->flag.pause == 1 && key_hook(e) == 0)
 		;
@@ -69,35 +64,57 @@ void	memory_exec(t_env *e, int *nb)
 
 void	memory_set_init(t_env *e, int *addr, int *y, int *x)
 {
-	if (*addr == MEM_SIZE * 2)
+	if (*addr == MEM_SIZE)
 		init_index(addr, y, x);
-	if (*addr % 2 == 0 && *addr != 0)
-	{
-		mvwprintw(e->window.memory, *y, *x, " ");
-		(*x)++;
-	}
-	if (*x >= 193 && (*x = 1))
+	(void)e;
+	// if (*addr % 2 == 0 && *addr != 0)
+	// {
+	// 	mvwprintw(e->window.memory, *y, *x, " ");
+	// 	(*x)++;
+	// }
+	if (*x >= 191 && (*x = 1))
 		(*y)++;
 }
 
 int		memory_run(t_env *e)
 {
-	cycle_downer(e, &e->memory_data[2]);
-	while (e->memory_data[2] != e->active_process)
+	cycle_downer(e, &e->memory_data[3]);
+	while (e->memory_data[3] != e->active_process)
 	{
 		if (key_hook(e) == 27)
 			return (1);
-		memory_set_init(e, &e->memory_data[3], &e->memory_data[0],
-			&e->memory_data[1]);
-		find_label(e, e->memory_data[2]);
-		display_memory_color(e, e->memory_data[0], e->memory_data[3],
-			e->memory_data[1]);
-		process_cursor(e, e->memory_data[0], e->memory_data[3],
-			e->memory_data[1]);
-		e->memory_data[3] += 2;
-		if (e->memory_data[3] == (MEM_SIZE * 2))
-			memory_exec(e, &e->memory_data[2]);
-		e->memory_data[1] += 2;
+		find_label(e, e->memory_data[3]);
+		if (tab2[e->memory_data[2]] == 1){
+			wattron(e->window.memory, COLOR_PAIR(tab2[e->memory_data[2]]));
+			mvwprintw(e->window.memory, e->memory_data[0], e->memory_data[1] , "%02x", (unsigned int)(unsigned char)tab[e->memory_data[2]]);
+			wattroff(e->window.memory, COLOR_PAIR(tab2[e->memory_data[2]]));
+		}
+		else
+			mvwprintw(e->window.memory, e->memory_data[0], e->memory_data[1] , "%02x", (unsigned int)(unsigned char)tab[e->memory_data[2]]);
+		process_cursor(e, e->memory_data[0], e->memory_data[2], e->memory_data[1]);
+		e->memory_data[1] += 3;
+		if (e->memory_data[1] >= 191)
+		{
+			e->memory_data[1] = 1; // retour debut ligne
+			e->memory_data[0] += 1; // +1 ligne
+		}
+		e->memory_data[2]++; // +1 dans le tableau
+		if (e->memory_data[2] == (MEM_SIZE))
+		{
+			wrefresh(e->window.memory);
+			nodelay(stdscr, 0);
+			getch();
+
+			e->memory_data[1] = 1; // Retour au debut X
+			e->memory_data[0] = 1; // Retour au debut Y
+			e->memory_data[2] = 0; // Retour au debut Y
+		}
+		e->memory_data[3]++; // Next process
+		// 2 = addr
+		// 0 = y
+		// 1 = x
+		// 3 = nb_proces
+
 	}
 	return (0);
 }

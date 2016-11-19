@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 17:50:40 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/16 00:53:33 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/19 03:41:28 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int		jump(int code, char *status)
 		return (12);
 	else if ((code == 70 && !ft_strcmp(status, "st")) || !ft_strcmp(status, "live"))
 		return (10);
+	else if (code == 50 && !ft_strcmp(status, "st"))
+		return (8);
 	else if (!ft_strcmp(status, "fork") || !ft_strcmp(status, "zjump"))
 		return (6);
 	else if (code == 94 && !ft_strcmp(status, "ldi"))
@@ -79,10 +81,11 @@ void	find_label(t_env *e, int x)
 	int 	index;
 	int		func;
 
-	label = to_opcode(tab[e->process[x]->position % ((MEM_SIZE) * 2)], tab[(e->process[x]->position + 1) % ((MEM_SIZE) * 2)]);
+	label = to_opcode(tab[e->process[x]->position % ((MEM_SIZE))], tab[(e->process[x]->position + 1) % ((MEM_SIZE))]);
 	func = instruct_tab_value(label);
 	size = to_opcode(tab[e->process[x]->position + 2], tab[e->process[x]->position + 3]);
 	jumpx = jump(ft_atoi(size), g_status_code[func]);
+	
 	index = 0;
 	while (index < jumpx)
 	{
@@ -93,9 +96,9 @@ void	find_label(t_env *e, int x)
 	wrefresh(e->window.menu);
 	e->process[x]->jumptodo = jumpx;
 	if (func == -1 && e->process[x]->wait_time != 2)
-		e->process[x]->wait_time = 2;
+		e->process[x]->wait_time = 1;
 	else if (e->process[x]->wait_time <= 1 && func)
-		e->process[x]->wait_time = wait_time[func];
+		e->process[x]->wait_time = wait_time[func] / 2;
 	else
 		e->process[x]->wait_time--;
 }

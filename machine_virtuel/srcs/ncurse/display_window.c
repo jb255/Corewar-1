@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 00:13:23 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/11 03:28:25 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/19 00:27:07 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,14 @@ void	display_tab(WINDOW **tab, t_env *e)
 
 void	display_memory_color(t_env *e, int y, int addr, int x)
 {
-	if (tab2[addr] >= 1 && tab2[addr] <= 4)
-	{
-		wattron(e->window.memory, COLOR_PAIR(tab2[addr]));
-		mvwprintw(e->window.memory, y, x , "%c%c", tab[addr], tab[addr + 1]);
-		wattroff(e->window.memory, COLOR_PAIR(tab2[addr]));
-	}
-	else
-		mvwprintw(e->window.memory, y, x , "%c%c", tab[addr], tab[addr + 1]);
+	// if (tab2[addr] >= 1 && tab2[addr] <= 4)
+	// {
+	// 	wattron(e->window.memory, COLOR_PAIR(tab2[addr]));
+	// 	mvwprintw(e->window.memory, y, x , "%c%c", tab[addr], tab[addr + 1]);
+	// 	wattroff(e->window.memory, COLOR_PAIR(tab2[addr]));
+	// }
+	// else
+	// mvwprintw(e->window.memory, y, x , "%c%c", tab[addr], tab[addr + 1]);
+	// printf("%d %d, %d\n", y,x, addr);
+	mvwprintw(e->window.memory, y, x , "%02X", tab[addr]);
 }

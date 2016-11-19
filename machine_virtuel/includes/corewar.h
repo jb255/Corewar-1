@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/16 04:13:52 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/19 04:54:25 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 # define TRUE 1
 # define FALSE 0
 
-char tab[MEM_SIZE * 2];
-char tab2[MEM_SIZE * 2];
-char tab3[MEM_SIZE * 2];
+int tab[MEM_SIZE];
+char tab2[MEM_SIZE];
+char tab3[MEM_SIZE];
 
 # define BYTE_START_CODE 2192
 

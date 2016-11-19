@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 00:52:00 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/11 02:09:59 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/19 00:28:37 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@ void	init_curse()
 	int n;
 
 	n = 0;
-	while (n < MEM_SIZE * 2)
+	while (n < MEM_SIZE)
 	{
-		tab[n] = '0';
-		tab2[n] = '0';
+		tab[n] = 0;
+		tab2[n] = 0;
 		tab3[n] = '-';
 		n++;
 	}
+	
 }
 
 void			init_process(t_env *e, int nb)

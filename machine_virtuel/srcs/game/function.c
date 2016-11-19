@@ -6,13 +6,13 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:37:17 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/16 06:39:31 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/19 00:18:37 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "n_curse.h"
 
-void	(*g_func_process[5])(t_env*, int, int) = {live_func, ld_func, live_func, add_func, sub_func};
+void	(*g_func_process[5])(t_env*, int, int) = {live_func, ld_func, st_func, add_func, sub_func};
 
 void		apply_func(t_env *e, int xproc, int func)
 {
@@ -71,7 +71,7 @@ char		*get_opfrom_x(t_env *e, int a, int x)
 		vm_error("x higher than a");
 	while (a < x)
 	{
-		result[index] = tab[a % ((MEM_SIZE) * 2)];
+		result[index] = tab[a % ((MEM_SIZE))];
 		a++;
 		index++;
 	}

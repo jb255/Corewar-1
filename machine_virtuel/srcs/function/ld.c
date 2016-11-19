@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 22:00:22 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/16 06:40:36 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/18 05:13:23 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ void	ld_func(t_env *e, int xproc, int func)
 		hex = get_opfrom_x(e, position + 4, position + 12);
 	else if (list.type[0].t_ind)
 		hex = get_opfrom_x(e, position + 4, position + 8);
-	if (list.type[1].t_reg && list.type[0].t_ind)
+	if (list.type[1].t_reg && list.type[0].t_ind){
 		reg = get_opfrom_x(e, position + 8, position + 10);
+	}
 	else if (list.type[1].t_reg && list.type[0].t_dir)
 		reg = get_opfrom_x(e, position + 12, position + 14);
 	if (!list.type[1].t_reg || (!list.type[0].t_ind && !list.type[0].t_dir) || list.type[0].t_reg)
@@ -39,6 +40,7 @@ void	ld_func(t_env *e, int xproc, int func)
 		e->process[xproc]->reg[ft_atoi(reg)] = hex_to_dec(hex);
 		e->process[xproc]->carry = 1;
 	}
+	// printf("Le registre {%s} a la valeur %d\n", reg, hex_to_dec(hex));
 	free(reg);
 	free(hex);
 	nodelay(stdscr, 0);

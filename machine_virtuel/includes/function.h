@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 22:08:57 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/16 01:55:07 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/18 05:01:18 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void		live_func(t_env *e, int xproc, int func);
 void		sub_func(t_env *e, int xproc, int func);
 void		add_func(t_env *e, int xproc, int func);
 void		ld_func(t_env *e, int xproc, int func);
+void	st_func(t_env *e, int xproc, int func);
 t_type_func check_jump(t_env *e, char *op_size);
 #endif
