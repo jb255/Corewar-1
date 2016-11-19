@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:57:55 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/19 00:48:09 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/19 00:58:46 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ void	other(char *str, t_env *e)
 		return ;
 	}
 	command = is_command(tab[0], e);
-	if (nb_space != command || tab[1] == NULL)
+	if ((nb_space != command || tab[1] == NULL) && tab[command + 1][0] != COMMENT_CHAR && tab[command + 1][0] != COMMENT_CHAR2)
 	{
 		printf("Syntax error in line %d\n", e->y_line);
 		exit(1);
