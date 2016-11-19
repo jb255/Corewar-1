@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/19 01:59:40 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/19 03:02:30 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,12 @@ unsigned char	calc_octet(unsigned int *nbr, unsigned int diviseur);
 void			check_single_label(t_line *line, t_func *func, int nb_inf, t_env *e);
 void			name_comment(char *str, t_env *e);
 int				epur_str(char *str);
-
-
+int				coerence_str_optab(char *str, t_env *e);
+void        	create_file(t_env *e);
+void       		decoupage_nb(t_line *tmp);
+char        	*parsename(char *arg);
+void        	init_env(t_env *e);
+int				verify_comma_continuity(char *str, int line);
 
 
 

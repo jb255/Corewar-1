@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing3.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlevieux <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/19 02:43:13 by mlevieux          #+#    #+#             */
+/*   Updated: 2016/11/19 03:01:41 by mlevieux         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parsing.h"
 
 int		is_command(char *str, t_env *e)
@@ -47,6 +59,7 @@ void	other(char *str, t_env *e)
 	int		command;
 
 	nb_space = epur_str(str);
+	verify_comma_continuity(str, e->y_line);
 	tab = ft_str_ext_split(str, "\t ,");
 	if (nb_space == 0 && ft_strchr(tab[0], ':'))
 	{
