@@ -6,36 +6,11 @@
 /*   By: jaustry <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 23:53:21 by jaustry           #+#    #+#             */
-/*   Updated: 2016/11/19 00:08:09 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/19 04:46:56 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-int		coerence_str_optab(char *str, t_env *e) // verifie si le type 
-{
-	if ((str[0]) == 'r')
-	{
-		e->method_total += 1;
-		return (1);
-	}
-	else if ((str[0]) == '%' && ((str[1] == ':') ||
-		((ft_strlen(str) < 5) && str[1] != '0')))
-	{
-		e->method_total += 2;
-		return (10);
-	}
-	else if ((str[0]) == '%')
-	{
-		e->method_total += 4;
-		return (10);
-	}
-	else
-	{
-		e->method_total += 2;
-		return (11);
-	}
-}
 
 int			calculate_encod(char **tab, int nb_arg, t_env *e)
 {
@@ -120,12 +95,11 @@ t_line		*create_method(char **tab, int nb_arg, t_env *e)
 	return (list);
 }
 
-void		push_tail_method(t_line **begin_list, char **tab, int nb_arg, t_env *e)
+void		push_tail_method(t_line **begin, char **tab, int nb_arg, t_env *e)
 {
 	t_line		*list;
 
-	list = *begin_list;
-	printf("Blop\n");
+	list = *begin;
 	if (list)
 	{
 		while (list->next != NULL)
@@ -133,15 +107,8 @@ void		push_tail_method(t_line **begin_list, char **tab, int nb_arg, t_env *e)
 		list->next = create_method(tab, nb_arg, e);
 	}
 	else
-	{
-		*begin_list = create_method(tab, nb_arg, e);
-	}
-	printf("Bloom\n");
+		*begin = create_method(tab, nb_arg, e);
 }
-
-// Prend l'index de l'operation dans op_tab, l'argument ("r2", "%:khdfve"...) et le numero de
-// l'information (donc 1, 2 ou 3) et renvoie le nombre d'octet a utiliser pour le codage
-// de l'info en question
 
 int			get_byte_len(int nb_tab, char *arg, int n_inf)
 {
@@ -154,19 +121,16 @@ int			get_byte_len(int nb_tab, char *arg, int n_inf)
 		return (1);
 	if (n_inf == 1)
 	{
-		if (nb_tab == 0 || nb_tab == 1 ||
-			nb_tab == 5 || nb_tab == 6 ||
-			nb_tab == 7 || nb_tab == 12)
+		if (nb_tab == 0 || nb_tab == 1 || nb_tab == 5 ||
+				nb_tab == 6 || nb_tab == 7 || nb_tab == 12)
 			return (4);
-		if (nb_tab == 2 || nb_tab == 8 ||
-			nb_tab == 9 || nb_tab == 11 ||
-			nb_tab == 13 || nb_tab == 14)
+		if (nb_tab == 2 || nb_tab == 8 || nb_tab == 9 ||
+				nb_tab == 11 || nb_tab == 13 || nb_tab == 14)
 			return (2);
 	}
 	if (n_inf == 2)
 	{
-		if (nb_tab == 5 || nb_tab == 6 ||
-			nb_tab == 7)
+		if (nb_tab == 5 || nb_tab == 6 || nb_tab == 7)
 			return (4);
 		if (nb_tab == 2 || nb_tab == 9 ||
 			nb_tab == 10 || nb_tab == 13)
