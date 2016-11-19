@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/17 21:07:49 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/19 01:59:40 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,9 @@ int				get_method_pos(char *label_name, t_env *file);
 int				get_byte_len(int nb_tab, char *arg, int n_inf);
 unsigned char	*cut_nbr(unsigned nbr);
 unsigned char	calc_octet(unsigned int *nbr, unsigned int diviseur);
-
+void			check_single_label(t_line *line, t_func *func, int nb_inf, t_env *e);
+void			name_comment(char *str, t_env *e);
+int				epur_str(char *str);
 
 
 

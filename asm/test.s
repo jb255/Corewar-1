@@ -5,7 +5,6 @@
 .comment	"choo-choo, motherf*****s !"
 
 		#lol
-entry:
 	sti		r1, %:beegees_gen, %1 #jjvlsnvljdl
 	sti		r1, %:beegees, %1
 	sti		r1, %:cc_spawn, %1

@@ -6,13 +6,13 @@
 /*   By: jaustry <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 23:53:21 by jaustry           #+#    #+#             */
-/*   Updated: 2016/11/19 00:08:09 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/19 01:47:33 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int		coerence_str_optab(char *str, t_env *e) // verifie si le type 
+int		coerence_str_optab(char *str, t_env *e)
 {
 	if ((str[0]) == 'r')
 	{
@@ -125,7 +125,6 @@ void		push_tail_method(t_line **begin_list, char **tab, int nb_arg, t_env *e)
 	t_line		*list;
 
 	list = *begin_list;
-	printf("Blop\n");
 	if (list)
 	{
 		while (list->next != NULL)
@@ -133,15 +132,8 @@ void		push_tail_method(t_line **begin_list, char **tab, int nb_arg, t_env *e)
 		list->next = create_method(tab, nb_arg, e);
 	}
 	else
-	{
 		*begin_list = create_method(tab, nb_arg, e);
-	}
-	printf("Bloom\n");
 }
-
-// Prend l'index de l'operation dans op_tab, l'argument ("r2", "%:khdfve"...) et le numero de
-// l'information (donc 1, 2 ou 3) et renvoie le nombre d'octet a utiliser pour le codage
-// de l'info en question
 
 int			get_byte_len(int nb_tab, char *arg, int n_inf)
 {
