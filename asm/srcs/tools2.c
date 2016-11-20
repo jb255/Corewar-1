@@ -93,23 +93,23 @@ void				decoupage_nb(t_line *tmp)
 
 	cut = cut_nbr(tmp->intfo1[1]);
 	if (tmp->intfo1[2] == 4)
-		printf("%-4d%-4d%-4d%-6d", cut[0], cut[1], cut[2], cut[3]);
+		ft_printf("%-4d%-4d%-4d%-6d", cut[0], cut[1], cut[2], cut[3]);
 	else if (tmp->intfo1[2] == 2)
-		printf("%-4d%-14d", cut[2], cut[3]);
+		ft_printf("%-4d%-14d", cut[2], cut[3]);
 	else if (tmp->intfo1[2] == 1)
-		printf("%-18d", cut[3]);
+		ft_printf("%-18d", cut[3]);
 	cut = cut_nbr(tmp->intfo2[1]);
 	if (tmp->intfo2[2] == 4)
-		printf("%-4d%-4d%-4d%-6d", cut[0], cut[1], cut[2], cut[3]);
+		ft_printf("%-4d%-4d%-4d%-6d", cut[0], cut[1], cut[2], cut[3]);
 	else if (tmp->intfo2[2] == 2)
-		printf("%-4d%-14d", cut[2], cut[3]);
+		ft_printf("%-4d%-14d", cut[2], cut[3]);
 	else if (tmp->intfo2[2] == 1)
-		printf("%-18d", cut[3]);
+		ft_printf("%-18d", cut[3]);
 	cut = cut_nbr(tmp->intfo3[1]);
 	if (tmp->intfo3[2] == 4)
-		printf("%-4d%-4d%-4d%d", cut[0], cut[1], cut[2], cut[3]);
+		ft_printf("%-4d%-4d%-4d%d", cut[0], cut[1], cut[2], cut[3]);
 	else if (tmp->intfo3[2] == 2)
-		printf("%-4d%d", cut[2], cut[3]);
+		ft_printf("%-4d%d", cut[2], cut[3]);
 	else if (tmp->intfo3[2] == 1)
-		printf("%d", cut[3]);
+		ft_printf("%d", cut[3]);
 }

@@ -6,7 +6,7 @@
 #    By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 20:28:54 by vlancien          #+#    #+#              #
-#    Updated: 2016/07/07 23:33:48 by vlancien         ###   ########.fr        #
+#    Updated: 2016/11/20 04:40:40 by mlevieux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ H_DIR 							= -I ./includes/
 SUB1_DIR 							= basic/
 SUB2_DIR 							= gnl/
 SUB3_DIR 							= list/
-SUB4_DIR 							= printf/srcs/
+SUB4_DIR 							= ft_printf/
 # SUB5_DIR 							= ft_printf/srcs/apply/
 # SUB6_DIR 							= ft_printf/srcs/get/
 # SUB7_DIR 							= ft_printf/srcs/int_calc/
