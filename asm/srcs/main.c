@@ -36,8 +36,8 @@ void				print_all_info(t_line *head)
 	{
 		printf("%-5d(%-3d) :        ", tmp->method_position,
 				tmp->method_total);
-		printf("%-10s%-18s%-18s%s\n", tmp->method, tmp->info1, tmp->nb_info > 1
-				? tmp->info2 : "", tmp->nb_info > 2 ? tmp->info3 : "");
+		printf("%-10s%-18s%-18s%s\n", tmp->method, tmp->info1, tmp->nb_info
+			> 1 ? tmp->info2 : "", tmp->nb_info > 2 ? tmp->info3 : "");
 		printf("                    %-4d", tmp->opcode);
 		if (tmp->encod)
 			printf("%-6d", tmp->encod);
@@ -74,7 +74,6 @@ int					main(int argc, char **argv)
 	init_env(&e);
 	if (!(e.name_file = parsename(argv[1])))
 		asm_error("asm: wrong file extension!");
-	printf("%s\n", e.name_file);
 	fille_op_tab(&e);
 	open_line(argv[1], &e);
 	trim_args(&e);

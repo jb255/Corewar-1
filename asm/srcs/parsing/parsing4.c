@@ -24,7 +24,7 @@ void	check_single_label(t_line *line, t_func *func, int nb_info, t_env *env)
 		func = func->next;
 	if (func == NULL)
 	{
-		printf("Call to undefined label \"%s\" at line %d\n", info + 2,
+		ft_printf("Call to undefined label \"%s\" at line %d\n", info + 2,
 				line->line_in_file);
 		exit(-1);
 	}
@@ -46,7 +46,7 @@ int		verify_comma_continuity(char *str, int line)
 		if (((i == 0 || i == ft_strlen(str) - 1) && str[i] == ',') ||
 			(i != 0 && str[i] == ',' && str[i - 1] == ','))
 		{
-			printf("Syntax error at line %d, trailing or double comma\n", line);
+			ft_printf("Syntax error at line %d, trailing or double comma\n", line);
 			exit(-1);
 		}
 		i += 1;

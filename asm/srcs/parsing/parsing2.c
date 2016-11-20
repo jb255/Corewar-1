@@ -64,7 +64,7 @@ void			handle_comment(char *str, t_env *e, char **tab)
 	e->comment = ft_strdup(tab[1]);
 	if (ft_strlen(e->comment) > COMMENT_LENGTH)
 	{
-		printf("Champion comment to long (Max lenght %d)\n", COMMENT_LENGTH);
+		ft_printf("Champion comment to long (Max lenght %d)\n", COMMENT_LENGTH);
 		free_2d_tab(tab, 2);
 		exit(-1);
 	}
@@ -81,7 +81,7 @@ void			name_comment(char *s, t_env *e)
 		e->name = ft_strdup(tab[1]);
 		if (ft_strlen(e->name) > PROG_NAME_LENGTH)
 		{
-			printf("Champion name to long (Max lenght %d)\n", PROG_NAME_LENGTH);
+			ft_printf("Champion name to long (Max lenght %d)\n", PROG_NAME_LENGTH);
 			free_2d_tab(tab, 2);
 			exit(-1);
 		}

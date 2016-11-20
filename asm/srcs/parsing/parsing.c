@@ -106,7 +106,7 @@ int		params_correspond(t_env *file)
 			set_flag(line, &flag, file);
 			if (flag != 0)
 			{
-				printf("Error line %d, param %d not valid\n",
+				ft_printf("Error line %d, param %d not valid\n",
 						line->line_in_file, flag);
 				exit(-1);
 			}

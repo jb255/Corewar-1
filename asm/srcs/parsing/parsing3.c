@@ -27,7 +27,7 @@ int		is_command(char *str, t_env *e)
 		i++;
 	}
 	e->nb_tab = 16;
-	printf("Syntax error in line %d\n", e->y_line);
+	ft_printf("Syntax error in line %d\n", e->y_line);
 	exit(1);
 	return (0);
 }
@@ -68,7 +68,7 @@ void	other(char *str, t_env *e)
 	command = is_command(tab[0], e);
 	if (!ft_match_command(command, tab))
 	{
-		printf("Syntax error in line %d\n", e->y_line);
+		ft_printf("Syntax error in line %d\n", e->y_line);
 		exit(1);
 	}
 	else
@@ -94,7 +94,6 @@ void	stock_line(char *str, t_env *e)
 			(str[0] == 0) || (str[0] == COMMENT_CHAR) ||
 			(str[0] == COMMENT_CHAR2))
 	{
-		printf("ligne vide ou # ou ;\n");
 		free(str);
 		e->suite = 0;
 		return ;
