@@ -20,9 +20,11 @@ int		get_method_pos(char *label_name, t_env *file)
 	func = file->head;
 	while (func && ft_strcmp(func->label, label_name))
 		func = func->next;
+	while (func && !func->line)
+		return (file->method_position);
 	if (!func)
 		asm_error("An unknown error occured");
-	return (func->line->method_position);
+	return (func->line ? func->line->method_position : file->method_position);
 }
 
 void	trim_args(t_env *file)

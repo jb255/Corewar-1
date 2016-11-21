@@ -66,8 +66,9 @@ int		check_param(int nb_tab, t_op op_tab[], char *info, int nb_param)
 	}
 	if (byte & T_DIR)
 	{
-		if (info[0] == DIRECT_CHAR && (ft_parse_match("[0-9]+", info + 1) ||
-					ft_parse_match(reg, info + 1)))
+		if (info[0] == DIRECT_CHAR && (ft_parse_match("[0-9]+",
+			info[1] == '-' ? info + 2 : info + 1) ||
+			ft_parse_match(reg, info + 1)))
 			return (1);
 		else if (byte == T_DIR || byte == (T_DIR | T_REG))
 			return (0);
