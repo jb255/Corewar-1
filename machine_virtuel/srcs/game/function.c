@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:37:17 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/19 00:18:37 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/21 09:42:01 by viko             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,23 @@ t_type_func check_jump(t_env *e, char *op_size)
 	ft_memset(&list, 0, sizeof(t_type_func));
 	if (ft_strlen(op_size) != 8)
 		return (list);
+	printf("OP_SIZE%s\n", op_size);
 	while (op_size[index] != '\0')
 	{
-		if (op_size[index] == '0' && op_size[index + 1] == '1')
+		if (op_size[index] == '0' && op_size[index + 1] == '1'){
 			list.type[x].t_reg++;
-		else if (op_size[index] == '1' && op_size[index + 1] == '0')
+			list.size += 1;
+		}
+		else if (op_size[index] == '1' && op_size[index + 1] == '0'){
 			list.type[x].t_dir++;
-		else if (op_size[index] == '1' && op_size[index + 1] == '1')
+			list.size += 2;
+		}
+		else if (op_size[index] == '1' && op_size[index + 1] == '1'){
 			list.type[x].t_ind++;
+			list.size += 2;
+		}
+		// else
+		// 	list.error = 1;
 		index += 2;
 		x++;
 	}

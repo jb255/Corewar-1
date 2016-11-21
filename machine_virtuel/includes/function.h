@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 22:08:57 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/18 05:01:18 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/21 09:40:52 by viko             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ typedef struct s_type_func	t_type_func;
 struct						s_type_func
 {
 	t_type_a				type[3];
+	int						size;
+	int						error;
 };
 
 void		live_func(t_env *e, int xproc, int func);
