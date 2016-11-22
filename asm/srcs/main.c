@@ -50,12 +50,14 @@ void				print_all_info(t_line *head)
 	}
 }
 
-void				print_all(t_env *env)
+void				print_all(t_env *e)
 {
 	t_func	*tmp;
 
-	tmp = env->head;
-	ft_printf("Dumping annoted program on standard output\nProgram size : %d bytes\nName : \"%s\"\nComment : \"%s\"\n\n", env->method_position + env->method_total, env->name, env->comment);
+	tmp = e->head;
+	ft_printf("Dumping annoted program on standard output\nProgram size : ");
+	ft_printf("%d bytes\nName : \"%s\"", e->method_position + e->method_total);
+	ft_printf("\nComment : \"%s\"\n\n", e->name, e->comment);
 	if (tmp->line)
 		while (tmp != NULL)
 		{
@@ -71,7 +73,12 @@ int					main(int argc, char **argv)
 	t_env		e;
 
 	if (argc < 2)
-		asm_error("Usage: ./asm <sourcefile.s>");
+	{
+		ft_printf("Usage: ./asm <sourcefile.s>\n");
+		ft_printf("-a : Instead of creating a .cor file, outputs a stripped ");
+		ft_printf("and annotated version of the code to the standard output\n");
+		exit(-1);
+	}
 	init_env(&e);
 	if (!(e.name_file = parsename(argv[argc - 1])))
 		asm_error("asm: wrong file extension!");
