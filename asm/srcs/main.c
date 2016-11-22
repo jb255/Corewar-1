@@ -56,8 +56,8 @@ void				print_all(t_env *e)
 
 	tmp = e->head;
 	ft_printf("Dumping annoted program on standard output\nProgram size : ");
-	ft_printf("%d bytes\nName : \"%s\"", e->method_position + e->method_total);
-	ft_printf("\nComment : \"%s\"\n\n", e->name, e->comment);
+	ft_printf("%d bytes\nName : \"", e->method_position + e->method_total);
+	ft_printf("%s\"\nComment : \"%s\"\n\n", e->name, e->comment);
 	if (tmp->line)
 		while (tmp != NULL)
 		{
