@@ -43,7 +43,7 @@ int		verify_comma_continuity(char *str, int line)
 	i = 0;
 	while (str[i])
 	{
-		if (((i == 0 || i == ft_strlen(str) - 1) && str[i] == ',') ||
+		if (((i == 0 || i == (int)ft_strlen(str) - 1) && str[i] == ',') ||
 			(i != 0 && str[i] == ',' && str[i - 1] == ','))
 		{
 			ft_printf("Syntax error at line %d, trailing or double comma\n", line);

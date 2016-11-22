@@ -17,9 +17,3 @@ void		asm_error(char *str)
 	ft_printf("%s\n", str);
 	exit(-1);
 }
-
-void		asm_error_str(char *str)
-{
-	ft_printf("%s\n", str);
-	exit(-1);
-}

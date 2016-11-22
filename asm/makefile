@@ -24,7 +24,7 @@ LIBFT 						= libft/
 H_DIR 						= -I ./includes/
 LIBS_H_DIR					= -I ./libft/includes/
 
-# FLAGS =  -Wall -Werror -Wextra
+FLAGS =  -Wall -Werror -Wextra
 
 LINKS = $(H_DIR) $(LIBS_H_DIR)
 

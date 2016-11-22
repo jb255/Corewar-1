@@ -15,7 +15,6 @@
 int		get_method_pos(char *label_name, t_env *file)
 {
 	t_func	*func;
-	t_line	*line;
 
 	func = file->head;
 	while (func && ft_strcmp(func->label, label_name))
@@ -30,7 +29,6 @@ int		get_method_pos(char *label_name, t_env *file)
 void	trim_args(t_env *file)
 {
 	t_func	*tmp_func;
-	t_line	*tmp_line;
 
 	tmp_func = file->head;
 	while (tmp_func)
