@@ -20,7 +20,7 @@ int			coerence_str_optab(char *str, t_env *e)
 		return (1);
 	}
 	else if ((str[0]) == '%' && ((str[1] == ':') ||
-		((ft_strlen(str) < 5) && str[1] != '0')))
+		((ft_strlen(str) < 5) && str[1] != '0' && str[1] != '1')))
 	{
 		e->method_total += 2;
 		return (10);

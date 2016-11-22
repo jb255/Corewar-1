@@ -64,6 +64,8 @@ struct						s_func
 	char					*label; // nom du truc de merde
 	int						line_in_file;
 	t_line					*line; //pointeur sur struct
+	int						method_position;
+	int						method_total;
 	struct s_func			*next;
 };
 
