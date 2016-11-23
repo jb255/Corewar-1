@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 00:55:52 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/23 01:53:18 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/23 09:41:23 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	player_to_tab(t_env *e, int x)
 		b = (unsigned char)strtol(tmp, NULL, 16);
 		tab[start] = b;
 		tab2[start] = e->players[x].id_player + 1;
-		printf("%s, %d, %02x\n", tmp, x, x);
+		// printf("%s, %d, %02x\n", tmp, x, x);
 		byte++;
 		start += 1;
 		free(tmp);
@@ -49,11 +49,11 @@ void	get_position(t_env *e)
 	int		saut;
 
 	saut = MEM_SIZE / e->active_players;
-	if (e->active_players == 2)
+	if (e->active_players >= 2)
 		e->players[1].start = saut;
-	if (e->active_players == 3)
+	if (e->active_players >= 3)
 		e->players[2].start = saut * 2;
-	if (e->active_players == 4)
+	if (e->active_players >= 4)
 		e->players[3].start = saut * 3;
 
 }
@@ -78,8 +78,9 @@ void	put_player(t_env *e)
 		e->process[x]->id_player = e->players[x].id_player;
 		e->process[x]->char_player = 'F' - x;
 		// find_next_pc(e, x);
-		printf("New process %c, id player %d\n", e->process[x]->char_player, e->process[x]->id_player);
+		printf("New process %c,pos[%d] id player %d\n", e->process[x]->char_player, e->process[x]->position, e->process[x]->id_player);
 	}
-	// set_process(e, e->active_process++, 2500, x - 1);
+	set_process(e, e->active_process++, (500), x);
+
 	afficher(e);
 }

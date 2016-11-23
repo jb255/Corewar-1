@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 17:50:40 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/23 04:43:34 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/23 06:40:10 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_type_func		find_label(t_env *e, int x)
 	// nodelay(stdscr, 0);
 	// getch();
 	// nodelay(stdscr, 1);
+	list.func = func;
 	if (func == -1 && e->process[x]->wait_time != 2)
 		e->process[x]->wait_time = 1;
 	else if (e->process[x]->wait_time <= 1 && func)

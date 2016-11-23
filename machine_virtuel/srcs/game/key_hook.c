@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:20:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/23 04:30:30 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/23 08:52:01 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		key_hook(t_env *e)
 		return (27);
 	if (keycode == 32 && !e->flag.pause) {
 		e->flag.pause = 1;
-		wrefresh(e->window.memory);
+		// wrefresh(e->window.memory);
 		wrefresh(e->window.menu);
 	}
 	else if (keycode == 32 && e->flag.pause == 1) {

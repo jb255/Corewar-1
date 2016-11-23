@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 01:16:37 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/23 04:41:19 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/23 09:41:39 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,27 +36,31 @@ extern char	g_status_code[17][8];
 int		memory_run(t_env *e)
 {
 	t_type_func		list;
-
 	// mvwprintw(e->window.menu, 3, 180, "%d", e->arena.cycle);
-	e->memory_data[3] = 0;
-	e->arena.cycle--;
-
-	while (e->memory_data[3] != e->active_process)
-	{
+	// while (e->memory_data[3] != e->active_process)
+	// {
 		if (key_hook(e) == 27)
 			return (1);
-		if (tab2[e->memory_data[2]] != 0){
-			wattron(e->window.memory, COLOR_PAIR(tab2[e->memory_data[2]]));
-			mvwprintw(e->window.memory, e->memory_data[0], e->memory_data[1] , "%02x", (unsigned int)(unsigned char)tab[e->memory_data[2]]);
-			wattroff(e->window.memory, COLOR_PAIR(tab2[e->memory_data[2]]));
-		}
-		else
-			mvwprintw(e->window.memory, e->memory_data[0], e->memory_data[1] , "%02x", (unsigned int)(unsigned char)tab[e->memory_data[2]]);
-		if (e->memory_data[2] == e->process[e->memory_data[3]]->position)
+
+
+		e->memory_data[3] = 0;
+		while (e->memory_data[3] < e->active_process)
 		{
-			wattron(e->window.memory, COLOR_PAIR(6));
-			mvwprintw(e->window.memory, e->memory_data[0], e->memory_data[1], "%02x", tab[e->memory_data[2] % MEM_SIZE]);
-			wattroff(e->window.memory, COLOR_PAIR(6));
+			if (e->memory_data[2] == e->process[e->memory_data[3]]->position)
+			{
+				wattron(e->window.memory, COLOR_PAIR(6));
+				mvwprintw(e->window.memory, e->memory_data[0], e->memory_data[1], "%02x", (unsigned int)(unsigned char)tab[e->memory_data[2] % MEM_SIZE]);
+				wattroff(e->window.memory, COLOR_PAIR(6));
+				wrefresh(e->window.memory);
+			}
+			else if (tab2[e->memory_data[2]] != 0){
+				wattron(e->window.memory, COLOR_PAIR(tab2[e->memory_data[2]]));
+				mvwprintw(e->window.memory, e->memory_data[0], e->memory_data[1] , "%02x", (unsigned int)(unsigned char)tab[e->memory_data[2]]);
+				wattroff(e->window.memory, COLOR_PAIR(tab2[e->memory_data[2]]));
+			}
+			else if (tab2[e->memory_data[2]] == 0)
+				mvwprintw(e->window.memory, e->memory_data[0], e->memory_data[1] , "%02x", (unsigned int)(unsigned char)tab[e->memory_data[2]]);
+			e->memory_data[3]++;
 		}
 		e->memory_data[1] += 3; // Avancement du x
 		if (e->memory_data[1] >= 191) // Saut de ligne
@@ -69,24 +73,32 @@ int		memory_run(t_env *e)
 		{
 			while (e->flag.pause == 1 && key_hook(e) == 0)
 				;
-			list = find_label(e, e->memory_data[3]);
-			if (e->process[e->memory_data[3]]->wait_time - 1 == 0)
+			e->memory_data[3] = 0;
+			while (e->memory_data[3] < e->active_process)
 			{
-				// printf("PROCESS JUMPTO DO %d       \n", e->process[e->memory_data[3]]->jumptodo);
-				e->process[e->memory_data[3]]->position = (e->process[e->memory_data[3]]->position + e->process[e->memory_data[3]]->jumptodo) % MEM_SIZE;
-				e->process[e->memory_data[3]]->wait_time = 0;
+				list = find_label(e, e->memory_data[3]);
+				if (e->process[e->memory_data[3]]->wait_time - 1 == 0)
+				{
+					// printf("PROCESS JUMPTO DO %d       \n", e->process[e->memory_data[3]]->jumptodo);
+					e->process[e->memory_data[3]]->position = (e->process[e->memory_data[3]]->position + e->process[e->memory_data[3]]->jumptodo) % MEM_SIZE;
+					e->process[e->memory_data[3]]->wait_time = 0;
+					e->arena.cycle--;
+					display_info_menu(e);
+				}
+				e->memory_data[3]++;
 			}
-			e->memory_data[1] = 1; // Retour au debut X
 			e->memory_data[0] = 1; // Retour au debut Y
+			e->memory_data[1] = 1; // Retour au debut X
 			e->memory_data[2] = 0; // Retour au debut Y
-			e->memory_data[3]++; // Next process
+			// x++; // Next process
 		}
 		// 2 = addr
 		// 0 = y
 		// 1 = x
 		// 3 = nb_proces
-		wrefresh(e->window.memory);
-	}
+	// }
+	// wrefresh(e->window.memory);
+
 
 	return (0);
 }

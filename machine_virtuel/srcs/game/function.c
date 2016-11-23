@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:37:17 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/23 05:17:37 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/23 08:33:02 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_type_func check_jump(t_env *e, char *op_size)
 	list.size = 2;
 	if (op_size[index + 6] != '0' || op_size[index + 7] != '0'){
 		list.error = 1;
-		printf("error pour %s\n", op_size);
+		// printf("error pour %s\n", op_size);
 	}
 	while (op_size[index] != '\0')
 	{

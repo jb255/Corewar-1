@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 12:53:56 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/22 06:16:46 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/23 09:21:39 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ extern char g_status_code[17][8];
 // {
 // 	char	*label = NULL;
 // 	int		func = -1;
-// 	int		jump_size;
+// 	int		jump_size = 1;
 // 	int		position = e->process[x]->position;
 // 	char	*size = NULL;
 //

@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 22:08:57 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/21 09:40:52 by viko             ###   ########.fr       */
+/*   Updated: 2016/11/23 06:40:23 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ struct						s_type_func
 {
 	t_type_a				type[3];
 	int						size;
+	int						func;
 	int						error;
 };
 

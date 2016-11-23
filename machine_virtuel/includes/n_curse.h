@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 17:26:39 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/23 04:35:31 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/23 06:31:57 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,5 @@ void	apply_func(t_env *e, int xproc, int func);
 char	*get_opfrom_x(t_env *e, int a, int x);
 t_type_func check_jump(t_env *e, char *op_size);
 char	*to_tab(char *str);
+void	display_info_menu(t_env *e);
 #endif
