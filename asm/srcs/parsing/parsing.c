@@ -24,11 +24,11 @@ int		labels_are_defined(t_env *file)
 		tl = taf->line;
 		while (tl != NULL)
 		{
-			if (tl->info1 && ft_parse_match("*:[a-z0-9_]+", tl->info1 + 1))
+			if (tl->info1 && ft_parse_match("*:[a-z0-9_]+", tl->info1))
 				check_single_label(tl, tbf = file->head, 1, file);
-			if (tl->info2 && ft_parse_match("*:[a-z0-9_]+", tl->info2 + 1))
+			if (tl->info2 && ft_parse_match("*:[a-z0-9_]+", tl->info2))
 				check_single_label(tl, tbf = file->head, 2, file);
-			if (tl->info3 && ft_parse_match("*:[a-z0-9_]+", tl->info3 + 1))
+			if (tl->info3 && ft_parse_match("*:[a-z0-9_]+", tl->info3))
 				check_single_label(tl, tbf = file->head, 3, file);
 			fill_intfo(tl);
 			tl = tl->next;

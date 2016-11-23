@@ -20,7 +20,7 @@ void	check_single_label(t_line *line, t_func *func, int nb_info, t_env *env)
 		info = nb_info == 1 ? line->info1 : line->info2;
 	else
 		info = line->info3;
-	while (func != NULL && info && ft_strcmp(func->label, info + 2))
+	while (func != NULL && info && ft_strcmp(func->label, info + (info[0] == '%' ? 2 : 1)))
 		func = func->next;
 	if (func == NULL)
 	{
@@ -29,11 +29,11 @@ void	check_single_label(t_line *line, t_func *func, int nb_info, t_env *env)
 		exit(-1);
 	}
 	if (nb_info == 1)
-		line->intfo1[1] = get_method_pos(info + 2, env) - line->method_position;
+		line->intfo1[1] = get_method_pos(info + (info[0] == '%' ? 2 : 1), env) - line->method_position;
 	if (nb_info == 2)
-		line->intfo2[1] = get_method_pos(info + 2, env) - line->method_position;
+		line->intfo2[1] = get_method_pos(info + (info[0] == '%' ? 2 : 1), env) - line->method_position;
 	if (nb_info == 3)
-		line->intfo3[1] = get_method_pos(info + 2, env) - line->method_position;
+		line->intfo3[1] = get_method_pos(info + (info[0] == '%' ? 2 : 1), env) - line->method_position;
 }
 
 int		verify_comma_continuity(char *str, int line)
