@@ -6,7 +6,7 @@
 /*   By: mlevieux <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 11:43:28 by mlevieux          #+#    #+#             */
-/*   Updated: 2016/11/13 13:15:18 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/23 18:05:28 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	fill(char **actual, char **iter, char *ext)
 		*actual = ft_strdup(*iter);
 	else
 	{
-		*actual = ft_strnew(end - *iter);
+		*actual = ft_strnew(end - *iter + 1);
 		ft_strncpy(*actual, *iter, end - *iter);
 		*iter = end;
 		while (ft_strchr(ext, **iter))

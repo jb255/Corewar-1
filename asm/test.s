@@ -5,9 +5,8 @@
 	and	r1, %0, r1
 
 lol:
-live:	
-	live	%1
-	zjmp	%:live
+live:	live	%1
+		zjmp	%:live
 
 label:
 	live	%1
