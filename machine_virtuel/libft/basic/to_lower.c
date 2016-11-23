@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game.h                                             :+:      :+:    :+:   */
+/*   to_lower.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/01 17:54:35 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/23 03:05:04 by vlancien         ###   ########.fr       */
+/*   Created: 2016/11/22 06:21:16 by vlancien          #+#    #+#             */
+/*   Updated: 2016/11/22 06:21:23 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GAME_H
-# define GAME_H
+#include "libft.h"
 
-# include "corewar.h"
-// # include "players.h"
-// # include "n_curse.h"
-# include <ncurses.h>
-# include "function.h"
+char	*to_lower(char *str)
+{
+	int		index;
 
-t_type_func		find_label(t_env *e, int x);
-
-#endif
+	index = 0;
+	while (str[index] != '\0')
+	{
+		if (str[index] >= 'A' && str[index] <= 'Z')
+			str[index] = str[index] + 32;
+		index++;
+	}
+	return (str);
+}
