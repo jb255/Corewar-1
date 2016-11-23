@@ -59,6 +59,7 @@ void	fill_intfo(t_line *tmp_line)
 	if (tmp_line->info1)
 		tmp_line->intfo1[2] = get_byte_len(tmp_line->nb_tab,
 				tmp_line->info1, 1);
+	printf("On a info = %s, et se code sur %d octets\n", tmp_line->info1 ? tmp_line->info1 : "NULL", tmp_line->intfo1[2]);
 	if (tmp_line->info2)
 		tmp_line->intfo2[2] = get_byte_len(tmp_line->nb_tab,
 				tmp_line->info2, 2);

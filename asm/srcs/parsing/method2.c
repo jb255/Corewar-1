@@ -15,22 +15,15 @@
 int			coerence_str_optab(char *str, t_env *e)
 {
 	if ((str[0]) == 'r')
-	{
 		return (1);
-	}
-	else if ((str[0]) == '%' && ((str[1] == ':') ||
+	else if (((str[0]) == '%' && ((str[1] == ':') ||
 		((ft_strlen(str) < 5) && str[1] != '0' && str[1] != '1')))
-	{
+		|| str[0] == ':')
 		return (10);
-	}
 	else if ((str[0]) == '%')
-	{
 		return (10);
-	}
 	else
-	{
 		return (11);
-	}
 	e->nb_tab = e->nb_tab;
 }
 

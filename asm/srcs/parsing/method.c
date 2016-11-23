@@ -109,12 +109,11 @@ int			get_byte_len(int nb_tab, char *arg, int n_inf)
 	tmp = ft_parse_match("r[0-9]+", arg ? arg : "");
 	if (n_inf == 1 && arg && !tmp)
 	{
-		if ((nb_tab == 0 || nb_tab == 1 || nb_tab == 5 ||
-				nb_tab == 6 || nb_tab == 7 || nb_tab == 12) &&
-				arg[0] != ':')
+		if (arg[0] == '%' && (nb_tab == 0 || nb_tab == 1 || nb_tab == 5 ||
+				nb_tab == 6 || nb_tab == 7 || nb_tab == 12))
 			return (4);
-		if (nb_tab == 2 || nb_tab == 8 || nb_tab == 9 ||
-				nb_tab == 11 || nb_tab == 13 || nb_tab == 14 || arg[0] == ':')
+		if (arg[0] != '%' || nb_tab == 2 || nb_tab == 8 || nb_tab == 9 ||
+				nb_tab == 11 || nb_tab == 13 || nb_tab == 14)
 			return (2);
 	}
 	if (n_inf == 2 && arg && !tmp)
