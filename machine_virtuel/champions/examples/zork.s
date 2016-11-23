@@ -1,7 +1,14 @@
 .name "zork"
 .comment "I'M ALIIIIVE"
 
-ld			487934, r3
-ld			%130, r16
-st			r2, -24
-st			r2, r3
+		ld %255, r2
+		st r1, 256
+		st r1, 511
+		st r1, 513
+l2:
+		sti r1, %:live, %1
+		and r1, %1, r1
+
+live:
+		live %1
+		zjmp %:live
