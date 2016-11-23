@@ -25,6 +25,7 @@ int			calculate_encod(char **tab, int nb_arg, t_env *e)
 	while (a <= nb_arg)
 	{
 		binary_code = coerence_str_optab(tab[a], e);
+		e->method_total += get_byte_len(e->nb_tab, tab[a], a);
 		encod = encod + (binary_code / 10 * multiplicateur) +
 		(binary_code % 10 * multiplicateur / 2);
 		multiplicateur /= 4;
@@ -87,6 +88,7 @@ t_line		*create_method(char **tab, int nb_arg, t_env *e)
 	if (!(list = (t_line *)ft_memalloc(sizeof(t_line))))
 		return (NULL);
 	list->method = tab[0];
+	printf("Actuellement e->method = %d et e->total = %d\n", e->method_position, e->method_total);
 	list->method_position = e->method_position + e->method_total;
 	list->line_in_file = e->y_line;
 	e->method_position += e->method_total;
@@ -105,7 +107,7 @@ int			get_byte_len(int nb_tab, char *arg, int n_inf)
 	int		tmp;
 
 	tmp = ft_parse_match("r[0-9]+", arg ? arg : "");
-	if (n_inf == 1 && arg)
+	if (n_inf == 1 && arg && !tmp)
 	{
 		if (nb_tab == 0 || nb_tab == 1 || nb_tab == 5 ||
 				nb_tab == 6 || nb_tab == 7 || nb_tab == 12)
@@ -114,7 +116,7 @@ int			get_byte_len(int nb_tab, char *arg, int n_inf)
 				nb_tab == 11 || nb_tab == 13 || nb_tab == 14)
 			return (2);
 	}
-	if (n_inf == 2 && arg)
+	if (n_inf == 2 && arg && !tmp)
 	{
 		if (nb_tab == 5 || nb_tab == 6 || nb_tab == 7)
 			return (4);
@@ -122,7 +124,7 @@ int			get_byte_len(int nb_tab, char *arg, int n_inf)
 			nb_tab == 10 || nb_tab == 13)
 			return (2);
 	}
-	if (n_inf == 3 && arg)
+	if (n_inf == 3 && arg && !tmp)
 		if (nb_tab == 10)
 			return (2);
 	return (tmp ? 1 : 0);
