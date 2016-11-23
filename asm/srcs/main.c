@@ -61,7 +61,7 @@ void				print_all(t_env *e)
 	if (tmp->line)
 		while (tmp != NULL)
 		{
-			ft_printf("%-11d:    ", tmp->line->method_position);
+			ft_printf("%-11d:    ", tmp->position);
 			ft_printf("%s:\n", tmp->label);
 			print_all_info(tmp->line);
 			tmp = tmp->next;

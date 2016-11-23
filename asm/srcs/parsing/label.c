@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-t_func		*create_label(void *data, int line)
+t_func		*create_label(void *data, t_env *e)
 {
 	t_func		*list;
 
@@ -23,13 +23,14 @@ t_func		*create_label(void *data, int line)
 		list->label = data;
 		list->next = NULL;
 		list->line = NULL;
-		list->line_in_file = line;
+		list->line_in_file = e->y_line;
+		list->position = e->method_position + e->method_total;
 	}
 	return (list);
 }
 
 void		push_tail_label(t_func **begin_list, t_func **end_list, void *data,
-		int line)
+		t_env *e)
 {
 	t_func		*list;
 
@@ -38,12 +39,12 @@ void		push_tail_label(t_func **begin_list, t_func **end_list, void *data,
 	{
 		while (list->next != NULL)
 			list = list->next;
-		list->next = create_label(data, line);
+		list->next = create_label(data, e);
 		*end_list = list->next;
 	}
 	else
 	{
-		*begin_list = create_label(data, line);
+		*begin_list = create_label(data, e);
 		*end_list = *begin_list;
 	}
 }

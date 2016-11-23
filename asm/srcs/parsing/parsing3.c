@@ -57,12 +57,14 @@ void	other(char *str, t_env *e)
 	int		nb_space;
 	int		command;
 
+	printf("On avance\n");
+
 	nb_space = epur_str(str);
 	verify_comma_continuity(str, e->y_line);
 	tab = ft_str_ext_split(str, "\t ,");
 	if (nb_space == 0 && ft_strchr(tab[0], ':'))
 	{
-		push_tail_label(&e->head, &e->tail, tab[0], e->y_line);
+		push_tail_label(&e->head, &e->tail, tab[0], e);
 		return ;
 	}
 	command = is_command(tab[0], e);
@@ -74,9 +76,11 @@ void	other(char *str, t_env *e)
 	else
 	{
 		if (e->tail == NULL)
-			push_tail_label(&e->head, &e->tail, ft_strnew(0), e->y_line);
+			push_tail_label(&e->head, &e->tail, ft_strnew(0), e);
 		push_tail_method(&e->tail->line, tab, command, e);
 	}
+
+	printf("On avance plus\n");
 }
 
 void	stock_line(char *str, t_env *e)

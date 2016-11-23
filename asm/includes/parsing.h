@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/20 00:15:30 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/23 17:42:27 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,7 @@ struct						s_func
 	char					*label; // nom du truc de merde
 	int						line_in_file;
 	t_line					*line; //pointeur sur struct
-	int						method_position;
-	int						method_total;
+	int						position;
 	struct s_func			*next;
 };
 
@@ -91,7 +90,7 @@ struct						s_env
 void			open_line(char *fichier, t_env *e);
 void			fille_op_tab(t_env *env);
 void			recup_label(char *str, t_env *e);
-void			push_tail_label(t_func **begin_list, t_func **end_list, void *data, int line);
+void			push_tail_label(t_func **begin_list, t_func **end_list, void *data, t_env *e);
 void			push_tail_method(t_line **begin_list, char **tab, int nb_arg, t_env *e);
 int				ft_parse_match(char *reg, char *str);
 void			trim_args(t_env *env);
