@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 12:53:56 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/19 04:55:52 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/22 06:16:46 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,27 @@
 
 extern char g_status_code[17][8];
 
-void	find_next_pc(t_env *e, int x)
-{
-	char	*label = NULL;
-	int		func = -1;
-	int		jump_size;
-	int		position = e->process[x]->position;
-	char	*size = NULL;
-
-	while (func == -1)
-	{
-		label = to_opcode(tab[position % ((MEM_SIZE))], tab[(position + 1) % ((MEM_SIZE))]);
-		func = instruct_tab_value(label);
-		size = to_opcode(tab[position + 2], tab[position + 3]);
-		jump_size = jump(ft_atoi(size), g_status_code[func]);
-		if (func == -1)
-			position++;
-		free(label);
-		free(size);
-	}
-	e->process[x]->addr_pc = position + jump_size;
-}
+// void	find_next_pc(t_env *e, int x)
+// {
+// 	char	*label = NULL;
+// 	int		func = -1;
+// 	int		jump_size;
+// 	int		position = e->process[x]->position;
+// 	char	*size = NULL;
+//
+// 	while (func == -1)
+// 	{
+// 		label = to_opcode(tab[position % ((MEM_SIZE))], tab[(position + 1) % ((MEM_SIZE))]);
+// 		func = instruct_tab_value(label);
+// 		size = to_opcode(tab[position + 2], tab[position + 3]);
+// 		jump_size = jump(ft_atoi(size), g_status_code[func]);
+// 		if (func == -1)
+// 			position++;
+// 		free(label);
+// 		free(size);
+// 	}
+// 	e->process[x]->addr_pc = position + jump_size;
+// }
 
 void	set_process(t_env *e, int process_nb, int x, int creator)
 {

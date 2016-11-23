@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 17:19:56 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/19 00:22:13 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/23 04:34:24 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	n_curse(t_env *e)
 	set_default();
 	display_init_color();
     refresh();
-	display_menu(&e->window.menu, e);
+	display_menu(e);
 	display_tab(&e->window.tab, e);
 	display_memory(e);
 	// refresh();

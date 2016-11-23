@@ -6,31 +6,19 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:37:17 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/21 09:42:01 by viko             ###   ########.fr       */
+/*   Updated: 2016/11/23 05:17:37 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "n_curse.h"
 
-void	(*g_func_process[5])(t_env*, int, int) = {live_func, ld_func, st_func, add_func, sub_func};
+void	(*g_func_process[5])(t_env*, int, int) = {live_func, live_func, live_func, live_func, live_func};
 
 void		apply_func(t_env *e, int xproc, int func)
 {
-	printf("FUNC %d\n", func);
-	if (func == 1 || func == 3 || func == 4 || func == 2)
+	// printf("FUNC %d\n", func);
+	if (func == 1)
 		g_func_process[func - 1](e, xproc, func);
-}
-
-char		*get_op_str(char c, char c1)
-{
-	char	*str;
-
-	str = malloc(sizeof(char) * 3);
-	str[0] = c;
-	str[1] = c1;
-	str[2] = '\0';
-	printf("{{%s}}\n", str);
-	return (str);
 }
 
 t_type_func check_jump(t_env *e, char *op_size)
@@ -44,8 +32,15 @@ t_type_func check_jump(t_env *e, char *op_size)
 	x = 0;
 	ft_memset(&list, 0, sizeof(t_type_func));
 	if (ft_strlen(op_size) != 8)
+	{
+		vm_error("check_jump");
 		return (list);
-	printf("OP_SIZE%s\n", op_size);
+	}
+	list.size = 2;
+	if (op_size[index + 6] != '0' || op_size[index + 7] != '0'){
+		list.error = 1;
+		printf("error pour %s\n", op_size);
+	}
 	while (op_size[index] != '\0')
 	{
 		if (op_size[index] == '0' && op_size[index + 1] == '1'){

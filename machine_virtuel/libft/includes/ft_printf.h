@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 21:04:06 by vlancien          #+#    #+#             */
-/*   Updated: 2016/09/27 21:09:15 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/22 06:26:20 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void						ft_putclist(wchar_t c, t_info_str *list);
 int							ft_printc(va_list ap);
 char						ft_analyse(char const *str, t_info_str *list);
 int							is_arg(char c);
-int							intlen(int c);
+int							intlen(int c, int base);
 void						ft_adress(void const *p, t_info_str *list);
 char						*convert_char(wchar_t c);
 
