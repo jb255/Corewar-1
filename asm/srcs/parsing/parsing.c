@@ -42,11 +42,11 @@ char	*ft_prepare_reg(void)
 {
 	char *reg;
 
-	reg = ft_strnew(ft_strlen(LABEL_CHARS) + 3);
-	ft_strcpy(reg, "[");
-	reg[1] = LABEL_CHAR;
+	reg = ft_strnew(ft_strlen(LABEL_CHARS) + 4);
+	reg[0] = LABEL_CHAR;
+	ft_strcpy(reg + 1, "[");
 	ft_strcpy(reg + 2, LABEL_CHARS);
-	ft_strcpy(reg + ft_strlen(LABEL_CHARS), "]+");
+	ft_strcpy(reg + ft_strlen(LABEL_CHARS) + 2, "]+");
 	return (reg);
 }
 
@@ -73,7 +73,7 @@ int		check_param(int nb_tab, t_op op_tab[], char *info, int nb_param)
 		else if (byte == T_DIR || byte == (T_DIR | T_REG))
 			return (0);
 	}
-	if (ft_parse_match("[0-9]+", info[0] == '-' ? info + 1 : info))
+	if (ft_parse_match("[0-9]+", info[0] == '-' ? info + 1 : info) || ft_parse_match(reg, info))
 		return (1);
 	free(reg);
 	return (0);
