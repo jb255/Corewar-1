@@ -58,18 +58,26 @@ void	other(char *str, t_env *e)
 	int		command;
 	int		flag;
 
+	printf("Entree %s\n", __FUNCTION__);
+
 	nb_space = epur_str(str);
+	printf("1\n");
 	verify_comma_continuity(str, e->y_line);
+	printf("2\n");
 	tab = ft_str_ext_split(str, "\t ,");
+	printf("3, line nb : %d, tab[0] = %s\n", e->y_line, tab[0]);
 	flag = 0;
 	if (tab[0][ft_strlen(tab[0]) - 1] == ':')
 	{
+		printf("4\n");
 		push_tail_label(&e->head, &e->tail, tab[0], e);
 		flag = 1;
 		if (++tab == NULL)
 			return ;
 	}
+	printf("5\n");
 	command = is_command(tab[0], e);
+	printf("6\n");
 	if (flag == 0 && !ft_match_command(command, tab))
 	{
 		ft_printf("Syntax error in line %d, the string is : %s\n", e->y_line, str);
@@ -81,6 +89,7 @@ void	other(char *str, t_env *e)
 			push_tail_label(&e->head, &e->tail, ft_strnew(0), e);
 		push_tail_method(&e->tail->line, tab, command, e);
 	}
+	printf("Sortie %s\n", __FUNCTION__);
 
 }
 
@@ -88,6 +97,8 @@ void	stock_line(char *str, t_env *e)
 {
 	char	*tmp;
 	char	*tmp2;
+
+	printf("Entree %s\n", __FUNCTION__);
 
 	tmp = ft_strnew(7);
 	ft_strcpy(tmp, "[\t ]+");
@@ -108,7 +119,22 @@ void	stock_line(char *str, t_env *e)
 	else
 		other(str, e);
 	free(tmp);
+	printf("Sortie %s\n", __FUNCTION__);
 	free(tmp2);
+}
+
+int		check_line_content(char *line)
+{
+	char	*tmp;
+
+	tmp = line;
+	while (*tmp)
+	{
+		if (*tmp != ' ' && *tmp != '\t')
+			return (1);
+		tmp++;
+	}
+	return (0);
 }
 
 void	open_line(char *fichier, t_env *e)
@@ -116,15 +142,17 @@ void	open_line(char *fichier, t_env *e)
 	char	*line;
 	int		fd;
 
+	printf("Entree %s\n", __FUNCTION__);
 	fd = open(fichier, O_RDONLY);
 	if (fd == -1)
 		asm_error("open_error");
 	while (get_next_line(fd, &line) == 1)
 	{
 		++e->y_line;
-		if(!((line[0] == 0 || line[0] == '\t' || line[0] == ' ') && !line[1]))
-		stock_line(line, e);
+		if(check_line_content(line))
+			stock_line(line, e);
 	}
 	if (close(fd) != 0)
 		asm_error("close_error");
+	printf("Sortie %s\n", __FUNCTION__);
 }
