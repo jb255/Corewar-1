@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 22:12:43 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/22 06:12:54 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/25 11:14:11 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ char	*dec_to_hex(unsigned dec, char *hex, int len)
 	char	*c;
 	char	*s;
 
+	if (dec == 0)
+		return ("00");
 	if (hex == NULL)
 	{
 		len = get_dec(dec);
@@ -61,5 +63,8 @@ char	*dec_to_hex(unsigned dec, char *hex, int len)
 	}
 	if (ft_strlen(hex2) == 3)
 		hex2[2] = '\0';
+	if (ft_strlen(hex2) == 9)
+		hex2[8] = '\0';
+	free(hex);
 	return (hex2);
 }

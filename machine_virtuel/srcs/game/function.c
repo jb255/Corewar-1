@@ -6,19 +6,19 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:37:17 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/23 08:33:02 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/25 10:52:57 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "n_curse.h"
 
-void	(*g_func_process[5])(t_env*, int, int) = {live_func, live_func, live_func, live_func, live_func};
+void	(*g_func_process[5])(t_env*, int, t_type_func) = {live_func, live_func, st_func, live_func, live_func};
 
-void		apply_func(t_env *e, int xproc, int func)
+void		apply_func(t_env *e, int xproc, t_type_func list)
 {
-	// printf("FUNC %d\n", func);
-	if (func == 1)
-		g_func_process[func - 1](e, xproc, func);
+	printf("FUNC %d\n", list.func);
+	if (list.func == 1 || list.func == 3)
+		g_func_process[list.func - 1](e, xproc, list);
 }
 
 t_type_func check_jump(t_env *e, char *op_size)

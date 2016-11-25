@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:57:55 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/05 02:06:44 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/25 09:20:39 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,22 +50,6 @@ void	get_flag_prog(char *arg, t_env *e)
 		vm_error("Too much champions!");
 }
 
-void	get_pos_champion(t_env *e, int size_total)
-{
-	int		size;
-
-	size = (MEM_SIZE * 2) / (e->active_players);
-	printf("active_players %d\n",MEM_SIZE * 2);
-	(void)size_total;
-	e->players[0].start = 0;
-	if (e->active_players >= 2)
-		e->players[1].start = size;
-	if (e->active_players >= 3)
-		e->players[2].start = size * 2;
-	if (e->active_players >= 4)
-		e->players[3].start = size * 3;
-}
-
 void	parsing_arg(char **arg, t_env *e)
 {
 	int		i;
@@ -89,8 +73,7 @@ void	parsing_arg(char **arg, t_env *e)
 		x++;
 		printf("\n");
 	}
-	if ((MEM_SIZE * 2) < size_total)
+	if ((MEM_SIZE) < size_total)
 		vm_error("Not enough space available.");
-	get_pos_champion(e, size_total);
 	return ;
 }

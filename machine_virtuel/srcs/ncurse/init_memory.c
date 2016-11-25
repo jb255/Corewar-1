@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 00:52:00 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/19 00:28:37 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/25 07:49:32 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@ void	init_curse()
 		tab3[n] = '-';
 		n++;
 	}
-	
+
 }
 
 void			init_process(t_env *e, int nb)
 {
 	e->process[nb] = malloc(sizeof(t_process));
+	// printf("%p\n", e->process[nb]);
 	e->flag.time_cycle = 10000;
 	e->process[nb]->start = 0;
 	e->process[nb]->position = 0;

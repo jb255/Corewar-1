@@ -23,8 +23,8 @@ C_FILES = $(shell ls -1 $(C_DIR) $(C_ATTACKFUNC_DIR) $(C_PARSING_DIR) $(C_FUNC_E
 O_FILES = $(addprefix $(O_DIR),$(C_FILES:.c=.o))
 
 all:
-	@make -C $(LIBFT);
-	@make -j4 $(NAME);
+	@make -C $(LIBFT)
+	@make -j4 $(NAME)
 
 $(NAME): $(O_FILES)
 	@$(CC) $(CFLAGS) $(LIBS) $(H_DIR) $(O_FILES) $(FT_O) $(INCURSES) -L./libft -lft -o $(NAME) && printf "\033[0;32m" || printf "\033[0;31m"

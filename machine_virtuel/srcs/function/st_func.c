@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 04:07:26 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/23 01:35:01 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/25 11:18:43 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,38 +39,55 @@
 // 	}
 // }
 //
-// void	st_func(t_env *e, int xproc, int func)
-// {
-// 	t_type_func	list;
-// 	int			position;
-// 	char		*hex = NULL;
-// 	char		*reg = NULL;
-// 	int			regist = 0;
-//
-// 	(void)func;
-// 	position = e->process[xproc]->position;
-// 	list = check_jump(e, hex_to_bin_quad(get_op_str(tab[(position + 2) % ((MEM_SIZE) * 2)], tab[(position + 3) % ((MEM_SIZE) * 2)])));
-// 	if (list.type[0].t_reg)
-// 		reg = get_opfrom_x(e, position + 4, position + 6);
-// 	if (list.type[0].t_reg && list.type[1].t_reg){
-// 		hex = get_opfrom_x(e, position + 6, position + 8);
-// 		regist = e->process[xproc]->reg[ft_atoi(hex)];
-// 	}
-// 	else if (list.type[0].t_reg && list.type[1].t_ind) {
-// 		hex = get_opfrom_x(e, position + 6, position + 10);
-// 		regist = (int)hex_to_dec(hex);
-// 	}
-// 	if (!list.type[0].t_reg || (!list.type[1].t_reg && !list.type[1].t_ind))
-// 		e->process[xproc]->jumptodo = 2;
-// 	else
-// 	{
-// 		printf("VALEUR DU REGISTRE {%d}\n", e->process[xproc]->reg[ft_atoi(hex)]);
-// 		write_from_x(e, (e->process[xproc]->addr_pc + (regist % (IDX_MOD))), regist, xproc);
-// 		// printf("FAULT\n");
-//
-// 		// printf("VALUE TO ADD %d - %s\n", regist, dec_to_hex(regist, NULL, intlen(regist)));
-// 		// printf("DATA ADDR{%d}\n", (e->process[xproc]->addr_pc + (regist % IDX_MOD)));
-// 	}
-// 	// printf("REGISTRE ST %s et %d\n", reg, regist);
-//
-// }
+void	st_func(t_env *e, int xproc, t_type_func list)
+{
+	// char		*hex = NULL;
+	int				reg = 0;
+	int			regist = 0;
+
+	(void)e;
+	(void)list;
+	(void)xproc;
+
+	if (list.type[0].t_reg)
+		reg = tab[e->process[xproc]->position + 2];
+	printf("ST FUNC reg[%d]\n", reg);
+	if (list.type[0].t_reg && list.type[1].t_reg)
+		regist = e->process[xproc]->reg[tab[e->process[xproc]->position + 3]];
+	else if (list.type[0].t_reg && list.type[1].t_ind)
+	{
+		unsigned int	x;
+		int				index;
+		char			*result = "";
+		char			*name = NULL;
+
+		index = 3;
+		// printf("IND[%d][%s]\n", tab[e->process[xproc]->position + 3], dec_to_hex(tab[e->process[xproc]->position + 3], NULL, intlen(tab[e->process[xproc]->position + 3], 10)));
+		// printf("IND[%d][%s]\n", tab[e->process[xproc]->position + 4], dec_to_hex(tab[e->process[xproc]->position + 4], NULL, intlen(tab[e->process[xproc]->position + 4], 10)));
+		while (index < 5)
+		{
+			x = tab[e->process[xproc]->position + index];
+			name = dec_to_hex(x, NULL, intlen(x, 10));
+			result = ft_strjoin(result, strdup(name));
+			if (result == NULL)
+				vm_error("fe");
+			index++;
+		}
+		regist = hex_to_dec(result);
+	}
+	if (!list.type[0].t_reg || (!list.type[1].t_reg && !list.type[1].t_ind))
+		e->process[xproc]->jumptodo = 2;
+	else
+	{
+		printf("VALEUR DU REGISTRE {%d}\n", e->process[xproc]->reg[reg]);
+		// write_from_x(e, (e->process[xproc]->addr_pc + (regist % (IDX_MOD))), regist, xproc);
+		printf("DATA ADDR{%d}\n", e->process[xproc]->addr_pc);
+		// printf("DATA ADDR{%d}\n", (e->process[xproc]->addr_pc + (regist % IDX_MOD)));
+		tab[(e->process[xproc]->addr_pc + (regist % IDX_MOD))] = 255;
+		tab[(e->process[xproc]->addr_pc + (regist % IDX_MOD))+1] = 255;
+		tab[(e->process[xproc]->addr_pc + (regist % IDX_MOD))+2] = 255;
+		tab[(e->process[xproc]->addr_pc + (regist % IDX_MOD))+3] = 255;
+	}
+	// printf("REGISTRE ST %s et %d\n", reg, regist);
+
+}

@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 17:50:40 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/23 06:40:10 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/25 09:04:49 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,10 @@ t_type_func		find_label(t_env *e, int x)
 		list.size = 3;
 	if (func == -1)
 		list.size = 1;
+	if (func == 1)
+		list.size = 5;
 	free(free_me);
 	e->process[x]->jumptodo = list.size;
-	// printf("Func%d, List.size ->%d<    ->%s<   ->%d<  \n", func,list.size + 2, hex_to_bin_quad(free_me), e->process[x]->jumptodo);
 	// nodelay(stdscr, 0);
 	// getch();
 	// nodelay(stdscr, 1);
