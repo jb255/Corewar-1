@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 12:59:13 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/25 09:16:09 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/26 06:42:48 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ void	free_fighter(t_env *e)
 		x++;
 	}
 }
-
-
 
 int		main(int argc, char **argv)
 {
@@ -56,7 +54,10 @@ int		main(int argc, char **argv)
 	// printf("Size = %d\n", test.size + 2);
 	// printf("%s\n", ft_itoa_base(21925245, 16));
 	// printf("%d\n", hex_to_dec("FE"));
-	// printf("%s\n", dec_to_hex(-1, NULL, 3));
+	printf("%s\n", dec_to_hex(2000000000, NULL, 10));
+	// printf("%s, %x\n", ft_itoa_base2(-1, 16), -1);
+	printf("%x\n", 2);
+	printf("%s\n", ft_sprintf("%x", 2));
 	// printf("%s\n", to_tab(strdup("B")));
 	// printf("%d %d %d %d\n", get_oct_from_str(9, 1), get_oct_from_str(9, 2), get_oct_from_str(9, 3), get_oct_from_str(9, 4));
 	// printf("main_>%s\n", ft_itoa_base(-1, 16));

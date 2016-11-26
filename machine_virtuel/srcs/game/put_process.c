@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 12:53:56 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/25 11:23:40 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/26 06:44:06 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,11 @@ void	find_next_pc(t_env *e, int x)
 
 	while (func == -1)
 	{
-		label = to_tab(ft_itoa_base(tab[e->process[x]->position + jump_size % MEM_SIZE], 16));
+		label = ft_sprintf("%02x", tab[e->process[x].position + jump_size % MEM_SIZE]);
 		func = instruct_tab_value(label);
-		free(label);
 		jump_size++;
 	}
-	e->process[x]->addr_pc = e->process[x]->position + jump_size - 1;
+	e->process[x].addr_pc = e->process[x].position + jump_size - 1;
 }
 
 void	set_process(t_env *e, int process_nb, int x, int creator)
@@ -49,10 +48,10 @@ void	set_process(t_env *e, int process_nb, int x, int creator)
 	if (e->active_process == process_nb)
 		vm_error("Error process attribution");
 	init_process(e, process_nb);
-	e->process[process_nb]->position = x % MEM_SIZE;
-	e->process[process_nb]->start = x % MEM_SIZE;
-	ft_memset(e->process[process_nb]->reg, 0, 17);
-	e->process[process_nb]->reg[0] = creator;
-	e->process[process_nb]->id_player = creator;
+	e->process[process_nb].position = x % MEM_SIZE;
+	e->process[process_nb].start = x % MEM_SIZE;
+	ft_memset(e->process[process_nb].reg, 0, 17);
+	e->process[process_nb].reg[1] = -creator;
+	e->process[process_nb].id_player = creator;
 	// find_next_pc(e, process_nb);
 }

@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:20:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/23 08:52:01 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/26 03:37:10 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		key_hook(t_env *e)
 	else if (keycode == 45 && e->flag.time_cycle > 110) // -
 		{
 			e->flag.time_cycle -= 1000;
-			e->process[0]->position = 4000;
+			e->process[0].position = 4000;
 		}
 	else if (keycode == 27)
 		return (27);

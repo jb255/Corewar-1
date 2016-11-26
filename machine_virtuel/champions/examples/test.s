@@ -2,4 +2,4 @@
 .comment "I'M ALIIIIVE"
 
 live %-1
-st r15, 12456567
+st r1, 12456567

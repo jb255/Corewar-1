@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 16:58:08 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/25 04:47:51 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/26 03:40:44 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	write_memory(t_env *e)
 		x = 0;
 		while (x < e->active_process)
 		{
-			if (e->memory_data[2] == e->process[x]->position)
+			if (e->memory_data[2] == e->process[x].position)
 			{
 				wattron(e->window.memory, COLOR_PAIR(6));
 				mvwprintw(e->window.memory, e->memory_data[0], e->memory_data[1], "%02x", (unsigned int)(unsigned char)tab[e->memory_data[2] % MEM_SIZE]);

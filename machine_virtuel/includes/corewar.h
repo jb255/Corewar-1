@@ -6,14 +6,14 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/25 07:49:26 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/26 05:48:17 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COREWAR_H
 # define COREWAR_H
 
-# include "libft.h"
+# include "../../libft/includes/libft.h"
 # include "../../op.h"
 # include <fcntl.h>
 # include <sys/types.h>
@@ -54,7 +54,7 @@ struct					s_env
 	int					memory_data[4];
 	t_arena				arena;
 	t_window			window;
-	t_process			**process;
+	t_process			process[1000];
 };
 
 void			vm_error(char *str);

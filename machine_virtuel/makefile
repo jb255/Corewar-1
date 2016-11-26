@@ -7,10 +7,10 @@ C_PARSING_DIR 				= srcs/parsing/
 C_FUNC_ERROR 				= srcs/func_error/
 C_CURSE_DIR 				= srcs/ncurse/
 C_GAME_DIR 					= srcs/game/
-C_ATTACKFUNC_DIR 					= srcs/function/
+C_ATTACKFUNC_DIR 			= srcs/function/
 
 O_DIR 						= o/
-LIBFT 						= libft/
+LIBFT 						= ../libft/
 
 H_DIR 						= -I ./includes/
 LIBS_H_DIR					= -I ./libft/includes/
@@ -27,7 +27,7 @@ all:
 	@make -j4 $(NAME)
 
 $(NAME): $(O_FILES)
-	@$(CC) $(CFLAGS) $(LIBS) $(H_DIR) $(O_FILES) $(FT_O) $(INCURSES) -L./libft -lft -o $(NAME) && printf "\033[0;32m" || printf "\033[0;31m"
+	@$(CC) $(CFLAGS) $(LIBS) $(H_DIR) $(O_FILES) $(FT_O) $(INCURSES) -L../libft -lft -o $(NAME) && printf "\033[0;32m" || printf "\033[0;31m"
 	@echo -e "\033[1;32m"
 	@echo ""
 	@echo "_____"

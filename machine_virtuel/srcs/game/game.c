@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 17:50:40 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/26 03:32:16 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/26 06:23:19 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,13 @@ t_type_func		find_label(t_env *e, int x)
 	int		func;
 	char	*free_me;
 
-	label = to_tab(ft_itoa_base(tab[e->process[x]->position % MEM_SIZE], 16));
+	label = ft_sprintf("%02x", tab[e->process[x].position % MEM_SIZE]);
 	func = instruct_tab_value(label);
-	free(label);
 	if (func > 9)
 		func -= 1;
-	free_me = to_tab(ft_itoa_base(tab[(e->process[x]->position + 1) % MEM_SIZE], 16));
+	free_me = ft_sprintf("%02x", tab[(e->process[x].position + 1) % MEM_SIZE]);
 	list = check_jump(e, hex_to_bin_quad(free_me));
-	if (tab[(e->process[x]->position + 1) % MEM_SIZE] == 144 && func == 2)
+	if (tab[(e->process[x].position + 1) % MEM_SIZE] == 144 && func == 2)
 		list.size += 2;
 	if (func == 12)
 		list.size = 3;
@@ -53,19 +52,17 @@ t_type_func		find_label(t_env *e, int x)
 		list.size = 1;
 	if (func == 1)
 		list.size = 5;
-	free(free_me);
-	// free(label);
-	e->process[x]->jumptodo = list.size;
+	e->process[x].jumptodo = list.size;
 	// nodelay(stdscr, 0);
 	// getch();
 	// nodelay(stdscr, 1);
 	list.func = func;
-	if (func == -1 && e->process[x]->wait_time != 2)
-		e->process[x]->wait_time = 1;
-	else if (e->process[x]->wait_time <= 1 && func)
-		e->process[x]->wait_time = wait_time[func];
+	if (func == -1 && e->process[x].wait_time != 2)
+		e->process[x].wait_time = 1;
+	else if (e->process[x].wait_time <= 1 && func)
+		e->process[x].wait_time = wait_time[func];
 	else
-		e->process[x]->wait_time--;
+		e->process[x].wait_time--;
 	return (list);
-	// printf("func=%d, List size%d\n", func,e->process[x]->wait_time);
+	// printf("func=%d, List size%d\n", func,e->process[x].wait_time);
 }
