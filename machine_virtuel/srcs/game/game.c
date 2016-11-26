@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 17:50:40 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/25 09:04:49 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/26 03:32:16 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_type_func		find_label(t_env *e, int x)
 
 	label = to_tab(ft_itoa_base(tab[e->process[x]->position % MEM_SIZE], 16));
 	func = instruct_tab_value(label);
+	free(label);
 	if (func > 9)
 		func -= 1;
 	free_me = to_tab(ft_itoa_base(tab[(e->process[x]->position + 1) % MEM_SIZE], 16));
@@ -53,6 +54,7 @@ t_type_func		find_label(t_env *e, int x)
 	if (func == 1)
 		list.size = 5;
 	free(free_me);
+	// free(label);
 	e->process[x]->jumptodo = list.size;
 	// nodelay(stdscr, 0);
 	// getch();

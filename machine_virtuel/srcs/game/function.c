@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:37:17 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/25 10:52:57 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/26 03:29:46 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,25 +60,26 @@ t_type_func check_jump(t_env *e, char *op_size)
 		index += 2;
 		x++;
 	}
+	free(op_size);
 	return (list);
 }
 
-char		*get_opfrom_x(t_env *e, int a, int x)
-{
-	char	*result;
-	int		index;
-
-	index = 0;
-	(void)e;
-	result = malloc(sizeof(char) * abs(a - x) + 1);
-	if (a > x)
-		vm_error("x higher than a");
-	while (a < x)
-	{
-		result[index] = tab[a % ((MEM_SIZE))];
-		a++;
-		index++;
-	}
-	result[index] = '\0';
-	return (result);
-}
+// char		*get_opfrom_x(t_env *e, int a, int x)
+// {
+// 	char	*result;
+// 	int		index;
+//
+// 	index = 0;
+// 	(void)e;
+// 	result = malloc(sizeof(char) * abs(a - x) + 1);
+// 	if (a > x)
+// 		vm_error("x higher than a");
+// 	while (a < x)
+// 	{
+// 		result[index] = tab[a % ((MEM_SIZE))];
+// 		a++;
+// 		index++;
+// 	}
+// 	result[index] = '\0';
+// 	return (result);
+// }
