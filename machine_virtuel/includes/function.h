@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 22:08:57 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/25 06:55:02 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/26 03:10:24 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,5 @@ void		add_func(t_env *e, int xproc, t_type_func list);
 void		ld_func(t_env *e, int xproc, t_type_func list);
 void		st_func(t_env *e, int xproc, t_type_func list);
 t_type_func check_jump(t_env *e, char *op_size);
-int			get_oct_from_str(int id, int nb)
-;
+
 #endif
