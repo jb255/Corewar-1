@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 15:33:49 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/20 04:42:32 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/26 05:50:13 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,4 +135,7 @@ char				*ft_str_reg_chr(const char *str, int c);
 char				**ft_str_ext_split(char *str, char *ext);
 int					ft_power(int nb, int pow);
 void				ft_putstr_char(char c, int nb);
+char				*ft_itoa_base(int value, int base);
+char				*to_lower(char *str);
+int					intlen(int nbr, int base);
 #endif
