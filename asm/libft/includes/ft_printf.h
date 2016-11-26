@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 21:04:06 by vlancien          #+#    #+#             */
-/*   Updated: 2016/09/27 21:09:15 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/26 05:30:08 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ struct						s_info_str
 };
 
 int							ft_printf(char const *format, ...);
+char						*ft_sprintf(char const *format, ...);
 int							data_next(t_info_str *list);
 void						ft_select_printable(va_list ap, t_info_str *list,
 							char c);

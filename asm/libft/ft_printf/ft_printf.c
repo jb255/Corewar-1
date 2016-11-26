@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlevieux <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mlevieux <mlevieux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 15:34:27 by mlevieux          #+#    #+#             */
-/*   Updated: 2016/05/06 11:35:03 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/26 05:32:47 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,44 @@ int			ft_printf(char const *fmt, ...)
 	ft_free_list(list);
 	free(list);
 	return (state_value);
+}
+
+char	*ft_sprint(char *str)
+{
+	int		i;
+	char	z;
+
+	i = 0;
+	z = ft_strlen(str);
+	while (str[i] != 0)
+	{
+		if (str[i] == -1)
+			str[i] = 0;
+		i++;
+	}
+	return (str);
+}
+
+char			*ft_sprintf(char const *fmt, ...)
+{
+	va_list		args;
+	int			state_value;
+	T_LIST		**list;
+	char		*result;
+	char		*res = NULL;
+
+	list = (T_LIST**)malloc(sizeof(T_LIST*) * 2);
+	va_start(args, fmt);
+	result = ft_strdup(fmt);
+	state_value = 1;
+	list[0] = ft_get_args(ft_strdup(fmt));
+	list[1] = list[0];
+	while (list[1])
+		state_value = printf_loop(list + 1, &args, &result);
+	state_value = (state_value) ? ft_strlen(result) : -1;
+	res = ft_sprint(result);
+	free(result);
+	ft_free_list(list);
+	free(list);
+	return (res);
 }
