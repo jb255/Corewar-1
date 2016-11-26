@@ -6,7 +6,7 @@
 /*   By: mlevieux <mlevieux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 15:34:27 by mlevieux          #+#    #+#             */
-/*   Updated: 2016/11/26 05:32:47 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/26 05:34:33 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int			ft_printf(char const *fmt, ...)
 	return (state_value);
 }
 
-char	*ft_sprint(char *str)
+char		*ft_sprint(char *str)
 {
 	int		i;
 	char	z;
@@ -85,14 +85,15 @@ char	*ft_sprint(char *str)
 	return (str);
 }
 
-char			*ft_sprintf(char const *fmt, ...)
+char		*ft_sprintf(char const *fmt, ...)
 {
 	va_list		args;
 	int			state_value;
 	T_LIST		**list;
 	char		*result;
-	char		*res = NULL;
+	char		*res;
 
+	res = NULL;
 	list = (T_LIST**)malloc(sizeof(T_LIST*) * 2);
 	va_start(args, fmt);
 	result = ft_strdup(fmt);
