@@ -90,7 +90,6 @@ void	other(char *str, t_env *e)
 		push_tail_method(&e->tail->line, tab, command, e);
 	}
 	printf("Sortie %s\n", __FUNCTION__);
-
 }
 
 void	stock_line(char *str, t_env *e)
@@ -151,7 +150,10 @@ void	open_line(char *fichier, t_env *e)
 		++e->y_line;
 		if(check_line_content(line))
 			stock_line(line, e);
+		else
+			free(line);
 	}
+	free(line);
 	if (close(fd) != 0)
 		asm_error("close_error");
 	printf("Sortie %s\n", __FUNCTION__);

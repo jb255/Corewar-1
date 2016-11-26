@@ -10,7 +10,7 @@
 label:		zjmp %:avantdebt
 		zjmp %0				# pour eviter ecrasement
 						# de l'instruction suivante
-						
+
 code:		live %42			# 5
 		sti  r15,%0,r14			# 6
 		zjmp %-200			# 3
@@ -79,3 +79,6 @@ level100:	live %42
 		ld   %-194,r14			# $A -6 -0
 		ld   %0,r2			#
 		zjmp %:label			#
+toto:
+
+tata:

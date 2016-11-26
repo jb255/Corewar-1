@@ -79,7 +79,7 @@ unsigned char		*cut_nbr(unsigned int nbr)
 
 	tab = (unsigned char *)ft_memalloc(sizeof(unsigned char) * 5);
 	if (!tab)
-		printf("malloc error\n");
+		ft_printf("malloc error\n");
 	tab[0] = calc_octet(&nbr, 2147483648);
 	tab[1] = calc_octet(&nbr, 8388608);
 	tab[2] = calc_octet(&nbr, 32768);

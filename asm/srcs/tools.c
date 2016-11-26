@@ -23,11 +23,8 @@ unsigned int	little_to_big(unsigned int little)
 
 void			cut_nbr_and_write(unsigned int nbr, int how_cut, int fd)
 {
-	unsigned char *tab;
+	unsigned char tab[4];
 
-	tab = (unsigned char *)ft_memalloc(sizeof(unsigned char) * 5);
-	if (!tab)
-		ft_printf("malloc error\n");
 	tab[0] = calc_octet(&nbr, 2147483648);
 	tab[1] = calc_octet(&nbr, 8388608);
 	tab[2] = calc_octet(&nbr, 32768);

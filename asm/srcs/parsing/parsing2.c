@@ -91,4 +91,5 @@ void			name_comment(char *s, t_env *e)
 		(s[7] == 't'))
 		handle_comment(s, e, tab);
 	free_2d_tab(tab, 2);
+	free(s);
 }
