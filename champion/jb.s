@@ -56,4 +56,24 @@ live:
 		st r6, 509
 		st r7, 508
 		st r8, 507
-
+		st r4, 511
+		st r5, 510
+		st r6, 509
+		st r7, 508
+		st r8, 507
+		st r4, 511
+		st r5, 510
+		st r6, 509
+		st r7, 508
+		st r8, 507
+		st r4, 511
+		st r5, 510
+		st r6, 509
+		st r7, 508
+		st r8, 507
+		st r4, 511
+		st r5, 510
+		st r6, 509
+		st r7, 508
+		st r8, 507
+		
