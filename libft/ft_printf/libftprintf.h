@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libftprintf.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlevieux <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mlevieux <mlevieux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/05 17:11:09 by mlevieux          #+#    #+#             */
-/*   Updated: 2016/05/06 11:43:14 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/28 09:25:36 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,6 @@ int				ft_printf(char const *fmt, ...);
 void			ft_round(long double *num, int accuracy);
 void			ft_get_fmt(T_LIST *trail, char fmt);
 void			ft_strtoupper(char *str);
+int				printf_loop(T_LIST **tmp, va_list *args, char **result);
 
 #endif

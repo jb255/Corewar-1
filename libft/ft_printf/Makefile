@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mlevieux <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: mlevieux <mlevieux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/25 16:57:31 by mlevieux          #+#    #+#              #
-#    Updated: 2016/05/14 09:44:36 by mlevieux         ###   ########.fr        #
+#    Updated: 2016/11/28 09:19:58 by vlancien         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ ft_call_char.c ft_call_wstring.c ft_free_list.c ft_is_format.c \
 ft_round.c ft_call_errno.c ft_char_type.c \
 ft_get_accuracy.c ft_is_modifier.c ft_set_length.c ft_call_float.c \
 ft_check_fmt.c ft_get_args.c ft_is_valid.c ft_set_width.c \
-ft_call_int.c ft_conv_exp.c ft_get_fmt.c ft_make_node.c ft_strset.c
+ft_call_int.c ft_conv_exp.c ft_get_fmt.c ft_make_node.c ft_strset.c ft_printf_fd.c
 
 OBJ = $(patsubst %c, %o, $(SRC))
 
