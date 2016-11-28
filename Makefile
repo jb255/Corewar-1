@@ -12,9 +12,7 @@
 
 .PHONY: all clean fclean re
 
-all: $(NAME)
-
-$(NAME): $(OBJS)
+all:
 	make -C ./libft/
 	make -C ./machine_virtuel/
 	make -C ./asm/
