@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 01:16:37 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/26 03:41:16 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/28 12:34:27 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ extern char	g_status_code[17][8];
 
 int		memory_run(t_env *e)
 {
-	t_type_func		list;
 	int				x;
 
 	x = 0;
@@ -42,19 +41,21 @@ int		memory_run(t_env *e)
 	{
 		if (key_hook(e) == 27)
 			return (1);
-		list = find_label(e, x);
-		// printf("WAIT TIME {%d}         \n", e->process[x].wait_time);
+		ft_putstr_fd("find_label\n", e->fd);
+		e->process[x].list = find_label(e, x);
 		if (e->process[x].wait_time - 1 == 0)
 		{
-			if (list.func != -1)
-				apply_func(e, x, list);
+			if (e->process[x].list.func != -1){
+				ft_putstr_fd("Apply_func\n", e->fd);
+				apply_func(e, x, e->process[x].list);
+			}
 			// nodelay(stdscr, 0);
 			// getch();
-
+			ft_putstr_fd("find_next_pc\n", e->fd);
 			find_next_pc(e, x);
-			e->process[x].position = (e->process[x].position + e->process[x].jumptodo) % MEM_SIZE;
+			ft_printf_fd(e->fd, "e->process[x].jumptodo[%d]\n", e->process[x].jumptodo);
+			e->process[x].position = (e->process[x].position + e->process[x].list.size) % MEM_SIZE;
 			e->process[x].wait_time = 0;
-			printf("PC %d\n", e->process[x].addr_pc);
 		}
 		x++;
 	}

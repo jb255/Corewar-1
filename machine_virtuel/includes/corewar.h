@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/26 05:48:17 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/28 12:54:43 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <display.h>
+# include "function.h"
 # include "players.h"
 
 # define TRUE 1
@@ -55,6 +56,7 @@ struct					s_env
 	t_arena				arena;
 	t_window			window;
 	t_process			process[1000];
+	int					fd;
 };
 
 void			vm_error(char *str);
@@ -86,10 +88,18 @@ char			*to_opcode(char c, char c1);
 void			init_process(t_env *e, int nb);
 void			set_process(t_env *e, int process_nb, int x, int creator);
 
+// function
+void		live_func(t_env *e, int xproc, t_type_func list);
+void		sub_func(t_env *e, int xproc, t_type_func list);
+void		add_func(t_env *e, int xproc, t_type_func list);
+void		ld_func(t_env *e, int xproc, t_type_func list);
+void		st_func(t_env *e, int xproc, t_type_func list);
+t_type_func check_jump(t_env *e, char *op_size);
+t_type_func		find_label(t_env *e, int x);
+//
 
-// int		get_process_pos(t_process *list, int x);
-// int		get_process_start(t_process *list, int x);
-// int		get_process_jumptodo(t_process *list, int x);
-// int		set_process_pos(t_env *e, int process, int data);
-// int		set_process_jumptodo(t_env *e, int process, int data);
+// WorkFunc
+int		octet_precision(char *hex, int octet);
+void	write_from_x(t_env *e, int from, int data, int octet);
+//
 #endif

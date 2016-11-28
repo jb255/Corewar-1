@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 22:08:57 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/26 03:10:24 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/28 10:35:43 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,5 @@ struct						s_type_func
 	int						error;
 };
 
-void		live_func(t_env *e, int xproc, t_type_func list);
-void		sub_func(t_env *e, int xproc, t_type_func list);
-void		add_func(t_env *e, int xproc, t_type_func list);
-void		ld_func(t_env *e, int xproc, t_type_func list);
-void		st_func(t_env *e, int xproc, t_type_func list);
-t_type_func check_jump(t_env *e, char *op_size);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 04:07:26 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/26 07:14:41 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/28 15:29:40 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,37 +17,7 @@
 // et stocke la valeur du registre vers le second paramètre.
 // Son opcode est 0x03. Par exemple, st r1, 42 stocke la valeur de r1 à l’adresse
 // (PC + (42 % IDX_MOD))
-
-int		octet_precision(char *hex, int octet)
-{
-	char	*test;
-	int		nb;
-
-	nb = 0;
-	if (octet == 1)
-		nb = 2;
-	else if (octet == 2)
-		nb = 4;
-	else if (octet == 3)
-		nb = 6;
-	test = ft_strdup(hex + nb);
-	test[2] = '\0';
-	return (hex_to_dec(test));
-}
-
-void	write_from_x(t_env *e, int from, int data, int octet)
-{
-	char	*hex;
-
-	(void)e;
-	hex = ft_sprintf("%08x", data);
-	while (octet > 0)
-	{
-		tab[(from + (4 - octet)) % MEM_SIZE] = octet_precision(hex, 4 - octet);
-		octet--;
-	}
-}
-
+// {T_REG, T_IND | T_REG}
 void	st_func(t_env *e, int xproc, t_type_func list)
 {
 	char			*result = "";
@@ -57,16 +27,19 @@ void	st_func(t_env *e, int xproc, t_type_func list)
 	printf("ST FUNC reg[%d]\n", reg);
 	if (list.type[0].t_reg)
 		reg = tab[e->process[xproc].position + 2];
-	if (list.type[0].t_reg && list.type[1].t_reg){
+	if (list.type[0].t_reg && list.type[1].t_reg)
+	{
 		regist = e->process[xproc].reg[tab[e->process[xproc].position + 3]];
 		e->process[xproc].reg[reg] = regist;
 	}
 	else if (list.type[0].t_reg && list.type[1].t_ind)
 	{
-		result = get_x_from_position(e, xproc, 3, 5);
+		result = get_x_from_position(e, xproc, e->process[xproc].position + 3, e->process[xproc].position + 5);
+		ft_printf_fd(e->fd, "------------->Function-ST Search from %d to %d, result [%s]\nRegistre %d du joueur %d contient %d\nPC ADDR [%d]\n", e->process[xproc].position + 3, e->process[xproc].position + 5, result, reg, xproc, e->process[xproc].reg[reg], e->process[xproc].addr_pc);
 		regist = hex_to_dec(result);
 		write_from_x(e, (e->process[xproc].addr_pc + (regist % (IDX_MOD))), e->process[xproc].reg[reg], 4);
 	}
 	if (!list.type[0].t_reg || (!list.type[1].t_reg && !list.type[1].t_ind))
-		e->process[xproc].jumptodo = 2;
+		e->process[xproc].jumptodo = 1;
+	free(result);
 }

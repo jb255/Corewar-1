@@ -6,14 +6,12 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 17:13:17 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/25 07:40:57 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/28 10:32:41 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PLAYERS_H
 # define PLAYERS_H
-
-// # include "corewar.h"
 
 typedef struct s_process	t_process;
 struct						s_process
@@ -28,6 +26,7 @@ struct						s_process
 	int						id_player;
 	int						char_player;
 	int						live_status;
+	t_type_func				list;
 };
 
 typedef struct s_player		t_player;
