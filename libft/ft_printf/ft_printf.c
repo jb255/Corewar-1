@@ -6,7 +6,7 @@
 /*   By: mlevieux <mlevieux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 15:34:27 by mlevieux          #+#    #+#             */
-/*   Updated: 2016/11/28 09:25:14 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/28 11:34:49 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char		*ft_sprint(char *str)
 			str[i] = 0;
 		i++;
 	}
-	return (str);
+	return (ft_strdup(str));
 }
 
 char		*ft_sprintf(char const *fmt, ...)
