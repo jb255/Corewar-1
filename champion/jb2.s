@@ -1,5 +1,5 @@
 .name "jaustryk's algoritm"
-.comment "fu helltrain"
+.comment "fu celebration funebre"
 
 start:
 		sti r1, %:save, %1
@@ -13,7 +13,6 @@ start:
 		ld %1879507452, r8
 save:
 		live %1
-		sti r1, %:live0, %1
 		sti r1, %:live1, %1
 		sti r1, %:live2, %1
 		sti r1, %:live3, %1
@@ -23,8 +22,6 @@ save:
 		sti r1, %:live7, %1
 		sti r1, %:live8, %1
 		sti r1, %:live9, %1
-live0:
-		live %1
 live1:
 		live %1
 live2:
@@ -43,6 +40,11 @@ live8:
 		live %1
 live9:
 		live %1
+		st r4, 511
+		st r5, 510
+		st r6, 509
+		st r7, 508
+		st r8, 507
 		st r4, 511
 		st r5, 510
 		st r6, 509
