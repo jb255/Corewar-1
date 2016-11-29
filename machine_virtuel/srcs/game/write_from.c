@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   live.c                                             :+:      :+:    :+:   */
+/*   write_from.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/15 21:59:31 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/29 19:11:48 by vlancien         ###   ########.fr       */
+/*   Created: 2016/11/29 19:10:32 by vlancien          #+#    #+#             */
+/*   Updated: 2016/11/29 19:10:50 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "n_curse.h"
 #include "function.h"
 
-int		check_live(t_env *e, int xproc, t_type_func list)
+void	write_from_tab2(int position, int size, int id)
 {
-	(void)e;
-	(void)xproc;
-	(void)list;
-	ft_putstr_fd("Check_live -- Fonction\n", e->fd);
-	return (1);
-}
+	int		index;
 
-void	live_func(t_env *e, int xproc, t_type_func list)
-{
-	char		*result;
-
-	(void)list;
-	result = get_x_from_position(e, xproc, e->process[xproc].position + 1, e->process[xproc].position + 5);
-	name_process(e, result);
-	free(result);
-	// nodelay(stdscr, 1);
-	// getch();
+	index = position + size;
+	while (position < index)
+	{
+		tab2[position] = id;
+		position++;
+	}
 }

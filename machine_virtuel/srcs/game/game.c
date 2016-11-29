@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 17:50:40 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/28 15:08:57 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/29 18:47:24 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,7 @@
 #include "g_variable.h"
 #include "n_curse.h"
 
-// 01 Registre, Suivie d’un octet (le numéro de registre)
-// 10 Direct, Suivie de DIR_SIZE octets (la valeur directement)
-// 11 Indirect, Suivie de IND_SIZE octets (la valeur de l’indirection)
-
-// # define REG_CODE				1
-// # define DIR_CODE				2
-// # define IND_CODE				3
+int		(*g_func_check[16])(t_env*, int, t_type_func) = {check_live, check_ld, check_st, check_add, check_add, check_and, check_live, check_live, check_live, check_live, check_live, check_live, check_live, check_live, check_live, check_live};
 
 int				func_valid(t_env *e, t_type_func list, int func)
 {
@@ -29,6 +23,10 @@ int				func_valid(t_env *e, t_type_func list, int func)
 	if (func == 2 && (!list.type[1].t_reg || (!list.type[0].t_ind && !list.type[0].t_dir) || list.type[0].t_reg))
 		return (-1);
 	if (func == 3 && (!list.type[0].t_reg || (!list.type[1].t_reg && !list.type[1].t_ind)))
+		return (-1);
+	if ((func == 4 || func == 5) && (!list.type[0].t_reg || !list.type[1].t_reg || !list.type[2].t_reg))
+		return (-1);
+	if (func == 5 && ((!list.type[0].t_reg && !list.type[0].t_ind && !list.type[0].t_dir) || (!list.type[1].t_reg && !list.type[1].t_ind && !list.type[1].t_dir) || !list.type[2].t_reg))
 		return (-1);
 	return (0);
 }
@@ -56,6 +54,7 @@ void			wait_time_downer(t_env *e, int xproc, int func)
 		e->process[xproc].wait_time = wait_time[func];
 	else
 		e->process[xproc].wait_time--;
+	ft_printf_fd(e->fd, "--->Waiting time downer:  [%d]\n", e->process[xproc].wait_time);
 }
 
 t_type_func		find_label(t_env *e, int x)
@@ -67,17 +66,16 @@ t_type_func		find_label(t_env *e, int x)
 
 	label = ft_sprintf("%02x", tab[e->process[x].position % MEM_SIZE]);
 	func = instruct_tab_value(label);
-	printf("Func %d\n", func);
-	ft_putstr_fd(label, e->fd);
-	ft_putnbr_fd(func, e->fd);
 	func > 9 ? (func -= 1) : func;
 	if ((func != 1 && func != 12 && func != -1) || label == NULL)
 	{
 		free_me = ft_sprintf("%02x", tab[(e->process[x].position + 1) % MEM_SIZE]);
 		list = check_jump(e, hex_to_bin_quad(free_me));
-		// check fonction a faire//
+		if (!g_func_check[func - 1](e, x, list))
+			func = -1;
 		if (func_valid(e, list, func) == -1)
 			func = -1;
+		ft_printf_fd(e->fd, "-->Verification de la fonction [%d]\n", func);
 		free(free_me);
 	}
 	list.size = special_func(e, x, func, list.size);

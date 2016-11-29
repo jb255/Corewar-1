@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 01:16:37 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/28 12:34:27 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/29 18:58:34 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ extern char	g_status_code[17][8];
 int		memory_run(t_env *e)
 {
 	int				x;
+	t_type_func		list;
 
 	x = 0;
 	e->memory_data[3] = 0;
@@ -41,21 +42,16 @@ int		memory_run(t_env *e)
 	{
 		if (key_hook(e) == 27)
 			return (1);
-		ft_putstr_fd("find_label\n", e->fd);
-		e->process[x].list = find_label(e, x);
+		ft_printf_fd(e->fd, "Execution du process pour le joueur %d\n", e->process[x].id_player);
+		list = find_label(e, x);
 		if (e->process[x].wait_time - 1 == 0)
 		{
-			if (e->process[x].list.func != -1){
-				ft_putstr_fd("Apply_func\n", e->fd);
-				apply_func(e, x, e->process[x].list);
-			}
-			// nodelay(stdscr, 0);
-			// getch();
-			ft_putstr_fd("find_next_pc\n", e->fd);
-			find_next_pc(e, x);
-			ft_printf_fd(e->fd, "e->process[x].jumptodo[%d]\n", e->process[x].jumptodo);
-			e->process[x].position = (e->process[x].position + e->process[x].list.size) % MEM_SIZE;
+			if (list.func != -1)
+				apply_func(e, x, list);
+			e->process[x].position = (e->process[x].position + list.size) % MEM_SIZE;
 			e->process[x].wait_time = 0;
+			// ft_putstr_fd("find_next_pc\n", e->fd);
+			find_next_pc(e, x);
 		}
 		x++;
 	}

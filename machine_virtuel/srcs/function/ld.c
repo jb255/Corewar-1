@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 22:00:22 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/28 15:05:30 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/29 18:45:01 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@
 // Cette opération modifie le carry.
 // ld 34,r3 charge les REG_SIZE octets à partir de l’adresse (PC + (34 % IDX_MOD)) dans le registre r3.
 // {T_DIR | T_IND, T_REG},
+int		check_ld(t_env *e, int xproc, t_type_func list)
+{
+	(void)list;
+	ft_putstr_fd("Check_ld -- Fonction\n", e->fd);
+	if (is_register_valid(e, xproc, 4))
+		return (1);
+	return (0);
+}
 
 void	ld_func(t_env *e, int xproc, t_type_func list)
 {
@@ -47,7 +55,7 @@ void	ld_func(t_env *e, int xproc, t_type_func list)
 	ft_printf_fd(e->fd, "---------->REGISTRE %d | value = [%d]\n", hex_to_dec(reg), hex_to_dec(value));
 	free(reg);
 	free(value);
-	nodelay(stdscr, 0);
-	getch();
-	nodelay(stdscr, 1);
+	// nodelay(stdscr, 0);
+	// getch();
+	// nodelay(stdscr, 1);
 }

@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 12:59:13 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/28 11:39:19 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/29 18:00:20 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,15 @@ int		main(int argc, char **argv)
 	if (argc < 2)
 		vm_error("Need more argument!");
 	e->fd = open("log.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-
 	parsing_arg(argv, e);
-// printf("data->%s\n", ft_sprintf("%x", 1));
 	init_curse();
 	put_player(e);
-
 	e->arena.cycle = CYCLE_TO_DIE;
 	e->flag.pause = 0;
 	if (e->flag.flag_n)
 		n_curse(e);
 	free_fighter(e);
+	printf("%d\n", 9 & 12 );
 	printf("END OF THE PROGRAM\n");
-
 	return (0);
 }

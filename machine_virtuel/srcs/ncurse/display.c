@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 16:58:08 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/26 03:40:44 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/29 18:26:31 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	display_memory(t_env *e)
 		e->arena.cycle--;
 		display_info_menu(e);
 	}
-
 }
 
 void	display_delete(t_env *e)

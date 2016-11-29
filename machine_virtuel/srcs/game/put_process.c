@@ -6,27 +6,13 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 12:53:56 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/26 06:44:06 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/29 19:12:15 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 
 extern char g_status_code[17][8];
-
-char	*to_tab(char *str)
-{
-	char	*result;
-
-	result = NULL;
-	if (ft_strlen(str) == 1)
-	{
-		result = ft_strjoin("0", to_lower(str));
-		free(str);
-		return (result);
-	}
-	return (str);
-}
 
 void	find_next_pc(t_env *e, int x)
 {

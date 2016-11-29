@@ -6,18 +6,18 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:37:17 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/28 15:23:45 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/29 18:29:49 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include "n_curse.h"
 
-void	(*g_func_process[5])(t_env*, int, t_type_func) = {live_func, ld_func, st_func, live_func, live_func};
+void	(*g_func_process[5])(t_env*, int, t_type_func) = {live_func, ld_func, st_func, add_func, sub_func};
 
 void		apply_func(t_env *e, int xproc, t_type_func list)
 {
-	if (list.func == 1 || list.func == 3 || list.func == 2)
+	if (list.func == 1 || list.func == 3 || list.func == 2 || list.func == 4 || list.func == 5)
 		g_func_process[list.func - 1](e, xproc, list);
 }
 
@@ -55,7 +55,6 @@ t_type_func check_jump(t_env *e, char *op_size)
 		index += 2;
 		x++;
 	}
-	ft_printf_fd(e->fd, "SIZE %d\n", list.size);
 	return (list);
 }
 

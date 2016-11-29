@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add.c                                              :+:      :+:    :+:   */
+/*   and.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/15 21:59:21 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/29 18:45:41 by vlancien         ###   ########.fr       */
+/*   Created: 2016/11/29 17:19:51 by vlancien          #+#    #+#             */
+/*   Updated: 2016/11/29 18:46:00 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "n_curse.h"
-#include "function.h"
+#include <n_curse.h>
+#include <function.h>
 
-// Cette instruction prend 3 registres en paramètre,
-// additionne le contenu des 2 premiers et met le résultat dans le troisième.
+// p1 & p2 -> p3. Le paramètre 3 est toujours un registre.
 // Cette opération modifie le carry.
-// add r2,r3,r5 additionne r2 et r3 et met le résultat dans r5
+// and r2, %0,r3 met r2 & 0 dans r3
+// {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}
 
-int		check_add(t_env *e, int xproc, t_type_func list)
+int		check_and(t_env *e, int xproc, t_type_func list)
 {
 	(void)list;
-	ft_putstr_fd("Check_add|sub -- Fonction\n", e->fd);
-	if (is_register_valid(e, xproc, 2) && is_register_valid(e, xproc, 3) && is_register_valid(e, xproc, 4)){
-		ft_putstr_fd("Check_add|sub -- Les registres sont corrects\n", e->fd);
+	ft_putstr_fd("Check_st -- Fonction\n", e->fd);
+	if (list.type[0].t_reg && is_register_valid(e, xproc, 2) && !list.type[1].t_reg)
 		return (1);
-	}
-	ft_putstr_fd("Check_add|sub -- Error\n", e->fd);
+	if (list.type[0].t_reg && is_register_valid(e, xproc, 2) && list.type[1].t_reg && is_register_valid(e, xproc, 3))
+		return (1);
 	return (0);
 }
 
-void	add_func(t_env *e, int xproc, t_type_func list)
+void	and_func(t_env *e, int xproc, t_type_func list)
 {
 	char	*regist[3];
 
@@ -39,9 +38,9 @@ void	add_func(t_env *e, int xproc, t_type_func list)
 	regist[2] = get_x_from_position(e, xproc, 4, 5);
 	if (list.type[0].t_reg && list.type[1].t_reg && list.type[2].t_reg)
 		e->process[xproc].reg[hex_to_dec(regist[2])] =
-		e->process[xproc].reg[hex_to_dec(regist[0])] +
+		e->process[xproc].reg[hex_to_dec(regist[0])] &
 		e->process[xproc].reg[hex_to_dec(regist[1])];
-	ft_printf_fd(e->fd, "--->Function add\n--->Registre %d update:  [%d]\n", hex_to_dec(regist[2]), e->process[xproc].reg[hex_to_dec(regist[2])]);
+	ft_printf_fd(e->fd, "--->Function and\n--->Registre %d update:  [%d]\n", hex_to_dec(regist[2]), e->process[xproc].reg[hex_to_dec(regist[2])]);
 	free(regist[0]);
 	free(regist[1]);
 	free(regist[2]);
