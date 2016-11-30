@@ -6,7 +6,7 @@
 /*   By: mlevieux <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:59:59 by mlevieux          #+#    #+#             */
-/*   Updated: 2016/11/28 21:49:31 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/30 21:44:19 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include "libft.h"
 # include <stdlib.h>
 # include <fcntl.h>
+
+# define MIN_CHAR_NUM 5
+# define MAX_CHAR_NUM 15
 
 typedef struct		s_data
 {
@@ -42,5 +45,5 @@ int					get_name_and_comment(char *brute_info, t_data *data);
 int					next_command_size(char *champ);
 void				add_dim(t_data *data, char *str, int len);
 char				*ft_strndup(char *to_copy, size_t len);
-
+int					get_spec_len(char *champ);
 #endif
