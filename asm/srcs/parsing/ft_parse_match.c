@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../../includes/corewar.h"
 #include <stdlib.h>
 
 static char	*ft_get_char_class(char **str)

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "../../includes/corewar.h"
 
 void		asm_error(char *str)
 {

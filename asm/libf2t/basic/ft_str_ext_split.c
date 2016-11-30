@@ -30,7 +30,7 @@ static int	count_words(char *str, char *ext)
 	return (w + 1);
 }
 
-static void	fill(char **actual, char **iter, char *ext)
+static void	fill(char **actual, int p, char **iter, char *ext)
 {
 	char	*tmp;
 	int		i;
@@ -46,11 +46,11 @@ static void	fill(char **actual, char **iter, char *ext)
 		i += 1;
 	}
 	if (!*end)
-		*actual = ft_strdup(*iter);
+		actual[p] = ft_strdup(*iter);
 	else
 	{
-		*actual = ft_strnew(end - *iter + 1);
-		ft_strncpy(*actual, *iter, end - *iter);
+		actual[p] = ft_strnew(end - *iter + 1);
+		ft_strncpy(actual[p], *iter, end - *iter);
 		*iter = end;
 		while (ft_strchr(ext, **iter))
 			*iter += 1;
@@ -75,7 +75,7 @@ char		**ft_str_ext_split(char *str, char *ext)
 	k = 0;
 	while (k < nb_w)
 	{
-		fill(&(res[k]), &tmp, ext);
+		fill(res, k, &tmp, ext);
 		k += 1;
 	}
 	res[k] = NULL;

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "../../includes/corewar.h"
 
 t_func		*create_label(void *data, t_env *e)
 {
@@ -20,7 +20,7 @@ t_func		*create_label(void *data, t_env *e)
 	list = (t_func *)malloc(sizeof(t_func));
 	if (list)
 	{
-		list->label = data;
+		list->label = data ? ft_strdup(data) : NULL;
 		list->next = NULL;
 		list->line = NULL;
 		list->line_in_file = e->y_line;

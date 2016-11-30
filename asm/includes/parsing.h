@@ -91,7 +91,7 @@ void			open_line(char *fichier, t_env *e);
 void			fille_op_tab(t_env *env);
 void			recup_label(char *str, t_env *e);
 void			push_tail_label(t_func **begin_list, t_func **end_list, void *data, t_env *e);
-void			push_tail_method(t_line **begin_list, char **tab, int nb_arg, t_env *e);
+char			**push_tail_method(t_line **begin_list, char **tab, int nb_arg, t_env *e);
 int				ft_parse_match(char *reg, char *str);
 void			trim_args(t_env *env);
 int				check_param(int nb_tab, t_op op_tab[], char *info, int nb_param);

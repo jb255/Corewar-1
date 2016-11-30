@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "../includes/corewar.h"
 
 unsigned int	little_to_big(unsigned int little)
 {
@@ -42,10 +42,12 @@ void			cut_nbr_and_write(unsigned int nbr, int how_cut, int fd)
 void			write_binary2(t_line *head, int fd)
 {
 	t_line *tmp;
+	t_line *to_free;
 
 	tmp = head;
 	while (tmp)
 	{
+		to_free = tmp;
 		write(fd, &tmp->opcode, 1);
 		if (tmp->encod)
 			write(fd, &tmp->encod, 1);
@@ -56,18 +58,33 @@ void			write_binary2(t_line *head, int fd)
 		if (tmp->nb_info > 2)
 			cut_nbr_and_write(tmp->intfo3[1], tmp->intfo3[2], fd);
 		tmp = tmp->next;
+		if (to_free)
+		{
+			free(to_free->info1);
+			free(to_free->info2);
+			free(to_free->info3);
+			free(to_free->method);
+			free(to_free);
+		}
 	}
 }
 
 void			write_binary(t_func *head, int fd)
 {
 	t_func *tmp;
+	t_func *to_free;
 
 	tmp = head;
 	while (tmp)
 	{
+		to_free = tmp;
 		write_binary2(tmp->line, fd);
 		tmp = tmp->next;
+		if (to_free)
+		{
+			free(to_free->label);
+			free(to_free);
+		}
 	}
 }
 
@@ -88,4 +105,7 @@ void			create_file(t_env *e)
 	write_binary(e->head, fd);
 	if (close(fd) != 0)
 		asm_error("close_error_.cor");
+	free(e->name_file);
+	free(e->name);
+	free(e->comment);
 }
