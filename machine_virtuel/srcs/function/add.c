@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 21:59:21 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/29 18:45:41 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/30 12:24:38 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	add_func(t_env *e, int xproc, t_type_func list)
 {
 	char	*regist[3];
 
-	regist[0] = get_x_from_position(e, xproc, 2, 3);
-	regist[1] = get_x_from_position(e, xproc, 3, 4);
-	regist[2] = get_x_from_position(e, xproc, 4, 5);
+	regist[0] = get_x_from_position(e, 2, 3);
+	regist[1] = get_x_from_position(e, 3, 4);
+	regist[2] = get_x_from_position(e, 4, 5);
 	if (list.type[0].t_reg && list.type[1].t_reg && list.type[2].t_reg)
 		e->process[xproc].reg[hex_to_dec(regist[2])] =
 		e->process[xproc].reg[hex_to_dec(regist[0])] +

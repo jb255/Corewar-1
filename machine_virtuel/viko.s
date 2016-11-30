@@ -5,4 +5,5 @@
 # ld 34, r4
 # live %-1
 # ld %0, r2
-st r1, 10
+xor r1, %15, r3
+st r3, 10

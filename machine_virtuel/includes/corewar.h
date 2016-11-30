@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/29 19:11:22 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/30 13:42:14 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,14 @@ void			set_process(t_env *e, int process_nb, int x, int creator);
 
 // function
 void		live_func(t_env *e, int xproc, t_type_func list);
-void		sub_func(t_env *e, int xproc, t_type_func list);
-void		add_func(t_env *e, int xproc, t_type_func list);
 void		ld_func(t_env *e, int xproc, t_type_func list);
 void		st_func(t_env *e, int xproc, t_type_func list);
+void		add_func(t_env *e, int xproc, t_type_func list);
+void		sub_func(t_env *e, int xproc, t_type_func list);
+void		and_func(t_env *e, int xproc, t_type_func list);
+void		or_func(t_env *e, int xproc, t_type_func list);
+void		xor_func(t_env *e, int xproc, t_type_func list);
+
 t_type_func check_jump(t_env *e, char *op_size);
 t_type_func		find_label(t_env *e, int x);
 //
@@ -104,6 +108,8 @@ int		check_ld(t_env *e, int xproc, t_type_func list);
 int		check_st(t_env *e, int xproc, t_type_func list);
 int		check_add(t_env *e, int xproc, t_type_func list);
 int		check_and(t_env *e, int xproc, t_type_func list);
+int		check_or(t_env *e, int xproc, t_type_func list);
+int		check_xor(t_env *e, int xproc, t_type_func list);
 //
 
 // WorkFunc
@@ -112,5 +118,7 @@ void	write_from_x(t_env *e, int from, int data, int octet);
 int		is_register_valid(t_env *e, int xproc, int position);
 void	write_from_tab2(int position, int size, int id);
 void	name_process(t_env *e, char	*name);
+int		ind_funcheck_and(t_env *e, int xproc, int place, t_type_a type);
+int		reg_funcheck_and(t_env *e, int xproc, int place);
 //
 #endif

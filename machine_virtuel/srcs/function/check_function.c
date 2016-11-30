@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:59:38 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/29 19:11:10 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/30 13:06:38 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ int		is_register_valid(t_env *e, int xproc, int position)
 	reg = tab[(e->process[xproc].position + position) % (MEM_SIZE)];
 	result = NULL;
 	result = ft_sprintf("%02x", reg);
-	reg = ft_atoi(result);
+	reg = hex_to_dec(result);
+	ft_printf_fd(e->fd, "+++Verification du registre reg.%d a la pos.%d hex.%02x++++++\n", reg, (e->process[xproc].position + position) % (MEM_SIZE), tab[(e->process[xproc].position + position) % (MEM_SIZE)]);
 	free(result);
-	if (reg > 0 && reg < 17)
+	if (reg >= 0 && reg < 17)
 		return (1);
 	return (0);
 }
@@ -46,13 +47,12 @@ void	name_process(t_env *e, char	*name)
 	}
 }
 
-char	*get_x_from_position(t_env *e, int xproc, int from, int at)
+char	*get_x_from_position(t_env *e, int from, int at)
 {
 	char			*result = "";
 	char			*name;
 	int				index;
 
-	(void)xproc;
 	(void)e;
 	index = from;
 	while (index < at)

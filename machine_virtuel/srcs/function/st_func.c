@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 04:07:26 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/29 19:11:44 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/30 12:25:33 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	st_func(t_env *e, int xproc, t_type_func list)
 	}
 	else if (list.type[0].t_reg && list.type[1].t_ind)
 	{
-		result = get_x_from_position(e, xproc, e->process[xproc].position + 3, e->process[xproc].position + 5);
+		result = get_x_from_position(e, e->process[xproc].position + 3, e->process[xproc].position + 5);
 		ft_printf_fd(e->fd, "------------->Function-ST Search from %d to %d, result [%s]\nRegistre %d du joueur %d contient %d\nPC ADDR [%d]\n", e->process[xproc].position + 3, e->process[xproc].position + 5, result, reg, xproc, e->process[xproc].reg[reg], e->process[xproc].addr_pc);
 		regist = hex_to_dec(result);
 		write_from_x(e, (e->process[xproc].position + (regist % (IDX_MOD))), e->process[xproc].reg[reg], 4);

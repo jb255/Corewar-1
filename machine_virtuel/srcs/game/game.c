@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 17:50:40 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/29 18:47:24 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/30 13:41:52 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "g_variable.h"
 #include "n_curse.h"
 
-int		(*g_func_check[16])(t_env*, int, t_type_func) = {check_live, check_ld, check_st, check_add, check_add, check_and, check_live, check_live, check_live, check_live, check_live, check_live, check_live, check_live, check_live, check_live};
+int		(*g_func_check[16])(t_env*, int, t_type_func) = {check_live, check_ld, check_st, check_add, check_add, check_and, check_or, check_xor, check_live, check_live, check_live, check_live, check_live, check_live, check_live, check_live};
 
 int				func_valid(t_env *e, t_type_func list, int func)
 {
@@ -26,7 +26,7 @@ int				func_valid(t_env *e, t_type_func list, int func)
 		return (-1);
 	if ((func == 4 || func == 5) && (!list.type[0].t_reg || !list.type[1].t_reg || !list.type[2].t_reg))
 		return (-1);
-	if (func == 5 && ((!list.type[0].t_reg && !list.type[0].t_ind && !list.type[0].t_dir) || (!list.type[1].t_reg && !list.type[1].t_ind && !list.type[1].t_dir) || !list.type[2].t_reg))
+	if ((func == 6 || func == 7 || func == 8) && ((!list.type[0].t_reg && !list.type[0].t_ind && !list.type[0].t_dir) || (!list.type[1].t_reg && !list.type[1].t_ind && !list.type[1].t_dir) || !list.type[2].t_reg))
 		return (-1);
 	return (0);
 }

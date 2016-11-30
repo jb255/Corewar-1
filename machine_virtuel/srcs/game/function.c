@@ -6,18 +6,18 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:37:17 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/29 18:29:49 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/30 13:41:55 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include "n_curse.h"
 
-void	(*g_func_process[5])(t_env*, int, t_type_func) = {live_func, ld_func, st_func, add_func, sub_func};
+void	(*g_func_process[8])(t_env*, int, t_type_func) = {live_func, ld_func, st_func, add_func, sub_func, and_func, or_func, xor_func};
 
 void		apply_func(t_env *e, int xproc, t_type_func list)
 {
-	if (list.func == 1 || list.func == 3 || list.func == 2 || list.func == 4 || list.func == 5)
+	if (list.func == 1 || list.func == 3 || list.func == 2 || list.func == 4 || list.func == 5 || list.func == 6 || list.func == 7 || list.func == 8)
 		g_func_process[list.func - 1](e, xproc, list);
 }
 
@@ -46,7 +46,7 @@ t_type_func check_jump(t_env *e, char *op_size)
 		}
 		else if (op_size[index] == '1' && op_size[index + 1] == '0'){
 			list.type[x].t_dir++;
-			list.size += 2;
+			list.size += 4;
 		}
 		else if (op_size[index] == '1' && op_size[index + 1] == '1'){
 			list.type[x].t_ind++;

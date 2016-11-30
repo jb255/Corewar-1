@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 22:00:22 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/29 18:45:01 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/30 12:25:19 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ void	ld_func(t_env *e, int xproc, t_type_func list)
 	position = 0;
 	e->process[xproc].carry = 1;
 	if (list.type[0].t_ind || list.type[0].t_dir)
-		value = get_x_from_position(e, xproc, 2, 4);
+		value = get_x_from_position(e, 2, 4);
 	if (list.type[1].t_reg)
-		reg = get_x_from_position(e, xproc, 4, 5);
+		reg = get_x_from_position(e, 4, 5);
 	if (list.type[0].t_ind && list.type[1].t_reg)
 	{
 		position = e->process[xproc].addr_pc + (hex_to_dec(value) % IDX_MOD);
-		value = get_x_from_position(e, xproc, position, position + REG_SIZE - 1);
+		value = get_x_from_position(e, position, position + REG_SIZE - 1);
 		e->process[xproc].reg[hex_to_dec(reg)] = hex_to_dec(value);
 	}
 	else if (list.type[0].t_dir && list.type[1].t_reg)

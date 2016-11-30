@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 12:59:13 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/29 18:00:20 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/30 13:42:44 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		main(int argc, char **argv)
 	if (e->flag.flag_n)
 		n_curse(e);
 	free_fighter(e);
-	printf("%d\n", 9 & 12 );
+	printf("%d\n", -1 ^ 15 );
 	printf("END OF THE PROGRAM\n");
 	return (0);
 }
