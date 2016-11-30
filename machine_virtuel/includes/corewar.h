@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/30 13:42:14 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/30 17:25:00 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void		sub_func(t_env *e, int xproc, t_type_func list);
 void		and_func(t_env *e, int xproc, t_type_func list);
 void		or_func(t_env *e, int xproc, t_type_func list);
 void		xor_func(t_env *e, int xproc, t_type_func list);
+void		zjump_func(t_env *e, int xproc, t_type_func list);
 
 t_type_func check_jump(t_env *e, char *op_size);
 t_type_func		find_label(t_env *e, int x);
@@ -110,6 +111,7 @@ int		check_add(t_env *e, int xproc, t_type_func list);
 int		check_and(t_env *e, int xproc, t_type_func list);
 int		check_or(t_env *e, int xproc, t_type_func list);
 int		check_xor(t_env *e, int xproc, t_type_func list);
+int		check_zjmp(t_env *e, int xproc, t_type_func list);
 //
 
 // WorkFunc

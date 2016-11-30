@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:37:17 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/30 13:41:55 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/30 16:14:15 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	(*g_func_process[8])(t_env*, int, t_type_func) = {live_func, ld_func, st_fu
 
 void		apply_func(t_env *e, int xproc, t_type_func list)
 {
+	if (list.error == 1)
+		return ;
 	if (list.func == 1 || list.func == 3 || list.func == 2 || list.func == 4 || list.func == 5 || list.func == 6 || list.func == 7 || list.func == 8)
 		g_func_process[list.func - 1](e, xproc, list);
 }

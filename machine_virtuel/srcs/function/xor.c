@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 13:40:11 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/30 13:40:39 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/30 15:55:00 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ int		check_xor(t_env *e, int xproc, t_type_func list)
 {
 	(void)list;
 	(void)xproc;
-	ft_printf_fd(e->fd, "Check_or -- Fonction\n");
-	// if (list.type[0].t_reg && is_register_valid(e, xproc, 2) && !list.type[1].t_reg)
+	ft_printf_fd(e->fd, "Check_xor -- Fonction, size %d\n", list.size);
+
+	// if (list.type[0].t_reg && is_register_valid(e, xproc, 2))
+	// 	return (1);
+	// if (list.type[2].t_reg && is_register_valid(e, xproc, list.size - 1))
 	// 	return (1);
 	// if (list.type[0].t_reg && is_register_valid(e, xproc, 2) && list.type[1].t_reg && is_register_valid(e, xproc, 3) && list.type[2].t_reg && is_register_valid(e, xproc, 4))
 	// 	return (1);
@@ -39,7 +42,6 @@ void	xor_func(t_env *e, int xproc, t_type_func list)
 		i[0] = ind_funcheck_and(e, xproc, place, list.type[0]);
 	else if (list.type[0].t_dir && (place = 6))
 		i[0] = ind_funcheck_and(e, xproc, place, list.type[0]);
-
 	if (list.type[1].t_reg && (place += 1))
 		i[1] = reg_funcheck_and(e, xproc, place);
 	else if (list.type[0].t_ind && (place += 2))

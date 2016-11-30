@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 04:07:26 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/30 12:25:33 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/30 16:14:06 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	st_func(t_env *e, int xproc, t_type_func list)
 		write_from_x(e, (e->process[xproc].position + (regist % (IDX_MOD))), e->process[xproc].reg[reg], 4);
 		write_from_tab2((e->process[xproc].position + (regist % (IDX_MOD))), 4, e->process[xproc].id_player + 1);
 	}
-	if (!list.type[0].t_reg || (!list.type[1].t_reg && !list.type[1].t_ind))
-		e->process[xproc].jumptodo = 1;
+	// if (!list.type[0].t_reg || (!list.type[1].t_reg && !list.type[1].t_ind))
+	// 	e->process[xproc].jumptodo = 1;
 	free(result);
 }

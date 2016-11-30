@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 17:50:40 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/30 13:41:52 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/11/30 18:14:27 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,18 @@ int				func_valid(t_env *e, t_type_func list, int func)
 
 int				special_func(t_env *e, int xproc, int func, int list_size)
 {
-	if (tab[(e->process[xproc].position + 1) % MEM_SIZE] == 144 && func == 2)
-		list_size += 2;
-	else if (func == 12)
+	(void)e;
+	(void)xproc;
+	// if (tab[(e->process[xproc].position + 1) % MEM_SIZE] == 144 && func == 2)
+	// 	list_size += 2;
+	if (func == 12)
 		list_size = 3;
 	else if (func == -1)
 		list_size = 1;
 	else if (func == 1)
 		list_size = 5;
+	else if (func == 9)
+		list_size = 3;
 	return (list_size);
 }
 
@@ -72,7 +76,7 @@ t_type_func		find_label(t_env *e, int x)
 		free_me = ft_sprintf("%02x", tab[(e->process[x].position + 1) % MEM_SIZE]);
 		list = check_jump(e, hex_to_bin_quad(free_me));
 		if (!g_func_check[func - 1](e, x, list))
-			func = -1;
+			list.error = 1;
 		if (func_valid(e, list, func) == -1)
 			func = -1;
 		ft_printf_fd(e->fd, "-->Verification de la fonction [%d]\n", func);
