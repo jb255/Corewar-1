@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../../includes/corewar.h"
 
 int		get_method_pos(char *label_name, t_env *file)
 {
 	t_func	*func;
 
 	func = file->head;
-	while (func && ft_strcmp(func->label, label_name))
+	while (func && (!func->label || ft_strcmp(func->label, label_name)))
 		func = func->next;
 	if (!func)
 		asm_error("An unknown error occured");
@@ -31,7 +31,8 @@ void	trim_args(t_env *file)
 	tmp_func = file->head;
 	while (tmp_func)
 	{
-		tmp_func->label[ft_strlen(tmp_func->label) - 1] = 0;
+		if (tmp_func->label != NULL)
+			tmp_func->label[ft_strlen(tmp_func->label) - 1] = 0;
 		tmp_func = tmp_func->next;
 	}
 }

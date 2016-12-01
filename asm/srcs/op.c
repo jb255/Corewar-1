@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "../includes/corewar.h"
 
 void		fille_op_tab2(t_env *env)
 {

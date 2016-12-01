@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "../../includes/corewar.h"
 
 int			coerence_str_optab(char *str, t_env *e)
 {
@@ -26,7 +26,7 @@ int			coerence_str_optab(char *str, t_env *e)
 	e->nb_tab = e->nb_tab;
 }
 
-void		push_tail_method(t_line **begin, char **tab, int nb_arg, t_env *e)
+char		**push_tail_method(t_line **begin, char **tab, int nb_arg, t_env *e)
 {
 	t_line		*list;
 
@@ -39,4 +39,5 @@ void		push_tail_method(t_line **begin, char **tab, int nb_arg, t_env *e)
 	}
 	else
 		*begin = create_method(tab, nb_arg, e);
+	return (tab);
 }

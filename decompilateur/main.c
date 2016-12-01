@@ -6,11 +6,12 @@
 /*   By: mlevieux <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:54:22 by mlevieux          #+#    #+#             */
-/*   Updated: 2016/11/28 22:38:10 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/11/30 22:03:26 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "decompile.h"
+#include "time.h"
 
 // Error codes :
 // 1. No file given
@@ -20,7 +21,7 @@
 // La fonction suivante sert juste a lire le fichier entier et a le mettre dans
 // le champ 'brute_file' de data, elle set egalement les autres champs a leur
 // equivalent NULL
-t_data		*get_file_info(char *file_name)
+/*t_data		*get_file_info(char *file_name)
 {
 	t_data	*res;
 	int		fd;
@@ -147,21 +148,49 @@ int			next_command_size(char *champ)
 	else
 		size += get_ocp_len(champ + 1);
 	return (size);
+}*/
+
+#include <stdio.h>
+char		*generate_label(void)
+{
+	time_t	t;
+	char	nb_chars;
+	char	*label;
+	int		i;
+
+	srand(time(NULL));
+	nb_chars = MIN_CHAR_NUM + rand() % (MAX_CHAR_NUM - MIN_CHAR_NUM);
+	printf("Nombre de caracteres a trouver : %d\n", nb_chars);
+	label = ft_strnew(nb_chars);
+	i = 0;
+	while (i < nb_chars)
+	{
+		t = (time_t)clock();
+		srand(t);
+		label[i] = (char)((rand() % 26) + 98);
+		printf("Caractere suivant : %c\n", (int)label[i]);
+		i += 1;
+	}
+	return (label);
 }
 
-// Le concept est plutot simple, on commence par verifier si le nombre de
-// fichiers donnes en argument n'est pas nul, puis respectivement, on lit
-// le fichier, on casse ses instructions bytecode, on traduit ses instructions
-// en chaines de caracteres et puis on ecrit un nouveau fichier en .s qui
-// correspond au .cor envoye. puis on passe au fichier suivant...
+/* 
+* * Le concept est plutot simple, on commence par verifier si le nombre de
+** fichiers donnes en argument n'est pas nul, puis respectivement, on lit
+** le fichier, on casse ses instructions bytecode, on traduit ses instructions
+** en chaines de caracteres et puis on ecrit un nouveau fichier en .s qui
+** correspond au .cor envoye. puis on passe au fichier suivant...
+*/
+
 int 		main(int argc, char **argv)
 {
 	t_data	*data;
 
-	if (argc < 2)
-		error(1);
+	//if (argc < 2)
+	//	error(1);
+	printf("%s\n", generate_label());
 	while (argc > 1)
-	{
+	/*{
 		data = get_file_info(argv[argc - 1]);
 		parse_info(data);
 		decompile(data);
@@ -169,6 +198,6 @@ int 		main(int argc, char **argv)
 		free(data);
 		data = NULL;
 		argc -= 1;
-	}
+	}*/
 	return (0);
 }

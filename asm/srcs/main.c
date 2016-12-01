@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "../includes/corewar.h"
 
 void				print_all_info2(t_line *tmp)
 {
@@ -61,8 +61,11 @@ void				print_all(t_env *e)
 	if (tmp->line)
 		while (tmp != NULL)
 		{
-			ft_printf("%-11d:    ", tmp->position);
-			ft_printf("%s:\n", tmp->label);
+			if (tmp->label)
+			{
+				ft_printf("%-11d:    ", tmp->position);
+				ft_printf("%s:\n", tmp->label);
+			}
 			print_all_info(tmp->line);
 			tmp = tmp->next;
 		}
@@ -87,10 +90,10 @@ int					main(int argc, char **argv)
 	trim_args(&e);
 	labels_are_defined(&e);
 	params_correspond(&e);
-	create_file(&e);
 	if (!ft_strcmp(argv[1], "-a"))
 		print_all(&e);
 	else
-		ft_printf("Writing output to program\n");
+		ft_printf("Writing output program to %s\n", argv[argc - 1]);
+	create_file(&e);
 	return (0);
 }

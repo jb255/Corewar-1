@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../../includes/corewar.h"
 
 void	check_single_label(t_line *line, t_func *func, int nb_info, t_env *env)
 {
@@ -20,9 +20,9 @@ void	check_single_label(t_line *line, t_func *func, int nb_info, t_env *env)
 		info = nb_info == 1 ? line->info1 : line->info2;
 	else
 		info = line->info3;
-	while (func != NULL && info && ft_strcmp(func->label, info + (info[0] == '%' ? 2 : 1)))
+	while (func != NULL && info && (ft_strcmp(func->label, info + (info[0] == '%' ? 2 : 1)) || !func->label))
 		func = func->next;
-	if (func == NULL)
+	if (func == NULL || (info != NULL && func->label == NULL))
 	{
 		ft_printf("Call to undefined label \"%s\" at line %d\n", info + 2,
 				line->line_in_file);
@@ -46,7 +46,7 @@ int		verify_comma_continuity(char *str, int line)
 		if (((i == 0 || i == (int)ft_strlen(str) - 1) && str[i] == ',') ||
 			(i != 0 && str[i] == ',' && str[i - 1] == ','))
 		{
-			ft_printf("Syntax error at line %d, trailing or double comma\n", line);
+			ft_printf("Syntax error at line %d, trailing or multiple comma(s)\n", line);
 			exit(-1);
 		}
 		i += 1;
@@ -59,7 +59,6 @@ void	fill_intfo(t_line *tmp_line)
 	if (tmp_line->info1)
 		tmp_line->intfo1[2] = get_byte_len(tmp_line->nb_tab,
 				tmp_line->info1, 1);
-	printf("On a info = %s, et se code sur %d octets\n", tmp_line->info1 ? tmp_line->info1 : "NULL", tmp_line->intfo1[2]);
 	if (tmp_line->info2)
 		tmp_line->intfo2[2] = get_byte_len(tmp_line->nb_tab,
 				tmp_line->info2, 2);

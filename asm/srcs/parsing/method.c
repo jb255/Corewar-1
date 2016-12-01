@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "../../includes/corewar.h"
 
 int			calculate_encod(char **tab, int nb_arg, t_env *e)
 {
@@ -38,14 +38,19 @@ int			calculate_encod(char **tab, int nb_arg, t_env *e)
 	return (encod);
 }
 
-void		argument_to_int(char *str, int *intfo)
+void		argument_to_int(char *str, int *intfo, int line)
 {
 	if ((str[0]) == 'r')
 	{
 		intfo[0] = T_REG;
 		intfo[1] = ft_atoi(++str);
+		if (intfo[1] > REG_NUMBER || intfo[1] < 0)
+		{
+			ft_printf("Register is not valid line %d : %s\n", line, str);
+			exit(-1);
+		}
 	}
-	else if ((str[0]) == '%' && (str[1] == ':'))
+	else if ((str[0]) == '%' && (str[1] == LABEL_CHAR))
 	{
 		intfo[0] = T_DIR;
 		intfo[1] = 0;
@@ -64,20 +69,23 @@ void		argument_to_int(char *str, int *intfo)
 
 void		set_infos(int nb_arg, t_line *list, char **tab)
 {
+	list->info1 = NULL;
+	list->info2 = NULL;
+	list->info3 = NULL;
 	if (nb_arg >= 1)
 	{
-		list->info1 = tab[1];
-		argument_to_int(tab[1], list->intfo1);
+		list->info1 = ft_strdup(tab[1]);
+		argument_to_int(tab[1], list->intfo1, list->line_in_file);
 	}
 	if (nb_arg >= 2)
 	{
-		list->info2 = tab[2];
-		argument_to_int(tab[2], list->intfo2);
+		list->info2 = ft_strdup(tab[2]);
+		argument_to_int(tab[2], list->intfo2, list->line_in_file);
 	}
 	if (nb_arg >= 3)
 	{
-		list->info3 = tab[3];
-		argument_to_int(tab[3], list->intfo3);
+		list->info3 = ft_strdup(tab[3]);
+		argument_to_int(tab[3], list->intfo3, list->line_in_file);
 	}
 }
 
@@ -87,8 +95,7 @@ t_line		*create_method(char **tab, int nb_arg, t_env *e)
 
 	if (!(list = (t_line *)ft_memalloc(sizeof(t_line))))
 		return (NULL);
-	list->method = tab[0];
-	printf("Actuellement e->method = %d et e->total = %d\n", e->method_position, e->method_total);
+	list->method = ft_strdup(tab[0]);
 	list->method_position = e->method_position + e->method_total;
 	list->line_in_file = e->y_line;
 	e->method_position += e->method_total;

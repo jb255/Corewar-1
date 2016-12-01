@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../../includes/corewar.h"
 
 int		labels_are_defined(t_env *file)
 {
@@ -54,29 +54,31 @@ int		check_param(int nb_tab, t_op op_tab[], char *info, int nb_param)
 {
 	char	byte;
 	char	*reg;
+	char	res;
 
 	reg = ft_prepare_reg();
 	byte = op_tab[nb_tab].params_types[nb_param];
+	res = 0;
 	if (byte & T_REG)
 	{
 		if (ft_parse_match("r[0-9]+", info) && ft_atoi(info + 1) <= REG_NUMBER)
-			return (1);
+			res = 1;
 		else if (byte == T_REG)
-			return (0);
+			res = 0;
 	}
 	if (byte & T_DIR)
 	{
 		if (info[0] == DIRECT_CHAR && (ft_parse_match("[0-9]+",
 			info[1] == '-' ? info + 2 : info + 1) ||
 			ft_parse_match(reg, info + 1)))
-			return (1);
+			res = 1;
 		else if (byte == T_DIR || byte == (T_DIR | T_REG))
-			return (0);
+			res = 0;
 	}
 	if (ft_parse_match("[0-9]+", info[0] == '-' ? info + 1 : info) || ft_parse_match(reg, info))
-		return (1);
+		res = 1;
 	free(reg);
-	return (0);
+	return (info ? 1 : res);
 }
 
 void	set_flag(t_line *line, int *flag, t_env *file)
