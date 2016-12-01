@@ -6,7 +6,7 @@
 /*   By: mlevieux <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:54:22 by mlevieux          #+#    #+#             */
-/*   Updated: 2016/11/30 22:03:26 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/12/01 21:57:07 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 // La fonction suivante sert juste a lire le fichier entier et a le mettre dans
 // le champ 'brute_file' de data, elle set egalement les autres champs a leur
 // equivalent NULL
-/*t_data		*get_file_info(char *file_name)
+t_data		*get_file_info(char *file_name)
 {
 	t_data	*res;
 	int		fd;
@@ -137,6 +137,14 @@ int			get_ocp_len(char *champ)
 	return (size);
 }
 
+int			get_spec_len(char *champ)
+{
+	if (*champ == 15)
+		return (REG_SIZE);
+	else
+		return (DIR_SIZE);
+}
+
 int			next_command_size(char *champ)
 {
 	int		size;
@@ -148,9 +156,8 @@ int			next_command_size(char *champ)
 	else
 		size += get_ocp_len(champ + 1);
 	return (size);
-}*/
+}
 
-#include <stdio.h>
 char		*generate_label(void)
 {
 	time_t	t;
@@ -160,7 +167,6 @@ char		*generate_label(void)
 
 	srand(time(NULL));
 	nb_chars = MIN_CHAR_NUM + rand() % (MAX_CHAR_NUM - MIN_CHAR_NUM);
-	printf("Nombre de caracteres a trouver : %d\n", nb_chars);
 	label = ft_strnew(nb_chars);
 	i = 0;
 	while (i < nb_chars)
@@ -168,7 +174,6 @@ char		*generate_label(void)
 		t = (time_t)clock();
 		srand(t);
 		label[i] = (char)((rand() % 26) + 98);
-		printf("Caractere suivant : %c\n", (int)label[i]);
 		i += 1;
 	}
 	return (label);
@@ -186,11 +191,10 @@ int 		main(int argc, char **argv)
 {
 	t_data	*data;
 
-	//if (argc < 2)
-	//	error(1);
-	printf("%s\n", generate_label());
+	if (argc < 2)
+		error(1);
 	while (argc > 1)
-	/*{
+	{
 		data = get_file_info(argv[argc - 1]);
 		parse_info(data);
 		decompile(data);
@@ -198,6 +202,6 @@ int 		main(int argc, char **argv)
 		free(data);
 		data = NULL;
 		argc -= 1;
-	}*/
+	}
 	return (0);
 }

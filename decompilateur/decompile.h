@@ -6,7 +6,7 @@
 /*   By: mlevieux <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:59:59 by mlevieux          #+#    #+#             */
-/*   Updated: 2016/11/30 21:44:19 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/12/01 21:56:36 by mlevieux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,5 @@ int					next_command_size(char *champ);
 void				add_dim(t_data *data, char *str, int len);
 char				*ft_strndup(char *to_copy, size_t len);
 int					get_spec_len(char *champ);
+
 #endif
