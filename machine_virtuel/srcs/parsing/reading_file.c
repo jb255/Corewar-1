@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 18:07:34 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/04 13:16:15 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/01 11:12:43 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,28 +60,21 @@ char	*print_hexa(unsigned char c, int byte)
 
 void	read_magic(char *file_player)
 {
-	char	byte_code;
-	char	*magic;
-	char	*tmp;
-	int		byte;
+	char	*magic[4];
+	int		byte = 0;
 
-	tmp = NULL;
-	magic = "\0";
-	byte = 0;
-	while (byte != 4)
+	while (byte < 4)
 	{
-		byte_code = file_player[byte];
-		tmp = print_hexa(byte_code, byte);
-		magic = ft_strjoin(magic, tmp);
+		magic[byte] = ft_sprintf("%x", file_player[byte]);
 		byte++;
-		free(tmp);
 	}
-	if (!ft_strcmp(magic, "0xea83f3"))
-		printf("Magic correct\n");
-	else{
+	magic[byte] = ft_sprintf("%s%s%s", magic[1] + 6, magic[2] + 6, magic[3] + 6);
+	if (!ft_strcmp(magic[0], "0") && !ft_strcmp(magic[byte], "ea83f3"))
+		ft_printf("Magic correct\n");
+	else
 		vm_error("Magic code incorrect");
-	}
-	free(magic);
+	while (--byte > -1)
+		free(magic[byte]);
 }
 
 void	reading_file(t_env *e, int x)
@@ -93,6 +86,7 @@ void	reading_file(t_env *e, int x)
 		vm_error("Error file.");
 	e->players[x].file = get_content(fd, NULL, buf);
 	e->players[x].size = lseek(fd, 0, SEEK_END);
+	ft_printf_fd(e->fd, "PLAYER SIZE = %d\n", e->players[x].size - BYTE_START_CODE);
 	close(fd);
 	e->players[x].name = read_name(e->players[x].file);
 	e->players[x].comment = read_comment(e->players[x].file);

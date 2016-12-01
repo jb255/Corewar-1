@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 01:16:37 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/29 18:58:34 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/01 12:24:22 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ int		memory_run(t_env *e)
 		{
 			if (list.func != -1)
 				apply_func(e, x, list);
-			e->process[x].position = (e->process[x].position + list.size) % MEM_SIZE;
+			else
+				e->process[x].position += 1 % MEM_SIZE;
 			e->process[x].wait_time = 0;
-			// ft_putstr_fd("find_next_pc\n", e->fd);
 			find_next_pc(e, x);
 		}
 		x++;

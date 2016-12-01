@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 22:00:22 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/30 18:12:03 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/01 12:01:23 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void	ld_func(t_env *e, int xproc, t_type_func list)
 	ft_printf_fd(e->fd, "---------->REGISTRE %d | value = [%d]\n", hex_to_dec(reg), hex_to_dec(value));
 	free(reg);
 	free(value);
+	e->process[xproc].position = (e->process[xproc].position + list.size) % MEM_SIZE;
+	
 	// nodelay(stdscr, 0);
 	// getch();
 	// nodelay(stdscr, 1);

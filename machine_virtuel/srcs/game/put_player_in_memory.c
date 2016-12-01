@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 00:55:52 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/29 14:31:58 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/01 11:19:56 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 void	player_to_tab(t_env *e, int x)
 {
-	int		byte = BYTE_START_CODE;
-	int		start = e->players[x].start;
-	char	*tmp = NULL;
-	int		b;
+	int		byte;
+	int		start;
+	char	*tmp;
 
+	start = e->players[x].start;
+	tmp = NULL;
+	byte = BYTE_START_CODE;
 	while (byte != (int)e->players[x].size)
 	{
-		tmp = print_hexa(e->players[x].file[byte], byte);
-		b = (unsigned char)strtol(tmp, NULL, 16);
-		tab[start] = b;
+		tmp = ft_sprintf("%02x", (unsigned char)e->players[x].file[byte]);
+		tab[start] = hex_to_dec(tmp);
 		tab2[start] = e->players[x].id_player + 1;
-		// printf("%s, %d, %02x\n", tmp, x, x);
 		byte++;
 		start += 1;
 		free(tmp);
@@ -55,7 +55,6 @@ void	get_position(t_env *e)
 		e->players[2].start = saut * 2;
 	if (e->active_players >= 4)
 		e->players[3].start = saut * 3;
-
 }
 
 void	put_player(t_env *e)
@@ -65,7 +64,6 @@ void	put_player(t_env *e)
 
 	x = -1;
 	list = NULL;
-	// e->process = malloc(sizeof(t_process*));
 	get_position(e);
 	e->active_process = e->active_players;
 	while (++x < e->active_players)

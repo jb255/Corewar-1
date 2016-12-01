@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/30 17:25:00 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/01 16:04:17 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,9 @@ void		and_func(t_env *e, int xproc, t_type_func list);
 void		or_func(t_env *e, int xproc, t_type_func list);
 void		xor_func(t_env *e, int xproc, t_type_func list);
 void		zjump_func(t_env *e, int xproc, t_type_func list);
+void		ldi_func(t_env *e, int xproc, t_type_func list);
 
-t_type_func check_jump(t_env *e, char *op_size);
+t_type_func check_jump(t_env *e, char *op_size, int func);
 t_type_func		find_label(t_env *e, int x);
 //
 
@@ -111,10 +112,12 @@ int		check_add(t_env *e, int xproc, t_type_func list);
 int		check_and(t_env *e, int xproc, t_type_func list);
 int		check_or(t_env *e, int xproc, t_type_func list);
 int		check_xor(t_env *e, int xproc, t_type_func list);
-int		check_zjmp(t_env *e, int xproc, t_type_func list);
+int		check_zjump(t_env *e, int xproc, t_type_func list);
+int		check_ldi(t_env *e, int xproc, t_type_func list);
 //
 
 // WorkFunc
+char	*get_x_from_position(t_env *e, int from, int at);
 int		octet_precision(char *hex, int octet);
 void	write_from_x(t_env *e, int from, int data, int octet);
 int		is_register_valid(t_env *e, int xproc, int position);
@@ -122,5 +125,7 @@ void	write_from_tab2(int position, int size, int id);
 void	name_process(t_env *e, char	*name);
 int		ind_funcheck_and(t_env *e, int xproc, int place, t_type_a type);
 int		reg_funcheck_and(t_env *e, int xproc, int place);
+int		get_i0_func_and(t_type_func list, t_env *e, int xproc, int *place);
+int		get_i1_func_and(t_type_func list, t_env *e, int xproc, int *place);
 //
 #endif

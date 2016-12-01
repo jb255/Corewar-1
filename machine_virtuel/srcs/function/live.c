@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 21:59:31 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/30 12:25:26 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/01 12:01:27 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	live_func(t_env *e, int xproc, t_type_func list)
 	(void)list;
 	result = get_x_from_position(e, e->process[xproc].position + 1, e->process[xproc].position + 5);
 	name_process(e, result);
+	e->process[xproc].position = (e->process[xproc].position + list.size) % MEM_SIZE;
 	free(result);
 	// nodelay(stdscr, 1);
 	// getch();

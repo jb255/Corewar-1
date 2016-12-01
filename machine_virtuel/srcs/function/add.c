@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 21:59:21 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/30 16:17:51 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/01 12:01:04 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,5 @@ void	add_func(t_env *e, int xproc, t_type_func list)
 	free(regist[0]);
 	free(regist[1]);
 	free(regist[2]);
+	e->process[xproc].position = (e->process[xproc].position + list.size) % MEM_SIZE;
 }

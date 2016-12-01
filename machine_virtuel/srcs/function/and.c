@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:19:51 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/30 17:30:49 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/01 15:23:51 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ int		check_and(t_env *e, int xproc, t_type_func list)
 	(void)list;
 	(void)xproc;
 	ft_printf_fd(e->fd, "Check_and -- Fonction, size %d\n", list.size);
-	if (list.type[1].t_reg && is_register_valid(e, xproc, 2))
-		return (1);
-	if (list.type[0].t_reg && is_register_valid(e, xproc, 2) && list.type[1].t_reg && is_register_valid(e, xproc, 3) && list.type[2].t_reg && is_register_valid(e, xproc, 4))
-		return (1);
-	return (0);
+	// if (list.type[0].t_reg && is_register_valid(e, xproc, 2))
+	// 	return (1);
+	// if (list.type[0].t_reg && is_register_valid(e, xproc, 2) && list.type[1].t_reg && is_register_valid(e, xproc, 3) && list.type[2].t_reg && is_register_valid(e, xproc, 4))
+	// 	return (1);
+	return (1);
 }
 
 int		reg_funcheck_and(t_env *e, int xproc, int place)
@@ -51,7 +51,6 @@ int		ind_funcheck_and(t_env *e, int xproc, int place, t_type_a type)
 		result[0] = get_x_from_position(e, e->process[xproc].position + (place - 2 % IDX_MOD), e->process[xproc].position + (place % IDX_MOD));
 		i = hex_to_dec(result[0]);
 		ft_printf_fd(e->fd, "Check_and/or -- value du DIR [%s]", result[0]);
-
 	}
 	else if (type.t_ind)
 	{
@@ -66,30 +65,57 @@ int		ind_funcheck_and(t_env *e, int xproc, int place, t_type_a type)
 	return (i);
 }
 
+int		get_i0_func_and(t_type_func list, t_env *e, int xproc, int *place)
+{
+	int		i;
+
+	i = 0;
+	if (list.type[0].t_reg && (*place = 3))
+		i = reg_funcheck_and(e, xproc, *place);
+	else if (list.type[0].t_ind && (*place = 4))
+		i = ind_funcheck_and(e, xproc, *place, list.type[0]);
+	else if (list.type[0].t_dir && (*place = 6))
+		i = ind_funcheck_and(e, xproc, *place, list.type[0]);
+	return (i);
+}
+
+int		get_i1_func_and(t_type_func list, t_env *e, int xproc, int *place)
+{
+	int		i;
+
+	i = 0;
+	if (list.type[1].t_reg && (*place += 1))
+		i = reg_funcheck_and(e, xproc, *place);
+	else if (list.type[0].t_ind && (*place += 2))
+		i = ind_funcheck_and(e, xproc, *place, list.type[1]);
+	else if (list.type[1].t_dir && (*place += 4))
+		i = ind_funcheck_and(e, xproc, *place, list.type[1]);
+	return (i);
+}
+
 void	and_func(t_env *e, int xproc, t_type_func list)
 {
 	char	*regist;
 	int		i[2];
 	int		place;
+	int		error;
 
 	place = 0;
+	error = 0;
 	ft_printf_fd(e->fd, "Check_and -- ENTER\n");
-	if (list.type[0].t_reg && (place = 3))
-		i[0] = reg_funcheck_and(e, xproc, place);
-	else if (list.type[0].t_ind && (place = 4))
-		i[0] = ind_funcheck_and(e, xproc, place, list.type[0]);
-	else if (list.type[0].t_dir && (place = 6))
-		i[0] = ind_funcheck_and(e, xproc, place, list.type[0]);
-
-	if (list.type[1].t_reg && (place += 1))
-		i[1] = reg_funcheck_and(e, xproc, place);
-	else if (list.type[0].t_ind && (place += 2))
-		i[1] = ind_funcheck_and(e, xproc, place, list.type[1]);
-	else if (list.type[1].t_dir && (place += 4))
-		i[1] = ind_funcheck_and(e, xproc, place, list.type[1]);
+	i[0] = get_i0_func_and(list, e, xproc, &place);
+	if (list.type[0].t_reg && (i[0] > 16 || i[0] < 1))
+		error = 1;
+	i[1] = get_i1_func_and(list, e, xproc, &place);
+	if (list.type[1].t_reg && (i[1] > 16 || i[1] < 1))
+		error = 1;
 	regist = get_x_from_position(e, e->process[xproc].position + (place % IDX_MOD), e->process[xproc].position + (place + 1 % IDX_MOD));
+	if (hex_to_dec(regist) > 16 || hex_to_dec(regist) < 1)
+		error = 1;
 	ft_printf_fd(e->fd, "Check_and -- %d & %d = %d\n", i[0], i[1], i[0] & i[1]);
-	e->process[xproc].reg[hex_to_dec(regist)] = i[0] & i[1];
+	if (!error)
+		e->process[xproc].reg[hex_to_dec(regist)] = i[0] & i[1];
 	ft_printf_fd(e->fd, "--->Function and\n--->Registre %d update:  [%d]\n", hex_to_dec(regist), e->process[xproc].reg[hex_to_dec(regist)]);
 	free(regist);
+	e->process[xproc].position = (e->process[xproc].position + list.size) % MEM_SIZE;
 }
