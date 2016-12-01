@@ -82,27 +82,23 @@ int					main(int argc, char **argv)
 		ft_printf("and annotated version of the code to the standard output\n");
 		exit(-1);
 	}
-	printf("Avant init_env\n");
 	init_env(&e);
-	printf("Avant parsename\n");
 	if (!(e.name_file = parsename(argv[argc - 1])))
 		asm_error("asm: wrong file extension!");
-	printf("Avant fille_op_tab\n");
 	fille_op_tab(&e);
-	printf("Avant open_line\n");
 	open_line(argv[argc - 1], &e);
-	printf("Avant trim_args\n");
 	trim_args(&e);
-	printf("Avant labels_are_defined\n");
 	labels_are_defined(&e);
-	printf("Avant params_correspond\n");
 	params_correspond(&e);
-	printf("Avant print_all\n");
+	if (!e.name || !e.comment)
+	{
+		ft_printf("Champion misses his %s\n", !e.name ? "name" : "comment");
+		exit(-1);
+	}
 	if (!ft_strcmp(argv[1], "-a"))
 		print_all(&e);
 	else
 		ft_printf("Writing output program to %s\n", argv[argc - 1]);
-	printf("Avant create_file\n");
 	create_file(&e);
 	return (0);
 }

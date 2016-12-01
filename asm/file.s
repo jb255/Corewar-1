@@ -1,7 +1,7 @@
-.nane " maxidef "
-.comment "module de defense"
+.name " Maxidef "
 
-loop:	live %0
+loop:
+live %0
 zjmp %8
 
 gobepc:	st r1,6			# 03 70 01 00 06			5
@@ -39,7 +39,7 @@ st r3,-510
 st r3,-510
 st r3,-510
 st r3,-510
-					st r3,-510
+st r3,-510
 deflv:	       live %1
 zjmp %:defm
 
@@ -55,7 +55,7 @@ sti r1,%:gen21,%1
 sti r1,%:gen22,%1
 sti r1,%:deflv,%1
 sti r1,%:slide1,%1
-ld       deflv,r2
+ld       :deflv,r2
 ldi %:deflv,%4,r4
 ld %0,r5
 
@@ -67,8 +67,11 @@ zjmp %:arbre
 arbre:	live %1
 fork %:gen22
 
-
+		
 gen21:	live %1
 zjmp %:slide1
 gen22:	live %1
 zjmp %:slide3
+#lol
+
+.comment " mdr c'est tput an ba"

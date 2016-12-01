@@ -105,6 +105,7 @@ void		set_infos(int nb_arg, t_line *list, char **tab)
 		list->info3 = ft_strdup(tab[3]);
 		argument_to_int(tab[3], list->intfo3, list->line_in_file);
 	}
+	free(reg);
 }
 
 t_line		*create_method(char **tab, int nb_arg, t_env *e)

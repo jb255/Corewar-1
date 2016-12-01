@@ -17,7 +17,7 @@ int		is_command(char *str, t_env *e)
 	int i;
 
 	i = 0;
-	while (i < 17)
+	while (i < 16)
 	{
 		if (ft_strcmp(str, e->op_tab[i].name) == 0)
 		{
@@ -27,26 +27,26 @@ int		is_command(char *str, t_env *e)
 		i++;
 	}
 	e->nb_tab = 16;
-	ft_printf("Syntax error in line %d\n", e->y_line);
-	exit(1);
+	ft_printf("Error line %d, instruction \"%s\" does not exist\n", e->y_line, str);
+	exit(-1);
 	return (0);
 }
 
-int		ft_match_command(int command, char **tab)
+int		ft_match_command(int command, char **tab, int line, char *inst)
 {
 	int		i;
 
 	i = 0;
-	while (tab[i])
+	while (tab[i] && tab[i][0] != COMMENT_CHAR &&
+				tab[i][0] != COMMENT_CHAR2)
 		i++;
 	i -= 1;
+	if (!tab[i])
+		i -= 1;
 	if (i != command)
 	{
-		if (i < command)
-			return (0);
-		else if (tab[command + 1][0] != COMMENT_CHAR &&
-				tab[command + 1][0] != COMMENT_CHAR2)
-			return (0);
+		ft_printf("Error line %d, instruction \"%s\" requires %d arguments, %d were given\n", line, inst, command, i);
+		exit(-1);
 	}
 	return (1);
 }
@@ -83,16 +83,16 @@ void	other(char *str, t_env *e)
 			return ;
 	}
 	command = is_command(tab[flag], e);
-	if (flag == 0 && !ft_match_command(command, tab + flag))
-	{
-		ft_printf("Syntax error in line %d, the string is : %s\n", e->y_line, str);
-		exit(1);
-	}
-	else if (tab[flag] != NULL)
+	if (tab[flag] != NULL && (flag == 0 || ft_match_command(command, tab + flag, e->y_line, tab[flag])))
 	{
 		if (e->tail == NULL)
 			push_tail_label(&e->head, &e->tail, NULL, e);
 		push_tail_method(&e->tail->line, tab + flag, command, e);
+	}
+	else if (flag == 0)
+	{
+		ft_printf("Unknown syntax error line %d\n", e->y_line);
+		exit(-1);
 	}
 	free_split(tab);
 }

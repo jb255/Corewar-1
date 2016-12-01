@@ -69,7 +69,7 @@ int		check_param(int nb_tab, t_op op_tab[], char *info, int nb_param)
 		else if (byte == T_REG)
 			res = 0;
 	}
-	if (byte & T_DIR)
+	if (byte & T_DIR && !res)
 	{
 		if (info[0] == DIRECT_CHAR && (ft_parse_match("[0-9]+",
 			info[1] == '-' ? info + 2 : info + 1) ||
@@ -81,7 +81,7 @@ int		check_param(int nb_tab, t_op op_tab[], char *info, int nb_param)
 	if (ft_parse_match("[0-9]+", info[0] == '-' ? info + 1 : info) || ft_parse_match(reg, info))
 		res = 1;
 	free(reg);
-	return (info ? 1 : res);
+	return (res);
 }
 
 void	set_flag(t_line *line, int *flag, t_env *file)
@@ -109,11 +109,6 @@ int		params_correspond(t_env *file)
 		line = func->line;
 		while (line)
 		{
-			if (line->nb_tab == 16)
-			{
-				ft_printf("Error line %d, instruction %s does not exist\n", line->line_in_file, line->method);
-				exit(-1);
-			}
 			set_flag(line, &flag, file);
 			if (flag != 0)
 			{

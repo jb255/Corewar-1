@@ -21,10 +21,7 @@ void	check_single_label(t_line *line, t_func *func, int nb_info, t_env *env)
 	else
 		info = line->info3;
 	while (func != NULL && info && (ft_strcmp(func->label, info + (info[0] == '%' ? 2 : 1)) || !func->label))
-	{
-		printf("\t\tOn cherche %s ; on est sur %s\n", info, func->label);
 		func = func->next;
-	}
 	if (func == NULL || (info != NULL && func->label == NULL))
 	{
 		ft_printf("Call to undefined label \"%s\" at line %d\n", info + 2,
