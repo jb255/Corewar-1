@@ -112,7 +112,7 @@ void        	init_env(t_env *e);
 int				verify_comma_continuity(char *str, int line);
 void			fill_intfo(t_line *line);
 t_line			*create_method(char **tab, int nb_arg, t_env *e);
-
+char			*ft_prepare_reg(void);
 
 
 

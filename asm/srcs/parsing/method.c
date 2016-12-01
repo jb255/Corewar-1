@@ -67,23 +67,41 @@ void		argument_to_int(char *str, int *intfo, int line)
 	}
 }
 
+void		check_label_chars(char *reg, char *info, int line)
+{
+	if ((info[0] == LABEL_CHAR ||
+		(info[0] == DIRECT_CHAR && info[1] == LABEL_CHAR)) &&
+		(!ft_parse_match(reg, info) && !ft_parse_match(reg, info + 1)))
+	{
+		ft_printf("Label \"%s\" contains non-authorized characters at line %d\n",
+			info, line);
+		exit(-1);
+	}
+}
+
 void		set_infos(int nb_arg, t_line *list, char **tab)
 {
+	char	*reg;
+
 	list->info1 = NULL;
 	list->info2 = NULL;
 	list->info3 = NULL;
+	reg = ft_prepare_reg();
 	if (nb_arg >= 1)
 	{
+		check_label_chars(reg, tab[1], list->line_in_file);
 		list->info1 = ft_strdup(tab[1]);
 		argument_to_int(tab[1], list->intfo1, list->line_in_file);
 	}
 	if (nb_arg >= 2)
 	{
+		check_label_chars(reg, tab[2], list->line_in_file);
 		list->info2 = ft_strdup(tab[2]);
 		argument_to_int(tab[2], list->intfo2, list->line_in_file);
 	}
 	if (nb_arg >= 3)
 	{
+		check_label_chars(reg, tab[3], list->line_in_file);
 		list->info3 = ft_strdup(tab[3]);
 		argument_to_int(tab[3], list->intfo3, list->line_in_file);
 	}

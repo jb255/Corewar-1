@@ -12,32 +12,6 @@
 
 #include "../../includes/corewar.h"
 
-int		labels_are_defined(t_env *file)
-{
-	t_func	*taf;
-	t_func	*tbf;
-	t_line	*tl;
-
-	taf = file->head;
-	while (taf != NULL)
-	{
-		tl = taf->line;
-		while (tl != NULL)
-		{
-			if (tl->info1 && ft_parse_match("*:[a-z0-9_]+", tl->info1))
-				check_single_label(tl, tbf = file->head, 1, file);
-			if (tl->info2 && ft_parse_match("*:[a-z0-9_]+", tl->info2))
-				check_single_label(tl, tbf = file->head, 2, file);
-			if (tl->info3 && ft_parse_match("*:[a-z0-9_]+", tl->info3))
-				check_single_label(tl, tbf = file->head, 3, file);
-			fill_intfo(tl);
-			tl = tl->next;
-		}
-		taf = taf->next;
-	}
-	return (1);
-}
-
 char	*ft_prepare_reg(void)
 {
 	char *reg;
@@ -48,6 +22,35 @@ char	*ft_prepare_reg(void)
 	ft_strcpy(reg + 2, LABEL_CHARS);
 	ft_strcpy(reg + ft_strlen(LABEL_CHARS) + 2, "]+");
 	return (reg);
+}
+
+int		labels_are_defined(t_env *file)
+{
+	t_func	*taf;
+	t_func	*tbf;
+	t_line	*tl;
+	char	*reg;
+
+	taf = file->head;
+	reg = ft_prepare_reg();
+	while (taf != NULL)
+	{
+		tl = taf->line;
+		while (tl != NULL)
+		{
+			if (tl->info1 && ft_parse_match(reg, tl->info1 + (tl->info1[0] == '%' ? 1 : 0)))
+				check_single_label(tl, tbf = file->head, 1, file);
+			if (tl->info2 && ft_parse_match(reg, tl->info2 + (tl->info2[0] == '%' ? 1 : 0)))
+				check_single_label(tl, tbf = file->head, 2, file);
+			if (tl->info3 && ft_parse_match(reg, tl->info3 + (tl->info3[0] == '%' ? 1 : 0)))
+				check_single_label(tl, tbf = file->head, 3, file);
+			fill_intfo(tl);
+			tl = tl->next;
+		}
+		taf = taf->next;
+	}
+	free(reg);
+	return (1);
 }
 
 int		check_param(int nb_tab, t_op op_tab[], char *info, int nb_param)
@@ -106,6 +109,11 @@ int		params_correspond(t_env *file)
 		line = func->line;
 		while (line)
 		{
+			if (line->nb_tab == 16)
+			{
+				ft_printf("Error line %d, instruction %s does not exist\n", line->line_in_file, line->method);
+				exit(-1);
+			}
 			set_flag(line, &flag, file);
 			if (flag != 0)
 			{
