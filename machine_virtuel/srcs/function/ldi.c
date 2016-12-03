@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 13:39:34 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/01 18:07:09 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/03 02:08:26 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int		get_i02_func_and(t_type_func list, t_env *e, int xproc, int *place)
 	int		i;
 
 	i = 0;
+	ft_printf_fd(e->fd, "get_i02_func_and ---- t_reg[%d]\n", list.type[0].t_reg);
 	if (list.type[0].t_reg && (*place = 3))
 		i = reg_funcheck_and(e, xproc, *place);
 	else if (list.type[0].t_ind && (*place = 4))
@@ -57,7 +58,7 @@ int		get_i1_2_func_and(t_type_func list, t_env *e, int xproc, int *place)
 void	ldi_func(t_env *e, int xproc, t_type_func list)
 {
 	char	*regist[2];
-	int		i[2];
+	int		i[3];
 	int		place;
 	int		error;
 
@@ -66,18 +67,24 @@ void	ldi_func(t_env *e, int xproc, t_type_func list)
 	i[0] = get_i02_func_and(list, e, xproc, &place);
 	if (list.type[0].t_reg && (i[0] > 16 || i[0] < 1))
 		error = 1;
+	else if (list.type[0].t_reg)
+		i[0] = e->process[xproc].reg[i[0]];
 	i[1] = get_i1_2_func_and(list, e, xproc, &place);
 	if (list.type[1].t_reg && (i[1] > 16 || i[1] < 1))
 		error = 1;
-	i[0] += i[1]; // Ajout de l'arg 2 a l'arg 1
+	else if (list.type[1].t_reg)
+		i[1] = e->process[xproc].reg[i[1]];
+	i[2] = i[1] + i[0]; // Ajout de l'arg 2 a l'arg 1
 	regist[0] = get_x_from_position(e, e->process[xproc].position + (place % IDX_MOD), e->process[xproc].position + (place + 1 % IDX_MOD));
-	regist[1] = get_x_from_position(e, e->process[xproc].position + (i[0] % IDX_MOD), e->process[xproc].position + ((i[0] + REG_SIZE) % IDX_MOD));
-	ft_printf_fd(e->fd, "Check_ldi -- %d & %d , r%d\n", i[0], i[1], hex_to_dec(regist[0]));
+	regist[1] = get_x_from_position(e, e->process[xproc].position + (i[2] % IDX_MOD), e->process[xproc].position + ((i[2] + REG_SIZE) % IDX_MOD));
+	ft_printf_fd(e->fd, "Check_ldi -- Registre[%s] Value[%d] + Value1[%d] = Value2[%d], Result a l'addr value2 [%s]\n", regist[0], i[0], i[1], i[2], regist[1]);
 	if (hex_to_dec(regist[0]) > 16 || hex_to_dec(regist[0]) < 1)
 		error = 1;
 	if (!error)
 		e->process[xproc].reg[hex_to_dec(regist[0])] = hex_to_dec(regist[1]);
+	ft_printf_fd(e->fd, "Check_ldi -- RESULT du Registre[%s] qui a ete recherché a l'adresse {%d} = %s and %08x\n", regist[0], i[0], regist[1], hex_to_dec(regist[1]));
 	free(regist[0]);
 	free(regist[1]);
+	ft_printf_fd(e->fd, "Check_ldi -- Value final du Registre1 [%d]\n", e->process[xproc].reg[1]);
 	e->process[xproc].position = (e->process[xproc].position + list.size) % MEM_SIZE;
 }

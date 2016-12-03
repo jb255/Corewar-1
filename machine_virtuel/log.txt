@@ -1,290 +1,85 @@
-PLAYER SIZE = 24
+PLAYER SIZE = 3
 Processus 0, starting at : 0
 Execution du process pour le joueur 0
-Check_ldi -- Fonction size 7
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [25]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 7
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [24]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 7
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [23]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 7
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [22]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 7
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [21]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 7
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [20]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 7
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [19]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 7
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [18]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 7
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [17]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 7
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [16]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 7
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [15]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 7
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [14]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 7
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [13]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 7
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [12]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 7
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [11]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 7
-Check de la fonction
--->Verification de la fonction [10]
 --->Waiting time downer:  [10]
 Execution du process pour le joueur 0
-Check_ldi -- Fonction size 7
-Check de la fonction
--->Verification de la fonction [10]
 --->Waiting time downer:  [9]
 Execution du process pour le joueur 0
-Check_ldi -- Fonction size 7
-Check de la fonction
--->Verification de la fonction [10]
 --->Waiting time downer:  [8]
 Execution du process pour le joueur 0
-Check_ldi -- Fonction size 7
-Check de la fonction
--->Verification de la fonction [10]
 --->Waiting time downer:  [7]
 Execution du process pour le joueur 0
-Check_ldi -- Fonction size 7
-Check de la fonction
--->Verification de la fonction [10]
 --->Waiting time downer:  [6]
 Execution du process pour le joueur 0
-Check_ldi -- Fonction size 7
-Check de la fonction
--->Verification de la fonction [10]
 --->Waiting time downer:  [5]
 Execution du process pour le joueur 0
-Check_ldi -- Fonction size 7
-Check de la fonction
--->Verification de la fonction [10]
 --->Waiting time downer:  [4]
 Execution du process pour le joueur 0
-Check_ldi -- Fonction size 7
-Check de la fonction
--->Verification de la fonction [10]
 --->Waiting time downer:  [3]
 Execution du process pour le joueur 0
-Check_ldi -- Fonction size 7
-Check de la fonction
--->Verification de la fonction [10]
 --->Waiting time downer:  [2]
 Execution du process pour le joueur 0
-Check_ldi -- Fonction size 7
-Check de la fonction
--->Verification de la fonction [10]
 --->Waiting time downer:  [1]
---->Recherche a partir de 2 a 4 ->Actual n2[0] hex[00]
---->Recherche a partir de 2 a 4 ->Actual n3[124] hex[7c]
---->Recherche a partir de 124 a 126 ->Actual n124[0] hex[00]
---->Recherche a partir de 124 a 126 ->Actual n125[0] hex[00]
-Check_and/or -- addr [007c] value du IND [0000]--->Recherche a partir de 4 a 6 ->Actual n4[0] hex[00]
---->Recherche a partir de 4 a 6 ->Actual n5[2] hex[02]
-Check_and/or -- value du DIR [0002]--->Recherche a partir de 6 a 7 ->Actual n6[1] hex[01]
---->Recherche a partir de 2 a 6 ->Actual n2[0] hex[00]
---->Recherche a partir de 2 a 6 ->Actual n3[124] hex[7c]
---->Recherche a partir de 2 a 6 ->Actual n4[0] hex[00]
---->Recherche a partir de 2 a 6 ->Actual n5[2] hex[02]
-Check_ldi -- 2 & 2 , r1
+Application de la fonction ?
+oui pour la fonction numero 12
+--->GetXfromPos From[1]- At[3]
+--->Recherche a partir de 1 a 3 ->Actual n1[0] hex[00]
+--->Recherche a partir de 1 a 3 ->Actual n2[12] hex[0c]
+-----Fork New Process at 12
 Execution du process pour le joueur 0
-Check_ldi -- Fonction size 6
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [25]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 6
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [24]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 6
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [23]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 6
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [22]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 6
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [21]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 6
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [20]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 6
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [19]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 6
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [18]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 6
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [17]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 6
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [16]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 6
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [15]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 6
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [14]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 6
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [13]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 6
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [12]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 6
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [11]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 6
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [10]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 6
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [9]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 6
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [8]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 6
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [7]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 6
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [6]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 6
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [5]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 6
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [4]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 6
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [3]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 6
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [2]
-Execution du process pour le joueur 0
-Check_ldi -- Fonction size 6
-Check de la fonction
--->Verification de la fonction [10]
 --->Waiting time downer:  [1]
---->Recherche a partir de 9 a 11 ->Actual n9[1] hex[01]
---->Recherche a partir de 9 a 11 ->Actual n10[88] hex[58]
---->Recherche a partir de 351 a 353 ->Actual n351[0] hex[00]
---->Recherche a partir de 351 a 353 ->Actual n352[0] hex[00]
-Check_and/or -- addr [0158] value du IND [0000]--->Recherche a partir de 11 a 12 ->Actual n11[1] hex[01]
---->Recherche a partir de 12 a 13 ->Actual n12[1] hex[01]
---->Recherche a partir de 9 a 13 ->Actual n9[1] hex[01]
---->Recherche a partir de 9 a 13 ->Actual n10[88] hex[58]
---->Recherche a partir de 9 a 13 ->Actual n11[1] hex[01]
---->Recherche a partir de 9 a 13 ->Actual n12[1] hex[01]
-Check_ldi -- 8126466 & 8126466 , r1
+Application de la fonction ?
 Execution du process pour le joueur 0
-Check_ldi -- Fonction size 5
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [25]
+--->Waiting time downer:  [1]
+Application de la fonction ?
 Execution du process pour le joueur 0
-Check_ldi -- Fonction size 5
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [24]
+--->Waiting time downer:  [1]
+Application de la fonction ?
 Execution du process pour le joueur 0
-Check_ldi -- Fonction size 5
-Check de la fonction
--->Verification de la fonction [10]
---->Waiting time downer:  [23]
+--->Waiting time downer:  [1]
+Application de la fonction ?
+Execution du process pour le joueur 0
+--->Waiting time downer:  [1]
+Application de la fonction ?
+Execution du process pour le joueur 0
+--->Waiting time downer:  [1]
+Application de la fonction ?
+Execution du process pour le joueur 0
+--->Waiting time downer:  [1]
+Application de la fonction ?
+Execution du process pour le joueur 0
+--->Waiting time downer:  [1]
+Application de la fonction ?
+Execution du process pour le joueur 0
+--->Waiting time downer:  [1]
+Application de la fonction ?
+Execution du process pour le joueur 0
+--->Waiting time downer:  [1]
+Application de la fonction ?
+Execution du process pour le joueur 0
+--->Waiting time downer:  [1]
+Application de la fonction ?
+Execution du process pour le joueur 0
+--->Waiting time downer:  [1]
+Application de la fonction ?
+Execution du process pour le joueur 0
+--->Waiting time downer:  [1]
+Application de la fonction ?
+Execution du process pour le joueur 0
+--->Waiting time downer:  [1]
+Application de la fonction ?
+Execution du process pour le joueur 0
+--->Waiting time downer:  [1]
+Application de la fonction ?
+Execution du process pour le joueur 0
+--->Waiting time downer:  [1]
+Application de la fonction ?
+Execution du process pour le joueur 0
+--->Waiting time downer:  [1]
+Application de la fonction ?
+Execution du process pour le joueur 0
+--->Waiting time downer:  [1]
+Application de la fonction ?
+Execution du process pour le joueur 0
+--->Waiting time downer:  [1]
+Application de la fonction ?

@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 22:00:22 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/01 12:01:23 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/03 04:45:06 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ld_func(t_env *e, int xproc, t_type_func list)
 		reg = get_x_from_position(e, 6, 7);
 	if (list.type[0].t_ind && list.type[1].t_reg)
 	{
-		position = e->process[xproc].addr_pc + (hex_to_dec(value) % IDX_MOD);
+		position = e->process[xproc].addr_pc + (hex_to_dec(value) % IDX_MOD); // Addr pc maybe wrong
 		value = get_x_from_position(e, position, position + REG_SIZE - 1);
 		e->process[xproc].reg[hex_to_dec(reg)] = hex_to_dec(value);
 	}
@@ -61,7 +61,7 @@ void	ld_func(t_env *e, int xproc, t_type_func list)
 	free(reg);
 	free(value);
 	e->process[xproc].position = (e->process[xproc].position + list.size) % MEM_SIZE;
-	
+
 	// nodelay(stdscr, 0);
 	// getch();
 	// nodelay(stdscr, 1);

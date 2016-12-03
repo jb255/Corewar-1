@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 12:53:56 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/29 19:12:15 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/03 04:32:57 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,5 @@ void	set_process(t_env *e, int process_nb, int x, int creator)
 	ft_memset(e->process[process_nb].reg, 0, 17);
 	e->process[process_nb].reg[1] = -creator;
 	e->process[process_nb].id_player = creator;
-	// find_next_pc(e, process_nb);
+	find_next_pc(e, process_nb);
 }

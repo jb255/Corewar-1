@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 12:59:13 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/30 13:42:44 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/03 00:14:59 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int		main(int argc, char **argv)
 {
 	t_env *e;
 
+	tab[MEM_SIZE - 1] = 9;
 	e = (t_env *)ft_memalloc(sizeof(t_env));
 	if (argc < 2)
 		vm_error("Need more argument!");

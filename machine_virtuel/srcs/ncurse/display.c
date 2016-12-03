@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 16:58:08 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/01 11:10:32 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/03 04:38:49 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,16 @@ void	write_memory(t_env *e)
 				mvwprintw(e->window.memory, e->memory_data[0], e->memory_data[1], "%02x", (unsigned int)(unsigned char)tab[e->memory_data[2] % MEM_SIZE]);
 				wattroff(e->window.memory, COLOR_PAIR(6));
 				wrefresh(e->window.memory);
-				nodelay(stdscr, 0);
-				getch();
+				// if (e->flag.pause)
+				// {
+					nodelay(stdscr, 0);
+					getch();
+				// }
+				// else
+				// {
+				// 	nodelay(stdscr, 1);
+				// 	// getch();
+				// }
 			}
 			x++;
 		}

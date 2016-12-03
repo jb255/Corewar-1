@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 13:40:11 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/01 15:23:03 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/03 01:45:03 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,13 @@ void	xor_func(t_env *e, int xproc, t_type_func list)
 	i[0] = get_i0_func_and(list, e, xproc, &place);
 	if (list.type[0].t_reg && (i[0] > 16 || i[0] < 1))
 		error = 1;
+	else if (list.type[0].t_reg) // A tester
+		i[0] = e->process[xproc].reg[i[0]]; // A tester
 	i[1] = get_i1_func_and(list, e, xproc, &place);
 	if (list.type[1].t_reg && (i[1] > 16 || i[1] < 1))
 		error = 1;
+	else if (list.type[1].t_reg)// A tester
+		i[1] = e->process[xproc].reg[i[1]]; // A tester
 	regist = get_x_from_position(e, e->process[xproc].position + (place % IDX_MOD), e->process[xproc].position + (place + 1 % IDX_MOD));
 	if (hex_to_dec(regist) > 16 || hex_to_dec(regist) < 1)
 		error = 1;

@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 17:50:40 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/01 16:03:57 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/03 04:39:13 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "g_variable.h"
 #include "n_curse.h"
 
-int		(*g_func_check[16])(t_env*, int, t_type_func) = {check_live, check_ld, check_st, check_add, check_add, check_and, check_or, check_xor, check_zjump, check_ldi, check_live, check_live, check_live, check_live, check_live, check_live};
+int		(*g_func_check[16])(t_env*, int, t_type_func) = {check_live, check_ld, check_st, check_add, check_add, check_and, check_or, check_xor, check_zjump, check_ldi, check_sti, check_fork, check_live, check_live, check_live, check_live};
 
 int				func_valid(t_env *e, t_type_func list, int func)
 {
@@ -29,6 +29,8 @@ int				func_valid(t_env *e, t_type_func list, int func)
 	if ((func == 6 || func == 7 || func == 8) && ((!list.type[0].t_reg && !list.type[0].t_ind && !list.type[0].t_dir) || (!list.type[1].t_reg && !list.type[1].t_ind && !list.type[1].t_dir) || !list.type[2].t_reg))
 		return (-1);
 	if (func == 10 && ((!list.type[0].t_reg && !list.type[0].t_dir && !list.type[0].t_ind) || (!list.type[1].t_dir && !list.type[1].t_reg) || (!list.type[2].t_reg)))
+		return (-1);
+	if (func == 11 && ((!list.type[0].t_reg) || (!list.type[0].t_reg && !list.type[0].t_dir && !list.type[0].t_ind) || (!list.type[0].t_reg && !list.type[0].t_dir)))
 		return (-1);
 	return (0);
 }
@@ -52,7 +54,7 @@ int				special_func(t_env *e, int xproc, int func, int list_size)
 
 void			wait_time_downer(t_env *e, int xproc, int func)
 {
-	int			wait_time[17] = {0, 10, 5, 5, 10, 10, 6, 6, 6, 20, 25, 25, 800, 10, 50, 1000, 2};
+	int			wait_time[17] = {0, 10, 5, 5, 10, 10, 6, 6, 6, 20, 25, 25, 10, 10, 50, 1000, 2};
 
 	if (func == -1 && e->process[xproc].wait_time != 2)
 		e->process[xproc].wait_time = 1;
