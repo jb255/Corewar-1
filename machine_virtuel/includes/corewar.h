@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/03 04:31:25 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/03 17:37:37 by viko             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,9 @@ void		zjump_func(t_env *e, int xproc, t_type_func list);
 void		ldi_func(t_env *e, int xproc, t_type_func list);
 void		sti_func(t_env *e, int xproc, t_type_func list);
 void		fork_func(t_env *e, int xproc, t_type_func list);
+void		lld_func(t_env *e, int xproc, t_type_func list);
+void		lldi_func(t_env *e, int xproc, t_type_func list);
+void		lfork_func(t_env *e, int xproc, t_type_func list);
 
 t_type_func check_jump(t_env *e, char *op_size, int func);
 t_type_func		find_label(t_env *e, int x);
@@ -118,6 +121,10 @@ int		check_zjump(t_env *e, int xproc, t_type_func list);
 int		check_ldi(t_env *e, int xproc, t_type_func list);
 int		check_sti(t_env *e, int xproc, t_type_func list);
 int		check_fork(t_env *e, int xproc, t_type_func list);
+int		check_lld(t_env *e, int xproc, t_type_func list);
+int		check_lldi(t_env *e, int xproc, t_type_func list);
+int		check_lfork(t_env *e, int xproc, t_type_func list);
+
 //
 
 // WorkFunc
@@ -131,5 +138,7 @@ int		ind_funcheck_and(t_env *e, int xproc, int place, t_type_a type);
 int		reg_funcheck_and(t_env *e, int xproc, int place);
 int		get_i0_func_and(t_type_func list, t_env *e, int xproc, int *place);
 int		get_i1_func_and(t_type_func list, t_env *e, int xproc, int *place);
+int		get_i02_func_and(t_type_func list, t_env *e, int xproc, int *place);
+int		get_i1_2_func_and(t_type_func list, t_env *e, int xproc, int *place);
 //
 #endif

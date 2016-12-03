@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 21:59:21 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/01 12:01:04 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/03 17:45:02 by viko             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ int		check_add(t_env *e, int xproc, t_type_func list)
 	(void)list;
 	(void)xproc;
 	ft_putstr_fd("Check_add|sub -- Fonction\n", e->fd);
-	if (is_register_valid(e, xproc, 2) && is_register_valid(e, xproc, 3) && is_register_valid(e, xproc, 4)){
-		ft_putstr_fd("Check_add|sub -- Les registres sont corrects\n", e->fd);
-		return (1);
-	}
+	// if (is_register_valid(e, xproc, 2) && is_register_valid(e, xproc, 3) && is_register_valid(e, xproc, 4)){
+	// 	ft_putstr_fd("Check_add|sub -- Les registres sont corrects\n", e->fd);
+	// 	return (1);
+	// }
 	// ft_putstr_fd("Check_add|sub -- Error\n", e->fd);
-	return (0);
+	return (1);
 }
 
 void	add_func(t_env *e, int xproc, t_type_func list)

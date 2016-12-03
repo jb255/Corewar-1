@@ -6,20 +6,20 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:37:17 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/03 04:30:45 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/03 17:41:54 by viko             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include "n_curse.h"
 
-void	(*g_func_process[16])(t_env*, int, t_type_func) = {live_func, ld_func, st_func, add_func, sub_func, and_func, or_func, xor_func, zjump_func, ldi_func, sti_func, fork_func};
+void	(*g_func_process[16])(t_env*, int, t_type_func) = {live_func, ld_func, st_func, add_func, sub_func, and_func, or_func, xor_func, zjump_func, ldi_func, sti_func, fork_func, lld_func, lldi_func, lfork_func};
 
 void		apply_func(t_env *e, int xproc, t_type_func list)
 {
 	if (list.error == 1)
 		return ;
-	if (list.func == 1 || list.func == 3 || list.func == 2 || list.func == 4 || list.func == 5 || list.func == 6 || list.func == 7 || list.func == 8 || list.func == 9 || list.func == 10 || list.func == 11 || list.func == 12)
+	if (list.func == 1 || list.func == 3 || list.func == 2 || list.func == 4 || list.func == 5 || list.func == 6 || list.func == 7 || list.func == 8 || list.func == 9 || list.func == 10 || list.func == 11 || list.func == 12 || list.func == 13 || list.func == 14 || list.func == 15)
 		g_func_process[list.func - 1](e, xproc, list);
 }
 
@@ -48,7 +48,7 @@ t_type_func check_jump(t_env *e, char *op_size, int func)
 		}
 		else if (op_size[index] == '1' && op_size[index + 1] == '0'){
 			list.type[x].t_dir++;
-			if (func == 10 || func == 11)
+			if (func == 10 || func == 11 || func == 13)
 				list.size += 2;
 			else
 				list.size += 4;
