@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 17:19:56 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/23 04:34:24 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/05 16:44:20 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	set_default(void)
 {
 	initscr();
 	cbreak();
-	nodelay(stdscr, 1);
+	nodelay(stdscr, 0);
 	// raw();
 	noecho();
 	curs_set(0);
@@ -44,6 +44,7 @@ void	set_default(void)
 void	n_curse(t_env *e)
 {
 	set_default();
+	e->flag.obo = 1;
 	display_init_color();
     refresh();
 	display_menu(e);

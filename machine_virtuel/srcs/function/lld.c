@@ -6,7 +6,7 @@
 /*   By: viko <viko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 17:31:30 by viko              #+#    #+#             */
-/*   Updated: 2016/12/03 17:37:13 by viko             ###   ########.fr       */
+/*   Updated: 2016/12/05 13:09:54 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@ void	lld_func(t_env *e, int xproc, t_type_func list)
 	position = 0;
 	e->process[xproc].carry = 1;
 	if (list.type[0].t_dir)
-		value = get_x_from_position(e, 2, 6);
+		value = get_x_from_position(e, e->process[xproc].position + 2, e->process[xproc].position + 6);
 	else if (list.type[0].t_ind)
-		value = get_x_from_position(e, 2, 4);
+		value = get_x_from_position(e, e->process[xproc].position + 2, e->process[xproc].position + 4);
 	if (list.type[1].t_reg && !list.type[0].t_dir)
-		reg = get_x_from_position(e, 4, 5);
+		reg = get_x_from_position(e, e->process[xproc].position + 4, e->process[xproc].position + 5);
 	else if (list.type[1].t_reg && list.type[0].t_dir)
-		reg = get_x_from_position(e, 6, 7);
+		reg = get_x_from_position(e, e->process[xproc].position + 6, e->process[xproc].position + 7);
 	if (list.type[0].t_ind && list.type[1].t_reg)
 	{
-		position = e->process[xproc].addr_pc + (hex_to_dec(value)); // Addr pc maybe wrong
+		position = e->process[xproc].position + (hex_to_dec(value)); // Addr pc maybe wrong
 		value = get_x_from_position(e, position, position + REG_SIZE - 1);
 		e->process[xproc].reg[hex_to_dec(reg)] = hex_to_dec(value);
 	}

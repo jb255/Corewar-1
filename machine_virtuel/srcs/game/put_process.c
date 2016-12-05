@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 12:53:56 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/03 17:53:48 by viko             ###   ########.fr       */
+/*   Updated: 2016/12/05 12:01:53 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	find_next_pc(t_env *e, int x)
 		label = ft_sprintf("%02x", tab[e->process[x].position + jump_size % MEM_SIZE]);
 		func = instruct_tab_value(label);
 		jump_size++;
+		free(label);
 	}
 	e->process[x].addr_pc = e->process[x].position + jump_size - 1;
 }

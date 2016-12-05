@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/03 17:37:37 by viko             ###   ########.fr       */
+/*   Updated: 2016/12/05 19:03:54 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ struct					s_flag
 	int					flag_n;
 	int					time_cycle;
 	int					pause;
+	int					obo;
 };
 
 typedef struct s_arena	t_arena;
@@ -44,6 +45,18 @@ struct					s_arena
 	char				zone_mem[MEM_SIZE];
 	int					cycle;
 };
+
+typedef struct				s_op
+{
+	char					*name;
+	int						nb_param;
+	char					params_types[4];
+	int						opcode;
+	int						nb_tours;
+	char					*full_name;
+	char					params_byte;
+	char					index_size;
+}							t_op;
 
 typedef struct s_env	t_env;
 struct					s_env
@@ -57,13 +70,15 @@ struct					s_env
 	t_window			window;
 	t_process			process[1000];
 	int					fd;
+	t_op				op[17];
 };
+
 
 void			vm_error(char *str);
 void			parsing_arg(char **arg, t_env *e);
 void			reading_file(t_env *e, int x);
 void			read_instruction(t_env *e, int x);
-
+void			op_tab(t_env *e);
 int				instruct_tab_value(char *str);
 int				get_func_method(int jump, char **action_, char *tmp);
 

@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 17:50:40 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/03 17:50:58 by viko             ###   ########.fr       */
+/*   Updated: 2016/12/05 18:39:38 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int				func_valid(t_env *e, t_type_func list, int func)
 		return (-1);
 	if (func == 11 && ((!list.type[0].t_reg) || (!list.type[0].t_reg && !list.type[0].t_dir && !list.type[0].t_ind) || (!list.type[0].t_reg && !list.type[0].t_dir)))
 		return (-1);
+	ft_putstr_fd("______________OK______________\n", e->fd);
 	return (0);
 }
 
@@ -81,11 +82,11 @@ t_type_func		find_label(t_env *e, int x)
 	{
 		free_me = ft_sprintf("%02x", tab[(e->process[x].position + 1) % MEM_SIZE]);
 		list = check_jump(e, hex_to_bin_quad(free_me), func);
-		if (!g_func_check[func - 1](e, x, list))
-			list.error = 1;
-		if (func_valid(e, list, func) == -1)
-			func = -1;
-		ft_printf_fd(e->fd, "-->Verification de la fonction [%d]\n", func);
+		// if (!g_func_check[func - 1](e, x, list))
+		// 	list.error = 1;
+		// if (func_valid(e, list, func) == -1)
+		// 	func = -1;
+		ft_printf_fd(e->fd, "-->Verification de la fonction [%d]size{%d}\n", func, list.size);
 		free(free_me);
 	}
 	list.size = special_func(e, x, func, list.size);
