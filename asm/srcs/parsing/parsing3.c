@@ -27,7 +27,8 @@ int		is_command(char *str, t_env *e)
 		i++;
 	}
 	e->nb_tab = 16;
-	ft_printf("Error line %d, instruction \"%s\" does not exist\n", e->y_line, str);
+	ft_printf("Error line %d, instruction \"%s\"", e->y_line, str);
+	ft_printf(" does not exist\n");
 	exit(-1);
 	return (0);
 }
@@ -45,7 +46,8 @@ int		ft_match_command(int command, char **tab, int line, char *inst)
 		i -= 1;
 	if (i != command)
 	{
-		ft_printf("Error line %d, instruction \"%s\" requires %d arguments, %d were given\n", line, inst, command, i);
+		ft_printf("Error line %d, instruction \"%s\" requires", line, inst);
+		ft_printf(" %d arguments, %d were given\n", command, i);
 		exit(-1);
 	}
 	return (1);
@@ -54,7 +56,7 @@ int		ft_match_command(int command, char **tab, int line, char *inst)
 void	free_split(char **tab)
 {
 	int i;
-	
+
 	i = 0;
 	while (tab[i] != NULL)
 	{
@@ -62,6 +64,12 @@ void	free_split(char **tab)
 		i++;
 	}
 	free(tab);
+}
+
+void	syntax_error(t_env *e)
+{
+	ft_printf("Unknown syntax error line %d\n", e->y_line);
+	exit(-1);
 }
 
 void	other(char *str, t_env *e)
@@ -83,17 +91,15 @@ void	other(char *str, t_env *e)
 			return ;
 	}
 	command = is_command(tab[flag], e);
-	if (tab[flag] != NULL && (flag == 0 || ft_match_command(command, tab + flag, e->y_line, tab[flag])))
+	if (tab[flag] != NULL && (flag == 0 ||
+		ft_match_command(command, tab + flag, e->y_line, tab[flag])))
 	{
 		if (e->tail == NULL)
 			push_tail_label(&e->head, &e->tail, NULL, e);
 		push_tail_method(&e->tail->line, tab + flag, command, e);
 	}
 	else if (flag == 0)
-	{
-		ft_printf("Unknown syntax error line %d\n", e->y_line);
-		exit(-1);
-	}
+		syntax_error(e);
 	free_split(tab);
 }
 
@@ -108,7 +114,7 @@ void	stock_line(char *str, t_env *e)
 	tmp[6] = '*';
 	tmp2 = ft_strdup(tmp);
 	tmp2[5] = COMMENT_CHAR2;
-	if (ft_parse_match(tmp, str) || ft_parse_match(tmp2, str) ||
+	if (pm(tmp, str) || pm(tmp2, str) ||
 			(str[0] == 0) || (str[0] == COMMENT_CHAR) ||
 			(str[0] == COMMENT_CHAR2) || !str)
 	{
@@ -153,7 +159,7 @@ void	open_line(char *fichier, t_env *e)
 	while (get_next_line(fd, &line) == 1)
 	{
 		++e->y_line;
-		if(check_line_content(line))
+		if (check_line_content(line))
 			stock_line(line, e);
 		else
 			free(line);

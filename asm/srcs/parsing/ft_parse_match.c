@@ -46,7 +46,7 @@ static int	go_forward_char_class(char **tmpb, char **tmpa)
 	return (1);
 }
 
-int			ft_parse_match(char *regex, char *string)
+int			pm(char *regex, char *string)
 {
 	char	*tmpa;
 	char	*tmpb;
@@ -62,7 +62,7 @@ int			ft_parse_match(char *regex, char *string)
 		}
 		else if (*tmpb == '*')
 		{
-			while (*tmpa && !ft_parse_match(tmpb + 1, tmpa))
+			while (*tmpa && !pm(tmpb + 1, tmpa))
 				++tmpa;
 			return (*tmpa || !*(tmpb + 1) ? 1 : 0);
 		}

@@ -39,6 +39,15 @@ void			cut_nbr_and_write(unsigned int nbr, int how_cut, int fd)
 		write(fd, &tab[3], 1);
 }
 
+void			free_all(t_line *to_free)
+{
+	free(to_free->info1);
+	free(to_free->info2);
+	free(to_free->info3);
+	free(to_free->method);
+	free(to_free);
+}
+
 void			write_binary2(t_line *head, int fd)
 {
 	t_line *tmp;
@@ -59,13 +68,7 @@ void			write_binary2(t_line *head, int fd)
 			cut_nbr_and_write(tmp->intfo3[1], tmp->intfo3[2], fd);
 		tmp = tmp->next;
 		if (to_free)
-		{
-			free(to_free->info1);
-			free(to_free->info2);
-			free(to_free->info3);
-			free(to_free->method);
-			free(to_free);
-		}
+			free_all(to_free);
 	}
 }
 

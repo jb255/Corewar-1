@@ -71,10 +71,10 @@ void		check_label_chars(char *reg, char *info, int line)
 {
 	if ((info[0] == LABEL_CHAR ||
 		(info[0] == DIRECT_CHAR && info[1] == LABEL_CHAR)) &&
-		(!ft_parse_match(reg, info) && !ft_parse_match(reg, info + 1)))
+		(!pm(reg, info) && !pm(reg, info + 1)))
 	{
-		ft_printf("Label \"%s\" contains non-authorized characters at line %d\n",
-			info, line);
+		ft_printf("Label \"%s\" contains non-authorized characters at line %d\n"
+			, info, line);
 		exit(-1);
 	}
 }
@@ -132,7 +132,7 @@ int			get_byte_len(int nb_tab, char *arg, int n_inf)
 {
 	int		tmp;
 
-	tmp = ft_parse_match("r[0-9]+", arg ? arg : "");
+	tmp = pm("r[0-9]+", arg ? arg : "");
 	if (n_inf == 1 && arg && !tmp)
 	{
 		if (arg[0] == '%' && (nb_tab == 0 || nb_tab == 1 || nb_tab == 5 ||

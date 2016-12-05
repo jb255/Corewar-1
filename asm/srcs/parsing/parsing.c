@@ -38,11 +38,11 @@ int		labels_are_defined(t_env *file)
 		tl = taf->line;
 		while (tl != NULL)
 		{
-			if (tl->info1 && ft_parse_match(reg, tl->info1 + (tl->info1[0] == '%' ? 1 : 0)))
+			if (tl->info1 && pm(reg, tl->info1 + (tl->info1[0] == '%' ? 1 : 0)))
 				check_single_label(tl, tbf = file->head, 1, file);
-			if (tl->info2 && ft_parse_match(reg, tl->info2 + (tl->info2[0] == '%' ? 1 : 0)))
+			if (tl->info2 && pm(reg, tl->info2 + (tl->info2[0] == '%' ? 1 : 0)))
 				check_single_label(tl, tbf = file->head, 2, file);
-			if (tl->info3 && ft_parse_match(reg, tl->info3 + (tl->info3[0] == '%' ? 1 : 0)))
+			if (tl->info3 && pm(reg, tl->info3 + (tl->info3[0] == '%' ? 1 : 0)))
 				check_single_label(tl, tbf = file->head, 3, file);
 			fill_intfo(tl);
 			tl = tl->next;
@@ -64,21 +64,20 @@ int		check_param(int nb_tab, t_op op_tab[], char *info, int nb_param)
 	res = 0;
 	if (byte & T_REG)
 	{
-		if (ft_parse_match("r[0-9]+", info) && ft_atoi(info + 1) <= REG_NUMBER)
+		if (pm("r[0-9]+", info) && ft_atoi(info + 1) <= REG_NUMBER)
 			res = 1;
 		else if (byte == T_REG)
 			res = 0;
 	}
 	if (byte & T_DIR && !res)
 	{
-		if (info[0] == DIRECT_CHAR && (ft_parse_match("[0-9]+",
-			info[1] == '-' ? info + 2 : info + 1) ||
-			ft_parse_match(reg, info + 1)))
+		if (info[0] == DIRECT_CHAR && (pm("[0-9]+", info[1] == '-' ? info + 2 :
+			info + 1) || pm(reg, info + 1)))
 			res = 1;
 		else if (byte == T_DIR || byte == (T_DIR | T_REG))
 			res = 0;
 	}
-	if (ft_parse_match("[0-9]+", info[0] == '-' ? info + 1 : info) || ft_parse_match(reg, info))
+	if (pm("[0-9]+", info[0] == '-' ? info + 1 : info) || pm(reg, info))
 		res = 1;
 	free(reg);
 	return (res);

@@ -20,7 +20,8 @@ void	check_single_label(t_line *line, t_func *func, int nb_info, t_env *env)
 		info = nb_info == 1 ? line->info1 : line->info2;
 	else
 		info = line->info3;
-	while (func != NULL && info && (ft_strcmp(func->label, info + (info[0] == '%' ? 2 : 1)) || !func->label))
+	while (func != NULL && info && (ft_strcmp(func->label, info +
+		(info[0] == '%' ? 2 : 1)) || !func->label))
 		func = func->next;
 	if (func == NULL || (info != NULL && func->label == NULL))
 	{
@@ -29,11 +30,14 @@ void	check_single_label(t_line *line, t_func *func, int nb_info, t_env *env)
 		exit(-1);
 	}
 	if (nb_info == 1)
-		line->intfo1[1] = get_method_pos(info + (info[0] == '%' ? 2 : 1), env) - line->method_position;
+		line->intfo1[1] = get_method_pos(info + (info[0] == '%' ? 2 : 1)
+			, env) - line->method_position;
 	if (nb_info == 2)
-		line->intfo2[1] = get_method_pos(info + (info[0] == '%' ? 2 : 1), env) - line->method_position;
+		line->intfo2[1] = get_method_pos(info + (info[0] == '%' ? 2 : 1)
+			, env) - line->method_position;
 	if (nb_info == 3)
-		line->intfo3[1] = get_method_pos(info + (info[0] == '%' ? 2 : 1), env) - line->method_position;
+		line->intfo3[1] = get_method_pos(info + (info[0] == '%' ? 2 : 1)
+			, env) - line->method_position;
 }
 
 int		verify_comma_continuity(char *str, int line)
@@ -46,7 +50,8 @@ int		verify_comma_continuity(char *str, int line)
 		if (((i == 0 || i == (int)ft_strlen(str) - 1) && str[i] == ',') ||
 			(i != 0 && str[i] == ',' && str[i - 1] == ','))
 		{
-			ft_printf("Syntax error at line %d, trailing or multiple comma(s)\n", line);
+			ft_printf("Syntax error at line %d,", line);
+			ft_printf(" trailing or multiple comma(s)\n");
 			exit(-1);
 		}
 		i += 1;

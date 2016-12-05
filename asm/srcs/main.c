@@ -71,17 +71,20 @@ void				print_all(t_env *e)
 		}
 }
 
+void				not_enough_arg(void)
+{
+	ft_printf("Usage: ./asm <sourcefile.s>\n");
+	ft_printf("-a : Instead of creating a .cor file, outputs a stripped ");
+	ft_printf("and annotated version of the code to the standard output\n");
+	exit(-1);
+}
+
 int					main(int argc, char **argv)
 {
 	t_env		e;
 
 	if (argc < 2)
-	{
-		ft_printf("Usage: ./asm <sourcefile.s>\n");
-		ft_printf("-a : Instead of creating a .cor file, outputs a stripped ");
-		ft_printf("and annotated version of the code to the standard output\n");
-		exit(-1);
-	}
+		not_enough_arg();
 	init_env(&e);
 	if (!(e.name_file = parsename(argv[argc - 1])))
 		asm_error("asm: wrong file extension!");
