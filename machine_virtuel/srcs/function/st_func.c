@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 04:07:26 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/01 12:01:38 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/03 17:44:42 by viko             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ int		check_st(t_env *e, int xproc, t_type_func list)
 	(void)list;
 	(void)xproc;
 	ft_putstr_fd("Check_st -- Fonction\n", e->fd);
-	if (list.type[0].t_reg && is_register_valid(e, xproc, 2) && list.type[1].t_ind)
-		return (1);
-	if (list.type[0].t_reg && is_register_valid(e, xproc, 2) && list.type[1].t_reg && is_register_valid(e, xproc, 3))
-		return (1);
-	return (0);
+	// if (list.type[0].t_reg && is_register_valid(e, xproc, 2) && list.type[1].t_ind)
+	// 	return (1);
+	// if (list.type[0].t_reg && is_register_valid(e, xproc, 2) && list.type[1].t_reg && is_register_valid(e, xproc, 3))
+	// 	return (1);
+	return (1);
 }
 
 void	st_func(t_env *e, int xproc, t_type_func list)

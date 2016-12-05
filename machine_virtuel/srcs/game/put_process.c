@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 12:53:56 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/03 04:32:57 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/03 17:53:48 by viko             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,20 @@ void	find_next_pc(t_env *e, int x)
 
 void	set_process(t_env *e, int process_nb, int x, int creator)
 {
+	int		i;
+
+	i = 0;
 	if (e->active_process == process_nb)
 		vm_error("Error process attribution");
 	init_process(e, process_nb);
 	e->process[process_nb].position = x % MEM_SIZE;
 	e->process[process_nb].start = x % MEM_SIZE;
 	ft_memset(e->process[process_nb].reg, 0, 17);
+	while (i < 17)
+	{
+		e->process[process_nb].reg[i] = e->process[creator].reg[i];
+		i++;
+	}
 	e->process[process_nb].reg[1] = -creator;
 	e->process[process_nb].id_player = creator;
 	find_next_pc(e, process_nb);
