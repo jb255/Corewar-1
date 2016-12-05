@@ -17,14 +17,6 @@
 # include "parsing.h"
 # include "../../op.h"
 
-// typedef struct s_res_lst	t_res_lst;
-// struct						s_res_lst
-// {
-// 	t_list					*dir;
-// 	t_list					*file;
-// 	t_list					*error;
-// };
-
 void		asm_error(char *str);
 
 #endif
