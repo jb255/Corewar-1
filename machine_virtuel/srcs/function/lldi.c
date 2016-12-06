@@ -6,7 +6,7 @@
 /*   By: viko <viko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 17:30:41 by viko              #+#    #+#             */
-/*   Updated: 2016/12/03 17:37:10 by viko             ###   ########.fr       */
+/*   Updated: 2016/12/06 16:06:28 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	lldi_func(t_env *e, int xproc, t_type_func list)
 	ft_printf_fd(e->fd, "Check_lldi -- RESULT du Registre[%s] qui a ete recherché a l'adresse {%d} = %s and %08x\n", regist[0], i[0], regist[1], hex_to_dec(regist[1]));
 	free(regist[0]);
 	free(regist[1]);
+	e->process[xproc].carry = 1;
 	ft_printf_fd(e->fd, "Check_lldi -- Value final du Registre1 [%d]\n", e->process[xproc].reg[1]);
 	e->process[xproc].position = (e->process[xproc].position + list.size) % MEM_SIZE;
 }

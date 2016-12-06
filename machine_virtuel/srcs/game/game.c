@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 17:50:40 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/05 18:39:38 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/06 15:23:28 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		(*g_func_check[16])(t_env*, int, t_type_func) = {check_live, check_ld, chec
 
 int				func_valid(t_env *e, t_type_func list, int func)
 {
-	ft_putstr_fd("Check de la fonction\n", e->fd);
+	// ft_putstr_fd("Check de la fonction\n", e->fd);
 	if ((func == 13 || func == 2) && (!list.type[1].t_reg || (!list.type[0].t_ind && !list.type[0].t_dir) || list.type[0].t_reg))
 		return (-1);
 	if (func == 3 && (!list.type[0].t_reg || (!list.type[1].t_reg && !list.type[1].t_ind)))
@@ -63,7 +63,7 @@ void			wait_time_downer(t_env *e, int xproc, int func)
 		e->process[xproc].wait_time = wait_time[func];
 	else
 		e->process[xproc].wait_time--;
-	ft_printf_fd(e->fd, "--->Waiting time downer:  [%d]\n", e->process[xproc].wait_time);
+	// ft_printf_fd(e->fd, "--->Waiting time downer process %d:  [%d]\nProcess is at %d\n", xproc, e->process[xproc].wait_time, e->process[xproc].position);
 }
 
 t_type_func		find_label(t_env *e, int x)
@@ -73,20 +73,15 @@ t_type_func		find_label(t_env *e, int x)
 	t_type_func	list;
 	int			func;
 
+	e->process[x].id_player = tab2[e->process[x].position] - 1;
 	label = ft_sprintf("%02x", tab[e->process[x].position % MEM_SIZE]);
 	func = instruct_tab_value(label);
 	func > 9 ? (func -= 1) : func;
-	ft_printf_fd(e->fd, "-->Find label func =  [%d]\n", func);
-
 	if ((func != 1 && func != 12 && func != 15 && func != -1 && func != 9) || label == NULL)
 	{
 		free_me = ft_sprintf("%02x", tab[(e->process[x].position + 1) % MEM_SIZE]);
 		list = check_jump(e, hex_to_bin_quad(free_me), func);
-		// if (!g_func_check[func - 1](e, x, list))
-		// 	list.error = 1;
-		// if (func_valid(e, list, func) == -1)
-		// 	func = -1;
-		ft_printf_fd(e->fd, "-->Verification de la fonction [%d]size{%d}\n", func, list.size);
+		// ft_printf_fd(e->fd, "-->Verification de la fonction [%d]size{%d}\n", func, list.size);
 		free(free_me);
 	}
 	list.size = special_func(e, x, func, list.size);

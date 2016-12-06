@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 01:16:37 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/03 02:31:05 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/06 17:07:39 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ int		memory_run(t_env *e)
 	{
 		if (key_hook(e) == 27)
 			return (1);
-		ft_printf_fd(e->fd, "Execution du process pour le joueur %d\n", e->process[x].id_player);
+		// ft_printf_fd(e->fd, "Execution du process pour le joueur %d\n", e->process[x].id_player);
 		list = find_label(e, x);
 		if (e->process[x].wait_time - 1 == 0)
 		{
-			ft_printf_fd(e->fd, "Application de la fonction ?\n");
+			// ft_printf_fd(e->fd, "Application de la fonction ?\n");
 			if (list.func != -1){
-				ft_printf_fd(e->fd, "oui pour la fonction numero %d\n", list.func);				
+				ft_printf_fd(e->fd, "oui pour la fonction numero %d\n", list.func);
 				apply_func(e, x, list);
 			}
 			else
@@ -57,7 +57,9 @@ int		memory_run(t_env *e)
 			find_next_pc(e, x);
 		}
 		x++;
+		ft_printf_fd(e->fd, "Le processus %d est a %d\n", x, e->process[x].position);
 	}
+
 	// 2 = addr
 	// 0 = y
 	// 1 = x

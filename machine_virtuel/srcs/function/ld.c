@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 22:00:22 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/05 16:06:19 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/06 16:01:25 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ld_func(t_env *e, int xproc, t_type_func list)
 	int			position;
 
 	position = 0;
-	ft_printf_fd(e->fd, "----LD FUNC dir[%d] ind[%d]\n", list.type[0].t_dir, list.type[0].t_ind);
+	// ft_printf_fd(e->fd, "----LD FUNC dir[%d] ind[%d] reg1[%d]\n", list.type[0].t_dir, list.type[0].t_ind, list.type[1].t_reg);
 	if (list.type[0].t_dir)
 		value = get_x_from_position(e, e->process[xproc].position + 2, e->process[xproc].position + 6);
 	else if (list.type[0].t_ind)
@@ -52,16 +52,13 @@ void	ld_func(t_env *e, int xproc, t_type_func list)
 	}
 	else if (list.type[0].t_dir && list.type[1].t_reg)
 		e->process[xproc].reg[hex_to_dec(reg)] = hex_to_dec(value);
-	else
-	{
-		e->process[xproc].jumptodo = 1;
-		e->process[xproc].carry = 0;
-	}
-	if (hex_to_dec(value) == 0)
+	if ((list.type[0].t_dir || list.type[0].t_ind) && list.type[0].t_reg && hex_to_dec(value) == 0)
 		e->process[xproc].carry = 1;
-	ft_printf_fd(e->fd, "---------->REGISTRE %d | value = [%d]\n", hex_to_dec(reg), hex_to_dec(value));
-	free(reg);
-	free(value);
+	// ft_printf_fd(e->fd, "---------->REGISTRE %d | value = [%d]\n", hex_to_dec(reg), hex_to_dec(value));
+	if (reg)
+		free(reg);
+	if (value)
+		free(value);
 	e->process[xproc].position = (e->process[xproc].position + list.size) % MEM_SIZE;
 
 	// nodelay(stdscr, 0);

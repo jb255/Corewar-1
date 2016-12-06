@@ -6,7 +6,7 @@
 /*   By: viko <viko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 17:31:30 by viko              #+#    #+#             */
-/*   Updated: 2016/12/05 13:09:54 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/06 16:01:41 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,8 @@ void	lld_func(t_env *e, int xproc, t_type_func list)
 	}
 	else if (list.type[0].t_dir && list.type[1].t_reg)
 		e->process[xproc].reg[hex_to_dec(reg)] = hex_to_dec(value);
-	else
-	{
-		e->process[xproc].jumptodo = 1;
-		e->process[xproc].carry = 0;
-	}
+	if ((list.type[0].t_dir || list.type[0].t_ind) && list.type[0].t_reg && hex_to_dec(value) == 0)
+		e->process[xproc].carry = 1;
 	ft_printf_fd(e->fd, "---------->REGISTRE %d | value = [%d]\n", hex_to_dec(reg), hex_to_dec(value));
 	free(reg);
 	free(value);

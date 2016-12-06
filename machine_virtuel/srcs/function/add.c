@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 21:59:21 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/03 17:45:02 by viko             ###   ########.fr       */
+/*   Updated: 2016/12/06 16:02:28 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int		check_add(t_env *e, int xproc, t_type_func list)
 {
 	(void)list;
 	(void)xproc;
-	ft_putstr_fd("Check_add|sub -- Fonction\n", e->fd);
+	(void)e;
+	// ft_putstr_fd("Check_add|sub -- Fonction\n", e->fd);
 	// if (is_register_valid(e, xproc, 2) && is_register_valid(e, xproc, 3) && is_register_valid(e, xproc, 4)){
 	// 	ft_putstr_fd("Check_add|sub -- Les registres sont corrects\n", e->fd);
 	// 	return (1);
@@ -39,9 +40,12 @@ void	add_func(t_env *e, int xproc, t_type_func list)
 	regist[1] = get_x_from_position(e, 3, 4);
 	regist[2] = get_x_from_position(e, 4, 5);
 	if (list.type[0].t_reg && list.type[1].t_reg && list.type[2].t_reg)
+	{
 		e->process[xproc].reg[hex_to_dec(regist[2])] =
 		e->process[xproc].reg[hex_to_dec(regist[0])] +
 		e->process[xproc].reg[hex_to_dec(regist[1])];
+		e->process[xproc].carry = 1;
+	}
 	ft_printf_fd(e->fd, "--->Function add\n--->Registre %d update:  [%d]\n", hex_to_dec(regist[2]), e->process[xproc].reg[hex_to_dec(regist[2])]);
 	free(regist[0]);
 	free(regist[1]);

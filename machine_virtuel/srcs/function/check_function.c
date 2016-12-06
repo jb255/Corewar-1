@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:59:38 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/03 00:30:38 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/06 17:06:23 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ void	name_process(t_env *e, char	*name)
 
 	tmp = NULL;
 	x = 0;
+	(void)name;
 	while (x < e->active_players)
 	{
-		if (!ft_strcmp(name, (tmp = ft_sprintf("%x", (e->players[x].id_player-1))))){
-			printf("LIVE FOR %s\n", e->players[x].name);
-			ft_printf_fd(e->fd, "(`'-._ Live for %s _.-'`)\n", e->players[x].name);
-		}
+		// if (!ft_strcmp(name, (tmp = ft_sprintf("%x", (e->players[x].id_player-1))))){
+		// 	ft_printf_fd(e->fd, "(`'-._ Live for %s _.-'`)\n", e->players[x].name);
+		// }
 		x++;
-		free(tmp);
+		// free(tmp);
 	}
 }
 
@@ -57,8 +57,6 @@ char	*get_x_from_position(t_env *e, int from, int at)
 	if (from < 0)
 		from = MEM_SIZE + from;
 	index = from;
-	ft_printf_fd(e->fd, "--->GetXfromPos From[%d]- At[%d]\n", from, at);
-
 	while (index != at)
 	{
 		ft_printf_fd(e->fd, "--->Recherche a partir de %d a %d ->Actual n%d[%d] hex[%02x]\n", from, at, index,tab[index % MEM_SIZE], tab[index % MEM_SIZE]);
