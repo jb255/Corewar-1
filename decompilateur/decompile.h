@@ -15,11 +15,24 @@
 
 # include "op.h"
 # include "libft.h"
+# include "time.h"
 # include <stdlib.h>
 # include <fcntl.h>
 
 # define MIN_CHAR_NUM 5
 # define MAX_CHAR_NUM 15
+
+typedef struct		s_op
+{
+	char			*name;
+	int				nb_param;
+	char			params_types[4];
+	int				opcode;
+	int				nb_tours;
+	char			*full_name;
+	char			params_byte;
+	char			index_size;
+}					t_op;
 
 typedef struct		s_data
 {
@@ -33,7 +46,10 @@ typedef struct		s_data
 	char			*brute_file; // file brute quoi
 	int				pointer; // pointer sur l'endroit auquel on est dans content, pas sur d'en avoir besoin
 	int				content_size; // nombre de bytes lu dans le fichier
+	t_op			op_tab[17];
 }					t_data;
+
+
 
 t_data				*get_file_info(char *file_name);
 void				parse_info(t_data *data);

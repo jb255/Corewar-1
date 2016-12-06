@@ -11,13 +11,50 @@
 /* ************************************************************************** */
 
 #include "decompile.h"
-#include "time.h"
 
 // Error codes :
 // 1. No file given
 // 2. Could not open file
 // 3. Error reading file
 // 4. Error allocating memory
+
+// Fonction reprise du compilateur pour mettre le op.c dans la structure
+void		fille_op_tab2(t_data *env)
+{
+	env->op_tab[9] = (t_op){"ldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG,
+		T_REG}, 10, 25, "load index", 1, 1};
+	env->op_tab[10] = (t_op){"sti", 3, {T_REG, T_REG | T_DIR | T_IND,
+		T_DIR | T_REG}, 11, 25, "store index", 1, 1};
+	env->op_tab[11] = (t_op){"fork", 1, {T_DIR}, 12, 800, "fork", 0, 1};
+	env->op_tab[12] = (t_op){"lld", 2, {T_DIR | T_IND, T_REG},
+	13, 10, "long load", 1, 0};
+	env->op_tab[13] = (t_op){"lldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG,
+		T_REG}, 14, 50, "long load index", 1, 1};
+	env->op_tab[14] = (t_op){"lfork", 1, {T_DIR}, 15, 1000, "long fork", 0, 1};
+	env->op_tab[15] = (t_op){"aff", 1, {T_REG}, 16, 2, "aff", 1, 0};
+	env->op_tab[16] = (t_op){0, 0, {0}, 0, 0, 0, 0, 0};
+}
+
+void		fille_op_tab(t_data *env)
+{
+	env->op_tab[0] = (t_op)(t_op){"live", 1, {T_DIR}, 1, 10, "alive", 0, 0};
+	env->op_tab[1] = (t_op){"ld", 2,
+	{T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0};
+	env->op_tab[2] = (t_op){"st", 2,
+	{T_REG, T_IND | T_REG}, 3, 5, "store", 1, 0};
+	env->op_tab[3] = (t_op){"add", 3,
+	{T_REG, T_REG, T_REG}, 4, 10, "addition", 1, 0};
+	env->op_tab[4] = (t_op){"sub", 3,
+	{T_REG, T_REG, T_REG}, 5, 10, "soustraction", 1, 0};
+	env->op_tab[5] = (t_op){"and", 3, {T_REG | T_DIR | T_IND, T_REG | T_IND
+		| T_DIR, T_REG}, 6, 6, "et (and  r1, r2, r3   r1&r2 -> r3", 1, 0};
+	env->op_tab[6] = (t_op){"or", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND
+		| T_DIR, T_REG}, 7, 6, "ou  (or   r1, r2, r3   r1 | r2 -> r3", 1, 0};
+	env->op_tab[7] = (t_op){"xor", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND
+		| T_DIR, T_REG}, 8, 6, "ou (xor  r1, r2, r3   r1^r2 -> r3", 1, 0};
+	env->op_tab[8] = (t_op){"zjmp", 1, {T_DIR}, 9, 20, "jump if zero", 0, 1};
+	fille_op_tab2(env);
+}
 
 // La fonction suivante sert juste a lire le fichier entier et a le mettre dans
 // le champ 'brute_file' de data, elle set egalement les autres champs a leur
@@ -35,6 +72,7 @@ t_data		*get_file_info(char *file_name)
 	res->brute_file = ft_strnew(CHAMP_MAX_SIZE);
 	if ((res->content_size = read(fd, res->brute_file, CHAMP_MAX_SIZE)) == -1)
 		error(3);
+	fille_op_tab(res);
 	res->pointer = 0;
 	res->core_name = NULL;
 	res->core_comment = NULL;
@@ -74,7 +112,7 @@ int			get_name_and_comment(char *tmp, t_data *data)
 	i = PROG_NAME_LENGTH + 1;
 	while (tmp[i] != 0 && i < PROG_NAME_LENGTH + COMMENT_LENGTH)
 		i += 1;
-	data->core_comment = ft_strdup(tmp, PROG_NAME_LENGTH + 1, i - PROG_NAME_LENGTH + 1);
+	data->core_comment = ft_strsub(tmp, PROG_NAME_LENGTH + 1, i - PROG_NAME_LENGTH + 1);
 	return (PROG_NAME_LENGTH + COMMENT_LENGTH + 1);
 }
 
@@ -147,9 +185,9 @@ void		data_replace_instructions(t_data *data)
 	while (data->pointer < data->nb_commands)
 	{
 		opcode = data->content[data->pointer][0];
-		len = ft_strlen(op_tab[opcode].name) - 1;
+		len = ft_strlen(data->op_tab[opcode].name) - 1;
 		replacer = ft_strnew(len + data->len[data->pointer]);
-		ft_strcpy(replacer, op_tab[opcode].name);
+		ft_strcpy(replacer, data->op_tab[opcode].name);
 		ft_strncpy(replacer + len + 1, data->content[data->pointer] + 1,
 			data->len[data->pointer] - 1);
 		free(data->content[data->pointer]);
@@ -199,6 +237,30 @@ int			get_spec_len(char *champ)
 		return (DIR_SIZE);
 }
 
+char		*get_single_info(char *bytes, int code, int *len)
+{
+	int		number;
+
+	number = 0;
+	if (code == REG_CODE)
+		number = (int)(*bytes);
+	else if (code == IND_CODE)
+	{
+		number += ((int)(*bytes) * 256);
+		number += (int)(*bytes);
+	}
+	else if (code == DIR_CODE)
+	{
+		number += ((int)(*bytes) * 256 * 256 * 256);
+		number += ((int)(*bytes) * 256 * 256);
+		number += ((int)(*bytes) * 256);
+		number += (int)(*bytes);
+	}
+	else
+		return (0);
+	return (ft_itoa(number));
+}
+
 // Prend une string (nulle ou non), un pointeur sur les octets
 // courants du fichier et concatene l'argument correspondant a
 // la fin de la chaine avant de la retourner
@@ -218,6 +280,17 @@ char		*get_decompiled_info(char *actual_string, char *bytes, int code)
 	return (actual_string);
 }
 
+int			get_size(char byte)
+{
+	if (byte & REG_CODE)
+		return (1);
+	if (byte & DIR_CODE)
+		return (DIR_SIZE);
+	if (byte & IND_CODE)
+		return (IND_SIZE);
+	return (0);
+}
+
 // Appelle en boucle la fonction precedente, afin de remplacer
 // la totalité du contenu de data->contents, par les arguments
 // correspondants sous formes humainement lisible
@@ -229,22 +302,22 @@ void 		transform_arguments(char *args, int len, t_data *data)
 	res = NULL;
 	if (*args == 0 || *args == 8 || *args == 11 ||
 			*args == 14)
-		res = get_decompiled_info(args + 1, DIR_SIZE);
+		res = get_decompiled_info(res, args + 1, DIR_SIZE);
 	else if (*args == 15)
-		res = get_decompiled_info(args + 1, REG_SIZE);
+		res = get_decompiled_info(res, args + 1, REG_SIZE);
 	else
 	{
-		next_len = *(args + 1) << 2;
+		next_len = get_size(*(args + 1) << 6);
 		res = get_decompiled_info(res, args + 2, get_code(next_len));
 		if (len > next_len)
 		{
 			res = get_decompiled_info(res, args + next_len,
 				get_code(*(args + 1) << 4));
-			next_len = *(args + 1) << 4;
+			next_len = get_size(*(args + 1) << 4);
 		}
 		if (len > next_len)
 			res = get_decompiled_info(res, args + next_len,
-				get_code(*(args + 1) << 6));
+				get_code(*(args + 1) << 2));
 	}
 	free(data->content[data->pointer]);
 	data->content[data->pointer] = NULL;
