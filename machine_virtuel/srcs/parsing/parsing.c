@@ -12,16 +12,6 @@
 
 #include "corewar.h"
 
-int		flag(char *str)
-{
-	int		index;
-
-	index = 0;
-	if (str[0] == '-' && str[1] == 'n')
-		return (TRUE);
-	return (FALSE);
-}
-
 int		is_cor(char *str)
 {
 	int		index;
@@ -34,12 +24,39 @@ int		is_cor(char *str)
 	return (0);
 }
 
+void	flag(char *str, t_env *e)
+{
+	int		index;
+
+	index = 0;
+	if (str[1] == 'c' && str[2] == '\0')
+		e->flag.flag_n = 1;
+	else if (str[1] == 'd' && str[2] == 'u' && str[3] == 'm' && str[4] == 'p' && str[5] == '\0')
+	{
+		if (e->flag.flag_dump == 1)
+			vm_error("Too much -dump");
+		e->flag.flag_dump = 1;
+	}
+	else if (str[1] == 'n' && str[2] == '\0')
+		e->flag.flag_number = 1;
+}
+
 void	get_flag_prog(char *arg, t_env *e)
 {
-	(void)e;
-	if (flag(arg)){
+	if (e->flag.flag_dump == 1)
+	{
+		e->flag.dump = ft_atoi(arg);
+		e->flag.flag_dump = 2;
+	}
+	else if (e->flag.flag_number == 1)
+	{
+		e->players[e->active_players].id_player = ft_atoi(arg);
+		e->flag.flag_number = 0;
+	}
+	else if (arg[0] == '-')
+	{
+		flag(arg, e);
 		printf(""RED"%s\n"NORM"", arg);
-		e->flag.flag_n = 1;
 	}
 	else if (e->active_players != MAX_PLAYERS && is_cor(arg))
 	{
