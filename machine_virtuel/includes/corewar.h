@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/05 19:03:54 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/06 15:47:10 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@
 
 # define TRUE 1
 # define FALSE 0
+typedef unsigned char	t_u8;
+typedef unsigned short	t_u16;
+typedef unsigned int	t_u32;
+typedef unsigned int	t_uint;
+
+# define vm_memget8(_b, _x) (*(t_u8*)vm_memget(_b, _x, 1))
+# define vm_memget16(_b, _x) (*(t_u16*)vm_memget(_b, _x, 2))
+# define vm_memget32(_b, _x) (*(t_u32*)vm_memget(_b, _x, 4))
 
 int tab[MEM_SIZE];
 int tab2[MEM_SIZE];
@@ -68,11 +76,12 @@ struct					s_env
 	int					memory_data[4];
 	t_arena				arena;
 	t_window			window;
-	t_process			process[1000];
+	t_process			process[100000];
 	int					fd;
 	t_op				op[17];
 };
 
+t_u32			*vm_memget(t_env *e, int xproc, size_t size);
 
 void			vm_error(char *str);
 void			parsing_arg(char **arg, t_env *e);
