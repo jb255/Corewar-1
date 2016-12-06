@@ -31,7 +31,8 @@ void	trim_args(t_env *file)
 	tmp_func = file->head;
 	while (tmp_func)
 	{
-		if (tmp_func->label != NULL)
+		if (tmp_func->label != NULL &&
+			tmp_func->label[ft_strlen(tmp_func->label) - 1] == ':')
 			tmp_func->label[ft_strlen(tmp_func->label) - 1] = 0;
 		tmp_func = tmp_func->next;
 	}

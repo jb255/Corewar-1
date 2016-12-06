@@ -17,6 +17,8 @@ int		is_command(char *str, t_env *e)
 	int i;
 
 	i = 0;
+	if (!ft_strcmp(str, ":"))
+		return (0);
 	while (i < 16)
 	{
 		if (ft_strcmp(str, e->op_tab[i].name) == 0)
@@ -75,24 +77,22 @@ void	syntax_error(t_env *e)
 void	other(char *str, t_env *e)
 {
 	char	**tab;
-	int		nb_space;
 	int		command;
 	int		flag;
 
-	nb_space = epur_str(str);
+	epur_str(str);
 	verify_comma_continuity(str, e->y_line);
 	tab = ft_str_ext_split(str, "\t ,");
 	flag = 0;
-	if (tab[0][ft_strlen(tab[0]) - 1] == ':')
+	if (tab[0][ft_strlen(tab[0]) - 1] == ':' ||
+		(tab[1] && !ft_strcmp(tab[1], ":")))
 	{
 		push_tail_label(&e->head, &e->tail, tab[0], e);
-		flag = 1;
-		if (tab + 1 == NULL)
-			return ;
+		flag = (tab[1] && !ft_strcmp(tab[1], ":")) ? 2 : 1;
 	}
 	command = is_command(tab[flag], e);
 	if (tab[flag] != NULL && (flag == 0 ||
-		ft_match_command(command, tab + flag, e->y_line, tab[flag])))
+		(ft_match_command(command, tab + flag, e->y_line, tab[flag]))))
 	{
 		if (e->tail == NULL)
 			push_tail_label(&e->head, &e->tail, NULL, e);
@@ -109,14 +109,12 @@ void	stock_line(char *str, t_env *e)
 	char	*tmp2;
 
 	tmp = ft_strnew(7);
-	ft_strcpy(tmp, "[\t ]+");
+	ft_strcpy(tmp, "[\t ]+.*");
 	tmp[5] = COMMENT_CHAR;
-	tmp[6] = '*';
 	tmp2 = ft_strdup(tmp);
 	tmp2[5] = COMMENT_CHAR2;
-	if (pm(tmp, str) || pm(tmp2, str) ||
-			(str[0] == 0) || (str[0] == COMMENT_CHAR) ||
-			(str[0] == COMMENT_CHAR2) || !str)
+	if (pm(tmp, str) || pm(tmp2, str) || (str[0] == 0) ||
+		(str[0] == COMMENT_CHAR) || (str[0] == COMMENT_CHAR2) || !str)
 	{
 		free(str);
 		free(tmp);

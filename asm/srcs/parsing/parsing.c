@@ -66,8 +66,6 @@ int		check_param(int nb_tab, t_op op_tab[], char *info, int nb_param)
 	{
 		if (pm("r[0-9]+", info) && ft_atoi(info + 1) <= REG_NUMBER)
 			res = 1;
-		else if (byte == T_REG)
-			res = 0;
 	}
 	if (byte & T_DIR && !res)
 	{
