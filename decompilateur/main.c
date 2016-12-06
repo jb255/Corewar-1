@@ -17,6 +17,7 @@
 // 1. No file given
 // 2. Could not open file
 // 3. Error reading file
+// 4. Error allocating memory
 
 // La fonction suivante sert juste a lire le fichier entier et a le mettre dans
 // le champ 'brute_file' de data, elle set egalement les autres champs a leur
@@ -59,6 +60,24 @@ char		*ft_strndup(char *to_copy, size_t len)
 	return (res);
 }
 
+// Recupere le nom et le commentaire du heros,
+// les met dans la structure t_data et renvoie le nombre
+// d'octets pour commencer le vrai fichier du heros
+int			get_name_and_comment(char *tmp, t_data *data)
+{
+	int i;
+	
+	i = 0;
+	while (tmp[i] != 0 && i < PROG_NAME_LENGTH)
+		i += 1;
+	data->core_name = ft_strsub(tmp, 0, i);
+	i = PROG_NAME_LENGTH + 1;
+	while (tmp[i] != 0 && i < PROG_NAME_LENGTH + COMMENT_LENGTH)
+		i += 1;
+	data->core_comment = ft_strdup(tmp, PROG_NAME_LENGTH + 1, i - PROG_NAME_LENGTH + 1);
+	return (PROG_NAME_LENGTH + COMMENT_LENGTH + 1);
+}
+
 // Cette fonction s'occupe juste de sauter d'opcode en opcode
 // et de remplir le champs 'content' de data avec les 'lignes' de bytecode
 // a noter qu'aucune modification du contenu n'est faite ici!
@@ -70,6 +89,8 @@ void		parse_info(t_data *data)
 
 	tmp = data->brute_file;
 	i = get_name_and_comment(tmp, data);
+	while (tmp[i] == 0 && i < data->content_size)
+		i += 1;
 	while (i < data->content_size)
 	{
 		j = next_command_size(&(tmp[i]));
@@ -102,15 +123,47 @@ void		add_dim(t_data *data, char *to_add, int len_str)
 	tmp[i] = ft_strndup(to_add, len_str);
 	free(to_add);
 	free(data->content);
+	data->content = NULL;
 	data->content = tmp;
 	data->nb_commands += 1;
 	tmp_int = (int*)malloc(sizeof(int) * data->nb_commands);
-	ft_memcpy(tmp_int, data->len, data->nb_commands - 1);
+	ft_memcpy(tmp_int, data->len, (data->nb_commands - 1) * 4);
 	tmp_int[data->nb_commands - 1] = len_str;
 	free(data->len);
+	data->len = NULL;
 	data->len = tmp_int;
 }
 
+// Remplace tous les opcodes de la structure t_data par les instructions
+// correspondantes, à changer pour des realloc, mais l'idee est la
+void		data_replace_instructions(t_data *data)
+{
+	char	opcode;
+	char	*replacer;
+	int		len;
+	
+	replacer = NULL;
+	data->pointer = 0;
+	while (data->pointer < data->nb_commands)
+	{
+		opcode = data->content[data->pointer][0];
+		len = ft_strlen(op_tab[opcode].name) - 1;
+		replacer = ft_strnew(len + data->len[data->pointer]);
+		ft_strcpy(replacer, op_tab[opcode].name);
+		ft_strncpy(replacer + len + 1, data->content[data->pointer] + 1,
+			data->len[data->pointer] - 1);
+		free(data->content[data->pointer]);
+		data->content[data->pointer] = NULL;
+		data->content[data->pointer] = replacer;
+		data->len[data->pointer] += len;
+		replacer = NULL;
+		data->pointer += 1;
+	}
+	data->pointer = 0;
+}
+
+// Recupere la taille des arguments d'une instruction
+// grace à son ocp
 int			get_ocp_len(char *champ)
 {
 	int	size;
@@ -137,6 +190,7 @@ int			get_ocp_len(char *champ)
 	return (size);
 }
 
+// Cas special correspondant a la fonction precedente
 int			get_spec_len(char *champ)
 {
 	if (*champ == 15)
@@ -145,6 +199,61 @@ int			get_spec_len(char *champ)
 		return (DIR_SIZE);
 }
 
+// Prend une string (nulle ou non), un pointeur sur les octets
+// courants du fichier et concatene l'argument correspondant a
+// la fin de la chaine avant de la retourner
+char		*get_decompiled_info(char *actual_string, char *bytes, int code)
+{
+	int		len;
+	char	*tmp;
+	
+	len = 0;
+	tmp = get_single_info(bytes, code, &len);
+	actual_string = realloc(actual_string, ft_strlen(actual_string) + len);
+	if (actual_string == NULL)
+		error(4);
+	ft_strcat(actual_string, tmp);
+	free(tmp);
+	tmp = NULL;
+	return (actual_string);
+}
+
+// Appelle en boucle la fonction precedente, afin de remplacer
+// la totalité du contenu de data->contents, par les arguments
+// correspondants sous formes humainement lisible
+void 		transform_arguments(char *args, int len, t_data *data)
+{
+	char	*res;
+	int		next_len;
+	
+	res = NULL;
+	if (*args == 0 || *args == 8 || *args == 11 ||
+			*args == 14)
+		res = get_decompiled_info(args + 1, DIR_SIZE);
+	else if (*args == 15)
+		res = get_decompiled_info(args + 1, REG_SIZE);
+	else
+	{
+		next_len = *(args + 1) << 2;
+		res = get_decompiled_info(res, args + 2, get_code(next_len));
+		if (len > next_len)
+		{
+			res = get_decompiled_info(res, args + next_len,
+				get_code(*(args + 1) << 4));
+			next_len = *(args + 1) << 4;
+		}
+		if (len > next_len)
+			res = get_decompiled_info(res, args + next_len,
+				get_code(*(args + 1) << 6));
+	}
+	free(data->content[data->pointer]);
+	data->content[data->pointer] = NULL;
+	data->content[data->pointer] = res;
+	data->len[data->pointer] = -1;
+}
+
+// Prend un ocp et renvoie la taille totale du champ que 
+// l'instruction va occuper en nombre d'octets
 int			next_command_size(char *champ)
 {
 	int		size;
@@ -158,6 +267,7 @@ int			next_command_size(char *champ)
 	return (size);
 }
 
+// Genere aleatoirement un label
 char		*generate_label(void)
 {
 	time_t	t;
