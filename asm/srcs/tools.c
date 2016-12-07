@@ -12,15 +12,6 @@
 
 #include "../includes/corewar.h"
 
-unsigned int	little_to_big(unsigned int little)
-{
-	unsigned int	big;
-
-	big = ((little >> 24) & 0xff) | ((little << 8) & 0xff0000) |
-	((little >> 8) & 0xff00) | ((little << 24) & 0xff000000);
-	return (big);
-}
-
 void			cut_nbr_and_write(unsigned int nbr, int how_cut, int fd)
 {
 	unsigned char tab[4];

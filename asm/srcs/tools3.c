@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_error.c                                        :+:      :+:    :+:   */
+/*   tools3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaustry <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/20 17:09:56 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/19 23:49:16 by mlevieux         ###   ########.fr       */
+/*   Created: 2016/12/07 15:41:35 by jaustry           #+#    #+#             */
+/*   Updated: 2016/12/07 15:41:37 by jaustry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/corewar.h"
+#include "../includes/corewar.h"
 
-void		asm_error(char *str)
+unsigned int	little_to_big(unsigned int little)
 {
-	ft_printf("%s\n", str);
-	exit(-1);
-}
+	unsigned int	big;
 
-void		syntax_error(t_env *e)
-{
-	ft_printf("Unknown syntax error line %d\n", e->y_line);
-	exit(-1);
+	big = ((little >> 24) & 0xff) | ((little << 8) & 0xff0000) |
+	((little >> 8) & 0xff00) | ((little << 24) & 0xff000000);
+	return (big);
 }

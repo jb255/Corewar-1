@@ -37,3 +37,46 @@ void	trim_args(t_env *file)
 		tmp_func = tmp_func->next;
 	}
 }
+
+int		is_command(char *str, t_env *e)
+{
+	int i;
+
+	i = 0;
+	if (!ft_strcmp(str, ":"))
+		return (0);
+	while (i < 16)
+	{
+		if (ft_strcmp(str, e->op_tab[i].name) == 0)
+		{
+			e->nb_tab = i;
+			return (e->op_tab[i].nb_param);
+		}
+		i++;
+	}
+	e->nb_tab = 16;
+	ft_printf("Error line %d, instruction \"%s\"", e->y_line, str);
+	ft_printf(" does not exist\n");
+	exit(-1);
+	return (0);
+}
+
+int		ft_match_command(int command, char **tab, int line, char *inst)
+{
+	int		i;
+
+	i = 0;
+	while (tab[i] && tab[i][0] != COMMENT_CHAR &&
+				tab[i][0] != COMMENT_CHAR2)
+		i++;
+	i -= 1;
+	if (!tab[i])
+		i -= 1;
+	if (i != command)
+	{
+		ft_printf("Error line %d, instruction \"%s\" requires", line, inst);
+		ft_printf(" %d arguments, %d were given\n", command, i);
+		exit(-1);
+	}
+	return (1);
+}
