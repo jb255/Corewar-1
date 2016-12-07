@@ -36,11 +36,12 @@ struct						s_player
 	char					*comment;
 	char					*path;
 	unsigned long			size;
-	int						start;
+	int						start; // emplacement du champion, load adress
 	int						size_func;
 	int						carry;
 	char					*file;
 	int						id_player;
+	int						id_live;
 	int						position;
 	int						jumptodo;
 };

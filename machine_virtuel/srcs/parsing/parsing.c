@@ -50,7 +50,7 @@ void	get_flag_prog(char *arg, t_env *e)
 	}
 	else if (e->flag.flag_number == 1)
 	{
-		e->players[e->active_players].id_player = ft_atoi(arg);
+		e->players[e->active_players].id_player = -ft_atoi(arg);
 		e->flag.flag_number = 0;
 	}
 	else if (arg[0] == '-')
@@ -65,6 +65,7 @@ void	get_flag_prog(char *arg, t_env *e)
 	}
 	else if (e->active_players == MAX_PLAYERS)
 		vm_error("Too much champions!");
+	printf("%d\n", e->players[e->active_players].id_player);
 }
 
 void	parsing_arg(char **arg, t_env *e)
