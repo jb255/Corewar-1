@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 01:16:37 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/06 17:07:39 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/07 18:56:46 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ int		memory_run(t_env *e)
 	e->memory_data[3] = 0;
 	while (x < e->active_process)
 	{
+		tab[100] = 255;
+		tab[101] = 232;
+		tab2[100] = 1;
+		tab2[101] = 1;
 		if (key_hook(e) == 27)
 			return (1);
 		// ft_printf_fd(e->fd, "Execution du process pour le joueur %d\n", e->process[x].id_player);

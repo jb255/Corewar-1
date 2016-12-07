@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 04:07:26 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/06 17:05:45 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/07 18:58:22 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,31 +34,34 @@ int		check_st(t_env *e, int xproc, t_type_func list)
 
 void	st_func(t_env *e, int xproc, t_type_func list)
 {
-	char			*result = "";
 	int				reg = 0;
 	int				regist = 0;
+	int				error;
+	int 			y;
 
+	error = 0;
 	ft_printf_fd(e->fd, "Fonction st lancement size %d, t_reg[%d], t_reg1[%d], t_ind1[%d]\n", list.size, list.type[0].t_reg, list.type[1].t_reg, list.type[1].t_ind);
 	if (list.type[0].t_reg)
-		reg = tab[e->process[xproc].position + 2];
-	if (list.type[0].t_reg && list.type[1].t_reg)
+		reg = tab[(e->process[xproc].position + 2) % MEM_SIZE];
+	else
+		error = 1;
+	(reg > 16 || reg < 1) ? (error = 1) : error;
+	if (list.type[1].t_reg && !error)
 	{
-		regist = e->process[xproc].reg[tab[e->process[xproc].position + 3]];
+		regist = e->process[xproc].reg[tab[(e->process[xproc].position + 3)]];
 		e->process[xproc].reg[reg] = regist;
-		ft_printf_fd(e->fd, "ERROR");
 	}
-	else if (list.type[0].t_reg && list.type[1].t_ind)
+	else if (list.type[1].t_ind)
 	{
 		ft_printf_fd(e->fd, "--------------%d-xproc=%d---------------\n", e->process[xproc].id_player, xproc);
-		result = get_x_from_position(e, e->process[xproc].position + 3, e->process[xproc].position + 5);
-		regist = (signed short)hex_to_dec(result);
-		ft_printf_fd(e->fd, "------Search begin at: %d at: %d, value of reg %d\n", regist, (e->process[xproc].position + (regist % IDX_MOD)), e->process[xproc].reg[reg]);
-		write_from_x(e, (e->process[xproc].position + (regist % (IDX_MOD))), e->process[xproc].reg[reg], 4);
-		int y = (e->process[xproc].position + (regist % (IDX_MOD)));
+		ft_printf_fd(e->fd, "no error ? \n");
+		regist = to_int_getx(get_x_from_position(e, e->process[xproc].position + 3, e->process[xproc].position + 5));
+		ft_printf_fd(e->fd, "its ok\n");
+		y = (e->process[xproc].position + (regist % (IDX_MOD)));
 		y = y < 0 ? MEM_SIZE + y : y;
 		ft_printf_fd(e->fd, "Position[%d], Size[%d], index[%d]\n", y, 4, y + 4);
+		write_from_x(e, (e->process[xproc].position + (regist % (IDX_MOD))), e->process[xproc].reg[reg], 4);
 		write_from_tab2(y, 4, e->process[xproc].id_player + 1);
-		free(result);
 		ft_printf_fd(e->fd, "Next ft_func\n");
 	}
 	e->process[xproc].position = (e->process[xproc].position + list.size) % MEM_SIZE;

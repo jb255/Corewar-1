@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 22:00:22 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/06 16:01:25 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/07 18:58:35 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,40 +28,58 @@ int		check_ld(t_env *e, int xproc, t_type_func list)
 	return (1);
 }
 
+int		to_int_getx(char *str)
+{
+	int		nb;
+
+	nb = hex_to_dec(str);
+	free(str);
+	return (nb);
+}
+
+int		get_first_ld(t_env *e, t_type_func list, int *error, int xproc)
+{
+	int		result;
+
+	result = 0;
+	if (list.type[0].t_dir)
+		result = to_int_getx(get_x_from_position(e, e->process[xproc].position + 2, e->process[xproc].position + 6));
+	else if (list.type[0].t_ind)
+		result = to_int_getx(get_x_from_position(e, e->process[xproc].position + 2, e->process[xproc].position + 4));
+	else
+		*error = 1;
+	return (result);
+}
+
 void	ld_func(t_env *e, int xproc, t_type_func list)
 {
-	char		*value = NULL;
-	char		*reg = NULL;
 	int			position;
+	int			reg;
+	int			place;
+	int			error;
+	int			value;
 
-	position = 0;
-	// ft_printf_fd(e->fd, "----LD FUNC dir[%d] ind[%d] reg1[%d]\n", list.type[0].t_dir, list.type[0].t_ind, list.type[1].t_reg);
-	if (list.type[0].t_dir)
-		value = get_x_from_position(e, e->process[xproc].position + 2, e->process[xproc].position + 6);
-	else if (list.type[0].t_ind)
-		value = get_x_from_position(e, e->process[xproc].position + 2, e->process[xproc].position + 4);
-	if (list.type[1].t_reg && !list.type[0].t_dir)
-		reg = get_x_from_position(e, e->process[xproc].position + 4, e->process[xproc].position + 5);
-	else if (list.type[1].t_reg && list.type[0].t_dir)
-		reg = get_x_from_position(e, e->process[xproc].position + 6, e->process[xproc].position + 7);
-	if (list.type[0].t_ind && list.type[1].t_reg)
+	place = 0;
+	reg = 0;
+	error = 0;
+	value = get_first_ld(e, list, &error, xproc);
+	ft_printf_fd(e->fd, "Ld- Value [%d]\n", value);
+	list.type[0].t_ind == 1 ? (place = 4) : place;
+	list.type[0].t_dir == 1 ? (place = 6) : place;
+	if (list.type[1].t_reg && !error)
+		reg = to_int_getx(get_x_from_position(e, e->process[xproc].position + place, e->process[xproc].position + (place + 1)));
+	(reg > 16 || reg < 1) ? (error = 1) : error;
+	if (list.type[0].t_ind && list.type[1].t_reg && !error)
 	{
-		position = e->process[xproc].position + (hex_to_dec(value) % IDX_MOD); // Addr pc maybe wrong
-		value = get_x_from_position(e, position, position + REG_SIZE - 1);
-		e->process[xproc].reg[hex_to_dec(reg)] = hex_to_dec(value);
+		position = e->process[xproc].position + (value % IDX_MOD);
+		value = to_int_getx(get_x_from_position(e, position, position + REG_SIZE));
+		ft_printf_fd(e->fd, "Ld- Position indirect [%d]\n", position);
 	}
-	else if (list.type[0].t_dir && list.type[1].t_reg)
-		e->process[xproc].reg[hex_to_dec(reg)] = hex_to_dec(value);
-	if ((list.type[0].t_dir || list.type[0].t_ind) && list.type[0].t_reg && hex_to_dec(value) == 0)
+	if (!error)
+		e->process[xproc].reg[reg] = value;
+	ft_printf_fd(e->fd, "LD- Value = %d\n", value);
+	if ((list.type[0].t_dir || list.type[0].t_ind) && list.type[0].t_reg && value == 0 && !error)
 		e->process[xproc].carry = 1;
-	// ft_printf_fd(e->fd, "---------->REGISTRE %d | value = [%d]\n", hex_to_dec(reg), hex_to_dec(value));
-	if (reg)
-		free(reg);
-	if (value)
-		free(value);
 	e->process[xproc].position = (e->process[xproc].position + list.size) % MEM_SIZE;
 
-	// nodelay(stdscr, 0);
-	// getch();
-	// nodelay(stdscr, 1);
 }

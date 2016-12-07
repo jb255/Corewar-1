@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 16:58:08 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/06 15:28:17 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/07 13:39:05 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,16 @@ void	write_memory(t_env *e)
 			print_cursor(e, x);
 		print_memory(e);
 	}
-	if (e->flag.obo){
+	if (e->flag.obo)
+	{
 		nodelay(stdscr, 0);
 		getch();
+		wrefresh(e->window.memory);
 	}
 	else
 		nodelay(stdscr, 1);
 	if (e->flag.pause)
 		getch();
-	wrefresh(e->window.memory);
 	e->memory_data[0] = 1;
 	e->memory_data[1] = 1;
 	e->memory_data[2] = 0;

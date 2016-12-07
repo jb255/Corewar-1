@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:37:17 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/06 17:15:50 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/07 16:19:06 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ t_type_func check_jump(t_env *e, char *op_size, int func)
 int		octet_precision(char *hex, int octet)
 {
 	char	*test;
+	int		result;
 	int		nb;
 
 	nb = 0;
@@ -79,29 +80,36 @@ int		octet_precision(char *hex, int octet)
 		nb = 6;
 	test = ft_strdup(hex + nb);
 	test[2] = '\0';
-	return (hex_to_dec(test));
+	result = hex_to_dec(test);
+	// free(test);
+	return (result);
 }
 
 void	write_from_x(t_env *e, int from, int data, int octet)
 {
-	char	*hex;
+	char	*hex = NULL;
 	int		x;
 
 
 	(void)e;
-	ft_printf_fd(e->fd, "DATA->>\n");
-	ft_printf_fd(e->fd, "%d\n", data);
-
+	// ft_printf_fd(e->fd, "DATA->>\n");
+	// ft_printf_fd(e->fd, "%d\n", data);
 	hex = ft_sprintf("%08x", data);
 	while (octet > 0)
 	{
 		x = (from + (4 - octet)) % MEM_SIZE;
 		x = x < 0 ? MEM_SIZE + x : x;
-		ft_printf_fd(e->fd, "write_from_x data = %d for %d\nWriting at %d, ->%02x base->%s\nWrite on tab[%d]\n", data, octet_precision(hex, 4 - octet), x, tab[x], hex, x);
+		// ft_printf_fd(e->fd, "write_from_x data = %d for %d\nWriting at %d, ->%02x base->%s\nWrite on tab[%d]\n", data, octet_precision(hex, 4 - octet), x, tab[x], hex, x);
+		ft_putstr_fd("Octet precision\n", e->fd);
 		tab[x] = octet_precision(hex, 4 - octet);
+		ft_putstr_fd("Octet precision off\n", e->fd);
+
+		// ft_printf_fd(e->fd, "OK FREE\n");
 		octet--;
 	}
-	if (hex)
+	// ft_printf_fd(e->fd, "Try to free: hex\n");
+	if (hex != NULL){
 		free(hex);
-	ft_printf_fd(e->fd, "End of write_from_x\n");
+	}
+	// ft_printf_fd(e->fd, "End of write_from_x\n");
 }

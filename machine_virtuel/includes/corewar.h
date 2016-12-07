@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/05 19:03:54 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/07 15:12:17 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ struct					s_env
 	t_op				op[17];
 };
 
-
+int		to_int_getx(char *str);
+void	display_info_menu(t_env *e);
 void			vm_error(char *str);
 void			parsing_arg(char **arg, t_env *e);
 void			reading_file(t_env *e, int x);

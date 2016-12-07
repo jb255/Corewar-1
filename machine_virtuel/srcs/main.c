@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 12:59:13 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/05 20:27:46 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/07 18:55:45 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,17 @@ void	display_memoryspeed(t_env *e)
 {
 	init_index(&e->memory_data[2], &e->memory_data[0], &e->memory_data[1]);
 	while (!memory_run(e))
+	{
 		e->arena.cycle--;
+		if (e->arena.cycle == 1000)
+			break;
+	}
 }
 
 int		main(int argc, char **argv)
 {
 	t_env *e;
 
-	tab[MEM_SIZE - 1] = 9;
 	e = (t_env *)ft_memalloc(sizeof(t_env));
 	if (argc < 2)
 		vm_error("Need more argument!");
@@ -55,7 +58,10 @@ int		main(int argc, char **argv)
 	else
 		display_memoryspeed(e);
 	free_fighter(e);
-	printf("%d\n", (signed int)ft_sprintf("%x", -24));
+	printf("%s\n", ft_sprintf("%x", -24));
+	printf("%d\n", hex_to_dec(ft_sprintf("%x", -24)));
+	// printf("%d\n", (signed short)hex_to_dec("2526"));
+
 
 	return (0);
 }

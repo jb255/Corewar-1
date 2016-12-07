@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:57:55 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/01 11:11:51 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/06 16:20:19 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	parsing_arg(char **arg, t_env *e)
 	{
 		printf("Champion %d: %s\n",x + 1, e->players[x].path);
 		reading_file(e, x);
-		printf("Player name: %s\n", e->players[x].name);
+		printf("ID %d\nPlayer name: %s\n", e->players[x].id_player, e->players[x].name);
 		printf("Player comment: %s\n", e->players[x].comment);
 		e->players[x].id_player = x;
 		size_total += e->players[x].size_func;
