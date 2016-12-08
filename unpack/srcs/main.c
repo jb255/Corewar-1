@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 19:44:05 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/08 20:42:34 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/08 20:49:12 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,50 @@ void	unpack_error(char *str)
 	exit(1);
 }
 
+
+t_type_func check_jump(t_env *e, char *op_size, int func)
+{
+	int			index;
+	int			x;
+	t_type_func	list;
+
+	index = 0;
+	x = 0;
+	ft_memset(&list, 0, sizeof(t_type_func));
+	if (ft_strlen(op_size) != 8)
+		vm_error("wtf");
+	list.size = 2;
+	while (op_size[index] != '\0' && e->op[func - 1].nb_param > x)
+	{
+		if (op_size[index] == '0' && op_size[index + 1] == '1')
+		{
+			list.type[x].t_reg++;
+			list.size += 1;
+		}
+		else if (op_size[index] == '1' && op_size[index + 1] == '0')
+		{
+			list.type[x].t_dir++;
+			if (func == 10 || func == 11 || func == 13)
+				list.size += 2;
+			else
+				list.size += 4;
+		}
+		else if (op_size[index] == '1' && op_size[index + 1] == '1')
+		{
+			list.type[x].t_ind++;
+			list.size += 2;
+		}
+		index += 2;
+		x++;
+	}
+	return (list);
+}
+
 void	read_function(t_file cor, char *file)
 {
 	int		x;
 
+	// ft_memset(&list, 0, sizeof(t_type_func));
 	x = BYTE_START_CODE;
 	while (x < cor.size)
 	{

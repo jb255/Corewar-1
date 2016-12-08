@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 19:42:48 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/08 20:14:39 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/08 20:46:13 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,22 @@
 
 # define BYTE_START_CODE 2192
 
+typedef struct s_type_a		t_type_a;
+struct						s_type_a
+{
+	int						t_reg;
+	int						t_dir;
+	int						t_ind;
+};
+
+typedef struct s_type_func	t_type_func;
+struct						s_type_func
+{
+	t_type_a				type[3];
+	int						size;
+	int						func;
+	int						error;
+};
 
 typedef struct s_op			t_op;
 struct						s_op
@@ -35,12 +51,12 @@ struct						s_op
 typedef struct s_file	t_file;
 struct					s_file
 {
-	char		*name;
-	char		*comment;
-	int			size;
-	char		*path;
-	char		*content;
-	int			fd;
+	char					*name;
+	char					*comment;
+	int						size;
+	char					*path;
+	char					*content;
+	int						fd;
 };
 
 void	unpack_error(char *str);
