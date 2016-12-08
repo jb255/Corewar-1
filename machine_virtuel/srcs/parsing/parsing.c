@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:57:55 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/06 16:20:19 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/08 17:17:41 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ int		is_cor(char *str)
 	index = ft_strlen(str);
 	if (index < 4)
 		vm_error("File error. Need *.cor !");
-	if (strstr(str, ".cor\0"))
+	str = str + index - 4;
+	if (!ft_strcmp(".cor", str))
 		return (1);
+	vm_error("File error. Need *.cor !");
 	return (0);
 }
 
@@ -31,7 +33,7 @@ void	flag(char *str, t_env *e)
 	index = 0;
 	if (str[1] == 'c' && str[2] == '\0')
 		e->flag.flag_n = 1;
-	else if (str[1] == 'd' && str[2] == 'u' && str[3] == 'm' && str[4] == 'p' && str[5] == '\0')
+	else if (!ft_strcmp(str, "-dump"))
 	{
 		if (e->flag.flag_dump == 1)
 			vm_error("Too much -dump");
@@ -41,23 +43,40 @@ void	flag(char *str, t_env *e)
 		e->flag.flag_number = 1;
 }
 
+int		ft_isid(char *str)
+{
+	int		index;
+
+	index = 0;
+	while (str[index] != '\0')
+	{
+		if ((str[index] == '-' || str[index] == '+') && index == 0)
+			index++;
+		if (!ft_isdigit(str[index]))
+			return (0);
+		index++;
+	}
+	return (1);
+}
+
 void	get_flag_prog(char *arg, t_env *e)
 {
 	if (e->flag.flag_dump == 1)
 	{
+		if (!ft_isid(arg))
+			vm_error("-dump error");
 		e->flag.dump = ft_atoi(arg);
-		e->flag.flag_dump = 2;
+		e->flag.flag_dump = 0;
 	}
 	else if (e->flag.flag_number == 1)
 	{
-		e->players[e->active_players].id_player = -ft_atoi(arg);
+		if (!ft_isid(arg) && ft_atoi(arg) != 0)
+			vm_error("-n error");
+		e->players[e->active_players].id_live = ft_atoi(arg);
 		e->flag.flag_number = 0;
 	}
 	else if (arg[0] == '-')
-	{
 		flag(arg, e);
-		printf(""RED"%s\n"NORM"", arg);
-	}
 	else if (e->active_players != MAX_PLAYERS && is_cor(arg))
 	{
 		e->players[e->active_players].path = arg;
@@ -65,7 +84,39 @@ void	get_flag_prog(char *arg, t_env *e)
 	}
 	else if (e->active_players == MAX_PLAYERS)
 		vm_error("Too much champions!");
-	printf("%d\n", e->players[e->active_players].id_player);
+}
+
+int		id_exist(t_env *e, int id, int xbis)
+{
+	int		x;
+
+	x = 0;
+	while (x < e->active_players)
+	{
+		if (e->players[x].id_live == id && x != xbis)
+			return (1);
+		x++;
+	}
+	return (0);
+}
+
+void	get_idprog(t_env *e)
+{
+	int		x;
+	int		itg;
+
+	itg = -1;
+	x = 0;
+	while (x < e->active_players)
+	{
+		if (e->players[x].id_live == 0)
+		{
+			while (id_exist(e, itg, x))
+				itg--;
+			e->players[x].id_live = itg;
+		}
+		x++;
+	}
 }
 
 void	parsing_arg(char **arg, t_env *e)
@@ -79,17 +130,17 @@ void	parsing_arg(char **arg, t_env *e)
 		get_flag_prog(arg[i], e);
 		i++;
 	}
+	get_idprog(e);
 	int x = 0;
+	ft_printf("Introducing all players...\n");
 	while (x < e->active_players)
 	{
-		printf("Champion %d: %s\n",x + 1, e->players[x].path);
 		reading_file(e, x);
-		printf("ID %d\nPlayer name: %s\n", e->players[x].id_player, e->players[x].name);
-		printf("Player comment: %s\n", e->players[x].comment);
+		ft_printf("->Player[%d] size: %d, name: %s || ", x + 1, e->players[x].size - BYTE_START_CODE, e->players[x].name);
+		ft_printf("comment: %s\n", e->players[x].comment);
 		e->players[x].id_player = x;
 		size_total += e->players[x].size_func;
 		x++;
-		printf("\n");
 	}
 	if ((MEM_SIZE) < size_total)
 		vm_error("Not enough space available.");
