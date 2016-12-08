@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 15:33:49 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/26 05:50:13 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/08 19:58:54 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-
+# include <fcntl.h>
+# include <sys/types.h>
 # include <stdarg.h>
 # include <dirent.h>
 # include <grp.h>
