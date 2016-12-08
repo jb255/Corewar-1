@@ -21,9 +21,11 @@ void	write_tab(void)
 	x = 0;
 	while (x < MEM_SIZE)
 	{
-		printf("%02x ", tab[x]);
+		if (x % 64 == 0)
+			ft_printf("0x%04x : ", x);
+		ft_printf("%02x ", tab[x]);
 		x++;
 		if (x % 64 == 0)
-			printf("\n");
+			ft_printf("\n");
 	}
 }
