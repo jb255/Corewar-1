@@ -139,8 +139,8 @@ void	parsing_arg(char **arg, t_env *e)
 	while (x < e->active_players)
 	{
 		reading_file(e, x);
-		ft_printf("->Player[%d] size: %d, name: %s || ", x + 1, e->players[x].size - BYTE_START_CODE, e->players[x].name);
-		ft_printf("comment: %s\n", e->players[x].comment);
+		ft_printf("* Player %d, weighing %d bytes,", x + 1, e->players[x].size - BYTE_START_CODE);
+		ft_printf(" \"%s\" (\"%s\") !\n",e->players[x].name, e->players[x].comment);
 		e->players[x].id_player = x;
 		size_total += e->players[x].size_func;
 		x++;
