@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 19:42:48 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/08 20:46:13 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/08 20:51:05 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ struct					s_file
 	char					*path;
 	char					*content;
 	int						fd;
+	t_op					*op;
 };
 
 void	unpack_error(char *str);
