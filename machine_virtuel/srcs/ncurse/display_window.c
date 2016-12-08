@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 00:13:23 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/05 16:48:17 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/08 17:42:06 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	display_info_menu(t_env *e)
 	if (e->flag.pause)
 		mvwprintw(e->window.menu, 4, 125, "PAUSED");
 	wattron(e->window.menu, COLOR_PAIR(5));
-	mvwprintw(e->window.menu, 1, 180, "%d    ", CYCLE_TO_DIE);
+	mvwprintw(e->window.menu, 1, 180, "%d    ", e->flag.cycle_to_die);
 	mvwprintw(e->window.menu, 2, 180, "%d    ", CYCLE_DELTA);
 	mvwprintw(e->window.menu, 3, 180, "%d    ", e->arena.cycle);
 	mvwprintw(e->window.menu, 4, 180, "%d    ", e->active_process);

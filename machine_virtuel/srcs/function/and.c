@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:19:51 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/03 01:44:08 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/08 14:26:22 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,12 @@ void	and_func(t_env *e, int xproc, t_type_func list)
 		error = 1;
 	ft_printf_fd(e->fd, "Check_and -- %d & %d = %d\n", i[0], i[1], i[0] & i[1]);
 	if (!error)
-		e->process[xproc].reg[hex_to_dec(regist)] = i[0] & i[1];
+		e->process[xproc].reg[hex_to_dec(regist)] = (short int)(i[0] & i[1]);
+	if ((i[0] & i[1]) == 0 && !error)
+		e->process[xproc].carry = 1;
+	else
+		e->process[xproc].carry = 0;
+
 	ft_printf_fd(e->fd, "--->Function and\n--->Registre %d update:  [%d]\n", hex_to_dec(regist), e->process[xproc].reg[hex_to_dec(regist)]);
 	free(regist);
 	e->process[xproc].position = (e->process[xproc].position + list.size) % MEM_SIZE;

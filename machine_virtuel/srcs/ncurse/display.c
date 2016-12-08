@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 16:58:08 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/07 13:39:05 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/08 18:01:57 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,30 @@ void	write_memory(t_env *e)
 	e->memory_data[2] = 0;
 }
 
+void	check_all_process(t_env *e)
+{
+	int		x;
+
+	x = 0;
+	while (x < e->active_process)
+	{
+		if (e->process[x].live_status == 0)
+			delete_process(e, x);
+		x++;
+	}
+}
+
+void	update_cycle(t_env *e)
+{
+	if (!e->active_process)
+		vm_error("STOP");
+	if (e->arena.cycle == e->flag.cycle_to_die)
+	{
+		check_all_process(e);
+		// e->arena.cycle = 0;
+	}
+}
+
 void	display_memory(t_env *e)
 {
 	e->window.memory = newwin(66, 194, 1, 1);
@@ -93,7 +117,8 @@ void	display_memory(t_env *e)
 	while (!memory_run(e))
 	{
 		write_memory(e);
-		e->arena.cycle--;
+		e->arena.cycle++;
+		update_cycle(e);
 		display_info_menu(e);
 	}
 }

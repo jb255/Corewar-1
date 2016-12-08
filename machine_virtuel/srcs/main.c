@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 12:59:13 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/07 18:55:45 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/08 17:49:59 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,20 @@ int		main(int argc, char **argv)
 		vm_error("Need more argument!");
 	e->fd = open("log.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	op_tab(e);
+	e->flag.live_call = 0;
+	e->flag.cycle_to_die = CYCLE_TO_DIE;
 	parsing_arg(argv, e);
 	init_curse();
 	put_player(e);
-	e->arena.cycle = CYCLE_TO_DIE;
+	e->arena.cycle = 0;
 	e->flag.pause = 0;
 	if (e->flag.flag_n)
 		n_curse(e);
 	else
 		display_memoryspeed(e);
 	free_fighter(e);
-	printf("%s\n", ft_sprintf("%x", -24));
-	printf("%d\n", hex_to_dec(ft_sprintf("%x", -24)));
+	// printf("%d\n", hex_to_dec("0a"));
+	// printf("%d\n", hex_to_dec(ft_sprintf("%x", -24)));
 	// printf("%d\n", (signed short)hex_to_dec("2526"));
 
 

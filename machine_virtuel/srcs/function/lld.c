@@ -6,22 +6,12 @@
 /*   By: viko <viko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 17:31:30 by viko              #+#    #+#             */
-/*   Updated: 2016/12/06 16:01:41 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/08 15:44:43 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "n_curse.h"
 #include "function.h"
-
-int		check_lld(t_env *e, int xproc, t_type_func list)
-{
-	(void)list;
-	(void)xproc;
-	ft_printf_fd(e->fd, "Check_lld -- Fonction size %d\n", list.size);
-	if (is_register_valid(e, xproc, 4))
-		return (1);
-	return (0);
-}
 
 void	lld_func(t_env *e, int xproc, t_type_func list)
 {

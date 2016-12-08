@@ -6,21 +6,12 @@
 /*   By: viko <viko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 17:30:41 by viko              #+#    #+#             */
-/*   Updated: 2016/12/06 16:06:28 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/08 15:44:48 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <n_curse.h>
 #include <function.h>
-
-int		check_lldi(t_env *e, int xproc, t_type_func list)
-{
-	ft_printf_fd(e->fd, "Check_lldi -- Fonction size %d\n", list.size);
-	(void)xproc;
-	(void)list;
-
-	return (1);
-}
 
 void	lldi_func(t_env *e, int xproc, t_type_func list)
 {

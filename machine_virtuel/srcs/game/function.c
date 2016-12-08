@@ -6,20 +6,20 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:37:17 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/07 16:19:06 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/08 15:23:50 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include "n_curse.h"
 
-void	(*g_func_process[16])(t_env*, int, t_type_func) = {live_func, ld_func, st_func, add_func, sub_func, and_func, or_func, xor_func, zjump_func, ldi_func, sti_func, fork_func, lld_func, lldi_func, lfork_func};
+void	(*g_func_process[16])(t_env*, int, t_type_func) = {live_func, ld_func, st_func, add_func, sub_func, and_func, or_func, xor_func, zjump_func, ldi_func, sti_func, fork_func, lld_func, lldi_func, lfork_func, aff_func};
 
 void		apply_func(t_env *e, int xproc, t_type_func list)
 {
 	// if (list.error == 1)
 	// 	return ;
-	if (list.func == 1 || list.func == 3 || list.func == 2 || list.func == 4 || list.func == 5 || list.func == 6 || list.func == 7 || list.func == 8 || list.func == 9 || list.func == 10 || list.func == 11 || list.func == 12 || list.func == 13 || list.func == 14 || list.func == 15)
+	if (list.func == 1 || list.func == 3 || list.func == 2 || list.func == 4 || list.func == 5 || list.func == 6 || list.func == 7 || list.func == 8 || list.func == 9 || list.func == 10 || list.func == 11 || list.func == 12 || list.func == 13 || list.func == 14 || list.func == 15 || list.func == 16)
 		g_func_process[list.func - 1](e, xproc, list);
 }
 
@@ -80,8 +80,8 @@ int		octet_precision(char *hex, int octet)
 		nb = 6;
 	test = ft_strdup(hex + nb);
 	test[2] = '\0';
-	result = hex_to_dec(test);
-	// free(test);
+	result = (short int)hex_to_dec(test);
+	free(test);
 	return (result);
 }
 
@@ -93,16 +93,16 @@ void	write_from_x(t_env *e, int from, int data, int octet)
 
 	(void)e;
 	// ft_printf_fd(e->fd, "DATA->>\n");
-	// ft_printf_fd(e->fd, "%d\n", data);
+	// ft_printf_fd(e->fd, "from %d\n", from);
+	// data = data % MEM_SIZE;
 	hex = ft_sprintf("%08x", data);
 	while (octet > 0)
 	{
 		x = (from + (4 - octet)) % MEM_SIZE;
 		x = x < 0 ? MEM_SIZE + x : x;
-		// ft_printf_fd(e->fd, "write_from_x data = %d for %d\nWriting at %d, ->%02x base->%s\nWrite on tab[%d]\n", data, octet_precision(hex, 4 - octet), x, tab[x], hex, x);
-		ft_putstr_fd("Octet precision\n", e->fd);
+		ft_printf_fd(e->fd, "write_from_x data = %d for %d\nWriting at %d, ->%02x base->%s\nWrite on tab[%d]\n", data, octet_precision(hex, 4 - octet), x, tab[x], hex, x);
+		// ft_printf_fd(e->fd, "x to write%d for [%s] WRITE [%d]\n", x, hex, octet_precision(hex, 4 - octet));
 		tab[x] = octet_precision(hex, 4 - octet);
-		ft_putstr_fd("Octet precision off\n", e->fd);
 
 		// ft_printf_fd(e->fd, "OK FREE\n");
 		octet--;

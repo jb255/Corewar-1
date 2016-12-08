@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 17:19:56 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/06 12:42:57 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/08 16:42:08 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	n_curse(t_env *e)
 	display_menu(e);
 	display_tab(&e->window.tab, e);
 	display_memory(e);
-	// refresh();
 	display_delete(e);
     endwin();
 }

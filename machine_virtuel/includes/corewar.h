@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/07 15:12:17 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/08 17:41:41 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,13 @@ struct					s_flag
 {
 	int					flag_n;
 	int					time_cycle;
+	int					live_call;
 	int					pause;
 	int					obo;
 	int					flag_dump;
 	int					dump;
 	int					flag_number;
+	int					cycle_to_die;
 };
 
 typedef struct s_arena	t_arena;
@@ -123,26 +125,27 @@ void		fork_func(t_env *e, int xproc, t_type_func list);
 void		lld_func(t_env *e, int xproc, t_type_func list);
 void		lldi_func(t_env *e, int xproc, t_type_func list);
 void		lfork_func(t_env *e, int xproc, t_type_func list);
+void		aff_func(t_env *e, int xproc, t_type_func list);
 
 t_type_func check_jump(t_env *e, char *op_size, int func);
 t_type_func		find_label(t_env *e, int x);
 //
 
 // Check Function
-int		check_live(t_env *e, int xproc, t_type_func list);
-int		check_ld(t_env *e, int xproc, t_type_func list);
-int		check_st(t_env *e, int xproc, t_type_func list);
-int		check_add(t_env *e, int xproc, t_type_func list);
-int		check_and(t_env *e, int xproc, t_type_func list);
-int		check_or(t_env *e, int xproc, t_type_func list);
-int		check_xor(t_env *e, int xproc, t_type_func list);
-int		check_zjump(t_env *e, int xproc, t_type_func list);
-int		check_ldi(t_env *e, int xproc, t_type_func list);
-int		check_sti(t_env *e, int xproc, t_type_func list);
-int		check_fork(t_env *e, int xproc, t_type_func list);
-int		check_lld(t_env *e, int xproc, t_type_func list);
-int		check_lldi(t_env *e, int xproc, t_type_func list);
-int		check_lfork(t_env *e, int xproc, t_type_func list);
+// int		check_live(t_env *e, int xproc, t_type_func list);
+// int		check_ld(t_env *e, int xproc, t_type_func list);
+// int		check_st(t_env *e, int xproc, t_type_func list);
+// int		check_add(t_env *e, int xproc, t_type_func list);
+// int		check_and(t_env *e, int xproc, t_type_func list);
+// int		check_or(t_env *e, int xproc, t_type_func list);
+// int		check_xor(t_env *e, int xproc, t_type_func list);
+// int		check_zjump(t_env *e, int xproc, t_type_func list);
+// int		check_ldi(t_env *e, int xproc, t_type_func list);
+// int		check_sti(t_env *e, int xproc, t_type_func list);
+// int		check_fork(t_env *e, int xproc, t_type_func list);
+// int		check_lld(t_env *e, int xproc, t_type_func list);
+// int		check_lldi(t_env *e, int xproc, t_type_func list);
+// int		check_lfork(t_env *e, int xproc, t_type_func list);
 
 //
 
@@ -152,12 +155,14 @@ int		octet_precision(char *hex, int octet);
 void	write_from_x(t_env *e, int from, int data, int octet);
 int		is_register_valid(t_env *e, int xproc, int position);
 void	write_from_tab2(int position, int size, int id);
-void	name_process(t_env *e, char	*name);
+int		name_process(t_env *e, char	*name);
 int		ind_funcheck_and(t_env *e, int xproc, int place, t_type_a type);
 int		reg_funcheck_and(t_env *e, int xproc, int place);
 int		get_i0_func_and(t_type_func list, t_env *e, int xproc, int *place);
 int		get_i1_func_and(t_type_func list, t_env *e, int xproc, int *place);
 int		get_i02_func_and(t_type_func list, t_env *e, int xproc, int *place);
 int		get_i1_2_func_and(t_type_func list, t_env *e, int xproc, int *place);
+
+void	delete_process(t_env *e, int process_nb);
 //
 #endif

@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 18:07:34 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/08 17:16:45 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/08 17:45:04 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,10 @@ void	reading_file(t_env *e, int x)
 	int		fd;
 	char	buf[1024];
 
-	if ((fd = open(e->players[x].path, O_RDONLY)) < 0)
+	if ((fd = open(e->players[x].path, O_RDONLY)) < 0){
+		printf("%s\n", e->players[x].path);
 		vm_error("Error file.");
+	}
 	e->players[x].file = get_content(fd, NULL, buf);
 	e->players[x].size = lseek(fd, 0, SEEK_END);
 	// ft_printf_fd(e->fd, "PLAYER SIZE = %d\n", e->players[x].size - BYTE_START_CODE);

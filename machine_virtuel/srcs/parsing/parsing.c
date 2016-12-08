@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:57:55 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/08 17:17:41 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/08 17:44:22 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,11 @@ void	parsing_arg(char **arg, t_env *e)
 		i++;
 	}
 	get_idprog(e);
-	int x = 0;
+	int x;
+	x = 0;
 	ft_printf("Introducing all players...\n");
+	if (!e->active_players)
+		vm_error("No player");
 	while (x < e->active_players)
 	{
 		reading_file(e, x);

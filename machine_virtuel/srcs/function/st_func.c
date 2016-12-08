@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 04:07:26 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/07 18:58:22 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/08 00:52:13 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	st_func(t_env *e, int xproc, t_type_func list)
 	int 			y;
 
 	error = 0;
-	ft_printf_fd(e->fd, "Fonction st lancement size %d, t_reg[%d], t_reg1[%d], t_ind1[%d]\n", list.size, list.type[0].t_reg, list.type[1].t_reg, list.type[1].t_ind);
 	if (list.type[0].t_reg)
 		reg = tab[(e->process[xproc].position + 2) % MEM_SIZE];
 	else
@@ -53,16 +52,12 @@ void	st_func(t_env *e, int xproc, t_type_func list)
 	}
 	else if (list.type[1].t_ind)
 	{
-		ft_printf_fd(e->fd, "--------------%d-xproc=%d---------------\n", e->process[xproc].id_player, xproc);
-		ft_printf_fd(e->fd, "no error ? \n");
 		regist = to_int_getx(get_x_from_position(e, e->process[xproc].position + 3, e->process[xproc].position + 5));
-		ft_printf_fd(e->fd, "its ok\n");
-		y = (e->process[xproc].position + (regist % (IDX_MOD)));
-		y = y < 0 ? MEM_SIZE + y : y;
-		ft_printf_fd(e->fd, "Position[%d], Size[%d], index[%d]\n", y, 4, y + 4);
-		write_from_x(e, (e->process[xproc].position + (regist % (IDX_MOD))), e->process[xproc].reg[reg], 4);
+		y = (e->process[xproc].position + regist);
+		// ft_printf_fd(e->fd, "{%s} Regist[%d] Position[%d], Size[%d], index[%d]\n", get_x_from_position(e, e->process[xproc].position + 3, e->process[xproc].position + 5), regist, y, 4, y + 4);
+		ft_printf_fd(e->fd, "[%d]Position write= %s\n", xproc, get_x_from_position(e, e->process[xproc].position + 3, e->process[xproc].position + 5));
+		write_from_x(e, y, e->process[xproc].reg[reg], 4);
 		write_from_tab2(y, 4, e->process[xproc].id_player + 1);
-		ft_printf_fd(e->fd, "Next ft_func\n");
 	}
 	e->process[xproc].position = (e->process[xproc].position + list.size) % MEM_SIZE;
 }
