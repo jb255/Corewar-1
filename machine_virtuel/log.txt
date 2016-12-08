@@ -1,8 +1,32 @@
-PLAYER SIZE = 12
-PLAYER SIZE = 12
-PLAYER SIZE = 12
-PLAYER SIZE = 12
-Processus 0, starting at : 0
-Processus 1, starting at : 1024
-Processus 2, starting at : 2048
-Processus 3, starting at : 3072
+[0]Position write= 0032
+write_from_x data = -1 for 255
+Writing at 55, ->00 base->ffffffff
+Write on tab[55]
+write_from_x data = -1 for 255
+Writing at 56, ->00 base->ffffffff
+Write on tab[56]
+write_from_x data = -1 for 255
+Writing at 57, ->00 base->ffffffff
+Write on tab[57]
+write_from_x data = -1 for 255
+Writing at 58, ->00 base->ffffffff
+Write on tab[58]
+--->Function add
+--->Registre[03] 3 update:  [-1]
+Check_and -- ENTER
+Check_and/or -- value du DIR [0004]Check_and -- -1 & 4 = 4
+--->Function and
+--->Registre 4 update:  [4]
+[0]Position write= 0064
+write_from_x data = 4 for 0
+Writing at 123, ->00 base->00000004
+Write on tab[123]
+write_from_x data = 4 for 0
+Writing at 124, ->00 base->00000004
+Write on tab[124]
+write_from_x data = 4 for 0
+Writing at 125, ->00 base->00000004
+Write on tab[125]
+write_from_x data = 4 for 4
+Writing at 126, ->00 base->00000004
+Write on tab[126]

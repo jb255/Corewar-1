@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/08 17:41:41 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/08 19:43:58 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 
 int tab[MEM_SIZE];
 int tab2[MEM_SIZE];
-char tab3[MEM_SIZE];
 
 # define BYTE_START_CODE 2192
 
