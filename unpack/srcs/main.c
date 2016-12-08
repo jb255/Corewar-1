@@ -83,6 +83,38 @@ char	*op_get_binary(int index, t_file *cor)
 	return (binary);
 }
 
+void 	single_arg(int *curr, t_type_a list, int index, t_file *cor)
+{
+	int		nb;
+	char	res[25];
+
+	nb = 0;
+	(void)res;
+	(void)nb;
+	(void)curr;
+	if (list.t_reg)
+	{
+		printf("r%x\n", (unsigned char)(unsigned int)cor->content[index + 1]);
+	}
+}
+
+void	get_args(t_file *cor, t_type_func list, int index, int code)
+{
+	int		curr_pos;
+
+	curr_pos = 2;
+	if (code == 1)
+	{
+		single_arg(&curr_pos, list.type[0], index, cor);
+		// single_arg(&curr_pos, list.type[1], index, cor);
+		// single_arg(&curr_pos, list.type[2], index, cor);
+	}
+	// else
+	// {
+	// 	break;
+	// }
+}
+
 void	read_op(char *op, t_file *cor, int *index)
 {
 	t_type_func		list;
@@ -97,9 +129,13 @@ void	read_op(char *op, t_file *cor, int *index)
 		printf("Argument 1: reg.%d ind.%d dir.%d\n", list.type[0].t_reg, list.type[0].t_ind, list.type[0].t_dir);
 		printf("Argument 2: reg.%d ind.%d dir.%d\n", list.type[1].t_reg, list.type[1].t_ind, list.type[1].t_dir);
 		printf("Argument 3: reg.%d ind.%d dir.%d\n", list.type[2].t_reg, list.type[2].t_ind, list.type[2].t_dir);
+		get_args(cor, list, *index, 1);
 	}
 	else
+	{
 		list.size = special_func(func + 1);
+		get_args(cor, list, *index, 0);
+	}
 	(*index) += list.size;
 	free(op);
 }
@@ -128,7 +164,8 @@ void	unpack(char *file)
 	op_tab(cor_file);
 	ft_printf("Try to unpack: %s\n", file);
 	if ((cor_file->fd = open(file, O_RDONLY)) < 0)
-		unpack_error("Error file.");
+		printf("fd %d\n", cor_file->fd);
+		// unpack_error("Error file.");
 	cor_file->content = get_content(cor_file->fd, NULL, buf);
 	cor_file->size = lseek(cor_file->fd, 0, SEEK_END);
 	cor_file->name = read_name(cor_file->content);

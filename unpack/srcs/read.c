@@ -29,6 +29,8 @@ char	*get_content(int fd, char *result, char buf[1024])
 		i[1] += i[0];
 		free(tmp);
 	}
+	if (i[0] == -1)
+			unpack_error("Unable to read file");
 	return (result);
 }
 
