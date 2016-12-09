@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 19:42:48 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/08 21:45:54 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/09 16:24:08 by viko             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,14 @@ struct					s_file
 	char					*path;
 	char					*content;
 	int						fd;
-	t_op					op[17];
+	t_op					op[18];
 };
 
 void		op_tab(t_file *env);
 void	unpack_error(char *str);
 char			*get_content(int fd, char *result, char buf[1024]);
-
+char			*get_x(t_file *cor, int from, int at);
+int		todec(char *str);
 char			*hex_to_bin_quad(char *str_1);
 unsigned int    hex_to_dec(const char *str);
 
