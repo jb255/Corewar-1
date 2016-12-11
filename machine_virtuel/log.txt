@@ -1,32 +1,588 @@
-[0]Position write= 0032
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[1] - Address [0] to write [ffffffff] -- error 0
 write_from_x data = -1 for 255
-Writing at 55, ->00 base->ffffffff
-Write on tab[55]
+Writing at 0, ->0b base->ffffffff
+Write on tab[0]
 write_from_x data = -1 for 255
-Writing at 56, ->00 base->ffffffff
-Write on tab[56]
+Writing at 1, ->68 base->ffffffff
+Write on tab[1]
 write_from_x data = -1 for 255
-Writing at 57, ->00 base->ffffffff
-Write on tab[57]
+Writing at 2, ->01 base->ffffffff
+Write on tab[2]
 write_from_x data = -1 for 255
-Writing at 58, ->00 base->ffffffff
-Write on tab[58]
---->Function add
---->Registre[03] 3 update:  [-1]
-Check_and -- ENTER
-Check_and/or -- value du DIR [0004]Check_and -- -1 & 4 = 4
---->Function and
---->Registre 4 update:  [4]
-[0]Position write= 0064
-write_from_x data = 4 for 0
-Writing at 123, ->00 base->00000004
-Write on tab[123]
-write_from_x data = 4 for 0
-Writing at 124, ->00 base->00000004
-Write on tab[124]
-write_from_x data = 4 for 0
-Writing at 125, ->00 base->00000004
-Write on tab[125]
-write_from_x data = 4 for 4
-Writing at 126, ->00 base->00000004
-Write on tab[126]
+Writing at 3, ->01 base->ffffffff
+Write on tab[3]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[1] - Address [0] to write [ffffffff] -- error 0
+write_from_x data = -1 for 255
+Writing at 49, ->0b base->ffffffff
+Write on tab[49]
+write_from_x data = -1 for 255
+Writing at 50, ->68 base->ffffffff
+Write on tab[50]
+write_from_x data = -1 for 255
+Writing at 51, ->01 base->ffffffff
+Write on tab[51]
+write_from_x data = -1 for 255
+Writing at 52, ->01 base->ffffffff
+Write on tab[52]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[1] - Address [0] to write [ffffffff] -- error 0
+write_from_x data = -1 for 255
+Writing at 70, ->0b base->ffffffff
+Write on tab[70]
+write_from_x data = -1 for 255
+Writing at 71, ->68 base->ffffffff
+Write on tab[71]
+write_from_x data = -1 for 255
+Writing at 72, ->01 base->ffffffff
+Write on tab[72]
+write_from_x data = -1 for 255
+Writing at 73, ->01 base->ffffffff
+Write on tab[73]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_sti -- 
+get_i02_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+get_i1_2_func_sti ---- t_reg[0]t_dir[0]t_ind[0]
+Check_sti -- Regist[112] - Address [0] to write [0] -- error 1
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
+Check_or -- ENTER
+Check_or -- 0 & 0 = 0
+--->Function or
+--->Registre 7 update:  [0]
