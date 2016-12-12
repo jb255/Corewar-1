@@ -1,6 +1,4 @@
-.name		"LOL"
-.comment	"Ceci est un fake"
+.name		"My name is Stain"
+.comment "Please no comment"
 
-la 	:
-st		r2, 34
-zjmp	%:la
+st r2, 567

@@ -76,7 +76,7 @@ void			name_comment(char *s, t_env *e)
 	char	**tab;
 
 	tab = ft_strsplit(s, '\"');
-	if ((s[1] == 'n') && (s[2] == 'a') && (s[3] == 'm') && (s[4] == 'e'))
+	if ((s[1] == 'n') && (s[2] == 'a') && (s[3] == 'm') && (s[4] == 'e') && valid_name_comment(s, 1))
 	{
 		double_cote(s, "error in .name");
 		e->name = ft_strdup(tab[1]);
@@ -90,7 +90,9 @@ void			name_comment(char *s, t_env *e)
 	}
 	else if ((s[1] == 'c') && (s[2] == 'o') && (s[3] == 'm')
 		&& (s[4] == 'm') && (s[5] == 'e') && (s[6] == 'n') &&
-		(s[7] == 't'))
+		(s[7] == 't') && valid_name_comment(s, 2))
 		handle_comment(s, e, tab);
+	else
+		asm_error(ft_strjoin("Extension field \"", ft_strjoin(s, "\" unknown.")));
 	free_2d_tab(tab, 2);
 }

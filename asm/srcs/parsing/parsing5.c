@@ -12,6 +12,33 @@
 
 #include "../../includes/corewar.h"
 
+int		valid_name_comment(char *str, int code)
+{
+	int	i;
+	int j;
+
+	i = (code == 1) ? 5 : 8;
+	while (str[i] != 0 && (str[i] == '\t' || str[i] == ' '))
+		i += 1;
+	if (str[i] != '\"')
+		asm_error(ft_strjoin("Trailing characters before ",
+			ft_strjoin(code == 1 ? "name : " : "comment : ",  &str[i])));
+	j = i;
+	i += 1;
+	while (str[i] != 0 && str[i] != '\"')
+		i += 1;
+	if (str[i] == 0)
+		asm_error(ft_strjoin("Missing quotation mark to end ",
+			ft_strjoin(code == 1 ? "name : " : "comment : ",  &str[i])));
+	i += 1;
+	while (str[i] != 0 && (str[i] == '\t' || str[i] == ' '))
+		i += 1;
+	if (str[i] != 0)
+		asm_error(ft_strjoin("Trailing characters after ",
+			ft_strjoin(code == 1 ? "name : " : "comment : ",  &str[i])));
+	return (1);
+}
+
 int		get_method_pos(char *label_name, t_env *file)
 {
 	t_func	*func;
