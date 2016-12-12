@@ -121,5 +121,6 @@ void						asm_error(char *str);
 int							is_command(char *str, t_env *e);
 int							ft_match_command(int command, char **tab,
 	int line, char *inst);
+int							valid_name_comment(char *str, int code);
 
 #endif
