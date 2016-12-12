@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 20:05:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/08 20:07:16 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/12 14:09:43 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*get_content(int fd, char *result, char buf[1024])
 		free(tmp);
 	}
 	if (i[0] == -1)
-			unpack_error("Unable to read file");
+		unpack_error("Unable to read file");
 	return (result);
 }
 
@@ -81,9 +81,7 @@ void	read_magic(char *file_player)
 		byte++;
 	}
 	magic[byte] = ft_sprintf("%s%s%s", magic[1] + 6, magic[2] + 6, magic[3] + 6);
-	if (!ft_strcmp(magic[0], "0") && !ft_strcmp(magic[byte], "ea83f3"))
-		ft_printf("Magic correct\n");
-	else
+	if (ft_strcmp(magic[0], "0") || ft_strcmp(magic[byte], "ea83f3"))
 		unpack_error("Magic code incorrect");
 	while (byte != -1)
 	{

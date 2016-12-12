@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 20:06:22 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/08 21:45:45 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/12 13:52:56 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ unsigned int    hex_to_dec(const char *str)
     unsigned int total;
     int i;
 
+	// ft_printf("Receive: %s\n", str);
     total = 0;
     i = 0;
     while (0 < str[i] && str[i] < 33)
