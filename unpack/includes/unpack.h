@@ -48,8 +48,8 @@ struct						s_op
 	char					index_size;
 };
 
-typedef struct s_file	t_file;
-struct					s_file
+typedef struct s_file		t_file;
+struct						s_file
 {
 	char					*name;
 	char					*comment;
@@ -60,14 +60,13 @@ struct					s_file
 	t_op					op[18];
 };
 
-void		op_tab(t_file *env);
-void	unpack_error(char *str);
+void			op_tab(t_file *env);
+void			unpack_error(char *str);
 char			*get_content(int fd, char *result, char buf[1024]);
 char			*get_x(t_file *cor, int from, int at);
-int		todec(char *str);
+int				todec(char *str);
 char			*hex_to_bin_quad(char *str_1);
-unsigned int    hex_to_dec(const char *str);
-
+unsigned int	hex_to_dec(const char *str);
 char			*read_name(char *file_player);
 char			*read_comment(char *file_player);
 void			read_magic(char *file_player);

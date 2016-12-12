@@ -1,0 +1,120 @@
+.name "bigzork"
+.comment "I know i cant win"
+
+sti	r1, %65415, %1
+sti	r1, %65423, %1
+sti	r1, %65424, %1
+sti	r1, %87, %1
+sti	r1, %65421, %1
+sti	r1, %65414, %9
+sti	r1, %383, %17
+sti	r1, %65445, %1
+sti	r1, %65417, %2
+sti	r1, %65485, %1
+sti	r1, %65478, %9
+sti	r1, %65432, %1
+ld	%0, r16
+fork	%323
+ld	%0, r2
+ld	%0, r16
+live	%-57
+st	r2, 65512
+st	r2, 65503
+st	r2, 65494
+st	r2, 65485
+st	r2, 65476
+st	r2, 65467
+st	r2, 65458
+st	r2, 65449
+st	r2, 65440
+st	r2, 65431
+st	r2, 65422
+st	r2, 65413
+st	r2, 65404
+st	r2, 65395
+st	r2, 65386
+st	r2, 65377
+st	r2, 65368
+st	r2, 65359
+st	r2, 65350
+st	r2, 65341
+st	r2, 65332
+st	r2, 65323
+st	r2, 65314
+st	r2, 65305
+st	r2, 65296
+st	r2, 65287
+st	r2, 65534
+st	r2, 65525
+st	r2, 65516
+st	r2, 65507
+st	r2, 65498
+st	r2, 65489
+st	r2, 65480
+st	r2, 65471
+st	r2, 65462
+st	r2, 65453
+st	r2, 65444
+st	r2, 65435
+st	r2, 65426
+st	r2, 65417
+st	r2, 65408
+st	r2, 65143
+st	r2, 65134
+st	r2, 65125
+st	r2, 65116
+st	r2, 65107
+st	r2, 65098
+st	r2, 65089
+st	r2, 65080
+st	r2, 65071
+st	r2, 65062
+st	r2, 65053
+st	r2, 65044
+st	r2, 65035
+st	r2, 65026
+zjmp	%65512
+live	%-20417
+fork	%65531
+ld	%0, r16
+live	%-31106
+zjmp	%65531
+live	%-89
+zjmp	%3
+fork	%65528
+live	%4329034
+fork	%94
+live	%-93
+fork	%47
+live	%-49
+fork	%65412
+ld	%0, r2
+ld	%251883523, r3
+ld	%0, r16
+live	%4930423
+ld	%0, r16
+zjmp	%120
+live	%4342342
+fork	%65140
+ld	%251883523, r2
+ld	%386101251, r3
+ld	%0, r16
+ld	%0, r16
+zjmp	%81
+live	%-91
+fork	%65432
+live	%4093282
+fork	%65390
+ld	%-65280, r2
+ld	%436432899, r3
+ld	%0, r16
+ld	%0, r16
+ld	%0, r16
+zjmp	%27
+ld	%57672192, r2
+ld	%318992387, r3
+ld	%0, r16
+zjmp	%3
+st	r2, 15
+st	r3, 65535
+live	%0

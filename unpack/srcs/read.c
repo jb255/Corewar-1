@@ -36,10 +36,11 @@ char	*get_content(int fd, char *result, char buf[1024])
 
 char	*read_name(char *file_player)
 {
-	char	*res = NULL;
+	char	*res;
 	int		byte;
 	int		index;
 
+	res = NULL;
 	byte = 4;
 	res = malloc(PROG_NAME_LENGTH);
 	index = 0;
@@ -54,10 +55,11 @@ char	*read_name(char *file_player)
 
 char	*read_comment(char *file_player)
 {
-	char	*res = NULL;
+	char	*res;
 	int		byte;
 	int		index;
 
+	res = NULL;
 	byte = 140;
 	res = malloc(COMMENT_LENGTH);
 	index = 0;
@@ -73,14 +75,16 @@ char	*read_comment(char *file_player)
 void	read_magic(char *file_player)
 {
 	char	*magic[4];
-	int		byte = 0;
+	int		byte;
 
+	byte = 0;
 	while (byte < 4)
 	{
 		magic[byte] = ft_sprintf("%x", file_player[byte]);
 		byte++;
 	}
-	magic[byte] = ft_sprintf("%s%s%s", magic[1] + 6, magic[2] + 6, magic[3] + 6);
+	magic[byte] = ft_sprintf("%s%s%s", magic[1] + 6, magic[2] + 6,
+		magic[3] + 6);
 	if (ft_strcmp(magic[0], "0") || ft_strcmp(magic[byte], "ea83f3"))
 		unpack_error("Magic code incorrect");
 	while (byte != -1)
