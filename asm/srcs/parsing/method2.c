@@ -52,7 +52,7 @@ int			calculate_encod(char **tab, int nb_arg, t_env *e)
 	a = 1;
 	multiplicateur = 128;
 	encod = 0;
-	while (a <= nb_arg)
+	while (a <= nb_arg && tab[a])
 	{
 		binary_code = coerence_str_optab(tab[a], e);
 		e->method_total += get_byte_len(e->nb_tab, tab[a], a);

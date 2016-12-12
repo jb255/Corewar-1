@@ -33,7 +33,7 @@ int		valid_name_comment(char *str, int code)
 	i += 1;
 	while (str[i] != 0 && (str[i] == '\t' || str[i] == ' '))
 		i += 1;
-	if (str[i] != 0)
+	if (str[i] != 0 && str[i] != '#')
 		asm_error(ft_strjoin("Trailing characters after ",
 			ft_strjoin(code == 1 ? "name : " : "comment : ", &str[i])));
 	return (1);
