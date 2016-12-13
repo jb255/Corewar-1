@@ -88,6 +88,7 @@ t_line		*create_method(char **tab, int nb_arg, t_env *e)
 
 	if (!(list = (t_line *)ft_memalloc(sizeof(t_line))))
 		return (NULL);
+	init_meth(list);
 	list->method = ft_strdup(tab[0]);
 	list->method_position = e->method_position + e->method_total;
 	list->line_in_file = e->y_line;

@@ -83,6 +83,7 @@ struct						s_env
 	int						nb_tab;
 };
 
+void						init_meth(t_line *line);
 void						open_line(char *fichier, t_env *e);
 void						fille_op_tab(t_env *env);
 void						recup_label(char *str, t_env *e);

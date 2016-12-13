@@ -12,6 +12,19 @@
 
 #include "../includes/corewar.h"
 
+// char					*name;
+// 	char					*comment;
+// 	char					*name_file;
+// 	int						suite;
+// 	int						y_line;
+// 	t_func					*head;
+// 	t_func					*tail;
+// 	t_op					op_tab[17];
+
+// 	int						method_position;
+// 	int						method_total;
+// 	int						nb_tab;
+
 void				init_env(t_env *e)
 {
 	e->name = NULL;
