@@ -12,19 +12,18 @@
 
 #include "../../includes/corewar.h"
 
-void			free_2d_tab(char **tab, int size)
+void			free_2d_tab(char **tab)
 {
 	int a;
 
 	a = 0;
 	if (tab == NULL)
 		return ;
-	while (tab[a] && tab[a][0] && (a < size - 1))
+	while (tab[a] && tab[a][0])
 	{
 		free(tab[a]);
 		++a;
 	}
-	free(tab[a]);
 	free(tab);
 }
 
@@ -66,7 +65,7 @@ void			handle_comment(char *str, t_env *e, char **tab)
 	{
 		ft_printf("Champion comment to long ");
 		ft_printf("Max lenght %d)\n", COMMENT_LENGTH);
-		free_2d_tab(tab, 2);
+		free_2d_tab(tab);
 		exit(-1);
 	}
 }
@@ -85,7 +84,7 @@ void			name_comment(char *s, t_env *e)
 		{
 			ft_printf("Champion name to long ");
 			ft_printf("(Max lenght %d)\n", PROG_NAME_LENGTH);
-			free_2d_tab(tab, 2);
+			free_2d_tab(tab);
 			exit(-1);
 		}
 	}
@@ -96,5 +95,5 @@ void			name_comment(char *s, t_env *e)
 	else
 		asm_error(ft_strjoin("Extension field \"",
 			ft_strjoin(s, "\" unknown.")));
-	free_2d_tab(tab, 2);
+	free_2d_tab(tab);
 }
