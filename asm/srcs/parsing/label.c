@@ -18,6 +18,12 @@ t_func		*create_label(void *data, t_env *e)
 
 	list = NULL;
 	list = (t_func *)malloc(sizeof(t_func));
+	if (data && ft_strlen(data) == 1)
+	{
+		ft_printf("Error line %d, label must be at least of length 1.\n",
+			e->y_line);
+		exit(-1);
+	}
 	if (list)
 	{
 		list->label = data ? ft_strdup(data) : NULL;
