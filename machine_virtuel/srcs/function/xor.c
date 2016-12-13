@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 13:40:11 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/13 14:21:06 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/13 15:42:41 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ void	xor_func(t_env *e, int xproc, t_type_func list)
 		e->process[xproc].reg[hex_to_dec(regist)] = (i[0] ^ i[1]);
 	ft_printf_fd(e->fd, "--->Function xor\n--->Registre %d update:  [%d]\n", hex_to_dec(regist), e->process[xproc].reg[hex_to_dec(regist)]);
 	free(regist);
-	if (e->process[xproc].reg[hex_to_dec(regist)] == 0 && !error)
-		e->process[xproc].carry = 1;
-	else if (!error)
+	if (e->process[xproc].reg[hex_to_dec(regist)])
 		e->process[xproc].carry = 0;
+	else if (!error)
+		e->process[xproc].carry = 1;
 	e->process[xproc].position = (e->process[xproc].position + list.size) % MEM_SIZE;
 }

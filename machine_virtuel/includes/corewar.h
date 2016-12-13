@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/13 12:33:58 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/13 15:33:55 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ struct					s_flag
 typedef struct s_arena	t_arena;
 struct					s_arena
 {
-	char				zone_mem[MEM_SIZE];
 	int					cycle;
 };
 

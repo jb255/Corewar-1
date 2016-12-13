@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 01:16:37 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/13 15:31:01 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/13 16:27:24 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int		memory_run(t_env *e)
 
 	x = 0;
 	e->memory_data[3] = 0;
-	while (x < e->active_process)
+	x = e->active_process;
+	while (x > 0)
 	{
 		if (key_hook(e) == 27)
 			return (1);
@@ -39,7 +40,8 @@ int		memory_run(t_env *e)
 		}
 		else
 			getch();
-		x++;
+		
+		x--;
 	}
 	// 2 = addr
 	// 0 = y
