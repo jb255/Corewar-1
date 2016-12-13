@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 16:58:08 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/12 20:13:18 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/13 14:38:25 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	write_memory(t_env *e)
 		// wrefresh(e->window.memory);
 	// }
 	// else
-		nodelay(stdscr, 1);
+		// nodelay(stdscr, 1);
 	// if (e->flag.pause)
 		// getch();
 	e->memory_data[0] = 1;

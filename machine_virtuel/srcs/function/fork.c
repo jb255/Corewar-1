@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 04:26:17 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/12 20:17:20 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/13 15:30:03 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ void	fork_func(t_env *e, int xproc, t_type_func list)
 	int			value;
 
 	new_start = get_x_from_position(e, e->process[xproc].position + 1, e->process[xproc].position + 3);
-	value = hex_to_dec(new_start);
+	value = (short)hex_to_dec(new_start) % IDX_MOD;
 	position = (e->process[xproc].position + value) % MEM_SIZE;
 	// position = position < 0 ? MEM_SIZE + position : position;
-	ft_printf_fd(e->fd, "-----Fork New Process at %d, Valeur donnee[%d][%s], Position initiale[%d]\n", position, value, new_start, e->process[xproc].position);
+	// ft_printf_fd(e->fd, "-----Fork New Process at %d, Valeur donnee[%d][%s], Position initiale[%d]\n", position, value, new_start, e->process[xproc].position);
 	set_process(e, e->active_process++, position, e->process[xproc].id_player);
 	free(new_start);
 	e->process[xproc].position = (e->process[xproc].position + list.size) % MEM_SIZE;

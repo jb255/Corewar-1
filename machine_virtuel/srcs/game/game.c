@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 17:50:40 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/12 22:25:33 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/13 14:10:37 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int				special_func(t_env *e, int xproc, int func, int list_size)
 	if (func == 12 || func == 15)
 		list_size = 3;
 	else if (func == -1)
-		list_size = 2;
+		list_size = 1;
 	else if (func == 1)
 		list_size = 5;
 	else if (func == 9 || func == 16)
@@ -54,15 +54,15 @@ t_type_func		find_label(t_env *e, int x)
 	e->process[x].id_player = tab2[e->process[x].position] - 1;
 	label = ft_sprintf("%02x", (unsigned char)tab[e->process[x].position % MEM_SIZE]);
 	func = instruct_tab_value(label);
-	if ((func != 1 && func != 12 && func != 15 && func != -1 && func != 9) || label == NULL)
+	list.error = 0;
+	if ((func != 1 && func != 12 && func != 15 && func != -1 && func != 9))
 	{
 		free_me = ft_sprintf("%02x", (unsigned char)tab[(e->process[x].position + 1) % MEM_SIZE]);
 		list = check_jump(e, hex_to_bin_quad(free_me), func);
-		// ft_printf_fd(e->fd, "-->Verification de la fonction [%d]size{%d}\n", func, list.size);
 		free(free_me);
 	}
-	if (list.error == -1)
-		func = -1;
+	// if (list.error == -1)
+	// 	func = -1;
 	list.func = func;
 	list.size = special_func(e, x, func, list.size);
 	wait_time_downer(e, x, func);

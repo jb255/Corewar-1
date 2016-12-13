@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 04:07:26 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/13 12:38:37 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/13 15:27:10 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,9 @@ void	st_func(t_env *e, int xproc, t_type_func list)
 	}
 	else if (list.type[1].t_ind)
 	{
-		regist = to_int_getx(get_x_from_position(e, e->process[xproc].position + 3, e->process[xproc].position + 5));
-		y = (e->process[xproc].position + regist) % MEM_SIZE;
+		regist = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + 3, e->process[xproc].position + 5)) % IDX_MOD;
+		y = (e->process[xproc].position + regist);
 		ind_idx = (short)regist;
-		// memspace[0] = *(tab[e->process[xproc].position + 3]);
-		// memspace[1] = *(tab[e->process[xproc].position + 4]);
 
 		ft_printf_fd(e->fd, "{%s} ->>[%d] || [%hd]/\n", get_x_from_position(e, e->process[xproc].position + 3, e->process[xproc].position + 5), regist, ind_idx);
 		// ft_printf_fd(e->fd, "[%d]Position write= %s\n", xproc, get_x_from_position(e, e->process[xproc].position + 3, e->process[xproc].position + 5));

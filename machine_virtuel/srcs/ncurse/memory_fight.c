@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 01:16:37 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/13 12:45:36 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/13 15:31:01 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,20 @@ int		memory_run(t_env *e)
 	{
 		if (key_hook(e) == 27)
 			return (1);
+		nodelay(stdscr, e->flag.obo);
 		list = find_label(e, x);
-		// ft_printf_fd(e->fd, "List func = %d\n", list.func);
-		if (list.func == -1)
-			e->process[x].position = (e->process[x].position + 1) % MEM_SIZE;
-		else if (e->process[x].wait_time - 1 <= 0)
+		if (e->process[x].wait_time - 1 <= 0)
 		{
-			if (list.func != -1){
+			getch();
+			if (list.func != -1 && !list.error){
 				apply_func(e, x, list);
-				nodelay(stdscr, 0);
-				getch();
 			}
+			if (list.func == -1 || list.error)
+				e->process[x].position = (e->process[x].position + 1) % MEM_SIZE;
 			e->process[x].wait_time = 0;
 		}
+		else
+			getch();
 		x++;
 	}
 	// 2 = addr
