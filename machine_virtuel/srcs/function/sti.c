@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 02:00:05 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/08 00:17:47 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/12 20:22:22 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		get_i02_func_sti(t_type_func list, t_env *e, int xproc, int *place)
 	int		i;
 
 	i = 0;
+	ft_printf_fd(e->fd, "get_i02_func_sti ---- t_reg[%d]t_dir[%d]t_ind[%d]\n", list.type[0].t_reg, list.type[0].t_dir, list.type[0].t_ind);
 	ft_printf_fd(e->fd, "get_i02_func_sti ---- t_reg[%d]t_dir[%d]t_ind[%d]\n", list.type[1].t_reg, list.type[1].t_dir, list.type[1].t_ind);
 	if (list.type[1].t_reg && (*place += 1))
 		i = reg_funcheck_and(e, xproc, *place);
@@ -62,8 +63,7 @@ void	sti_func(t_env *e, int xproc, t_type_func list)
 	error = 0;
 	place = 3;
 	(void)list;
-	(void)i;
-	ft_printf_fd(e->fd, "Check_sti -- \n");
+	// ft_printf_fd(e->fd, "Check_sti -- \n");
 	regist[0] = get_x_from_position(e, e->process[xproc].position + 2, e->process[xproc].position + 3);
 	i[0] = hex_to_dec(regist[0]);
 	// ft_printf_fd(e->fd, "Check_sti -- Registre[%s]\n", regist[0]);
@@ -85,13 +85,14 @@ void	sti_func(t_env *e, int xproc, t_type_func list)
 	else if (list.type[2].t_reg)
 		i[2] = e->process[xproc].reg[i[2]];
 	// ft_printf_fd(e->fd, "Check_sti -- Data 2 value [%d]\n", i[2]);
-	i[3] = i[1] + i[2];
-	i[3] %= MEM_SIZE;
-	ft_printf_fd(e->fd, "Check_sti -- Regist[%d] - Address [%d] to write [%x] -- error %d\n", hex_to_dec(regist[0]),i[3], e->process[xproc].reg[hex_to_dec(regist[0])],error);
+	i[3] = ((i[1]) + (i[2])) % MEM_SIZE;
+	// ft_printf_fd(e->fd, "Check_sti -- Regist[%d] - Address [%d] to write [%x] -- error %d\n", hex_to_dec(regist[0]), i[3], e->process[xproc].reg[hex_to_dec(regist[0])], error);
 	if (!error)
 	{
 		write_from_x(e, (e->process[xproc].position + i[3]), e->process[xproc].reg[hex_to_dec(regist[0])], 4);
 		write_from_tab2((e->process[xproc].position + i[3]), 4, e->process[xproc].id_player + 1);
 	}
 	e->process[xproc].position = (e->process[xproc].position + list.size) % MEM_SIZE;
+	// nodelay(stdscr, 0);
+	// getch();
 }

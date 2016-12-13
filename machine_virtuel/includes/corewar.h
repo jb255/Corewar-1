@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/08 19:43:58 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/13 12:33:58 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,14 @@
 # define TRUE 1
 # define FALSE 0
 
-int tab[MEM_SIZE];
+unsigned char tab[MEM_SIZE];
 int tab2[MEM_SIZE];
 
 # define BYTE_START_CODE 2192
+
+typedef unsigned char	t_u8;
+typedef unsigned short	t_u16;
+typedef unsigned int	t_u32;
 
 typedef struct s_flag	t_flag;
 struct					s_flag

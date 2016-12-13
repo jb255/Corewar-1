@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 22:00:22 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/08 14:31:02 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/13 10:24:00 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,14 @@ void	ld_func(t_env *e, int xproc, t_type_func list)
 	place = 0;
 	reg = 0;
 	error = 0;
+
 	value = get_first_ld(e, list, &error, xproc);
 	// ft_printf_fd(e->fd, "Ld- Value [%d]\n", value);
 	list.type[0].t_ind == 1 ? (place = 4) : place;
 	list.type[0].t_dir == 1 ? (place = 6) : place;
 	if (list.type[1].t_reg && !error){
 		reg = to_int_getx(get_x_from_position(e, e->process[xproc].position + place, e->process[xproc].position + (place + 1)));
-		ft_printf_fd(e->fd, "value du reg = %d // %s\n", reg, get_x_from_position(e, e->process[xproc].position + place, e->process[xproc].position + (place + 1)));
+		// ft_printf_fd(e->fd, "value du reg = %d // %s\n", reg, get_x_from_position(e, e->process[xproc].position + place, e->process[xproc].position + (place + 1)));
 	}
 	(reg > 16 || reg < 1) ? (error = 1) : error;
 	if (list.type[0].t_ind && list.type[1].t_reg && !error)
@@ -79,12 +80,18 @@ void	ld_func(t_env *e, int xproc, t_type_func list)
 	}
 	if (!error){
 		e->process[xproc].reg[reg] = value;
-		ft_printf_fd(e->fd, "LD- Registre :%d contient: %d\n", reg,value);
+		// ft_printf_fd(e->fd, "LD- Registre :%d contient: %d\n", reg,value);
 
 	}
 	if (value == 0 && !error)
 		e->process[xproc].carry = 1;
 	else if (!error)
 		e->process[xproc].carry = 0;
+
+	if (error)
+		ft_printf_fd(e->fd, "LD: NOTHING TO DO////////////////////////\n");
+	else
+		ft_printf_fd(e->fd, "LD: DONE         ////////////////////////\n");
 	e->process[xproc].position = (e->process[xproc].position + list.size) % MEM_SIZE;
+
 }

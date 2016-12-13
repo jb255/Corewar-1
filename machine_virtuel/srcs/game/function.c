@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:37:17 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/08 15:23:50 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/12 22:38:51 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ t_type_func check_jump(t_env *e, char *op_size, int func)
 	index = 0;
 	x = 0;
 	ft_memset(&list, 0, sizeof(t_type_func));
+	if (!ft_strcmp("00000000", op_size)){
+		list.func = -1;
+		list.error = -1;
+		return list;
+	}
+
 	if (ft_strlen(op_size) != 8)
 	{
 		ft_putstr_fd("ERROR - check_jump op_size != 8 ->>", e->fd);
@@ -62,6 +68,10 @@ t_type_func check_jump(t_env *e, char *op_size, int func)
 		index += 2;
 		x++;
 	}
+	// ft_printf_fd(e->fd, ".t_reg[%d]//t_ind[%d]//t_dir[%d]\n", list.type[0].t_reg,list.type[0].t_ind,list.type[0].t_dir);
+	// ft_printf_fd(e->fd, ".t_reg[%d]//t_ind[%d]//t_dir[%d]\n", list.type[1].t_reg,list.type[1].t_ind,list.type[1].t_dir);
+	// ft_printf_fd(e->fd, ".t_reg[%d]//t_ind[%d]//t_dir[%d]\n", list.type[2].t_reg,list.type[2].t_ind,list.type[2].t_dir);
+	// ft_printf_fd(e->fd, "\n");
 	return (list);
 }
 
@@ -100,7 +110,7 @@ void	write_from_x(t_env *e, int from, int data, int octet)
 	{
 		x = (from + (4 - octet)) % MEM_SIZE;
 		x = x < 0 ? MEM_SIZE + x : x;
-		ft_printf_fd(e->fd, "write_from_x data = %d for %d\nWriting at %d, ->%02x base->%s\nWrite on tab[%d]\n", data, octet_precision(hex, 4 - octet), x, tab[x], hex, x);
+		// ft_printf_fd(e->fd, "write_from_x data = %d for %d\nWriting at %d, ->%02x base->%s\nWrite on tab[%d]\n", data, octet_precision(hex, 4 - octet), x, tab[x], hex, x);
 		// ft_printf_fd(e->fd, "x to write%d for [%s] WRITE [%d]\n", x, hex, octet_precision(hex, 4 - octet));
 		tab[x] = octet_precision(hex, 4 - octet);
 

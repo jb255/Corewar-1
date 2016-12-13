@@ -6,29 +6,13 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 12:53:56 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/08 17:08:22 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/12 15:41:46 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 
 extern char g_status_code[17][8];
-
-// void	find_next_pc(t_env *e, int x)
-// {
-// 	char	*label = NULL;
-// 	int		func = -1;
-// 	int		jump_size = 1;
-//
-// 	while (func == -1)
-// 	{
-// 		label = ft_sprintf("%02x", tab[e->process[x].position + jump_size % MEM_SIZE]);
-// 		func = instruct_tab_value(label);
-// 		jump_size++;
-// 		free(label);
-// 	}
-// 	e->process[x].addr_pc = e->process[x].position + jump_size - 1;
-// }
 
 void	delete_process(t_env *e, int process_nb)
 {

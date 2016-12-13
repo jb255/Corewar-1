@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:20:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/07 13:17:40 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/12 20:19:55 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int		key_hook(t_env *e)
 	int		keycode;
 
 	(void)e;
+	nodelay(stdscr, 1);
 	keycode = getch();
 	// ft_printf_fd(e->fd, "Keycode %d\n", keycode);
 	// if (keycode != -1)
