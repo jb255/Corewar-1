@@ -33,14 +33,18 @@ char	*get_x(t_file *cor, int from, int at)
 	char			*result;
 	char			*name;
 	int				index;
+	char			*tmp;
 
 	result = "";
 	index = from;
 	while (index != at)
 	{
 		name = ft_sprintf("%02x", (unsigned char)cor->content[index]);
+		tmp = result;
 		result = ft_strjoin(result, name);
 		index++;
+		if (ft_strlen(tmp) != 0)
+			free(tmp);
 		free(name);
 	}
 	return (result);

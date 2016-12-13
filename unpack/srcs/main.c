@@ -154,6 +154,25 @@ void			read_function(t_file *cor, char *file)
 		read_op(ft_sprintf("%02x", (short int)file[x]), cor, &x);
 }
 
+// struct						s_file
+// {
+// 	char					*name;
+// 	char					*comment;
+// 	int						size;
+// 	char					*path;
+// 	char					*content;
+// 	int						fd;
+// 	t_op					op[18];
+// };
+
+void			free_cor_file(t_file *cor_file)
+{
+	free(cor_file->content);
+	free(cor_file->name);
+	free(cor_file->comment);
+	free(cor_file);
+}
+
 void			unpack(char *file)
 {
 	char		buf[1024];
@@ -172,6 +191,7 @@ void			unpack(char *file)
 	read_magic(cor_file->content);
 	read_function(cor_file, cor_file->content);
 	close(cor_file->fd);
+	free_cor_file(cor_file);
 }
 
 int				main(int ac, char **av)
