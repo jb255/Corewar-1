@@ -106,6 +106,7 @@ void			print_args(t_type_a arg, int *index, int func, t_file *cor)
 		}
 	}
 }
+
 void			get_args(t_file *cor, t_type_func list, int index)
 {
 	print_args(list.type[0], &index, list.func, cor);
