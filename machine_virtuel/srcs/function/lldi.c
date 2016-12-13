@@ -6,7 +6,7 @@
 /*   By: viko <viko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 17:30:41 by viko              #+#    #+#             */
-/*   Updated: 2016/12/08 15:44:48 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/13 18:58:06 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,12 @@ void	lldi_func(t_env *e, int xproc, t_type_func list)
 	i[2] = i[1] + i[0]; // Ajout de l'arg 2 a l'arg 1
 	regist[0] = get_x_from_position(e, e->process[xproc].position + (place), e->process[xproc].position + (place + 1));
 	regist[1] = get_x_from_position(e, e->process[xproc].position + (i[2]), e->process[xproc].position + ((i[2] + REG_SIZE)));
-	ft_printf_fd(e->fd, "Check_lldi -- Registre[%s] Value[%d] + Value1[%d] = Value2[%d], Result a l'addr value2 [%s]\n", regist[0], i[0], i[1], i[2], regist[1]);
 	if (hex_to_dec(regist[0]) > 16 || hex_to_dec(regist[0]) < 1)
 		error = 1;
 	if (!error)
 		e->process[xproc].reg[hex_to_dec(regist[0])] = hex_to_dec(regist[1]);
-	ft_printf_fd(e->fd, "Check_lldi -- RESULT du Registre[%s] qui a ete recherché a l'adresse {%d} = %s and %08x\n", regist[0], i[0], regist[1], hex_to_dec(regist[1]));
 	free(regist[0]);
 	free(regist[1]);
 	e->process[xproc].carry = 1;
-	ft_printf_fd(e->fd, "Check_lldi -- Value final du Registre1 [%d]\n", e->process[xproc].reg[1]);
 	e->process[xproc].position = (e->process[xproc].position + list.size) % MEM_SIZE;
 }

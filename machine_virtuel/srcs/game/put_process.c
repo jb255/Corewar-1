@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 12:53:56 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/12 15:41:46 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/13 19:14:15 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	set_process(t_env *e, int process_nb, int x, int creator)
 		vm_error("Error process attribution");
 	init_process(e, process_nb);
 	e->process[process_nb].position = x % MEM_SIZE;
-	// ft_printf_fd(e->fd, "New process at %d\n", e->process[process_nb].position);
 	e->process[process_nb].start = x % MEM_SIZE;
 	e->process[process_nb].wait_time = e->process[creator].wait_time;
 	ft_memset(e->process[process_nb].reg, 0, 17);
@@ -47,10 +46,6 @@ void	set_process(t_env *e, int process_nb, int x, int creator)
 		e->process[process_nb].reg[i] = e->process[creator].reg[i];
 		i++;
 	}
-	// e->process[process_nb].reg[1] = -creator;
 	e->process[process_nb].id_player = creator;
 	e->process[process_nb].carry = e->process[creator].carry;
-	// e->process[process_nb].id_live = e->process[creator].id_live;
-	// find_next_pc(e, process_nb);
-	// ft_printf_fd(e->fd, "New process [%d] starting at %d\n", process_nb, x % MEM_SIZE);
 }

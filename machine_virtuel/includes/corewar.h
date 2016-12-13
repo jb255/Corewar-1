@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/13 15:33:55 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/13 18:48:38 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ struct					s_env
 	int					memory_data[4];
 	t_arena				arena;
 	t_window			window;
-	t_process			process[1000];
+	t_process			process[10000];
 	int					fd;
 	t_op				op[17];
 };

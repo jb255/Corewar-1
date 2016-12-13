@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 13:39:34 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/03 02:08:26 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/13 18:56:32 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,6 @@
 // On nommera S cette somme. On lit REG_SIZE octet à l’adresse (PC + (S % IDX_MOD)) que l’on copie dans r1.
 // Les paramètres 1 et 2 sont des index.
 // T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG
-int		check_ldi(t_env *e, int xproc, t_type_func list)
-{
-	ft_printf_fd(e->fd, "Check_ldi -- Fonction size %d\n", list.size);
-	(void)xproc;
-	(void)list;
-
-	return (1);
-}
 
 int		get_i02_func_and(t_type_func list, t_env *e, int xproc, int *place)
 {
@@ -77,14 +69,11 @@ void	ldi_func(t_env *e, int xproc, t_type_func list)
 	i[2] = i[1] + i[0]; // Ajout de l'arg 2 a l'arg 1
 	regist[0] = get_x_from_position(e, e->process[xproc].position + (place % IDX_MOD), e->process[xproc].position + (place + 1 % IDX_MOD));
 	regist[1] = get_x_from_position(e, e->process[xproc].position + (i[2] % IDX_MOD), e->process[xproc].position + ((i[2] + REG_SIZE) % IDX_MOD));
-	ft_printf_fd(e->fd, "Check_ldi -- Registre[%s] Value[%d] + Value1[%d] = Value2[%d], Result a l'addr value2 [%s]\n", regist[0], i[0], i[1], i[2], regist[1]);
 	if (hex_to_dec(regist[0]) > 16 || hex_to_dec(regist[0]) < 1)
 		error = 1;
 	if (!error)
 		e->process[xproc].reg[hex_to_dec(regist[0])] = hex_to_dec(regist[1]);
-	ft_printf_fd(e->fd, "Check_ldi -- RESULT du Registre[%s] qui a ete recherché a l'adresse {%d} = %s and %08x\n", regist[0], i[0], regist[1], hex_to_dec(regist[1]));
 	free(regist[0]);
 	free(regist[1]);
-	ft_printf_fd(e->fd, "Check_ldi -- Value final du Registre1 [%d]\n", e->process[xproc].reg[1]);
 	e->process[xproc].position = (e->process[xproc].position + list.size) % MEM_SIZE;
 }

@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 00:55:52 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/08 17:20:31 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/13 19:13:59 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,6 @@ void	player_to_tab(t_env *e, int x)
 		byte++;
 		start += 1;
 		free(tmp);
-	}
-}
-
-void	afficher(t_env *e)
-{
-	int			x;
-
-	x = 0;
-	while (x < e->active_process)
-	{
-		printf("Process .%d. = {%d}\n", x + 1, e->process[x].id_player);
-		x++;
 	}
 }
 

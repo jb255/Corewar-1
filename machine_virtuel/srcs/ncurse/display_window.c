@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 00:13:23 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/08 17:42:06 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/13 19:12:37 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	display_info_menu(t_env *e)
 	mvwprintw(e->window.menu, 5, 165, "TIME_CYCLE: ");
 	if (e->flag.pause)
 		mvwprintw(e->window.menu, 4, 125, "PAUSED");
+	else
+		mvwprintw(e->window.menu, 4, 125, "      ");
 	wattron(e->window.menu, COLOR_PAIR(5));
 	mvwprintw(e->window.menu, 1, 180, "%d    ", e->flag.cycle_to_die);
 	mvwprintw(e->window.menu, 2, 180, "%d    ", CYCLE_DELTA);

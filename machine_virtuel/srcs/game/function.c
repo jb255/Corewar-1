@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:37:17 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/13 13:41:47 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/13 19:00:37 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void	(*g_func_process[16])(t_env*, int, t_type_func) = {live_func, ld_func, st_f
 
 void		apply_func(t_env *e, int xproc, t_type_func list)
 {
-	// if (list.error == 1)
-	// 	return ;
 	if (list.func == 1 || list.func == 3 || list.func == 2 || list.func == 4 || list.func == 5 || list.func == 6 || list.func == 7 || list.func == 8 || list.func == 9 || list.func == 10 || list.func == 11 || list.func == 12 || list.func == 13 || list.func == 14 || list.func == 15 || list.func == 16)
 		g_func_process[list.func - 1](e, xproc, list);
 }
@@ -68,10 +66,6 @@ t_type_func check_jump(t_env *e, char *op_size, int func)
 		index += 2;
 		x++;
 	}
-	// ft_printf_fd(e->fd, ".t_reg[%d]//t_ind[%d]//t_dir[%d]\n", list.type[0].t_reg,list.type[0].t_ind,list.type[0].t_dir);
-	// ft_printf_fd(e->fd, ".t_reg[%d]//t_ind[%d]//t_dir[%d]\n", list.type[1].t_reg,list.type[1].t_ind,list.type[1].t_dir);
-	// ft_printf_fd(e->fd, ".t_reg[%d]//t_ind[%d]//t_dir[%d]\n", list.type[2].t_reg,list.type[2].t_ind,list.type[2].t_dir);
-	// ft_printf_fd(e->fd, "\n");
 	return (list);
 }
 
@@ -102,24 +96,14 @@ void	write_from_x(t_env *e, int from, int data, int octet)
 
 
 	(void)e;
-	// ft_printf_fd(e->fd, "DATA->>\n");
-	// ft_printf_fd(e->fd, "from %d\n", from);
-	// data = data % MEM_SIZE;
 	hex = ft_sprintf("%08x", data);
 	while (octet > 0)
 	{
 		x = (from + (4 - octet)) % MEM_SIZE;
-		x = x < 0 ? MEM_SIZE + x : x;
-		// ft_printf_fd(e->fd, "write_from_x data = %d for %d\nWriting at %d, ->%02x base->%s\nWrite on tab[%d]\n", data, octet_precision(hex, 4 - octet), x, tab[x], hex, x);
-		// ft_printf_fd(e->fd, "x to write%d for [%s] WRITE [%d]\n", x, hex, octet_precision(hex, 4 - octet));
+		x = x < 0 ? MEM_SIZE + x : x; // Pour recuperer les valeurs negatives
 		tab[x] = octet_precision(hex, 4 - octet);
-
-		// ft_printf_fd(e->fd, "OK FREE\n");
 		octet--;
 	}
-	// ft_printf_fd(e->fd, "Try to free: hex\n");
-	if (hex != NULL){
+	if (hex != NULL)
 		free(hex);
-	}
-	// ft_printf_fd(e->fd, "End of write_from_x\n");
 }

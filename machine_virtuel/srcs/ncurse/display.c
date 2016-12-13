@@ -6,24 +6,12 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 16:58:08 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/13 14:38:25 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/13 19:14:30 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "n_curse.h"
 
-// nodelay(stdscr, 0);
-// getch();
-// // if (e->flag.pause)
-// // {
-// // nodelay(stdscr, 0);
-// // getch();
-// // }
-// // else
-// // {
-// // 	nodelay(stdscr, 1);
-// // 	getch();
-// // }
 void	print_cursor(t_env *e, int x)
 {
 	int		i;
@@ -73,16 +61,6 @@ void	write_memory(t_env *e)
 		e->memory_data[2]++; // +1 dans le tableau
 	}
 	wrefresh(e->window.memory);
-	// if (e->flag.obo)
-	// {
-		// nodelay(stdscr, 0);
-		// getch();
-		// wrefresh(e->window.memory);
-	// }
-	// else
-		// nodelay(stdscr, 1);
-	// if (e->flag.pause)
-		// getch();
 	e->memory_data[0] = 1;
 	e->memory_data[1] = 1;
 	e->memory_data[2] = 0;

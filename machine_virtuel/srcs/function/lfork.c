@@ -6,7 +6,7 @@
 /*   By: viko <viko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 17:29:51 by viko              #+#    #+#             */
-/*   Updated: 2016/12/12 15:39:44 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/13 18:57:18 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ void	lfork_func(t_env *e, int xproc, t_type_func list)
 {
 	char		*new_start;
 	int			position;
+	int			value;
 
 	new_start = get_x_from_position(e, e->process[xproc].position + 1, e->process[xproc].position + 3);
-	position = e->process[xproc].position + (hex_to_dec(new_start));
-	// ft_printf_fd(e->fd, "-----lFork New Process at %d\n", position);
+	value = (short)hex_to_dec(new_start);
+	position = (e->process[xproc].position + value) % MEM_SIZE;
 	set_process(e, e->active_process++, position, e->process[xproc].id_player);
 	free(new_start);
 	e->process[xproc].position = (e->process[xproc].position + list.size) % MEM_SIZE;

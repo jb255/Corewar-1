@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:19:51 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/08 14:26:22 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/13 18:53:06 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,6 @@
 // Cette opération modifie le carry.
 // and r2, %0,r3 met r2 & 0 dans r3
 // {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}
-
-int		check_and(t_env *e, int xproc, t_type_func list)
-{
-	(void)list;
-	(void)xproc;
-	ft_printf_fd(e->fd, "Check_and -- Fonction, size %d\n", list.size);
-	// if (list.type[0].t_reg && is_register_valid(e, xproc, 2))
-	// 	return (1);
-	// if (list.type[0].t_reg && is_register_valid(e, xproc, 2) && list.type[1].t_reg && is_register_valid(e, xproc, 3) && list.type[2].t_reg && is_register_valid(e, xproc, 4))
-	// 	return (1);
-	return (1);
-}
 
 int		reg_funcheck_and(t_env *e, int xproc, int place)
 {

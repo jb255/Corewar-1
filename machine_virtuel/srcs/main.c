@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 12:59:13 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/13 14:46:45 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/13 19:16:09 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,5 @@ int		main(int argc, char **argv)
 	else
 		display_memoryspeed(e);
 	free_fighter(e);
-
 	return (0);
 }

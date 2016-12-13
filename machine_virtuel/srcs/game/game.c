@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 17:50:40 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/13 14:10:37 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/13 19:02:52 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ int				special_func(t_env *e, int xproc, int func, int list_size)
 {
 	(void)e;
 	(void)xproc;
-	// if (tab[(e->process[xproc].position + 1) % MEM_SIZE] == 144 && func == 2)
-	// 	list_size += 2;
 	if (func == 12 || func == 15)
 		list_size = 3;
 	else if (func == -1)
@@ -34,12 +32,10 @@ int				special_func(t_env *e, int xproc, int func, int list_size)
 
 void			wait_time_downer(t_env *e, int xproc, int func)
 {
-	int			wait_time[17] = {0, 10, 5, 5, 10, 10, 6, 6, 6, 20, 25, 25, 800, 10, 50, 1000, 2};
-
 	if (func == -1 && e->process[xproc].wait_time != 2)
 		e->process[xproc].wait_time = 1;
 	else if (e->process[xproc].wait_time <= 1 && func)
-		e->process[xproc].wait_time = wait_time[func];
+		e->process[xproc].wait_time = e->op[func - 1].nb_tours;
 	else
 		e->process[xproc].wait_time--;
 }
@@ -61,8 +57,6 @@ t_type_func		find_label(t_env *e, int x)
 		list = check_jump(e, hex_to_bin_quad(free_me), func);
 		free(free_me);
 	}
-	// if (list.error == -1)
-	// 	func = -1;
 	list.func = func;
 	list.size = special_func(e, x, func, list.size);
 	wait_time_downer(e, x, func);

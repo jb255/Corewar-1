@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 18:07:34 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/08 17:45:04 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/13 19:15:35 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,26 +62,15 @@ void	read_magic(char *file_player)
 {
 	char	*magic[4];
 	int		byte = 0;
-	// char	*tmp[2];
 
-	(void)file_player;
-	// tmp[0] = "0";
-	// tmp[1] = "ea83f3";
 	while (byte < 4)
 	{
 		magic[byte] = ft_sprintf("%x", file_player[byte]);
-		// printf("%d est malloc\n", byte);
 		byte++;
 	}
 	magic[byte] = ft_sprintf("%s%s%s", magic[1] + 6, magic[2] + 6, magic[3] + 6);
-	// printf("%d est malloc\n", byte);
-
-	// if (!ft_strcmp(magic[0], tmp[0]) && !ft_strcmp(magic[byte], tmp[1]))
-	// 	ft_printf("Magic correct\n");
-	// else
-	// 	vm_error("Magic code incorrect");
-	while (byte != -1){
-		// printf("%d est free\n", byte);
+	while (byte != -1)
+	{
 		free(magic[byte]);
 		byte--;
 	}
@@ -98,7 +87,6 @@ void	reading_file(t_env *e, int x)
 	}
 	e->players[x].file = get_content(fd, NULL, buf);
 	e->players[x].size = lseek(fd, 0, SEEK_END);
-	// ft_printf_fd(e->fd, "PLAYER SIZE = %d\n", e->players[x].size - BYTE_START_CODE);
 	close(fd);
 	e->players[x].name = read_name(e->players[x].file);
 	e->players[x].comment = read_comment(e->players[x].file);
