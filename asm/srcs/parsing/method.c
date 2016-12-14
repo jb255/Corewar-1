@@ -88,7 +88,6 @@ t_line		*create_method(char **tab, int nb_arg, t_env *e)
 
 	if (!(list = (t_line *)ft_memalloc(sizeof(t_line))))
 		return (NULL);
-	init_meth(list);
 	list->method = ft_strdup(tab[0]);
 	list->method_position = e->method_position + e->method_total;
 	list->line_in_file = e->y_line;
@@ -119,9 +118,9 @@ int			get_byte_len(int nb_tab, char *arg, int n_inf)
 	}
 	if (n_inf == 2 && arg && !tmp)
 	{
-		if (nb_tab == 5 || nb_tab == 6 || nb_tab == 7)
+		if (arg[0] == '%' && (nb_tab == 5 || nb_tab == 6 || nb_tab == 7))
 			return (4);
-		if (nb_tab == 2 || nb_tab == 9 ||
+		if (arg[0] != '%' || nb_tab == 2 || nb_tab == 9 ||
 			nb_tab == 10 || nb_tab == 13)
 			return (2);
 	}

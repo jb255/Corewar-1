@@ -20,15 +20,14 @@ void			cut_nbr_and_write(unsigned int nbr, int how_cut, int fd)
 	tab[1] = (unsigned char)calc_octet(&nbr, 8388608);
 	tab[2] = (unsigned char)calc_octet(&nbr, 32768);
 	tab[3] = (unsigned char)calc_octet(&nbr, 128);
-	printf("fd -------------------------- %d\n", fd);
 	if (how_cut == 4)
-	 	write(fd, tab, 1);
-	if (how_cut == 3)
-	 	write(fd, tab, 2);		
-	if (how_cut == 2)
-	 	write(fd, tab, 3);
-	if (how_cut == 1)
-	 	write(fd, tab, 4);
+ 		write(fd, &tab[0], 1);
+ 	if (how_cut >= 3)
+ 		write(fd, &tab[1], 1);
+ 	if (how_cut >= 2)
+ 		write(fd, &tab[2], 1);
+ 	if (how_cut >= 1)
+ 		write(fd, &tab[3], 1);
 }
 
 void			free_all(t_line *to_free)
