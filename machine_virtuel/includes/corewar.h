@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/14 18:05:45 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/14 21:33:50 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int				key_hook(t_env *e);
 char			*to_opcode(char c, char c1);
 void			init_process(t_env *e, int nb);
 void			set_process(t_env *e, int process_nb, int x, int creator);
-
+int				get_first_ld(t_env *e, t_type_func list, int *error, int xproc);
 // function
 void		live_func(t_env *e, int xproc, t_type_func list);
 void		ld_func(t_env *e, int xproc, t_type_func list);

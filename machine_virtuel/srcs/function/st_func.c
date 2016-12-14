@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 04:07:26 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/14 17:42:52 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/14 22:30:57 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,23 @@ void	st_func(t_env *e, int xproc, t_type_func list)
 	int 			y;
 
 	error = 0;
-	if (list.type[0].t_reg)
-		reg = tab[(e->process[xproc].position + 2) % MEM_SIZE];
+	if (list.type[0].t_reg){
+		// reg = tab[(e->process[xproc].position + 2) % MEM_SIZE];
+		reg = to_int_getx(get_x_from_position(e, e->process[xproc].position + 2, e->process[xproc].position + 3));
+	}
 	else
 		error = 1;
 	(reg > 16 || reg < 1) ? (error = 1) : error;
 	if (list.type[1].t_reg && !error)
 	{
-		regist = e->process[xproc].reg[tab[(e->process[xproc].position + 3)]];
+		regist = e->process[xproc].reg[tab[(e->process[xproc].position + 3) % MEM_SIZE]];
 		e->process[xproc].reg[reg] = regist;
 	}
 	else if (list.type[1].t_ind)
 	{
-		regist = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + 3, e->process[xproc].position + 5));
-		y = (e->process[xproc].position + (regist % IDX_MOD));
-		ft_printf_fd(e->fd, "e->process[%d].reg[reg] = %d\n", xproc,e->process[xproc].reg[reg]);
+		regist = to_int_getx(get_x_from_position(e, e->process[xproc].position + 3, e->process[xproc].position + 5));
+		ft_printf_fd(e->fd, "Regist %d\n", regist);
+		y = (e->process[xproc].position + (regist % IDX_MOD)) % MEM_SIZE;
 		write_from_x(e, y, e->process[xproc].reg[reg], 4);
 		write_from_tab2(y, 4, e->process[xproc].id_player + 1);
 	}
