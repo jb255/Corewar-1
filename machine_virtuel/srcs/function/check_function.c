@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:59:38 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/13 18:53:15 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/14 20:54:38 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,25 @@
 
 char	*get_x_from_position(t_env *e, int from, int at)
 {
-	char			*result = "";
-	char			*name;
-	int				index;
+	char            *result = "";
+    char            *name;
+    int                index;
+    char            *tmp;
 
-	(void)e;
-	if (from < 0)
-		from = MEM_SIZE + from;
-	index = from;
-	while (index != at)
-	{
-		name = ft_sprintf("%02x", (unsigned char)tab[index % MEM_SIZE]);
-		result = ft_strjoin(result, name);
-		index++;
-		if (index == MEM_SIZE)
-			index = 0;
+    (void)e;
+    if (from < 0)
+        from = MEM_SIZE + from;
+    index = from;
+    while (index != at)
+    {
+        name = ft_sprintf("%02x", (unsigned char)tab[index % MEM_SIZE]);
+        tmp = result;
+        result = ft_strjoin(result, name);
+        index++;
+        if (index == MEM_SIZE)
+            index = 0;
+        if (ft_strlen(tmp) > 0)
+            free(tmp);
 		free(name);
 	}
 	return (result);

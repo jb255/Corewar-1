@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:37:17 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/13 19:00:37 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/14 20:55:10 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ t_type_func check_jump(t_env *e, char *op_size, int func)
 		index += 2;
 		x++;
 	}
+	free(op_size);
 	return (list);
 }
 
