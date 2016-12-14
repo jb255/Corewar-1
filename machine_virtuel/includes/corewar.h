@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/13 18:48:38 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/14 18:05:45 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ unsigned char tab[MEM_SIZE];
 int tab2[MEM_SIZE];
 
 # define BYTE_START_CODE 2192
-
-typedef unsigned char	t_u8;
-typedef unsigned short	t_u16;
-typedef unsigned int	t_u32;
+# define MAX_PROCESS 30000
 
 typedef struct s_flag	t_flag;
 struct					s_flag
@@ -75,7 +72,7 @@ struct					s_env
 	int					memory_data[4];
 	t_arena				arena;
 	t_window			window;
-	t_process			process[10000];
+	t_process			process[MAX_PROCESS];
 	int					fd;
 	t_op				op[17];
 };

@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 00:13:23 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/13 19:12:37 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/14 17:34:57 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	name_menu(t_env *e, int nb)
 {
 	wattron(e->window.menu, COLOR_PAIR(nb + 1));
-	mvwprintw(e->window.menu, ((nb + 1) * 1.8) + 1, 12, "%s", e->players[nb].name);
+	mvwprintw(e->window.menu, ((nb + 1) * 1.8) + 1, 15, "%s", e->players[nb].name);
 	wattroff(e->window.menu, COLOR_PAIR(nb + 1));
 }
 
@@ -52,7 +52,7 @@ void	display_menu(t_env *e)
 	while (nb < e->active_players)
 	{
 		wattron(e->window.menu, COLOR_PAIR(5));
-		mvwprintw(e->window.menu, ((nb + 1) * 1.8 ) + 1 , 1, "Joueur %d: ", nb + 1);
+		mvwprintw(e->window.menu, ((nb + 1) * 1.8 ) + 1 , 1, "Joueur %d[%d]: ", nb + 1, e->players[nb].id_live);
 		wattroff(e->window.menu, COLOR_PAIR(5));
 		mvwprintw(e->window.menu, ((nb + 1) * 1.8 ) + 1 , 35, "|");
 		name_menu(e, nb);

@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 01:16:37 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/13 16:27:24 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/14 20:13:00 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@ int		memory_run(t_env *e)
 
 	x = 0;
 	e->memory_data[3] = 0;
-	x = e->active_process;
-	while (x > 0)
+	x = e->active_process - 1;
+	while (x >= 0)
 	{
-		if (key_hook(e) == 27)
-			return (1);
-		nodelay(stdscr, e->flag.obo);
+
+		nodelay(stdscr, e->flag.obo == 1 ? 0 : 1);
 		list = find_label(e, x);
 		if (e->process[x].wait_time - 1 <= 0)
 		{
-			getch();
+			if (key_hook(e) == 27)
+				return (1);
 			if (list.func != -1 && !list.error){
 				apply_func(e, x, list);
 			}
@@ -38,9 +38,8 @@ int		memory_run(t_env *e)
 				e->process[x].position = (e->process[x].position + 1) % MEM_SIZE;
 			e->process[x].wait_time = 0;
 		}
-		else
-			getch();
-		
+		// else
+		// 	getch();
 		x--;
 	}
 	// 2 = addr

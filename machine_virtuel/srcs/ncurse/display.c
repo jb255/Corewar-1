@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 16:58:08 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/14 13:08:55 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/14 17:56:34 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	print_cursor(t_env *e, int x)
 {
 	int		i;
 
-	i = e->active_process;
-	while (i > 0)
+	i = e->active_process - 1;
+	while (i >= 0)
 	{
 		if (x == e->process[i].position)
 		{
@@ -100,6 +100,8 @@ void	display_memory(t_env *e)
 	{
 		write_memory(e);
 		e->arena.cycle++;
+		if (e->active_process == MAX_PROCESS)
+			break ;
 		// update_cycle(e);
 		display_info_menu(e);
 	}

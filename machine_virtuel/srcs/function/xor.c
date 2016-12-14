@@ -6,27 +6,12 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 13:40:11 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/13 18:59:21 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/14 17:18:27 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <n_curse.h>
 #include <function.h>
-
-int		check_xor(t_env *e, int xproc, t_type_func list)
-{
-	(void)list;
-	(void)xproc;
-	ft_printf_fd(e->fd, "Check_xor -- Fonction, size %d\n", list.size);
-
-	// if (list.type[0].t_reg && is_register_valid(e, xproc, 2))
-	// 	return (1);
-	// if (list.type[2].t_reg && is_register_valid(e, xproc, list.size - 1))
-	// 	return (1);
-	// if (list.type[0].t_reg && is_register_valid(e, xproc, 2) && list.type[1].t_reg && is_register_valid(e, xproc, 3) && list.type[2].t_reg && is_register_valid(e, xproc, 4))
-	// 	return (1);
-	return (1);
-}
 
 void	xor_func(t_env *e, int xproc, t_type_func list)
 {
@@ -51,7 +36,7 @@ void	xor_func(t_env *e, int xproc, t_type_func list)
 	if (hex_to_dec(regist) > 16 || hex_to_dec(regist) < 1)
 		error = 1;
 	if (!error)
-		e->process[xproc].reg[hex_to_dec(regist)] = (i[0] ^ i[1]);
+		e->process[xproc].reg[hex_to_dec(regist)] = i[0] ^ i[1];
 	free(regist);
 	if (e->process[xproc].reg[hex_to_dec(regist)])
 		e->process[xproc].carry = 0;

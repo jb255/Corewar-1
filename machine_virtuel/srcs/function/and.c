@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:19:51 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/14 14:58:18 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/14 18:10:48 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ int		ind_funcheck_and(t_env *e, int xproc, int place, t_type_a type)
 	if (type.t_dir){
 		result[0] = get_x_from_position(e, e->process[xproc].position + ((place - 2) % IDX_MOD), e->process[xproc].position + (place % IDX_MOD));
 		i = hex_to_dec(result[0]);
-		ft_printf_fd(e->fd, "Check_and/or -- value du DIR [%s]", result[0]);
+		// ft_printf_fd(e->fd, "Check_and/or -- value du DIR [%s]", result[0]);
 	}
 	else if (type.t_ind)
 	{
 		result[0] = get_x_from_position(e, e->process[xproc].position + place - 2, e->process[xproc].position + place);
 		result[1] = get_x_from_position(e, e->process[xproc].position + (hex_to_dec(result[0]) % IDX_MOD), e->process[xproc].position + ((hex_to_dec(result[0]) + IND_SIZE) % IDX_MOD));
 		i = hex_to_dec(result[1]);
-		ft_printf_fd(e->fd, "Check_and/or -- addr [%s] value du IND [%s]", result[0], result[1]);
+		// ft_printf_fd(e->fd, "Check_and/or -- addr [%s] value du IND [%s]", result[0], result[1]);
 		free(result[1]);
 	}
 	free(result[0]);
@@ -89,7 +89,7 @@ void	and_func(t_env *e, int xproc, t_type_func list)
 
 	place = 0;
 	error = 0;
-	ft_printf_fd(e->fd, "Check_and -- ENTER\n");
+	// ft_printf_fd(e->fd, "Check_and -- ENTER\n");
 	i[0] = get_i0_func_and(list, e, xproc, &place); // VALUE du reg
 	if (list.type[0].t_reg && (i[0] > 16 || i[0] < 1))
 		error = 1;
@@ -103,7 +103,7 @@ void	and_func(t_env *e, int xproc, t_type_func list)
 	regist = get_x_from_position(e, e->process[xproc].position + (place % IDX_MOD), e->process[xproc].position + (place + 1 % IDX_MOD));
 	if (hex_to_dec(regist) > 16 || hex_to_dec(regist) < 1)
 		error = 1;
-	ft_printf_fd(e->fd, "Check_and -- %d & %d = %d\n", i[0], i[1], i[0] & i[1]);
+	// ft_printf_fd(e->fd, "Check_and -- %d & %d = %d\n", i[0], i[1], i[0] & i[1]);
 	if (!error)
 		e->process[xproc].reg[hex_to_dec(regist)] = (short int)(i[0] & i[1]);
 	if ((i[0] & i[1]) == 0 && !error)
@@ -111,7 +111,7 @@ void	and_func(t_env *e, int xproc, t_type_func list)
 	else
 		e->process[xproc].carry = 0;
 
-	ft_printf_fd(e->fd, "--->Function and\n--->Registre %d update:  [%d]\n", hex_to_dec(regist), e->process[xproc].reg[hex_to_dec(regist)]);
+	// ft_printf_fd(e->fd, "--->Function and\n--->Registre %d update:  [%d]\n", hex_to_dec(regist), e->process[xproc].reg[hex_to_dec(regist)]);
 	free(regist);
 	e->process[xproc].position = (e->process[xproc].position + list.size) % MEM_SIZE;
 }
