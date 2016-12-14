@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 22:00:22 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/13 18:56:18 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/14 14:06:02 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ void	ld_func(t_env *e, int xproc, t_type_func list)
 	}
 	if (!error)
 		e->process[xproc].reg[reg] = value;
-	if (value)
+	if (value && !error)
 		e->process[xproc].carry = 0;
-	else
+	else if (!error)
 		e->process[xproc].carry = 1;
 	e->process[xproc].position = (e->process[xproc].position + list.size) % MEM_SIZE;
 }

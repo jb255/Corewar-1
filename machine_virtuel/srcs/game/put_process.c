@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 12:53:56 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/13 19:14:15 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/14 15:23:02 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	set_process(t_env *e, int process_nb, int x, int creator)
 	init_process(e, process_nb);
 	e->process[process_nb].position = x % MEM_SIZE;
 	e->process[process_nb].start = x % MEM_SIZE;
-	e->process[process_nb].wait_time = e->process[creator].wait_time;
+	e->process[process_nb].wait_time = 1;
+	// e->process[process_nb].wait_time = e->process[creator].wait_time;
 	ft_memset(e->process[process_nb].reg, 0, 17);
 	while (i < 17)
 	{

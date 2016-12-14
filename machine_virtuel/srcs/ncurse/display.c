@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 16:58:08 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/13 19:14:30 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/14 13:08:55 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	print_cursor(t_env *e, int x)
 {
 	int		i;
 
-	i = -1;
-	while (++i < e->active_process)
+	i = e->active_process;
+	while (i > 0)
 	{
 		if (x == e->process[i].position)
 		{
@@ -26,6 +26,7 @@ void	print_cursor(t_env *e, int x)
 		"%02x", (unsigned int)(unsigned char)tab[x % MEM_SIZE]);
 			wattroff(e->window.memory, COLOR_PAIR(6));
 		}
+		i--;
 	}
 }
 

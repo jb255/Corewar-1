@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:19:51 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/13 18:53:06 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/14 14:58:18 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int		ind_funcheck_and(t_env *e, int xproc, int place, t_type_a type)
 		result[1] = get_x_from_position(e, e->process[xproc].position + (hex_to_dec(result[0]) % IDX_MOD), e->process[xproc].position + ((hex_to_dec(result[0]) + IND_SIZE) % IDX_MOD));
 		i = hex_to_dec(result[1]);
 		ft_printf_fd(e->fd, "Check_and/or -- addr [%s] value du IND [%s]", result[0], result[1]);
-
 		free(result[1]);
 	}
 	free(result[0]);
