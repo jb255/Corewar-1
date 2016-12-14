@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 13:39:34 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/14 20:38:28 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/14 21:20:59 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ int		get_i02_func_and(t_type_func list, t_env *e, int xproc, int *place)
 		i = e->process[xproc].reg[i];
 	}
 	else if (list.type[0].t_ind && (*place = 4))
+	{
 		i = to_int_getx(get_x_from_position(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place));
+		// i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + i, e->process[xproc].position + i + 2)) % IDX_MOD;
+	}
 	else if (list.type[0].t_dir && (*place = 4))
 		i = to_int_getx(get_x_from_position(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place));
 	return (i);

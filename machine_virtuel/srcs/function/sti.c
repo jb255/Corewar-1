@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 02:00:05 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/14 20:49:08 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/14 21:20:50 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,11 @@ int		get_i02_func_sti(t_type_func list, t_env *e, int xproc, int *place)
 			*place = -1;
 		i = e->process[xproc].reg[i];
 	}
-	else if (list.type[1].t_ind && (*place += 2))
-		i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place)) % IDX_MOD;
+	else if (list.type[1].t_ind && (*place += 2)){
+		i = to_int_getx(get_x_from_position(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place)) % IDX_MOD;
+		ft_printf_fd(e->fd, "A l'adresse ind %d\n", i);
+		i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + i, e->process[xproc].position + i + 2)) % IDX_MOD;
+	}
 	else if (list.type[1].t_dir && (*place += 2))
 		i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place)) % IDX_MOD;
 	return (i);
@@ -49,7 +52,7 @@ int		get_i1_2_func_sti(t_type_func list, t_env *e, int xproc, int *place)
 		i = e->process[xproc].reg[i];
 	}
 	else if (list.type[2].t_dir && (*place += 2))
-		i = ind_funcheck_and(e, xproc, *place, list.type[2]);
+		i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place)) % IDX_MOD;
 	return (i);
 }
 
@@ -66,6 +69,7 @@ void	sti_func(t_env *e, int xproc, t_type_func list)
 	i[1] = get_i02_func_sti(list, e, xproc, &place); // Valeur arg 1
 	i[2] = get_i1_2_func_sti(list, e, xproc, &place); // Valeur arg 2
 	i[3] = ((i[1]) + (i[2])) % IDX_MOD;
+	ft_printf_fd(e->fd, "sti -- id[3] = %d\nreg[%d], Arg 1 = %d // Arg 2 = %d\n",  i[3], i[0], i[1], i[2]);
 	if (place == -1)
 		error = 1;
 	if (!error)
