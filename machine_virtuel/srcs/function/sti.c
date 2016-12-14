@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 02:00:05 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/14 19:02:43 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/14 20:49:08 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <function.h>
 // sti : Opcode 11. Prend un registre, et deux index (potentiellement des registres).
 // Additionne les deux derniers, utilise cette somme comme une adresse ou sera copiée la valeur du premier paramètre.
-
+// {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}
 int		get_i02_func_sti(t_type_func list, t_env *e, int xproc, int *place)
 {
 	int		i;
@@ -28,9 +28,9 @@ int		get_i02_func_sti(t_type_func list, t_env *e, int xproc, int *place)
 		i = e->process[xproc].reg[i];
 	}
 	else if (list.type[1].t_ind && (*place += 2))
-		i = ind_funcheck_and(e, xproc, *place, list.type[1]);
+		i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place)) % IDX_MOD;
 	else if (list.type[1].t_dir && (*place += 2))
-		i = ind_funcheck_and(e, xproc, *place, list.type[1]);
+		i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place)) % IDX_MOD;
 	return (i);
 }
 

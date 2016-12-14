@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 13:39:34 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/14 20:04:43 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/14 20:38:28 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ int		get_i1_2_func_and(t_type_func list, t_env *e, int xproc, int *place)
 		i = e->process[xproc].reg[i];
 	}
 	else if (list.type[0].t_ind && (*place += 2))
-		i = to_int_getx(get_x_from_position(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place));
+		i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place)) % IDX_MOD;
 	else if (list.type[1].t_dir && (*place += 2))
-		i = to_int_getx(get_x_from_position(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place));
+		i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place)) % IDX_MOD;
 	return (i);
 }
 
@@ -71,7 +71,7 @@ void	ldi_func(t_env *e, int xproc, t_type_func list)
 	// if (list.type[1].t_reg && (i[1] > 16 || i[1] < 1))
 	i[0] = get_i02_func_and(list, e, xproc, &place); // Arg 1
 	i[1] = get_i1_2_func_and(list, e, xproc, &place); // Arg 2
-	i[3] = to_int_getx(get_x_from_position(e, e->process[xproc].position + (place), e->process[xproc].position + ((place + 1)))); // Arg3
+	i[3] = to_int_getx(get_x_from_position(e, e->process[xproc].position + place, e->process[xproc].position + (place + 1))); // Arg3
 	ft_printf_fd(e->fd, "{%d} {%d} {%d}\n", i[0], i[1], i[3]);
 	i[2] = ((i[1] + i[0])) % MEM_SIZE; // Ajout de l'arg 2 a l'arg 1
 	ft_printf_fd(e->fd, "Value ldi to search %d\n", i[2]);
