@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 02:00:05 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/14 21:20:50 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/14 21:59:40 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@ int		get_i02_func_sti(t_type_func list, t_env *e, int xproc, int *place)
 		i = e->process[xproc].reg[i];
 	}
 	else if (list.type[1].t_ind && (*place += 2)){
-		i = to_int_getx(get_x_from_position(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place)) % IDX_MOD;
-		ft_printf_fd(e->fd, "A l'adresse ind %d\n", i);
-		i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + i, e->process[xproc].position + i + 2)) % IDX_MOD;
+		i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place)) % IDX_MOD;
+		// ft_printf_fd(e->fd, "A l'adresse ind %d\n", i);
 	}
 	else if (list.type[1].t_dir && (*place += 2))
 		i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place)) % IDX_MOD;
@@ -65,17 +64,18 @@ void	sti_func(t_env *e, int xproc, t_type_func list)
 	error = 0;
 	place = 3;
 	(void)list;
-	i[0] = to_int_getx(get_x_from_position(e, e->process[xproc].position + 2, e->process[xproc].position + 3)); // Valeur du reg
+	i[0] = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + 2, e->process[xproc].position + 3)); // Valeur du reg
 	i[1] = get_i02_func_sti(list, e, xproc, &place); // Valeur arg 1
 	i[2] = get_i1_2_func_sti(list, e, xproc, &place); // Valeur arg 2
 	i[3] = ((i[1]) + (i[2])) % IDX_MOD;
-	ft_printf_fd(e->fd, "sti -- id[3] = %d\nreg[%d], Arg 1 = %d // Arg 2 = %d\n",  i[3], i[0], i[1], i[2]);
+	// ft_printf_fd(e->fd, "sti -- id[3] = %d\nreg[%d], Arg 1 = %d // Arg 2 = %d\n",  i[3], i[0], i[1], i[2]);
+	i[3] = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + i[3], e->process[xproc].position + i[3] + 2)) % IDX_MOD;
 	if (place == -1)
 		error = 1;
 	if (!error)
 	{
-		write_from_x(e, (e->process[xproc].position + i[3]), e->process[xproc].reg[i[0]], 4);
-		write_from_tab2((e->process[xproc].position + i[3]), 4, e->process[xproc].id_player + 1);
+		write_from_x(e, (e->process[xproc].position + 1 + i[3]), e->process[xproc].reg[i[0]], 4);
+		write_from_tab2((e->process[xproc].position + 1+ i[3]), 4, e->process[xproc].id_player + 1);
 	}
 	e->process[xproc].position = (e->process[xproc].position + list.size) % MEM_SIZE;
 }
