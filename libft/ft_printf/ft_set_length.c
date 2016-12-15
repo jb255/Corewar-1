@@ -66,7 +66,10 @@ char			*ft_set_length(T_LIST *trail, char *result)
 	i = 0;
 	j = -1;
 	if (!ft_strcmp(result, "0") && !trail->accuracy && !trail->alternate)
+	{
+		free(result);
 		return (ft_strnew(1));
+	}
 	if (trail->format == 'x' || trail->format == 'X' || trail->type == 'p')
 		return (result = set_x_length(trail, result));
 	while (result[++j] != 0)
