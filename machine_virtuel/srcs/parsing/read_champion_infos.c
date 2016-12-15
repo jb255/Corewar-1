@@ -19,14 +19,15 @@ char	*read_name(char *file_player)
 	int		index;
 
 	byte = 4;
-	res = malloc(PROG_NAME_LENGTH);
+	res = malloc(PROG_NAME_LENGTH + 1);
 	index = 0;
-	while (byte != PROG_NAME_LENGTH)
+	while (index != PROG_NAME_LENGTH)
 	{
 		res[index] = file_player[byte];
 		index++;
 		byte++;
 	}
+	res[index] = 0;
 	return (res);
 }
 
@@ -37,13 +38,14 @@ char	*read_comment(char *file_player)
 	int		index;
 
 	byte = 140;
-	res = malloc(COMMENT_LENGTH);
+	res = malloc(COMMENT_LENGTH + 1);
 	index = 0;
-	while (byte != COMMENT_LENGTH)
+	while (index != COMMENT_LENGTH)
 	{
 		res[index] = file_player[byte];
 		index++;
 		byte++;
 	}
+	res[index] = 0;
 	return (res);
 }
