@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:57:55 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/08 17:44:22 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/15 12:54:35 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ void	get_flag_prog(char *arg, t_env *e)
 	{
 		if (!ft_isid(arg))
 			vm_error("-dump error");
-		e->flag.dump = ft_atoi(arg);
+		if ((e->flag.dump = ft_atoi(arg)) <= 0)
+			vm_error("-dump error");
 		e->flag.flag_dump = 0;
 	}
 	else if (e->flag.flag_number == 1)

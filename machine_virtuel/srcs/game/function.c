@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:37:17 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/14 20:55:10 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/15 12:19:21 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ t_type_func check_jump(t_env *e, char *op_size, int func)
 	if (!ft_strcmp("00000000", op_size)){
 		list.func = -1;
 		list.error = -1;
+		free(op_size);
 		return list;
 	}
-
 	if (ft_strlen(op_size) != 8)
 	{
 		ft_putstr_fd("ERROR - check_jump op_size != 8 ->>", e->fd);

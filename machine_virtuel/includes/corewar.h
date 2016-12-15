@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/14 21:33:50 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/15 12:35:27 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ int		get_i0_func_and(t_type_func list, t_env *e, int xproc, int *place);
 int		get_i1_func_and(t_type_func list, t_env *e, int xproc, int *place);
 int		get_i02_func_and(t_type_func list, t_env *e, int xproc, int *place);
 int		get_i1_2_func_and(t_type_func list, t_env *e, int xproc, int *place);
-
+void	write_tab(void);
 void	delete_process(t_env *e, int process_nb);
 //
 #endif

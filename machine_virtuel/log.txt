@@ -3,4 +3,29 @@
 
 
 e->process[0].reg[1] = -1
-Regist 23427
+[0;31m(`'-._ Live for Candy _.-'`)[0;m
+[0;31m(`'-._ Live for Candy _.-'`)[0;m
+--Fork new process at 14
+Live_status new fork 0
+Le process 1 doit etre supprimé
+--Fork new process at 663
+Live_status new fork 0
+[0;31m(`'-._ Live for (null) _.-'`)[0;m
+[0;31m(`'-._ Live for Candy _.-'`)[0;m
+--Fork new process at 535
+Live_status new fork 0
+[0;31m(`'-._ Live for (unknow) _.-'`)[0;m
+--Fork new process at 342
+Live_status new fork 0
+[0;31m(`'-._ Live for (null) _.-'`)[0;m
+[0;31m(`'-._ Live for (unknow) _.-'`)[0;m
+[0;31m(`'-._ Live for Candy _.-'`)[0;m
+[0;31m(`'-._ Live for (unknow) _.-'`)[0;m
+[0;31m(`'-._ Live for (unknow) _.-'`)[0;m
+[0;31m(`'-._ Live for (unknow) _.-'`)[0;m
+[0;31m(`'-._ Live for (unknow) _.-'`)[0;m
+[0;31m(`'-._ Live for (unknow) _.-'`)[0;m
+[0;31m(`'-._ Live for (unknow) _.-'`)[0;m
+[0;31m(`'-._ Live for (unknow) _.-'`)[0;m
+[0;31m(`'-._ Live for Candy _.-'`)[0;m
+[0;31m(`'-._ Live for (unknow) _.-'`)[0;m

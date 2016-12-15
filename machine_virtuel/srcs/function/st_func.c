@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 04:07:26 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/14 22:30:57 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/15 14:17:03 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ void	st_func(t_env *e, int xproc, t_type_func list)
 	}
 	else if (list.type[1].t_ind)
 	{
-		regist = to_int_getx(get_x_from_position(e, e->process[xproc].position + 3, e->process[xproc].position + 5));
-		ft_printf_fd(e->fd, "Regist %d\n", regist);
+		regist = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + 3, e->process[xproc].position + 5));
 		y = (e->process[xproc].position + (regist % IDX_MOD)) % MEM_SIZE;
 		write_from_x(e, y, e->process[xproc].reg[reg], 4);
 		write_from_tab2(y, 4, e->process[xproc].id_player + 1);

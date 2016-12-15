@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 12:59:13 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/13 19:16:09 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/15 14:15:52 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,11 @@ void	display_memoryspeed(t_env *e)
 	init_index(&e->memory_data[2], &e->memory_data[0], &e->memory_data[1]);
 	while (!memory_run(e))
 	{
-		e->arena.cycle--;
-		if (e->arena.cycle == 1000)
-			break;
+		e->arena.cycle++;
+		if (e->arena.cycle == e->flag.dump)
+			return (write_tab());
+		if (e->active_process == MAX_PROCESS)
+			break ;
 	}
 }
 
@@ -49,11 +51,12 @@ int		main(int argc, char **argv)
 	e->fd = open("log.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	op_tab(e);
 	ft_printf_fd(e->fd, "%080s%d\n\n\n\n", ".NEW LAUNCH.", 111607808 % MEM_SIZE );
-
 	e->flag.live_call = 0;
 	e->flag.cycle_to_die = CYCLE_TO_DIE;
 	parsing_arg(argv, e);
 	init_curse();
+	// tab[1040] = 1;
+	// tab2[1040] = 1;
 	put_player(e);
 	e->arena.cycle = 0;
 	e->flag.pause = 0;

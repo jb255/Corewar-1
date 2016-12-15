@@ -1,4 +1,6 @@
 .name "viko"
 .comment "I'M ALIIIIVE"
 
-st r1, 34533578398595
+ld %0, r5
+fork %5
+zjmp %500

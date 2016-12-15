@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 16:58:08 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/14 17:56:34 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/15 14:25:59 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,20 @@ void	check_all_process(t_env *e)
 {
 	int		x;
 
-	x = 0;
-	while (x < e->active_process)
+	x = e->active_process - 1;
+	while (x >= 0)
 	{
 		if (e->process[x].live_status == 0)
+		{
+			ft_printf_fd(e->fd, "Le process %d doit etre supprimé\n", x);
 			delete_process(e, x);
-		x++;
+		}
+		else
+			e->process[x].live_status = 0;
+		x--;
 	}
+	e->arena.cycle = 0;
+	e->flag.live_call = 0;
 }
 
 void	update_cycle(t_env *e)
@@ -102,7 +109,7 @@ void	display_memory(t_env *e)
 		e->arena.cycle++;
 		if (e->active_process == MAX_PROCESS)
 			break ;
-		// update_cycle(e);
+		update_cycle(e);
 		display_info_menu(e);
 	}
 }
