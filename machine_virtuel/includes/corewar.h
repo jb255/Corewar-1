@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/15 12:35:27 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/15 16:02:04 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,14 @@ struct					s_flag
 	int					dump;
 	int					flag_number;
 	int					cycle_to_die;
+	int					is_decremented;
 };
 
 typedef struct s_arena	t_arena;
 struct					s_arena
 {
 	int					cycle;
+	int					winner;
 };
 
 typedef struct				s_op
@@ -126,7 +128,10 @@ void		lldi_func(t_env *e, int xproc, t_type_func list);
 void		lfork_func(t_env *e, int xproc, t_type_func list);
 void		aff_func(t_env *e, int xproc, t_type_func list);
 
-t_type_func check_jump(t_env *e, char *op_size, int func);
+void	update_cycle(t_env *e);
+int				check_all_processlive(t_env *e);
+void			victory_player(t_env *e);
+t_type_func 	check_jump(t_env *e, char *op_size, int func);
 t_type_func		find_label(t_env *e, int x);
 //
 

@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 21:59:34 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/01 12:01:42 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/15 16:42:47 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,24 @@
 
 void	sub_func(t_env *e, int xproc, t_type_func list)
 {
-	char	*regist[3];
+	int		i[3];
+	int		error;
 
-	regist[0] = get_x_from_position(e, 2, 3);
-	regist[1] = get_x_from_position(e, 3, 4);
-	regist[2] = get_x_from_position(e, 4, 5);
-	if (list.type[0].t_reg && list.type[1].t_reg && list.type[2].t_reg)
-		e->process[xproc].reg[hex_to_dec(regist[2])] =
-		e->process[xproc].reg[hex_to_dec(regist[0])] -
-		e->process[xproc].reg[hex_to_dec(regist[1])];
-	ft_printf_fd(e->fd, "--->Function sub\n--->Registre %d update:  [%d]\n", hex_to_dec(regist[2]), e->process[xproc].reg[hex_to_dec(regist[2])]);
-	free(regist[0]);
-	free(regist[1]);
-	free(regist[2]);
+	error = 0;
+	i[0] = to_int_getx(get_x_from_position(e, e->process[xproc].position + 2, e->process[xproc].position + 3));
+	i[1] = to_int_getx(get_x_from_position(e, e->process[xproc].position + 3, e->process[xproc].position + 4));
+	i[2] = to_int_getx(get_x_from_position(e, e->process[xproc].position + 4, e->process[xproc].position + 5));
+	if ((i[0] > 16 || i[0] < 1) || (i[1] > 16 || i[1] < 1) || (i[2] > 16 || i[2] < 1))
+		error = 1;
+	if (list.type[0].t_reg && list.type[1].t_reg && list.type[2].t_reg && !error)
+	{
+		e->process[xproc].reg[i[2]] =
+		e->process[xproc].reg[i[0]] -
+		e->process[xproc].reg[i[1]];
+	}
+	if (i[2] && !error)
+		e->process[xproc].carry = 0;
+	else if (!error)
+		e->process[xproc].carry = 1;
 	e->process[xproc].position = (e->process[xproc].position + list.size) % MEM_SIZE;
 }

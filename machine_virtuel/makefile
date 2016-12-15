@@ -27,7 +27,7 @@ all:
 	@make -j4 $(NAME)
 
 $(NAME): $(O_FILES)
-	@$(CC) $(CFLAGS) $(LIBS) $(H_DIR) $(O_FILES) $(FT_O) $(INCURSES) -L../libft -lft -o $(NAME) && printf "\033[0;32m" || printf "\033[0;31m"
+	@$(CC) -O3 $(CFLAGS) $(LIBS) $(H_DIR) $(O_FILES) $(FT_O) $(INCURSES) -L../libft -lft -o $(NAME) && printf "\033[0;32m" || printf "\033[0;31m"
 	@echo -e "\033[1;32m"
 	@echo ""
 	@echo "_____"

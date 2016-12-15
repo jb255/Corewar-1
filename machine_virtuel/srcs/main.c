@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 12:59:13 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/15 14:15:52 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/15 16:01:40 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	display_memoryspeed(t_env *e)
 			return (write_tab());
 		if (e->active_process == MAX_PROCESS)
 			break ;
+		update_cycle(e);
+
 	}
 }
 
@@ -52,6 +54,7 @@ int		main(int argc, char **argv)
 	op_tab(e);
 	ft_printf_fd(e->fd, "%080s%d\n\n\n\n", ".NEW LAUNCH.", 111607808 % MEM_SIZE );
 	e->flag.live_call = 0;
+	e->flag.is_decremented = 0;
 	e->flag.cycle_to_die = CYCLE_TO_DIE;
 	parsing_arg(argv, e);
 	init_curse();

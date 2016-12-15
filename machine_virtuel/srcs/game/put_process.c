@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 12:53:56 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/15 14:12:59 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/15 15:56:36 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	delete_process(t_env *e, int process_nb)
 	}
 	e->active_process--;
 	if (!e->active_process)
-		vm_error("STOP");
+		victory_player(e);
 }
 
 void	set_process(t_env *e, int process_nb, int x, int creator)
