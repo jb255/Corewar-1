@@ -43,7 +43,8 @@ static void	ft_print(char *str)
 			str[i] = 0;
 		i++;
 	}
-	write(1, str, z);
+	if (z != 0)
+		write(1, str, z);
 }
 
 int			ft_printf(char const *fmt, ...)
