@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:59:38 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/14 22:28:05 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/15 18:11:14 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ char	*get_x_from_position(t_env *e, int from, int at)
             free(tmp);
 		free(name);
 	}
+	ft_printf_fd(e->fd, "%s\n", result);
 	return (result);
 }

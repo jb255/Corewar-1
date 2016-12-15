@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 13:39:34 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/15 16:46:04 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/15 18:22:50 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,24 @@ int		get_i02_func_and(t_type_func list, t_env *e, int xproc, int *place)
 	i = 0;
 	if (*place == -1)
 		return (i);
-	if (list.type[0].t_reg && (*place = 3))
+	if (list.type[0].t_reg && (*place += 1))
 	{
+
 		i = reg_funcheck_and(e, xproc, *place);
 		if (i > 16 || i < 1)
 			*place = -1;
+		ft_printf_fd(e->fd , "Registre %d\n", i);
 		i = e->process[xproc].reg[i];
 	}
-	else if (list.type[0].t_ind && (*place = 4))
+	else if (list.type[0].t_ind && (*place += 2))
 	{
-		i = to_int_getx(get_x_from_position(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place));
-		// i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + i, e->process[xproc].position + i + 2)) % IDX_MOD;
+		i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place)) % IDX_MOD;
+		ft_printf_fd(e->fd , "Indirect %d\n", i);
+
+		// i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + 1 +i, e->process[xproc].position + i + 1+ 2)) % IDX_MOD;
 	}
-	else if (list.type[0].t_dir && (*place = 4))
-		i = to_int_getx(get_x_from_position(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place));
+	else if (list.type[0].t_dir && (*place += 2))
+		i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place)) % IDX_MOD;
 	return (i);
 }
 
@@ -56,10 +60,10 @@ int		get_i1_2_func_and(t_type_func list, t_env *e, int xproc, int *place)
 			*place = -1;
 		i = e->process[xproc].reg[i];
 	}
-	else if (list.type[0].t_ind && (*place += 2))
+	else if (list.type[1].t_ind && (*place += 2))
 	{
 		i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place)) % IDX_MOD;
-		// i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + i, e->process[xproc].position + i + 2)) % IDX_MOD;
+		// i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + 1 +i, e->process[xproc].position + i + 1+ 2)) % IDX_MOD;
 	}
 	else if (list.type[1].t_dir && (*place += 2))
 		i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place)) % IDX_MOD;
@@ -73,7 +77,7 @@ void	ldi_func(t_env *e, int xproc, t_type_func list)
 	int		error;
 
 	error = 0;
-	place = 0;
+	place = 3;
 	// if (list.type[1].t_reg && (i[1] > 16 || i[1] < 1))
 	i[0] = get_i02_func_and(list, e, xproc, &place); // Arg 1
 	i[1] = get_i1_2_func_and(list, e, xproc, &place); // Arg 2
