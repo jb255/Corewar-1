@@ -45,13 +45,15 @@ static char		*set_ds_length(T_LIST *trail, char *result, int i, int j)
 {
 	char	*insert;
 
-	insert = ft_strset(ft_strnew(i), i, '0');
+	if (i >= 0)
+		insert = ft_strset(ft_strnew(i), i, '0');
 	if (trail->type == 'd' && i > 0)
 		result = ft_repstr(result, j, j, insert);
-	free(insert);
+	if (i >= 0)
+		free(insert);
 	if (trail->type == 'S' && trail->accuracy != -1)
 		result[get_slen(trail->w_size, trail->accuracy)] = 0;
-	else if (trail->type == 's')
+	else if (trail->type == 's' && trail->accuracy >= 0)
 		result[trail->accuracy] = 0;
 	return (result);
 }
