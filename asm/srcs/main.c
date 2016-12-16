@@ -101,7 +101,7 @@ int					main(int argc, char **argv)
 	if (!ft_strcmp(argv[1], "-a"))
 		print_all(&e);
 	else
-		ft_printf("Writing output program to %s\n", argv[argc - 1]);
+		ft_printf("Writing output program to %s\n", e.name_file);
 	create_file(&e);
 	return (0);
 }

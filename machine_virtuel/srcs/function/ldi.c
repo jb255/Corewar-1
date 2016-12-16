@@ -34,8 +34,10 @@ int		get_i02_func_and(t_type_func list, t_env *e, int xproc, int *place)
 	}
 	else if (list.type[0].t_ind && (*place = 4))
 	{
-		i = to_int_getx(get_x_from_position(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place));
-		// i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + i, e->process[xproc].position + i + 2)) % IDX_MOD;
+		i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place)) % IDX_MOD;
+		ft_printf_fd(e->fd, "valeur de i0 %d\n", i);
+		i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + i + 1, e->process[xproc].position + i + 3)) % IDX_MOD;
+		ft_printf_fd(e->fd, "valeur de i0 %d process %d\n", i, e->process[xproc].position + i);
 	}
 	else if (list.type[0].t_dir && (*place = 4))
 		i = to_int_getx(get_x_from_position(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place));
@@ -59,7 +61,9 @@ int		get_i1_2_func_and(t_type_func list, t_env *e, int xproc, int *place)
 	else if (list.type[0].t_ind && (*place += 2))
 	{
 		i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place)) % IDX_MOD;
-		// i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + i, e->process[xproc].position + i + 2)) % IDX_MOD;
+		ft_printf_fd(e->fd, "valeur de i1 %d\n", i);
+		i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + i, e->process[xproc].position + i + 2)) % IDX_MOD;
+		ft_printf_fd(e->fd, "valeur de i1 %d\n", i);
 	}
 	else if (list.type[1].t_dir && (*place += 2))
 		i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place)) % IDX_MOD;
