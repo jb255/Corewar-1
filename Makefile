@@ -15,17 +15,17 @@
 all:
 	make -C ./libft/
 	make -C ./machine_virtuel/
-	make -C ./asm/
+	make -C ./assembleur/
 
 clean:
 	make -C ./libft/ clean
 	make -C ./machine_virtuel/ clean
-	make -C ./asm/ clean
+	make -C ./assembleur/ clean
 
 
 fclean: clean
 	make -C ./libft/ fclean
 	make -C ./machine_virtuel/ fclean
-	make -C ./asm/ fclean
+	make -C ./assembleur/ fclean
 
 re: fclean all
