@@ -18,9 +18,9 @@ wchar_t		*ft_conv_wchar(char *str)
 	int		i;
 
 	i = -1;
-	if (!str)
+	if (!str || !str[0])
 		return (NULL);
-	res = (wchar_t*)malloc(sizeof(wchar_t) * ft_strlen(str) + 1);
+	res = (wchar_t*)malloc(sizeof(wchar_t) * (ft_strlen(str) + 1));
 	while (str[++i] != 0)
 		res[i] = (unsigned char)str[i];
 	res[i] = 0;

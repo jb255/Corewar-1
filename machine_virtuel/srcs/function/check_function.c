@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:59:38 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/14 22:28:05 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/16 02:38:43 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 
 char	*get_x_from_position(t_env *e, int from, int at)
 {
-	char            *result = "";
-    char            *name;
-    int                index;
-    char            *tmp;
+	char			*result;
+    char			*name;
+    int				index;
+    char			*tmp;
 
     (void)e;
+	result = "";
     if (from < 0)
         from = MEM_SIZE + from;
     index = from % MEM_SIZE;

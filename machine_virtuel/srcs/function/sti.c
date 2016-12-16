@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 02:00:05 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/15 14:39:29 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/15 17:22:17 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int		get_i02_func_sti(t_type_func list, t_env *e, int xproc, int *place)
 	else if (list.type[1].t_ind && (*place += 2)){
 		i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place)) % IDX_MOD;
 		ft_printf_fd(e->fd, "Indirect %d\n", i);
-		i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + 1 + i, e->process[xproc].position + i +1 + 2));
+		i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + 1 + i, e->process[xproc].position + i + 1 + 2));
 	}
 	else if (list.type[1].t_dir && (*place += 2))
 		i = (short)to_int_getx(get_x_from_position(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place)) % IDX_MOD;

@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 21:59:31 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/15 16:16:24 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/16 02:44:54 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,6 @@ int		name_process(t_env *e, char	*name)
 	return (0);
 }
 
-// void	check_all_processlive(t_env *e)
-// {
-// 	int		x;
-// 	int		i;
-//
-// 	x = e->active_process;
-// 	while (x >= 0)
-// 	{
-// 		if (e->process[x].live_status == 0)
-// 			i = 1;
-// 		x--;
-// 	}
-// 	return (i);
-// }
-
 void	live_func(t_env *e, int xproc, t_type_func list)
 {
 	char		*result;
@@ -58,12 +43,15 @@ void	live_func(t_env *e, int xproc, t_type_func list)
 	id = name_process(e, result);
 	e->process[xproc].live_status++;
 	if (id < e->active_players)
+	{
 		ft_printf_fd(e->fd, ""RED"(`'-._ Live for %s _.-'`)"NORM"\n", e->players[id].name);
+	}
 	else{
 		ft_printf_fd(e->fd, ""RED"(`'-._ Live for %s[%d] _.-'`)"NORM"\n", "(unknow)", id);
-		e->arena.winner = xproc;
 	}
-	e->flag.live_call++;
+	e->arena.winner = e->process[xproc].id_player;
+	// e->arena.winner = xproc;
+	e->arena.live_call++;
 	e->process[xproc].position = (e->process[xproc].position + list.size) % MEM_SIZE;
 	free(result);
 }

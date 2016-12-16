@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 13:38:40 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/15 16:38:35 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/15 22:00:43 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,17 @@
 void	or_func(t_env *e, int xproc, t_type_func list)
 {
 	int		i[4];
-	int		error;
 	int		place;
+	int		error;
 
-	place = 3;
 	error = 0;
-	i[0] = get_i02_func_and(list, e, xproc, &place); // VALUE du reg
-	i[1] = get_i1_2_func_and(list, e, xproc, &place);
+	place = 2;
+	i[0] = get_xorandor_arg(list.type[0], e, xproc, &place); // VALUE du reg
+	i[1] = get_xorandor_arg(list.type[1], e, xproc, &place);
 	i[2] = to_int_getx(get_x_from_position(e, e->process[xproc].position + place, e->process[xproc].position + (place + 1))); // Arg3
-	i[3] = (i[0] | i[1]);
+	ft_printf_fd(e->fd, "Arg1[%d] // Arg2[%d] // Arg3[%d]\n", i[0], i[1], i[2]);
+	i[3] = (i[0] ^ i[1]);
+	ft_printf_fd(e->fd, "result i[3] = %d\n", i[3]);
 	if (place == -1)
 		error = 1;
 	if (!error)

@@ -6,14 +6,14 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 00:52:00 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/13 18:46:03 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/16 01:26:04 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include "n_curse.h"
 
-void	init_curse()
+void	init_curse(t_env *e)
 {
 	int n;
 
@@ -24,11 +24,17 @@ void	init_curse()
 		tab2[n] = 0;
 		n++;
 	}
+	e->arena.live_call = 0;
+	e->flag.is_decremented = 0;
+	e->arena.cycle_total = 0;
+	e->arena.cycle_to_die = CYCLE_TO_DIE;
+	e->arena.cycle = 0;
+	e->flag.pause = 0;
 }
 
 void			init_process(t_env *e, int nb)
 {
-	e->flag.time_cycle = 10000;
+	e->arena.time_cycle = 1;
 	e->process[nb].start = 0;
 	e->process[nb].position = 0;
 	e->process[nb].jumptodo = 0;

@@ -33,7 +33,7 @@ int		printf_loop(T_LIST **tmp, va_list *args, char **result)
 static void	ft_print(char *str)
 {
 	int		i;
-	char	z;
+	int		z;
 
 	i = 0;
 	z = ft_strlen(str);
@@ -43,7 +43,8 @@ static void	ft_print(char *str)
 			str[i] = 0;
 		i++;
 	}
-	write(1, str, z);
+	if (z != 0)
+		write(1, str, z);
 }
 
 int			ft_printf(char const *fmt, ...)
@@ -72,7 +73,7 @@ int			ft_printf(char const *fmt, ...)
 char		*ft_sprint(char *str)
 {
 	int		i;
-	char	z;
+	int		z;
 
 	i = 0;
 	z = ft_strlen(str);
