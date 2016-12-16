@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 01:16:37 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/14 20:22:26 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/16 01:22:22 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ int		memory_run(t_env *e)
 				e->process[x].position = (e->process[x].position + 1) % MEM_SIZE;
 			e->process[x].wait_time = 0;
 		}
-		// else
-		// 	getch();
 		x--;
 	}
 	// 2 = addr

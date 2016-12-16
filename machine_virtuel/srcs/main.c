@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 12:59:13 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/15 16:01:40 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/16 02:14:32 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,7 @@ void	display_memoryspeed(t_env *e)
 		e->arena.cycle++;
 		if (e->arena.cycle == e->flag.dump)
 			return (write_tab());
-		if (e->active_process == MAX_PROCESS)
-			break ;
 		update_cycle(e);
-
 	}
 }
 
@@ -52,17 +49,11 @@ int		main(int argc, char **argv)
 		vm_error("Need more argument!");
 	e->fd = open("log.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	op_tab(e);
-	ft_printf_fd(e->fd, "%080s%d\n\n\n\n", ".NEW LAUNCH.", 111607808 % MEM_SIZE );
-	e->flag.live_call = 0;
-	e->flag.is_decremented = 0;
-	e->flag.cycle_to_die = CYCLE_TO_DIE;
+	ft_printf_fd(e->fd, "%080s---\n\n\n\n", ".NEW LAUNCH.");
 	parsing_arg(argv, e);
-	init_curse();
-	// tab[1040] = 1;
-	// tab2[1040] = 1;
+	init_curse(e);
 	put_player(e);
-	e->arena.cycle = 0;
-	e->flag.pause = 0;
+	ft_printf_fd(e->fd, "DATA----%d\n", tab[0]);
 	if (e->flag.flag_n)
 		n_curse(e);
 	else

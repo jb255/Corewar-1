@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 16:58:08 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/15 16:03:35 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/16 02:37:59 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,51 +67,18 @@ void	write_memory(t_env *e)
 	e->memory_data[2] = 0;
 }
 
-void	check_all_process(t_env *e)
-{
-	int		x;
-
-	x = e->active_process - 1;
-	while (x >= 0)
-	{
-		if (e->process[x].live_status == 0)
-		{
-			ft_printf_fd(e->fd, "Le process %d doit etre supprimé\n", x);
-			delete_process(e, x);
-		}
-		else
-			e->process[x].live_status = 0;
-		x--;
-	}
-	if (e->flag.live_call >= NBR_LIVE)
-		e->flag.cycle_to_die -= CYCLE_DELTA;
-	e->flag.is_decremented++;
-	e->arena.cycle = 0;
-	e->flag.live_call = 0;
-}
-
-void	update_cycle(t_env *e)
-{
-	if (!e->active_process)
-		victory_player(e);
-	if (e->arena.cycle >= e->flag.cycle_to_die)
-		check_all_process(e);
-	if (e->flag.is_decremented >= MAX_CHECKS)
-	{
-		e->flag.cycle_to_die -= CYCLE_DELTA;
-		e->flag.is_decremented = 0;
-	}
-}
 
 void	display_memory(t_env *e)
 {
 	e->window.memory = newwin(66, 194, 1, 1);
 	init_index(&e->memory_data[2], &e->memory_data[0], &e->memory_data[1]);
 	write_memory(e);
+	press_start(e);
 	while (!memory_run(e))
 	{
 		write_memory(e);
 		e->arena.cycle++;
+		e->arena.cycle_total++;
 		if (e->active_process == MAX_PROCESS)
 			break ;
 		update_cycle(e);
@@ -124,11 +91,4 @@ void	display_delete(t_env *e)
 	delwin(e->window.tab);
 	delwin(e->window.memory);
     delwin(e->window.menu);
-}
-
-void	victory_player(t_env *e)
-{
-	endwin();
-	ft_printf("\nle joueur %d(%s) a gagne\n", e->players[e->arena.winner].id_live, e->players[e->arena.winner].name);
-	exit(1);
 }

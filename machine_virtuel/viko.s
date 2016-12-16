@@ -1,6 +1,8 @@
 .name "viko"
 .comment "I'M ALIIIIVE"
 
-ld %0, r5
-fork %5
-zjmp %500
+test:
+	ld %0, r4
+	live %-1
+	fork %:test
+	zjmp %:test

@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 12:53:56 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/15 15:56:36 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/16 02:24:25 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	set_process(t_env *e, int process_nb, int x, int creator)
 	e->process[process_nb].position = x % MEM_SIZE;
 	e->process[process_nb].start = x % MEM_SIZE;
 	e->process[process_nb].wait_time = 1;
-	// e->process[process_nb].wait_time = e->process[creator].wait_time;
 	ft_memset(e->process[process_nb].reg, 0, 17);
 	while (i < 17)
 	{
@@ -51,5 +50,4 @@ void	set_process(t_env *e, int process_nb, int x, int creator)
 	}
 	e->process[process_nb].id_player = creator;
 	e->process[process_nb].carry = e->process[creator].carry;
-	ft_printf_fd(e->fd, "Live_status new fork %d\n", e->process[process_nb].live_status);
 }

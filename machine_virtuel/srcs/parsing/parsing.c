@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:57:55 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/15 12:54:35 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/16 02:03:19 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,15 @@ void	get_flag_prog(char *arg, t_env *e)
 	if (e->flag.flag_dump == 1)
 	{
 		if (!ft_isid(arg))
-			vm_error("-dump error");
+			vm_error("Error flag ! [-dump]");
 		if ((e->flag.dump = ft_atoi(arg)) <= 0)
-			vm_error("-dump error");
+			vm_error("Error flag ! [-dump]");
 		e->flag.flag_dump = 0;
 	}
 	else if (e->flag.flag_number == 1)
 	{
 		if (!ft_isid(arg) && ft_atoi(arg) != 0)
-			vm_error("-n error");
+			vm_error("Error flag ! [-n]");
 		e->players[e->active_players].id_live = ft_atoi(arg);
 		e->flag.flag_number = 0;
 	}
@@ -136,7 +136,7 @@ void	parsing_arg(char **arg, t_env *e)
 	x = 0;
 	ft_printf("Introducing all players...\n");
 	if (!e->active_players)
-		vm_error("No player");
+		vm_error("No player. Choose players.");
 	while (x < e->active_players)
 	{
 		reading_file(e, x);
@@ -144,9 +144,9 @@ void	parsing_arg(char **arg, t_env *e)
 		ft_printf(" \"%s\" (\"%s\") !\n",e->players[x].name, e->players[x].comment);
 		e->players[x].id_player = x;
 		size_total += e->players[x].size_func;
+		if (CHAMP_MAX_SIZE < e->players[x].size - BYTE_START_CODE)
+			vm_error("Not enough space available.");
 		x++;
 	}
-	if ((MEM_SIZE) < size_total)
-		vm_error("Not enough space available.");
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 17:50:40 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/13 19:02:52 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/16 01:09:54 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ void			wait_time_downer(t_env *e, int xproc, int func)
 
 t_type_func		find_label(t_env *e, int x)
 {
-	char		*label = NULL;
 	char		*free_me = NULL;
 	t_type_func	list;
 	int			func;
 
 	e->process[x].id_player = tab2[e->process[x].position] - 1;
-	label = ft_sprintf("%02x", (unsigned char)tab[e->process[x].position % MEM_SIZE]);
-	func = instruct_tab_value(label);
+	func = tab[e->process[x].position % MEM_SIZE];
+	if (func > 16 || func < 1)
+		func = -1;
 	list.error = 0;
 	if ((func != 1 && func != 12 && func != 15 && func != -1 && func != 9))
 	{
@@ -60,6 +60,5 @@ t_type_func		find_label(t_env *e, int x)
 	list.func = func;
 	list.size = special_func(e, x, func, list.size);
 	wait_time_downer(e, x, func);
-	free(label);
 	return (list);
 }

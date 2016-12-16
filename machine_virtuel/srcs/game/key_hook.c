@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:20:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/14 20:07:17 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/16 01:50:08 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,21 @@
 int		key_hook(t_env *e)
 {
 	int		keycode;
+	int		done;
 
+	done = 0;
 	keycode = getch();
 	if (keycode == 27)
 		return (27);
-	if (keycode == 43 && e->flag.time_cycle < 100000) // +
-		e->flag.time_cycle += 1000;
-	else if (keycode == 45 && e->flag.time_cycle == 2000) // -
-		e->flag.time_cycle -= 1000;
-	if (keycode == 32 && !e->flag.pause)
-	{
-		e->flag.pause = 1;
-		display_info_menu(e);
-	}
-	else if (keycode == 32 && e->flag.pause == 1)
-	{
-		e->flag.pause = 0;
-		display_info_menu(e);
-	}
-	if (keycode == 112) // p
+	if (keycode == 43 && e->arena.time_cycle < 4 && (done = 1)) // +
+		e->arena.time_cycle += 1;
+	else if (keycode == 45 && e->arena.time_cycle > 1 && (done = 1)) // -
+		e->arena.time_cycle -= 1;
+	if (keycode == 32 && (done = 1)) // Enter
+		e->flag.pause = e->flag.pause == 1 ? 0 : 1;
+	if (keycode == 112 && (done = 1)) // p
 		e->flag.obo = e->flag.obo == 1 ? 0 : 1;
-	return (0);
+	if (done)
+		display_info_menu(e);
+	return (keycode);
 }

@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/15 16:02:04 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/16 02:38:28 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,17 @@ unsigned char tab[MEM_SIZE];
 int tab2[MEM_SIZE];
 
 # define BYTE_START_CODE 2192
-# define MAX_PROCESS 30000
+# define MAX_PROCESS 100000
 
 typedef struct s_flag	t_flag;
 struct					s_flag
 {
 	int					flag_n;
-	int					time_cycle;
-	int					live_call;
 	int					pause;
 	int					obo;
 	int					flag_dump;
 	int					dump;
 	int					flag_number;
-	int					cycle_to_die;
 	int					is_decremented;
 };
 
@@ -49,6 +46,10 @@ typedef struct s_arena	t_arena;
 struct					s_arena
 {
 	int					cycle;
+	int					cycle_to_die;
+	int					live_call;
+	int					time_cycle;
+	int					cycle_total;
 	int					winner;
 };
 
@@ -74,7 +75,7 @@ struct					s_env
 	int					memory_data[4];
 	t_arena				arena;
 	t_window			window;
-	t_process			process[MAX_PROCESS];
+	t_process			process[MAX_PROCESS + 10000];
 	int					fd;
 	t_op				op[17];
 };
@@ -104,7 +105,6 @@ void			player_to_tab(t_env *e, int x);
 // void		new_emptyprocess(t_process **begin_list, t_env *e);
 // void		init_temp_process(t_env *e);
 int				jump(int code, char *status);
-void			find_next_pc(t_env *e, int x);
 int				key_hook(t_env *e);
 char			*to_opcode(char c, char c1);
 void			init_process(t_env *e, int nb);
@@ -135,23 +135,10 @@ t_type_func 	check_jump(t_env *e, char *op_size, int func);
 t_type_func		find_label(t_env *e, int x);
 //
 
-// Check Function
-// int		check_live(t_env *e, int xproc, t_type_func list);
-// int		check_ld(t_env *e, int xproc, t_type_func list);
-// int		check_st(t_env *e, int xproc, t_type_func list);
-// int		check_add(t_env *e, int xproc, t_type_func list);
-// int		check_and(t_env *e, int xproc, t_type_func list);
-// int		check_or(t_env *e, int xproc, t_type_func list);
-// int		check_xor(t_env *e, int xproc, t_type_func list);
-// int		check_zjump(t_env *e, int xproc, t_type_func list);
-// int		check_ldi(t_env *e, int xproc, t_type_func list);
-// int		check_sti(t_env *e, int xproc, t_type_func list);
-// int		check_fork(t_env *e, int xproc, t_type_func list);
-// int		check_lld(t_env *e, int xproc, t_type_func list);
-// int		check_lldi(t_env *e, int xproc, t_type_func list);
-// int		check_lfork(t_env *e, int xproc, t_type_func list);
-
-//
+void	victory_player(t_env *e);
+void	update_cycle(t_env *e);
+void	check_all_process(t_env *e);
+void	press_start(t_env *e);
 
 // WorkFunc
 char	*get_x_from_position(t_env *e, int from, int at);
@@ -160,7 +147,7 @@ void	write_from_x(t_env *e, int from, int data, int octet);
 int		is_register_valid(t_env *e, int xproc, int position);
 void	write_from_tab2(int position, int size, int id);
 int		name_process(t_env *e, char	*name);
-int		ind_funcheck_and(t_env *e, int xproc, int place, t_type_a type);
+int		get_xorandor_arg(t_type_a list, t_env *e, int xproc, int *place);
 int		reg_funcheck_and(t_env *e, int xproc, int place);
 int		get_i0_func_and(t_type_func list, t_env *e, int xproc, int *place);
 int		get_i1_func_and(t_type_func list, t_env *e, int xproc, int *place);
