@@ -42,8 +42,8 @@ void	other(char *str, t_env *e)
 		flag = (tab[1] && !ft_strcmp(tab[1], ":")) ? 2 : 1;
 	}
 	command = is_command(tab[flag], e);
-	if (tab[flag] != NULL && ((ft_match_command(command, tab + flag, e->y_line, tab[flag])) ||
-		flag == 0))
+	if (tab[flag] != NULL && ((ft_match_command(command, tab + flag, e->y_line
+		, tab[flag])) || flag == 0))
 	{
 		if (e->tail == NULL)
 			push_tail_label(&e->head, &e->tail, NULL, e);
@@ -108,7 +108,6 @@ void	open_line(char *fichier, t_env *e)
 	while (get_next_line(fd, &line) == 1)
 	{
 		++e->y_line;
-		// printf("Line : %d\n", e->y_line);
 		if (check_line_content(line))
 			stock_line(line, e);
 		else
