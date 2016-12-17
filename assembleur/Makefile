@@ -6,11 +6,11 @@
 #    By: mlevieux <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/20 04:44:37 by mlevieux          #+#    #+#              #
-#    Updated: 2016/11/20 04:44:39 by mlevieux         ###   ########.fr        #
+#    Updated: 2016/12/16 23:37:28 by jaustry          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 						= asm
+NAME 						= ../asm
 
 CC							= gcc
 
@@ -28,7 +28,9 @@ FLAGS =  -Wall -Werror -Wextra
 
 LINKS = $(H_DIR) $(LIBS_H_DIR)
 
-C_FILES = $(shell ls -1 $(C_DIR) $(C_PARSING_DIR) $(C_FUNC_ERROR)| grep "\.c")
+# C_FILES = $(shell ls -1 $(C_DIR) $(C_PARSING_DIR) $(C_FUNC_ERROR)| grep "\.c")
+C_FILES = main.c op.c tools.c tools2.c tools3.c asm_error.c ft_parse_match.c \
+label.c method.c method2.c parsing.c parsing2.c parsing3.c parsing4.c parsing5.c
 O_FILES = $(addprefix $(O_DIR),$(C_FILES:.c=.o))
 
 all:
@@ -79,4 +81,5 @@ fclean: clean
 
 re: fclean all
 
+print-%  : ; @echo $* = $($*)
 .PHONY: all clean fclean re
