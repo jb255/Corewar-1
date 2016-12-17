@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:19:51 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/15 22:01:02 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/17 03:31:24 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	and_func(t_env *e, int xproc, t_type_func list)
 	i[1] = get_xorandor_arg(list.type[1], e, xproc, &place);
 	i[2] = to_int_getx(get_x_from_position(e, e->process[xproc].position + place, e->process[xproc].position + (place + 1))); // Arg3
 	ft_printf_fd(e->fd, "Arg1[%d] // Arg2[%d] // Arg3[%d]\n", i[0], i[1], i[2]);
-	i[3] = (i[0] ^ i[1]);
+	i[3] = (i[0] & i[1]);
 	ft_printf_fd(e->fd, "result i[3] = %d\n", i[3]);
 	if (place == -1)
 		error = 1;

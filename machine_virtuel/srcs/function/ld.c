@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 22:00:22 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/14 21:32:44 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/17 03:24:40 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	ld_func(t_env *e, int xproc, t_type_func list)
 	place = 0;
 	reg = 0;
 	error = 0;
+	// ft_printf_fd(e->fd, "ld ");
 	value = get_first_ld(e, list, &error, xproc);
 	list.type[0].t_ind == 1 ? (place = 4) : place;
 	list.type[0].t_dir == 1 ? (place = 6) : place;
@@ -64,6 +65,8 @@ void	ld_func(t_env *e, int xproc, t_type_func list)
 		position = e->process[xproc].position + (value % IDX_MOD);
 		value = to_int_getx(get_x_from_position(e, position, position + REG_SIZE));
 	}
+	ft_printf_fd(e->fd, "P\t%d | ld %d r%d\n", xproc, value, reg);
+
 	if (!error)
 		e->process[xproc].reg[reg] = value;
 	if (value && !error)

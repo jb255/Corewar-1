@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 16:24:29 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/13 18:59:46 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/17 04:12:08 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	zjump_func(t_env *e, int xproc, t_type_func list)
 
 	(void)list;
 	jump_to = get_x_from_position(e, e->process[xproc].position + 1, e->process[xproc].position + 3);
+	ft_printf_fd(e->fd, "P\t%d | zjmp %d\n", xproc, (short)hex_to_dec(jump_to));
 	if (e->process[xproc].carry == 1)
 		e->process[xproc].position = (e->process[xproc].position + ((short)hex_to_dec(jump_to) % IDX_MOD)) % MEM_SIZE;
 	else

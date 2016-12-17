@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 21:59:21 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/15 17:27:24 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/16 23:35:40 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	add_func(t_env *e, int xproc, t_type_func list)
 	i[0] = to_int_getx(get_x_from_position(e, e->process[xproc].position + 2, e->process[xproc].position + 3));
 	i[1] = to_int_getx(get_x_from_position(e, e->process[xproc].position + 3, e->process[xproc].position + 4));
 	i[2] = to_int_getx(get_x_from_position(e, e->process[xproc].position + 4, e->process[xproc].position + 5));
-	ft_printf_fd(e->fd, "Arg1[%d] // Arg2[%d] // Arg3[%d]", i[0], i[1], i[2]);
+	// ft_printf_fd(e->fd, "Arg1[%d] // Arg2[%d] // Arg3[%d]", i[0], i[1], i[2]);
 	if ((i[0] > 16 || i[0] < 1) || (i[1] > 16 || i[1] < 1) || (i[2] > 16 || i[2] < 1))
 		error = 1;
 	if (list.type[0].t_reg && list.type[1].t_reg && list.type[2].t_reg && !error)

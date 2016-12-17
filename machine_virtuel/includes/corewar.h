@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 13:09:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/16 02:38:28 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/16 18:02:52 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ int				get_func_method(int jump, char **action_, char *tmp);
 //Players
 char			*read_comment(char *file_player);
 char			*read_name(char *file_player);
-char			*print_hexa(unsigned char c, int byte);
 
 char			*hex_to_bin_quad(char *str_1);
 unsigned int    hex_to_dec(const char *str);

@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 18:07:34 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/13 19:15:35 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/16 18:02:46 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,43 +32,21 @@ char	*get_content(int fd, char *result, char buf[1024])
 	return (result);
 }
 
-char	*print_hexa(unsigned char c, int byte)
-{
-	unsigned char	val1;
-	unsigned char	val2;
-	char			*str;
-
-	str = ft_memalloc(sizeof(char) * 2 + 1);
-	if (!str)
-		vm_error("Error malloc");
-	val1 = c / 16;
-	val2 = c % 16;
-	if (val1 > 9)
-		val1 += -10 + 'a';
-	else
-		val1 += '0';
-	if (val2 > 9)
-		val2 += -10 + 'a';
-	else
-		val2 += '0';
-	str[0] = val1;
-	str[1] = val2;
-	if (byte == 0)
-		str[1] = 'x';
-	return (str);
-}
-
 void	read_magic(char *file_player)
 {
 	char	*magic[4];
-	int		byte = 0;
+	int		byte;
 
+	byte = 0;
 	while (byte < 4)
 	{
 		magic[byte] = ft_sprintf("%x", file_player[byte]);
 		byte++;
 	}
-	magic[byte] = ft_sprintf("%s%s%s", magic[1] + 6, magic[2] + 6, magic[3] + 6);
+	magic[byte] = ft_sprintf("%s%s%s", magic[1] + 6, magic[2] + 6,
+		magic[3] + 6);
+	if (ft_strcmp(magic[0], "0") || ft_strcmp(magic[byte], "ea83f3"))
+		vm_error("Magic code incorrect");
 	while (byte != -1)
 	{
 		free(magic[byte]);
@@ -81,8 +59,9 @@ void	reading_file(t_env *e, int x)
 	int		fd;
 	char	buf[1024];
 
-	if ((fd = open(e->players[x].path, O_RDONLY)) < 0){
-		printf("%s\n", e->players[x].path);
+	if ((fd = open(e->players[x].path, O_RDONLY)) < 0)
+	{
+		ft_printf("%s\n", e->players[x].path);
 		vm_error("Error file.");
 	}
 	e->players[x].file = get_content(fd, NULL, buf);
