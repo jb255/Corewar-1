@@ -93,3 +93,11 @@ void	read_magic(char *file_player)
 		byte--;
 	}
 }
+
+void	free_cor_file(t_file *cor_file)
+{
+	free(cor_file->content);
+	free(cor_file->name);
+	free(cor_file->comment);
+	free(cor_file);
+}

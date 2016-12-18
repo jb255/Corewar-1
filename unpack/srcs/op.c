@@ -49,3 +49,26 @@ void		op_tab(t_file *env)
 	env->op[9] = (t_op){"zjmp", 1, {T_DIR}, 9, 20, "jump if zero", 0, 1};
 	fille_op_tab2(env);
 }
+
+void		read_op(char *op, t_file *cor, int *index)
+{
+	t_type_func		list;
+	int				func;
+
+	list = check_jump(cor, op_get_binary(*index, cor), hex_to_dec(op));
+	func = list.func;
+	if (func > 0 && func < 17 && func != 1 && func != 9 && func != 12
+		&& func != 15)
+	{
+		ft_printf("%s\t", cor->op[func].name);
+		get_args(cor, list, *index);
+	}
+	else
+	{
+		list.size = special_func(func);
+		ft_printf("%s\t%%%d\n", cor->op[func].name, todec(get_x(cor, *index + 1,
+			*index + list.size)));
+	}
+	(*index) += list.size;
+	free(op);
+}

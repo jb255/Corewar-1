@@ -60,6 +60,7 @@ struct						s_file
 	t_op					op[18];
 };
 
+void						read_function(t_file *cor, char *file);
 void						op_tab(t_file *env);
 void						unpack_error(char *str);
 char						*get_content(int fd, char *result, char buf[1024]);
@@ -70,5 +71,16 @@ unsigned int				hex_to_dec(const char *str);
 char						*read_name(char *file_player);
 char						*read_comment(char *file_player);
 void						read_magic(char *file_player);
+
+void						read_op(char *op, t_file *cor, int *index);
+
+void						unpack_error(char *str);
+t_type_func					op_size_analys(t_type_func list, int x, int index,
+	char *op_size);
+t_type_func					check_jump(t_file *cor, char *op_size, int func);
+int							special_func(int func);
+char						*op_get_binary(int index, t_file *cor);
+void						get_args(t_file *cor, t_type_func list, int index);
+void						free_cor_file(t_file *cor_file);
 
 #endif
