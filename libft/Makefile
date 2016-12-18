@@ -6,7 +6,7 @@
 #    By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 20:28:54 by vlancien          #+#    #+#              #
-#    Updated: 2016/11/20 04:40:40 by mlevieux         ###   ########.fr        #
+#    Updated: 2016/12/18 22:42:44 by vlancien         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,6 @@ SUB1_DIR 							= basic/
 SUB2_DIR 							= gnl/
 SUB3_DIR 							= list/
 SUB4_DIR 							= ft_printf/
-# SUB5_DIR 							= ft_printf/srcs/apply/
-# SUB6_DIR 							= ft_printf/srcs/get/
-# SUB7_DIR 							= ft_printf/srcs/int_calc/
-# SUB8_DIR 							= ft_printf/srcs/tools/
 
 O_DIR 						= o/
 
@@ -64,7 +60,6 @@ $(O_DIR)%.o: $(SUB3_DIR)%.c
 	&& printf "\033[0;0m%-24s\033[1;30m-->>	\033[0;32m$@\033[0;0m\n" "$<" \
 	|| (printf "\033[0;0m%-24s\033[1;30m-->>	\033[0;31m$@\033[0;0m\n" "$<" \
 	&& exit 1)
-
 
 $(O_DIR)%.o: $(SUB4_DIR)%.c
 	@mkdir $(O_DIR) 2> /dev/null || echo "" > /dev/null

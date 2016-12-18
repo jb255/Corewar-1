@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaustry <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jaustry <jaustry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 15:25:20 by jaustry           #+#    #+#             */
-/*   Updated: 2016/11/19 03:14:47 by mlevieux         ###   ########.fr       */
+/*   Updated: 2016/12/18 22:23:02 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void			write_binary(t_func *head, int fd)
 void			create_file(t_env *e)
 {
 	int			fd;
-	header_t	header;
+	t_header	header;
 
 	ft_bzero(header.prog_name, PROG_NAME_LENGTH + 2);
 	ft_bzero(header.comment, COMMENT_LENGTH + 1);

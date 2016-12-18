@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 19:42:48 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/09 16:24:08 by viko             ###   ########.fr       */
+/*   Updated: 2016/12/18 21:29:41 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,10 @@ unsigned int				hex_to_dec(const char *str);
 char						*read_name(char *file_player);
 char						*read_comment(char *file_player);
 void						read_magic(char *file_player);
-
 void						read_op(char *op, t_file *cor, int *index);
-
 void						unpack_error(char *str);
-t_type_func					op_size_analys(t_type_func list, int x, int index,
-	char *op_size);
+t_type_func					op_size_analys(char *op_size, int index,
+							t_type_func list, int x);
 t_type_func					check_jump(t_file *cor, char *op_size, int func);
 int							special_func(int func);
 char						*op_get_binary(int index, t_file *cor);

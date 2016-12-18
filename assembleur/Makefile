@@ -1,16 +1,16 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    makefile                                           :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mlevieux <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: mlevieux <mlevieux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/20 04:44:37 by mlevieux          #+#    #+#              #
-#    Updated: 2016/12/16 23:37:28 by jaustry          ###   ########.fr        #
+#    Updated: 2016/12/18 22:40:05 by vlancien         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 						= ../asm
+NAME 						= asm
 
 CC							= gcc
 
@@ -28,7 +28,6 @@ FLAGS =  -Wall -Werror -Wextra
 
 LINKS = $(H_DIR) $(LIBS_H_DIR)
 
-# C_FILES = $(shell ls -1 $(C_DIR) $(C_PARSING_DIR) $(C_FUNC_ERROR)| grep "\.c")
 C_FILES = main.c op.c tools.c tools2.c tools3.c asm_error.c ft_parse_match.c \
 label.c method.c method2.c parsing.c parsing2.c parsing3.c parsing4.c parsing5.c
 O_FILES = $(addprefix $(O_DIR),$(C_FILES:.c=.o))
@@ -71,8 +70,9 @@ $(O_DIR)%.o: $(C_FUNC_ERROR)%.c
 		&& exit 1)
 
 clean:
-	@rm $(O_FILES) $(O_DIR2) 2> /dev/null || echo "" > /dev/null
-	@rmdir -p $(O_DIR) $(O_DIR2) 2> /dev/null || echo "" > /dev/null
+	@rm $(O_FILES) $(O_DIR) 2> /dev/null || echo "" > /dev/null
+	@rmdir -p $(O_DIR) $(O_DIR) 2> /dev/null || echo "" > /dev/null
+	@mkdir $(O_DIR)
 	@make -C $(LIBFT) clean
 
 fclean: clean

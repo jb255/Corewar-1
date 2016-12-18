@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 20:05:50 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/12 14:09:43 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/18 19:13:51 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	read_magic(char *file_player)
 	magic[byte] = ft_sprintf("%s%s%s", magic[1] + 6, magic[2] + 6,
 		magic[3] + 6);
 	if (ft_strcmp(magic[0], "0") || ft_strcmp(magic[byte], "ea83f3"))
-		unpack_error("Magic code incorrect");
+		unpack_error("Fichier incorrect. [ Magic error ]");
 	while (byte != -1)
 	{
 		free(magic[byte]);

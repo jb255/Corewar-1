@@ -6,7 +6,7 @@
 /*   By: viko <viko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 16:21:41 by viko              #+#    #+#             */
-/*   Updated: 2016/12/12 14:09:26 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/18 21:41:32 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,47 @@ int		todec(char *str)
 	result = hex_to_dec(str);
 	free(str);
 	return (result);
+}
+
+void	print_args(t_type_a arg, int *index, int func, t_file *cor)
+{
+	if (arg.t_reg)
+	{
+		ft_printf("r%d", todec(get_x(cor, *index + 2, *index + 3)));
+		*index += 1;
+	}
+	if (arg.t_ind)
+	{
+		ft_printf("%d", todec(get_x(cor, *index + 2, *index + 4)));
+		*index += 2;
+	}
+	if (arg.t_dir)
+	{
+		if (func == 10 || func == 11 || func == 13)
+		{
+			ft_printf("%%%d", todec(get_x(cor, *index + 2, *index + 4)));
+			*index += 2;
+		}
+		else
+		{
+			ft_printf("%%%d", todec(get_x(cor, *index + 2, *index + 6)));
+			*index += 4;
+		}
+	}
+}
+
+void	get_args(t_file *cor, t_type_func list, int index)
+{
+	print_args(list.type[0], &index, list.func, cor);
+	if (list.type[1].t_reg || list.type[1].t_ind || list.type[1].t_dir)
+	{
+		ft_printf(", ");
+		print_args(list.type[1], &index, list.func, cor);
+	}
+	if (list.type[2].t_reg || list.type[2].t_ind || list.type[2].t_dir)
+	{
+		ft_printf(", ");
+		print_args(list.type[2], &index, list.func, cor);
+	}
+	ft_printf("\n");
 }

@@ -1,4 +1,4 @@
-NAME 						= corewar_vm
+NAME 						= corewar
 
 CC							= gcc
 
@@ -13,7 +13,7 @@ O_DIR 						= o/
 LIBFT 						= ../libft/
 
 H_DIR 						= -I ./includes/
-LIBS_H_DIR					= -I ./libft/includes/
+LIBS_H_DIR					= -I ../libft/includes/
 
 FLAGS =  -Wall -Werror -Wextra
 INCURSES = -lncurses

@@ -14,7 +14,7 @@ FLAGS =  -Wall -Werror -Wextra
 INCURSES = -lncurses
 LINKS = $(H_DIR) $(LIBS_H_DIR)
 # C_FILES = $(shell ls -1 $(C_DIR) | grep "\.c")
-C_FILES = hextodec.c main.c op.c read.c size_op.c main2.c
+C_FILES = hextodec.c main.c op.c read.c size_op.c op_get_size.c
 O_FILES = $(addprefix $(O_DIR),$(C_FILES:.c=.o))
 
 all:

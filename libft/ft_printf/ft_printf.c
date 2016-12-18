@@ -6,13 +6,13 @@
 /*   By: mlevieux <mlevieux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 15:34:27 by mlevieux          #+#    #+#             */
-/*   Updated: 2016/11/28 11:34:49 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/18 22:05:54 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int		printf_loop(T_LIST **tmp, va_list *args, char **result)
+int			printf_loop(T_LIST **tmp, va_list *args, char **result)
 {
 	int state_value;
 
