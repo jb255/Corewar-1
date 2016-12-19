@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:37:17 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/19 01:48:35 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/19 20:11:47 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_type_func		op_size_analys(t_type_func list,
 	&& op_size[index + 1] == '0' && (list.size += 4))
 	{
 		list.type[x].t_dir++;
-		if (list.func == 10 || list.func == 11 || list.func == 13)
+		if (list.func == 10 || list.func == 11 || list.func == 14)
 			list.size -= 2;
 	}
 	else if (op_size[index] == '1' && op_size[index + 1] == '1' &&
@@ -66,6 +66,7 @@ t_type_func		check_jump(t_env *e, char *op_size, int func)
 	list.size = 2;
 	while (op_size[index] != '\0' && e->op[func - 1].nb_param > x)
 	{
+		// ft_printf("List size = %d\n", list.size);
 		list = op_size_analys(list, x, index, op_size);
 		index += 2;
 		x++;
