@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 21:25:43 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/19 19:38:36 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/19 19:59:46 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,10 @@ void		read_op(char *op, t_file *cor, int *index)
 	else
 	{
 		list.size = special_func(func);
-		ft_printf("%s\t%%%d\n", cor->op[func].name, todec(get_x(cor, *index + 1,
-			*index + list.size)));
+		if (list.func == 16)
+			ft_printf("%s\tr%d\n", cor->op[func].name, todec(get_x(cor, *index + 2, *index + 3)));
+		else
+			ft_printf("%s\t%%%d\n", cor->op[func].name, todec(get_x(cor, *index + 1, *index + list.size)));
 	}
 	(*index) += list.size;
 	free(op);
