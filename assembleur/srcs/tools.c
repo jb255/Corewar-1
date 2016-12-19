@@ -88,7 +88,7 @@ void			create_file(t_env *e)
 	t_header	header;
 
 	ft_bzero(header.prog_name, PROG_NAME_LENGTH + 2);
-	ft_bzero(header.comment, COMMENT_LENGTH + 1);
+	ft_bzero(header.comment, COMMENT_LENGTH + 2);
 	header.prog_size = little_to_big(e->method_position + e->method_total);
 	header.magic = little_to_big(COREWAR_EXEC_MAGIC);
 	ft_strncpy(header.prog_name, e->name, PROG_NAME_LENGTH);
