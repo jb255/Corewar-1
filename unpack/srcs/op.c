@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 21:25:43 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/09 15:46:41 by viko             ###   ########.fr       */
+/*   Updated: 2016/12/19 19:38:36 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void		read_op(char *op, t_file *cor, int *index)
 	list = check_jump(cor, op_get_binary(*index, cor), hex_to_dec(op));
 	func = list.func;
 	if (func > 0 && func < 17 && func != 1 && func != 9 && func != 12
-		&& func != 15)
+		&& func != 15 && func != 16)
 	{
 		ft_printf("%s\t", cor->op[func].name);
 		get_args(cor, list, *index);
