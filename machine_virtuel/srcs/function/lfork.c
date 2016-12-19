@@ -6,21 +6,12 @@
 /*   By: viko <viko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 17:29:51 by viko              #+#    #+#             */
-/*   Updated: 2016/12/14 17:02:58 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/19 00:58:01 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <n_curse.h>
 #include <function.h>
-
-int		check_lfork(t_env *e, int xproc, t_type_func list)
-{
-	ft_printf_fd(e->fd, "Check_lfork -- Fonction size %d\n", list.size);
-	(void)xproc;
-	(void)list;
-
-	return (1);
-}
 
 void	lfork_func(t_env *e, int xproc, t_type_func list)
 {
@@ -28,10 +19,12 @@ void	lfork_func(t_env *e, int xproc, t_type_func list)
 	int			position;
 	int			value;
 
-	new_start = get_x_from_position(e, e->process[xproc].position + 1, e->process[xproc].position + 3);
+	new_start = get_x(e, e->process[xproc].position + 1,
+		e->process[xproc].position + 3);
 	value = (short)hex_to_dec(new_start);
 	position = (e->process[xproc].position + value) % MEM_SIZE;
 	set_process(e, e->active_process++, position, e->process[xproc].id_player);
 	free(new_start);
-	e->process[xproc].position = (e->process[xproc].position + list.size) % MEM_SIZE;
+	e->process[xproc].position = (e->process[xproc].position +
+		list.size) % MEM_SIZE;
 }

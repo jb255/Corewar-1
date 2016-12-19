@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 00:52:00 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/16 01:26:04 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/19 01:45:22 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	init_curse(t_env *e)
 	e->flag.pause = 0;
 }
 
-void			init_process(t_env *e, int nb)
+void	init_process(t_env *e, int nb)
 {
 	e->arena.time_cycle = 1;
 	e->process[nb].start = 0;

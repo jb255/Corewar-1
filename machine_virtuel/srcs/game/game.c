@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 17:50:40 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/16 01:09:54 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/19 02:13:57 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,25 @@ void			wait_time_downer(t_env *e, int xproc, int func)
 		e->process[xproc].wait_time--;
 }
 
+/*
+** e->process[x].id_player = tab2[e->process[x].position] - 1;
+*/
+
 t_type_func		find_label(t_env *e, int x)
 {
-	char		*free_me = NULL;
+	char		*free_me;
 	t_type_func	list;
 	int			func;
 
-	e->process[x].id_player = tab2[e->process[x].position] - 1;
+	free_me = NULL;
 	func = tab[e->process[x].position % MEM_SIZE];
 	if (func > 16 || func < 1)
 		func = -1;
 	list.error = 0;
 	if ((func != 1 && func != 12 && func != 15 && func != -1 && func != 9))
 	{
-		free_me = ft_sprintf("%02x", (unsigned char)tab[(e->process[x].position + 1) % MEM_SIZE]);
+		free_me = ft_sprintf("%02x", (unsigned char)tab[(e->process[x].position
+			+ 1) % MEM_SIZE]);
 		list = check_jump(e, hex_to_bin_quad(free_me), func);
 		free(free_me);
 	}

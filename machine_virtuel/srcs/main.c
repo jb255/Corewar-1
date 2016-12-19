@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 12:59:13 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/16 02:14:32 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/19 01:18:58 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int		main(int argc, char **argv)
 	parsing_arg(argv, e);
 	init_curse(e);
 	put_player(e);
-	ft_printf_fd(e->fd, "DATA----%d\n", tab[0]);
 	if (e->flag.flag_n)
 		n_curse(e);
 	else

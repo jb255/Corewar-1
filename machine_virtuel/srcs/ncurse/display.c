@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 16:58:08 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/16 02:37:59 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/19 01:44:11 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ void	print_memory(t_env *e)
 	if (tab2[e->memory_data[2]] != 0)
 	{
 		wattron(e->window.memory, COLOR_PAIR(tab2[e->memory_data[2]]));
-		mvwprintw(e->window.memory, e->memory_data[0], e->memory_data[1] ,
+		mvwprintw(e->window.memory, e->memory_data[0], e->memory_data[1],
 			"%02x", (unsigned int)(unsigned char)tab[e->memory_data[2]]);
 		wattroff(e->window.memory, COLOR_PAIR(tab2[e->memory_data[2]]));
 	}
 	else if (tab2[e->memory_data[2]] == 0)
-		mvwprintw(e->window.memory, e->memory_data[0], e->memory_data[1] ,
+		mvwprintw(e->window.memory, e->memory_data[0], e->memory_data[1],
 			"%02x", (unsigned int)(unsigned char)tab[e->memory_data[2]]);
 }
 
@@ -52,21 +52,19 @@ void	write_memory(t_env *e)
 			;
 		print_memory(e);
 		print_cursor(e, e->memory_data[2]);
-
-		e->memory_data[1] += 3; // Avancement du x
-		if (e->memory_data[1] >= 191) // Saut de ligne
+		e->memory_data[1] += 3;
+		if (e->memory_data[1] >= 191)
 		{
-			e->memory_data[1] = 1; // retour debut ligne
-			e->memory_data[0] += 1; // +1 ligne
+			e->memory_data[1] = 1;
+			e->memory_data[0] += 1;
 		}
-		e->memory_data[2]++; // +1 dans le tableau
+		e->memory_data[2]++;
 	}
 	wrefresh(e->window.memory);
 	e->memory_data[0] = 1;
 	e->memory_data[1] = 1;
 	e->memory_data[2] = 0;
 }
-
 
 void	display_memory(t_env *e)
 {
@@ -90,5 +88,5 @@ void	display_delete(t_env *e)
 {
 	delwin(e->window.tab);
 	delwin(e->window.memory);
-    delwin(e->window.menu);
+	delwin(e->window.menu);
 }

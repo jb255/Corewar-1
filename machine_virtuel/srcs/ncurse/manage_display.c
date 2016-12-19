@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 02:36:53 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/16 23:46:37 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/19 01:45:51 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,14 @@ int		get_playerfromidlive(t_env *e, int idlive)
 	}
 	return (0);
 }
+
 void	victory_player(t_env *e)
 {
 	int		winner;
 
 	winner = get_playerfromidlive(e, e->arena.winner);
 	endwin();
-	ft_printf("le joueur %d(%s) a gagne\n",e->players[e->arena.winner].id_live, e->players[e->arena.winner].name);
+	ft_printf("le joueur %d(%s) a gagne\n", e->players[e->arena.winner].id_live,
+	e->players[e->arena.winner].name);
 	exit(1);
 }

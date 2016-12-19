@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 16:57:55 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/16 02:03:19 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/19 01:42:21 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,10 +120,9 @@ void	get_idprog(t_env *e)
 	}
 }
 
-void	parsing_arg(char **arg, t_env *e)
+void	get_flagprog(char **arg, t_env *e)
 {
 	int		i;
-	int		size_total = 0;
 
 	i = 1;
 	while (arg[i])
@@ -131,17 +130,27 @@ void	parsing_arg(char **arg, t_env *e)
 		get_flag_prog(arg[i], e);
 		i++;
 	}
-	get_idprog(e);
-	int x;
+}
+
+void	parsing_arg(char **arg, t_env *e)
+{
+	int		size_total;
+	int		x;
+
+	size_total = 0;
 	x = 0;
+	get_flagprog(arg, e);
+	get_idprog(e);
 	ft_printf("Introducing all players...\n");
 	if (!e->active_players)
 		vm_error("No player. Choose players.");
 	while (x < e->active_players)
 	{
 		reading_file(e, x);
-		ft_printf("* Player %d, weighing %d bytes,", x + 1, e->players[x].size - BYTE_START_CODE);
-		ft_printf(" \"%s\" (\"%s\") !\n",e->players[x].name, e->players[x].comment);
+		ft_printf("* Player %d, weighing %d bytes,", x + 1,
+		e->players[x].size - BYTE_START_CODE);
+		ft_printf(" \"%s\" (\"%s\") !\n", e->players[x].name,
+		e->players[x].comment);
 		e->players[x].id_player = x;
 		size_total += e->players[x].size_func;
 		if (CHAMP_MAX_SIZE < e->players[x].size - BYTE_START_CODE)

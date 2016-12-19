@@ -140,7 +140,7 @@ void	check_all_process(t_env *e);
 void	press_start(t_env *e);
 
 // WorkFunc
-char	*get_x_from_position(t_env *e, int from, int at);
+char	*get_x(t_env *e, int from, int at);
 int		octet_precision(char *hex, int octet);
 void	write_from_x(t_env *e, int from, int data, int octet);
 int		is_register_valid(t_env *e, int xproc, int position);

@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/22 01:34:08 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/16 17:53:04 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/19 01:42:48 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 char	*read_name(char *file_player)
 {
-	char	*res = NULL;
+	char	*res;
 	int		byte;
 	int		index;
 
 	byte = 4;
+	res = NULL;
 	res = malloc(PROG_NAME_LENGTH + 1);
 	index = 0;
 	while (index != PROG_NAME_LENGTH)
@@ -33,10 +34,11 @@ char	*read_name(char *file_player)
 
 char	*read_comment(char *file_player)
 {
-	char	*res = NULL;
+	char	*res;
 	int		byte;
 	int		index;
 
+	res = NULL;
 	byte = 140;
 	res = malloc(COMMENT_LENGTH + 1);
 	index = 0;

@@ -6,7 +6,7 @@
 /*   By: jaustry <jaustry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 18:02:59 by jaustry           #+#    #+#             */
-/*   Updated: 2016/12/13 19:16:12 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/19 01:37:42 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void	write_tab(void)
 {
-	int x ;
+	int x;
 
 	x = 0;
 	while (x < MEM_SIZE)
