@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 02:00:05 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/19 02:09:51 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/19 21:32:55 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		get_i02_func_sti(t_type_func list, t_env *e, int xproc, int *place)
 	if (list.type[1].t_reg && (*place += 1))
 	{
 		i = reg_funcheck_and(e, xproc, *place);
+		ft_printf_fd(e->fd, " r%d", i);
 		if (i > 16 || i < 1)
 			*place = -1;
 		i = e->process[xproc].reg[i];
@@ -33,10 +34,16 @@ int		get_i02_func_sti(t_type_func list, t_env *e, int xproc, int *place)
 	else if (list.type[1].t_ind && (*place += 2))
 	{
 		i = (short)to_int_getx(get_x(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place)) % IDX_MOD;
-		i = (short)to_int_getx(get_x(e, e->process[xproc].position + 1 + i, e->process[xproc].position + i + 1 + 2));
+		ft_printf_fd(e->fd, " %d->%s", i, get_x(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place));
+		i = (short)to_int_getx(get_x(e, e->process[xproc].position + i, e->process[xproc].position + i + 2));
+		ft_printf_fd(e->fd, " {%d}", i);
+
 	}
-	else if (list.type[1].t_dir && (*place += 2))
+	else if (list.type[1].t_dir && (*place += 2)){
 		i = (short)to_int_getx(get_x(e, e->process[xproc].position + *place - 2, e->process[xproc].position + *place)) % IDX_MOD;
+		ft_printf_fd(e->fd, " %d", i);
+
+	}
 	return (i);
 }
 
@@ -50,6 +57,7 @@ int		get_i1_2_func_sti(t_type_func list, t_env *e, int xproc, int *place)
 	if (list.type[2].t_reg && (*place += 1))
 	{
 		i = reg_funcheck_and(e, xproc, *place);
+		ft_printf_fd(e->fd, " r%d\n", i);
 		if (i > 16 || i < 1)
 			*place = -1;
 		i = e->process[xproc].reg[i];
@@ -68,7 +76,8 @@ void	sti_func(t_env *e, int xproc, t_type_func list)
 	error = 0;
 	place = 3;
 	i[0] = to_int_getx(get_x(e, e->process[xproc].position + 2, e->process[xproc].position + 3));
-	ft_printf_fd(e->fd, "P\t%d | sti r%s", xproc, get_x(e, e->process[xproc].position + 2, e->process[xproc].position + 3));
+	ft_printf_fd(e->fd, "Sti\nr%d ", i[0]);
+	// ft_printf_fd(e->fd, "P\t%d | sti r%s", xproc, get_x(e, e->process[xproc].position + 2, e->process[xproc].position + 3));
 	i[1] = get_i02_func_sti(list, e, xproc, &place);
 	i[2] = get_i1_2_func_sti(list, e, xproc, &place);
 	i[3] = ((i[1]) + (i[2])) % IDX_MOD;

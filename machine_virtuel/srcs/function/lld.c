@@ -6,7 +6,7 @@
 /*   By: viko <viko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 17:31:30 by viko              #+#    #+#             */
-/*   Updated: 2016/12/19 01:57:19 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/19 20:55:44 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	lld_func(t_env *e, int xproc, t_type_func list)
 	if (list.type[0].t_ind && list.type[1].t_reg && place >= 0)
 		value = to_int_getx(get_x(e, e->process[xproc].position +
 			(value), e->process[xproc].position + (value + REG_SIZE)));
-	if (place >= 0)
+	if (place != -1)
 		e->process[xproc].reg[reg] = value;
 	if (value && place >= 0)
 		e->process[xproc].carry = 0;

@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 19:10:32 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/07 20:13:57 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/19 20:35:39 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	write_from_tab2(int position, int size, int id)
 	position = position % MEM_SIZE;
 	while (index < size)
 	{
-		tab2[position % MEM_SIZE] = id;
+		tab2[position % MEM_SIZE] = abs(id);
+		// printf("ID = %d\n", id);
 		position++;
 		if (position == MEM_SIZE)
 			position = 0;

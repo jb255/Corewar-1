@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 17:13:17 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/08 16:25:49 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/19 20:53:36 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ struct						s_process
 	int						wait_time;
 	int						jumptodo;
 	int						addr_pc;
-	int						reg[REG_NUMBER];
+	int						reg[REG_NUMBER + 1];
 	int						id_player;
 	int						live_status;
 	t_type_func				list;
