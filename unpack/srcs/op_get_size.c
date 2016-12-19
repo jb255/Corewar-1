@@ -6,7 +6,7 @@
 /*   By: jaustry <jaustry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 14:45:30 by jaustry           #+#    #+#             */
-/*   Updated: 2016/12/18 21:41:09 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/19 19:19:39 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ t_type_func	op_size_analys(char *op_size, int index, t_type_func list, int x)
 	&& (list.size += 4))
 	{
 		list.type[x].t_dir++;
-		if (list.func == 10 || list.func == 11 || list.func == 13)
+		if (list.func == 10 || list.func == 11 || list.func == 13
+			|| list.func == 14)
 			list.size -= 2;
 	}
 	else if (op_size[index] == '1' && op_size[index + 1] == '1'

@@ -6,7 +6,7 @@
 /*   By: viko <viko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 16:21:41 by viko              #+#    #+#             */
-/*   Updated: 2016/12/18 21:41:32 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/19 19:19:32 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	print_args(t_type_a arg, int *index, int func, t_file *cor)
 	}
 	if (arg.t_dir)
 	{
-		if (func == 10 || func == 11 || func == 13)
+		if (func == 10 || func == 11 || func == 13 || func == 14)
 		{
 			ft_printf("%%%d", todec(get_x(cor, *index + 2, *index + 4)));
 			*index += 2;
