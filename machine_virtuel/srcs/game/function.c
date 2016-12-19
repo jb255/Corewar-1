@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:37:17 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/19 21:48:53 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/19 23:41:09 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	(*g_func_process[16])(t_env*, int, t_type_func) = {live_func, ld_func,
 
 void			apply_func(t_env *e, int xproc, t_type_func list)
 {
+	ft_printf_fd(e->fd, "Application de la fonction %d size:%d\n", list.func, list.size);
 	if (list.func >= 1 && list.func <= 16)
 		g_func_process[list.func - 1](e, xproc, list);
 }

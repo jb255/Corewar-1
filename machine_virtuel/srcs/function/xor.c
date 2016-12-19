@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 13:40:11 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/19 02:12:31 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/20 00:02:52 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		get_xorandor_arg(t_type_a list, t_env *e, int xproc, int *place)
 	{
 		i = reg_funcheck_and(e, xproc, *place);
 		if (i > 16 || i < 1)
-			*place = -1;
+			list.error = 1;
 		i = e->process[xproc].reg[i];
 	}
 	else if (list.t_ind && (*place += 2))

@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:59:38 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/19 01:54:05 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/19 23:56:02 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ char	*get_x(t_env *e, int from, int at)
 
 	(void)e;
 	result = "";
+	if (at < 0)
+		at = MEM_SIZE + at;
 	if (from < 0)
 		from = MEM_SIZE + from;
 	index = from % MEM_SIZE;
