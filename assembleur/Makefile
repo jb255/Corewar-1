@@ -6,7 +6,7 @@
 #    By: mlevieux <mlevieux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/20 04:44:37 by mlevieux          #+#    #+#              #
-#    Updated: 2016/12/18 22:40:05 by vlancien         ###   ########.fr        #
+#    Updated: 2016/12/20 17:22:13 by vlancien         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,6 @@ $(O_DIR)%.o: $(C_FUNC_ERROR)%.c
 clean:
 	@rm $(O_FILES) $(O_DIR) 2> /dev/null || echo "" > /dev/null
 	@rmdir -p $(O_DIR) $(O_DIR) 2> /dev/null || echo "" > /dev/null
-	@mkdir $(O_DIR)
 	@make -C $(LIBFT) clean
 
 fclean: clean
