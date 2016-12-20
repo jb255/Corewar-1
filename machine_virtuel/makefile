@@ -18,8 +18,15 @@ LIBS_H_DIR					= -I ../libft/includes/
 FLAGS =  -Wall -Werror -Wextra
 INCURSES = -lncurses
 LINKS = $(H_DIR) $(LIBS_H_DIR)
-C_FILES = $(shell ls -1 $(C_DIR) $(C_ATTACKFUNC_DIR) $(C_PARSING_DIR) $(C_FUNC_ERROR) $(C_CURSE_DIR) $(C_GAME_DIR) | grep "\.c")
-# C_FILES = main.c vm_error.c add.c aff.c and.c check_function.c fork.c ld.c ldi.c lfork.c live.c lld.c lldi.c or.c st_func.c sti.c sub.c xor.c zjump.c function.c game.c key_hook.c put_player_in_memory.c put_process.c write_from.c display.c display_window.c init_color.c init_memory.c memory_fight.c n_curse.c decimal_to_hex.c hexa_to_binary.c hexa_to_decimal.c parsing.c read_champion_infos.c read_instruction.c reading_file.c
+C_FILES = main.c print_dump.c vm_error.c add.c aff.c and.c \
+check_function.c fork.c ld.c ldi.c lfork.c live.c lld.c lldi.c or.c \
+st_func.c sti.c sub.c xor.c zjump.c \
+function.c game.c key_hook.c op.c put_player_in_memory.c put_process.c \
+write_from.c display.c display_window.c init_color.c init_memory.c \
+manage_display.c memory_fight.c n_curse.c get_parsing.c \
+hexa_to_binary.c hexa_to_decimal.c parsing.c read_champion_infos.c \
+read_instruction.c reading_file.c
+
 O_FILES = $(addprefix $(O_DIR),$(C_FILES:.c=.o))
 
 all:
