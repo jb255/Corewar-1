@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 00:13:23 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/19 01:44:57 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/20 04:43:46 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	display_info_menu(t_env *e)
 	mvwprintw(e->window.menu, 3, 165, "CYCLE: ");
 	mvwprintw(e->window.menu, 4, 165, "CYCLE T: ");
 	mvwprintw(e->window.menu, 5, 165, "PROCESS: ");
-	mvwprintw(e->window.menu, 6, 165, "TIME_SPEED: ");
+	mvwprintw(e->window.menu, 6, 165, "[+-]TIME_SPEED: ");
 	mvwprintw(e->window.menu, 7, 165, "[P]AUTO MODE: ");
 	if (e->flag.pause)
 		mvwprintw(e->window.menu, 4, 125, "PAUSED");
@@ -55,7 +55,10 @@ void	display_info_menu(t_env *e)
 	mvwprintw(e->window.menu, 3, 180, "%d    ", e->arena.cycle);
 	mvwprintw(e->window.menu, 4, 180, "%d    ", e->arena.cycle_total);
 	mvwprintw(e->window.menu, 5, 180, "%d    ", e->active_process);
-	mvwprintw(e->window.menu, 6, 180, "x%d    ", e->arena.time_cycle);
+	if (!e->arena.time_cycle)
+		mvwprintw(e->window.menu, 6, 180, "FAST");
+	else
+		mvwprintw(e->window.menu, 6, 180, "SLOW");
 	auto_mode(e);
 	wattroff(e->window.menu, COLOR_PAIR(5));
 	wrefresh(e->window.menu);

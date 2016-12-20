@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:37:17 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/19 23:41:09 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/20 04:25:53 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	(*g_func_process[16])(t_env*, int, t_type_func) = {live_func, ld_func,
 
 void			apply_func(t_env *e, int xproc, t_type_func list)
 {
-	ft_printf_fd(e->fd, "Application de la fonction %d size:%d\n", list.func, list.size);
+	ft_printf_fd(e->fd, "Cycle:\t%d:\t%s\n",
+	e->arena.cycle_total, e->op[list.func].name);
 	if (list.func >= 1 && list.func <= 16)
 		g_func_process[list.func - 1](e, xproc, list);
 }
@@ -67,7 +68,6 @@ t_type_func		check_jump(t_env *e, char *op_size, int func)
 	list.size = 2;
 	while (op_size[index] != '\0' && e->op[func - 1].nb_param > x)
 	{
-		// ft_printf("List size = %d\n", list.size);
 		list = op_size_analys(list, x, index, op_size);
 		index += 2;
 		x++;

@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 22:00:22 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/19 02:04:57 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/20 04:35:01 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,6 @@
 // Cette opération modifie le carry.
 // ld 34,r3 charge les REG_SIZE octets à partir de l’adresse (PC + (34 % IDX_MOD)) dans le registre r3.
 // {T_DIR | T_IND, T_REG},
-
-int		to_int_getx(char *str)
-{
-	int		nb;
-
-	nb = hex_to_dec(str);
-	free(str);
-	return (nb);
-}
 
 int		get_first_ld(t_env *e, t_type_func list, int *error, int xproc)
 {
@@ -42,6 +33,15 @@ int		get_first_ld(t_env *e, t_type_func list, int *error, int xproc)
 	return (result);
 }
 
+void	set_carry_value(t_env *e, int xproc, int value, int reg)
+{
+	e->process[xproc].reg[reg] = value;
+	if (value)
+	e->process[xproc].carry = 0;
+	else
+	e->process[xproc].carry = 1;
+}
+
 void	ld_func(t_env *e, int xproc, t_type_func list)
 {
 	int			position;
@@ -53,7 +53,6 @@ void	ld_func(t_env *e, int xproc, t_type_func list)
 	place = 0;
 	reg = 0;
 	error = 0;
-	// ft_printf_fd(e->fd, "ld ");
 	value = get_first_ld(e, list, &error, xproc);
 	list.type[0].t_ind == 1 ? (place = 4) : place;
 	list.type[0].t_dir == 1 ? (place = 6) : place;
@@ -65,13 +64,7 @@ void	ld_func(t_env *e, int xproc, t_type_func list)
 		position = e->process[xproc].position + (value % IDX_MOD);
 		value = to_int_getx(get_x(e, position, position + REG_SIZE));
 	}
-	ft_printf_fd(e->fd, "P\t%d | ld %d r%d\n", xproc, value, reg);
-
 	if (!error)
-		e->process[xproc].reg[reg] = value;
-	if (value && !error)
-		e->process[xproc].carry = 0;
-	else if (!error)
-		e->process[xproc].carry = 1;
+		set_carry_value(e, xproc, value, reg);
 	e->process[xproc].position = (e->process[xproc].position + list.size) % MEM_SIZE;
 }
