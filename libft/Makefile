@@ -6,7 +6,7 @@
 #    By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 20:28:54 by vlancien          #+#    #+#              #
-#    Updated: 2016/12/20 04:48:03 by vlancien         ###   ########.fr        #
+#    Updated: 2016/12/20 16:24:26 by vlancien         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,7 +94,6 @@ $(O_DIR)%.o: $(SUB4_DIR)%.c
 clean:
 	@rm $(O_FILES) $(O_DIR) 2> /dev/null || echo "" > /dev/null
 	@rmdir -p $(O_DIR) 2> /dev/null || echo "" > /dev/null
-	@mkdir $(O_DIR)
 
 fclean: clean
 	@rm $(NAME) 2> /dev/null || echo "" > /dev/null
