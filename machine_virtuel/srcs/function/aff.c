@@ -17,7 +17,7 @@ void	aff_func(t_env *e, int xproc, t_type_func list)
 {
 	int		reg;
 
-	reg = to_int_getx(get_x(e, e->process[xproc].position + 2,
+	reg = to_int_getx(get_x(e->process[xproc].position + 2,
 		e->process[xproc].position + 3));
 	if (!e->flag.flag_n && list.type[0].t_reg)
 		ft_printf("%c", e->process[xproc].reg[reg] % 256);

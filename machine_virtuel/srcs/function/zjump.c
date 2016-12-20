@@ -30,7 +30,7 @@ void	zjump_func(t_env *e, int xproc, t_type_func list)
 {
 	char	*jump_to;
 
-	jump_to = get_x(e, e->process[xproc].position + 1,
+	jump_to = get_x(e->process[xproc].position + 1,
 		e->process[xproc].position + 3);
 	if (e->process[xproc].carry == 1)
 		e->process[xproc].position = (e->process[xproc].position +

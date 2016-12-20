@@ -6,7 +6,7 @@
 /*   By: viko <viko@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 17:30:41 by viko              #+#    #+#             */
-/*   Updated: 2016/12/20 02:31:20 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/20 16:52:01 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ int		get_lldi_arg(t_type_a list, t_env *e, int xproc, int *place)
 	}
 	else if (list.t_ind && (*place += 2))
 	{
-		i = (short)to_int_getx(get_x(e, pos + *place - 2, pos + *place));
-		i = to_int_getx(get_x(e, pos + i, pos + i + 4));
+		i = (short)to_int_getx(get_x(pos + *place - 2, pos + *place));
+		i = to_int_getx(get_x(pos + i, pos + i + 4));
 	}
 	else if (list.t_dir && (*place += 2))
-		i = (short)to_int_getx(get_x(e, pos + *place - 2, pos + *place));
+		i = (short)to_int_getx(get_x(pos + *place - 2, pos + *place));
 	return (i);
 }
 
@@ -46,35 +46,28 @@ int		get_lldi_arg(t_type_a list, t_env *e, int xproc, int *place)
 
 void	lldi_func(t_env *e, int xproc, t_type_func list)
 {
-	int		i[5];
+	int		i[6];
 	int		place;
 	int		error;
 
 	error = 0;
 	place = 2;
+	i[5] = e->process[xproc].position;
 	if (list.type[2].t_ind || list.type[2].t_dir || list.type[1].t_ind)
-	{
 		error = 1;
-		place = -1;
-	}
-	// else
-		// ft_printf_fd(e->fd, "P\t%d | lldi", xproc);
+	(error == 1) ? (place = -1) : error;
 	i[0] = get_lldi_arg(list.type[0], e, xproc, &place);
 	i[1] = get_lldi_arg(list.type[1], e, xproc, &place);
-	i[3] = to_int_getx(get_x(e, e->process[xproc].position + place, e->process[xproc].position + (place + 1)));
+	i[3] = to_int_getx(get_x(i[5] + place, i[5] + (place + 1)));
 	(i[3] > 16 || i[3] < 1) ? (error = 1) : error;
 	i[2] = ((i[0] + i[1])) % MEM_SIZE;
-	i[4] = to_int_getx(get_x(e, e->process[xproc].position + i[2], e->process[xproc].position + i[2] + REG_SIZE));
+	i[4] = to_int_getx(get_x(i[5] + i[2], i[5] + i[2] + REG_SIZE));
 	(place == -1) ? (error = 1) : error;
-	// if (!error)
-		// ft_printf_fd(e->fd, " %d\n\t-> load from %d + %d = %d (with pc %d // pc = %d[%s])", i[3], i[1], i[0], i[2], e->process[xproc].position + i[2], e->process[xproc].position, get_x(e, e->process[xproc].position + i[2], e->process[xproc].position + i[2] + REG_SIZE));
 	if (!error)
 		e->process[xproc].reg[i[3]] = i[4];
 	if (i[4] && !error)
 		e->process[xproc].carry = 0;
 	else if (!error)
 		e->process[xproc].carry = 1;
-	e->process[xproc].position = (e->process[xproc].position +
-		list.size) % MEM_SIZE;
-	ft_printf_fd(e->fd, "\n");
+	e->process[xproc].position = (i[5] + list.size) % MEM_SIZE;
 }

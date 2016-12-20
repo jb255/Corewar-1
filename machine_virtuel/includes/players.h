@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 17:13:17 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/19 20:53:36 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/20 16:31:32 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ struct						s_player
 	char					*comment;
 	char					*path;
 	unsigned long			size;
-	int						start; // emplacement du champion, load adress
+	int						start;
 	int						size_func;
 	int						carry;
 	char					*file;
@@ -44,6 +44,5 @@ struct						s_player
 	int						position;
 	int						jumptodo;
 };
-
 
 #endif

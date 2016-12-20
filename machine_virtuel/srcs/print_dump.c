@@ -23,7 +23,7 @@ void	write_tab(void)
 	{
 		if (x % 64 == 0)
 			ft_printf("0x%04x : ", x);
-		ft_printf("%02x ", tab[x]);
+		ft_printf("%02x ", g_tab[x]);
 		x++;
 		if (x % 64 == 0)
 			ft_printf("\n");

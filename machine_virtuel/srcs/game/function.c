@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:37:17 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/20 04:25:53 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/20 17:03:33 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,23 +94,4 @@ int				octet_precision(char *hex, int octet)
 	test2[2] = '\0';
 	result = (short int)hex_to_dec(test2);
 	return (result);
-}
-
-void			write_from_x(t_env *e, int from, int data, int octet)
-{
-	char	*hex;
-	int		x;
-
-	hex = NULL;
-	(void)e;
-	hex = ft_sprintf("%08x", data);
-	while (octet > 0)
-	{
-		x = (from + (4 - octet)) % MEM_SIZE;
-		x = x < 0 ? MEM_SIZE + x : x;
-		tab[x] = octet_precision(hex, 4 - octet);
-		octet--;
-	}
-	if (hex != NULL)
-		free(hex);
 }

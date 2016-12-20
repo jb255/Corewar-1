@@ -19,7 +19,7 @@ void	lfork_func(t_env *e, int xproc, t_type_func list)
 	int			position;
 	int			value;
 
-	new_start = get_x(e, e->process[xproc].position + 1,
+	new_start = get_x(e->process[xproc].position + 1,
 		e->process[xproc].position + 3);
 	value = (short)hex_to_dec(new_start);
 	position = (e->process[xproc].position + value) % MEM_SIZE;

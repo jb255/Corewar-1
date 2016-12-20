@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 21:59:34 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/20 03:17:59 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/20 16:22:30 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	sub_func(t_env *e, int xproc, t_type_func list)
 		list.type[1].t_dir || list.type[2].t_ind || list.type[2].t_dir)
 		error = 1;
 	i[3] = e->process[xproc].position;
-	i[0] = to_int_getx(get_x(e, i[3] + 2, i[3] + 3));
-	i[1] = to_int_getx(get_x(e, i[3] + 3, i[3] + 4));
-	i[2] = to_int_getx(get_x(e, i[3] + 4, i[3] + 5));
+	i[0] = to_int_getx(get_x(i[3] + 2, i[3] + 3));
+	i[1] = to_int_getx(get_x(i[3] + 3, i[3] + 4));
+	i[2] = to_int_getx(get_x(i[3] + 4, i[3] + 5));
 	if ((i[0] > 16 || i[0] < 1) || (i[1] > 16 || i[1] < 1) ||
 	(i[2] > 16 || i[2] < 1))
 		error = 1;
@@ -46,5 +46,5 @@ void	sub_func(t_env *e, int xproc, t_type_func list)
 		e->process[xproc].carry = 0;
 	else if (!error)
 		e->process[xproc].carry = 1;
-	i[3] = (i[3] + list.size) % MEM_SIZE;
+	e->process[xproc].position = (i[3] + list.size) % MEM_SIZE;
 }

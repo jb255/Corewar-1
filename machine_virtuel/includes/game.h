@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 17:54:35 by vlancien          #+#    #+#             */
-/*   Updated: 2016/11/28 10:36:17 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/20 16:34:42 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,5 @@
 # include "corewar.h"
 # include <ncurses.h>
 # include "function.h"
-
 
 #endif

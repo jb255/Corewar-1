@@ -82,7 +82,6 @@ $(O_DIR)%.o: $(C_ATTACKFUNC_DIR)%.c
 clean:
 	@rm $(O_FILES) $(O_DIR) 2> /dev/null || echo "" > /dev/null
 	@rmdir -p $(O_DIR) 2> /dev/null || echo "" > /dev/null
-	@mkdir $(O_DIR)
 	@make -C $(LIBFT) clean
 
 fclean: clean

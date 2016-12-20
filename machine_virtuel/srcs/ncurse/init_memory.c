@@ -20,8 +20,8 @@ void	init_curse(t_env *e)
 	n = 0;
 	while (n < MEM_SIZE)
 	{
-		tab[n] = 0;
-		tab2[n] = 0;
+		g_tab[n] = 0;
+		g_tab2[n] = 0;
 		n++;
 	}
 	e->arena.live_call = 0;

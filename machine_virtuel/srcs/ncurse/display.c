@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 16:58:08 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/20 04:41:02 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/20 16:29:33 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	print_cursor(t_env *e, int x)
 		{
 			wattron(e->window.memory, COLOR_PAIR(6));
 			mvwprintw(e->window.memory, e->memory_data[0], e->memory_data[1],
-		"%02x", (unsigned int)(unsigned char)tab[x % MEM_SIZE]);
+		"%02x", (unsigned char)g_tab[x % MEM_SIZE]);
 			wattroff(e->window.memory, COLOR_PAIR(6));
 		}
 		i--;
@@ -32,16 +32,16 @@ void	print_cursor(t_env *e, int x)
 
 void	print_memory(t_env *e)
 {
-	if (tab2[e->memory_data[2]] != 0)
+	if (g_tab2[e->memory_data[2]] != 0)
 	{
-		wattron(e->window.memory, COLOR_PAIR(tab2[e->memory_data[2]]));
+		wattron(e->window.memory, COLOR_PAIR(g_tab2[e->memory_data[2]]));
 		mvwprintw(e->window.memory, e->memory_data[0], e->memory_data[1],
-			"%02x", (unsigned int)(unsigned char)tab[e->memory_data[2]]);
-		wattroff(e->window.memory, COLOR_PAIR(tab2[e->memory_data[2]]));
+			"%02x", (unsigned char)g_tab[e->memory_data[2]]);
+		wattroff(e->window.memory, COLOR_PAIR(g_tab2[e->memory_data[2]]));
 	}
-	else if (tab2[e->memory_data[2]] == 0)
+	else if (g_tab2[e->memory_data[2]] == 0)
 		mvwprintw(e->window.memory, e->memory_data[0], e->memory_data[1],
-			"%02x", (unsigned int)(unsigned char)tab[e->memory_data[2]]);
+			"%02x", (unsigned char)g_tab[e->memory_data[2]]);
 }
 
 void	write_memory(t_env *e)

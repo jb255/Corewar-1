@@ -29,11 +29,11 @@ void	lld_func(t_env *e, int xproc, t_type_func list)
 	list.type[0].t_ind == 1 ? (place = 4) : place;
 	list.type[0].t_dir == 1 ? (place = 6) : place;
 	if (list.type[1].t_reg && place >= 0)
-		reg = to_int_getx(get_x(e, e->process[xproc].position +
+		reg = to_int_getx(get_x(e->process[xproc].position +
 			place, e->process[xproc].position + (place + 1)));
 	(reg > 16 || reg < 1) ? (place = -1) : place;
 	if (list.type[0].t_ind && list.type[1].t_reg && place >= 0)
-		value = to_int_getx(get_x(e, e->process[xproc].position +
+		value = to_int_getx(get_x(e->process[xproc].position +
 			(value), e->process[xproc].position + (value + REG_SIZE)));
 	if (place != -1)
 		e->process[xproc].reg[reg] = value;

@@ -24,8 +24,8 @@ void	player_to_tab(t_env *e, int x)
 	while (byte != (int)e->players[x].size)
 	{
 		tmp = ft_sprintf("%02x", (unsigned char)e->players[x].file[byte]);
-		tab[start] = hex_to_dec(tmp);
-		tab2[start] = e->players[x].id_player + 1;
+		g_tab[start] = hex_to_dec(tmp);
+		g_tab2[start] = e->players[x].id_player + 1;
 		byte++;
 		start += 1;
 		free(tmp);

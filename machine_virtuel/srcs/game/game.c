@@ -6,14 +6,14 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 17:50:40 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/19 21:34:34 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/20 16:39:27 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
-#include "function.h"
-#include "g_variable.h"
-#include "n_curse.h"
+#include <game.h>
+#include <function.h>
+#include <g_variable.h>
+#include <n_curse.h>
 
 int				special_func(t_env *e, int xproc, int func, int list_size)
 {
@@ -41,7 +41,7 @@ void			wait_time_downer(t_env *e, int xproc, int func)
 }
 
 /*
-** e->process[x].id_player = tab2[e->process[x].position] - 1;
+** e->process[x].id_player = g_tab2[e->process[x].position] - 1;
 */
 
 t_type_func		find_label(t_env *e, int x)
@@ -51,14 +51,14 @@ t_type_func		find_label(t_env *e, int x)
 	int			func;
 
 	free_me = NULL;
-	func = tab[e->process[x].position % MEM_SIZE];
+	func = g_tab[e->process[x].position % MEM_SIZE];
 	if (func > 16 || func < 1)
 		func = -1;
 	list.error = 0;
 	if ((func != 1 && func != 12 && func != 15 && func != -1 && func != 9))
 	{
-		free_me = ft_sprintf("%02x", (unsigned char)tab[(e->process[x].position
-			+ 1) % MEM_SIZE]);
+		free_me = ft_sprintf("%02x",
+		(unsigned char)g_tab[(e->process[x].position + 1) % MEM_SIZE]);
 		list = check_jump(e, hex_to_bin_quad(free_me), func);
 		free(free_me);
 	}

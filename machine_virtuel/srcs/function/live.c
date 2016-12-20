@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 21:59:31 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/20 15:56:41 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/20 16:22:30 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	live_func(t_env *e, int xproc, t_type_func list)
 {
 	char		*result;
 
-	result = get_x(e, e->process[xproc].position + 1,
+	result = get_x(e->process[xproc].position + 1,
 		e->process[xproc].position + 5);
 	name_process(e, result);
 	e->process[xproc].live_status++;
