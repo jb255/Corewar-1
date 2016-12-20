@@ -6,7 +6,7 @@
 /*   By: vlancien <vlancien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 21:59:31 by vlancien          #+#    #+#             */
-/*   Updated: 2016/12/19 01:57:00 by vlancien         ###   ########.fr       */
+/*   Updated: 2016/12/20 15:56:41 by vlancien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int		name_process(t_env *e, char *name)
 			if (!e->flag.flag_n)
 				ft_printf("un processus dit que le joueur %d(%s) est en vie\n",
 		e->players[e->arena.winner].id_live, e->players[e->arena.winner].name);
+			ft_printf_fd(e->fd, ""RED"(`'-._ Live for %s_.-'`)"NORM"\n",
+			e->players[e->arena.winner].name);
 			free(tmp);
 			return (1);
 		}
@@ -37,11 +39,6 @@ int		name_process(t_env *e, char *name)
 	}
 	return (0);
 }
-
-/*
-** ft_printf_fd(e->fd, "Process de %d/"RED"(`'-._ Live for %s
-** _.-'`)"NORM"\n", xproc, e->players[e->arena.winner].name);
-*/
 
 void	live_func(t_env *e, int xproc, t_type_func list)
 {
